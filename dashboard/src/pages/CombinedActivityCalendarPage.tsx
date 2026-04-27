@@ -284,9 +284,9 @@ export function CombinedActivityCalendarPage({
                         const c = SPORT_COLORS[s] || "#D4CFC9";
                         const Ic = SPORT_ICONS[s] || FALLBACK_SPORT_ICON;
                         return (
-                          <div key={idx} className="cp-cell-act" style={{ background: c }}>
-                            <Ic size={9} strokeWidth={2.5} color={darken(c, 0.4)} />
-                            <span className="cp-cell-act-dur" style={{ color: darken(c, 0.4) }}>
+                          <div key={idx} className="cp-cell-act" style={{ background: `color-mix(in srgb, ${c} 18%, transparent)` }}>
+                            <Ic size={9} strokeWidth={2.5} color={c} />
+                            <span className="cp-cell-act-dur" style={{ color: c }}>
                               {shortDur(a.moving_time)}
                             </span>
                           </div>
