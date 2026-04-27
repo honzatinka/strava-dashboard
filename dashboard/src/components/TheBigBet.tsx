@@ -1,30 +1,26 @@
 import { useState, useEffect } from "react";
 import type { Activity } from "../types";
-import { SPORT_ICONS, SPORT_COLORS, FALLBACK_SPORT_ICON } from "../types";
+import { SPORT_ICONS, FALLBACK_SPORT_ICON } from "../types";
 import { formatDistance } from "../utils";
 import "../pages/CombinedActivityCalendarPage.css";
 
 interface FriendStats { name: string; photo: string | null; sports: { sport: string; dist: number; time: number }[] }
 
-function DeltaBadge({ myDist, friendDist, friendPhoto, friendName, sportColor }: {
-  myDist: number; friendDist: number; friendPhoto: string | null; friendName: string; sportColor: string;
+function DeltaBadge({ myDist, friendDist, friendPhoto, friendName }: {
+  myDist: number; friendDist: number; friendPhoto: string | null; friendName: string;
 }) {
   const delta = myDist - friendDist;
   const absDist = Math.abs(delta);
   const label = (delta >= 0 ? "+" : "–") + (absDist >= 1000
     ? `${(absDist / 1000).toFixed(1)}km`
     : `${Math.round(absDist)}m`);
-  const ahead = delta >= 0;
   return (
-    <div className="cp-bigbet-badge">
+    <div className={`cp-bigbet-badge${delta < 0 ? " cp-bigbet-badge--behind" : ""}`}>
       {friendPhoto
         ? <img className="cp-bigbet-badge-avatar" src={friendPhoto} alt={friendName} />
         : <div className="cp-bigbet-badge-avatar cp-bigbet-badge-avatar--fb">{friendName[0]}</div>
       }
-      <span
-        className="cp-bigbet-badge-label"
-        style={{ color: ahead ? sportColor : "var(--color-text-muted)" }}
-      >{label}</span>
+      <span className="cp-bigbet-badge-label">{label}</span>
     </div>
   );
 }
@@ -54,10 +50,6 @@ export function TheBigBet({ activities }: { activities: Activity[] }) {
   const RunIcon  = SPORT_ICONS["Run"]        || FALLBACK_SPORT_ICON;
   const SwimIcon = SPORT_ICONS["Swim"]       || FALLBACK_SPORT_ICON;
 
-  const bikeColor = SPORT_COLORS["GravelRide"] || "#FFD580";
-  const swimColor = SPORT_COLORS["Swim"]       || "#A0D4F5";
-  const runColor  = SPORT_COLORS["Run"]        || "#FFAFA3";
-
   return (
     <div className="cp-bigbet">
       <div className="cp-bigbet-year">2026</div>
@@ -71,7 +63,7 @@ export function TheBigBet({ activities }: { activities: Activity[] }) {
           <span>Bike <strong>{formatDistance(bikeDist)}</strong></span>
           <span>Ebike <strong>{formatDistance(ebikeDist)}</strong></span>
         </div>
-        {friend && <DeltaBadge myDist={combined} friendDist={friendBike} friendPhoto={friend.photo} friendName={friend.name} sportColor={bikeColor} />}
+        {friend && <DeltaBadge myDist={combined} friendDist={friendBike} friendPhoto={friend.photo} friendName={friend.name} />}
       </div>
 
       <div className="cp-bigbet-divider" />
@@ -80,7 +72,7 @@ export function TheBigBet({ activities }: { activities: Activity[] }) {
       <div className="cp-bigbet-sport">
         <span className="cp-bigbet-sport-icon"><SwimIcon size={22} strokeWidth={1.6} /></span>
         <div className="cp-bigbet-value">{formatDistance(swimDist)}</div>
-        {friend && <DeltaBadge myDist={swimDist} friendDist={friendSwim} friendPhoto={friend.photo} friendName={friend.name} sportColor={swimColor} />}
+        {friend && <DeltaBadge myDist={swimDist} friendDist={friendSwim} friendPhoto={friend.photo} friendName={friend.name} />}
       </div>
 
       <div className="cp-bigbet-divider" />
@@ -89,7 +81,7 @@ export function TheBigBet({ activities }: { activities: Activity[] }) {
       <div className="cp-bigbet-sport">
         <span className="cp-bigbet-sport-icon"><RunIcon size={22} strokeWidth={1.6} /></span>
         <div className="cp-bigbet-value">{formatDistance(runDist)}</div>
-        {friend && <DeltaBadge myDist={runDist} friendDist={friendRun} friendPhoto={friend.photo} friendName={friend.name} sportColor={runColor} />}
+        {friend && <DeltaBadge myDist={runDist} friendDist={friendRun} friendPhoto={friend.photo} friendName={friend.name} />}
       </div>
     </div>
   );

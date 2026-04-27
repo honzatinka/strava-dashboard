@@ -250,7 +250,6 @@
   padding: 20px 16px;
   display: flex;
   flex-direction: column;
-  align-items: flex-end;
   gap: 0;
 }
 
@@ -262,7 +261,6 @@
   text-transform: uppercase;
   letter-spacing: 0.8px;
   margin-bottom: 4px;
-  align-self: flex-start;
 }
 
 .cp-bigbet-title {
@@ -272,28 +270,22 @@
   color: var(--color-text-primary);
   margin-bottom: 16px;
   letter-spacing: -0.2px;
-  align-self: flex-start;
 }
 
 .cp-bigbet-divider {
   height: 1px;
   background: var(--color-border);
   margin: 14px 0;
-  width: 100%;
-  align-self: stretch;
 }
 
 .cp-bigbet-sport {
   display: flex;
   flex-direction: column;
-  align-items: flex-end;
-  gap: 4px;
-  width: 100%;
+  gap: 6px;
 }
 
 .cp-bigbet-sport-icon {
   color: var(--color-text-secondary);
-  align-self: flex-start;
 }
 
 .cp-bigbet-value {
@@ -313,7 +305,6 @@
   font-size: 10px;
   color: var(--color-text-muted);
   line-height: 1.3;
-  text-align: right;
 }
 
 .cp-bigbet-breakdown strong {
