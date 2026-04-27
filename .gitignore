@@ -1,0 +1,21 @@
+# Secrets — never commit these
+.env
+strava_tokens.json
+friend_tokens.json
+
+# Build output
+dashboard/dist/
+dashboard/node_modules/
+node_modules/
+
+# Logs & runtime
+api-server.log
+api-server.pid
+*.log
+
+# macOS
+.DS_Store
+
+# Data files (large, fetched at runtime)
+strava_activities.json
+strava_activities.csv
