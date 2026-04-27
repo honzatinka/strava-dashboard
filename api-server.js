@@ -144,8 +144,15 @@ function refreshFriendToken(callback) {
   req.end();
 }
 
-// Load Strava tokens
+// Load Strava tokens (env vars take priority for production/Render)
 function loadStravaTokens() {
+  if (process.env.STRAVA_REFRESH_TOKEN) {
+    return {
+      access_token:  process.env.STRAVA_ACCESS_TOKEN  || "",
+      refresh_token: process.env.STRAVA_REFRESH_TOKEN,
+      expires_at:    parseInt(process.env.STRAVA_EXPIRES_AT || "0"),
+    };
+  }
   try {
     if (fs.existsSync(TOKENS_FILE)) {
       return JSON.parse(fs.readFileSync(TOKENS_FILE, "utf-8"));
@@ -203,11 +210,13 @@ function refreshStravaToken(callback) {
           return;
         }
 
-        // Update tokens file
+        // Update tokens (only write to file in local dev)
         tokens.access_token = response.access_token;
         tokens.refresh_token = response.refresh_token;
         tokens.expires_at = response.expires_at;
-        fs.writeFileSync(TOKENS_FILE, JSON.stringify(tokens, null, 2));
+        if (!process.env.STRAVA_REFRESH_TOKEN) {
+          fs.writeFileSync(TOKENS_FILE, JSON.stringify(tokens, null, 2));
+        }
         console.log("✓ Token refreshed");
 
         callback(null, tokens.access_token);
