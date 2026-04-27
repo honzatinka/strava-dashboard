@@ -223,7 +223,7 @@ export function CombinedActivityCalendarPage({
                   <span className="cp-month-stat-value">{monthActs.length} activities</span>
                   {prevMonthActs.length > 0 && (
                     <span className={`cp-month-stat-delta ${deltaCount >= 0 ? "cp-delta--up" : "cp-delta--down"}`}>
-                      {deltaCount >= 0 ? "▲" : "▼"}{Math.abs(deltaCount)}
+                      {deltaCount >= 0 ? "▲ " : "▼ "}{Math.abs(deltaCount)}
                     </span>
                   )}
                 </div>
@@ -232,7 +232,7 @@ export function CombinedActivityCalendarPage({
                   <span className="cp-month-stat-value">{monthHH}h {monthMM}m</span>
                   {prevMonthActs.length > 0 && (
                     <span className={`cp-month-stat-delta ${deltaSecs >= 0 ? "cp-delta--up" : "cp-delta--down"}`}>
-                      {deltaSecs >= 0 ? "▲" : "▼"}{fmtDelta(deltaSecs)}
+                      {deltaSecs >= 0 ? "▲ " : "▼ "}{fmtDelta(deltaSecs)}
                     </span>
                   )}
                 </div>
@@ -241,7 +241,7 @@ export function CombinedActivityCalendarPage({
                   <span className="cp-month-stat-value">{formatDistance(monthDist)}</span>
                   {prevMonthActs.length > 0 && (
                     <span className={`cp-month-stat-delta ${deltaDist >= 0 ? "cp-delta--up" : "cp-delta--down"}`}>
-                      {deltaDist >= 0 ? "▲" : "▼"}{fmtDistDelta(deltaDist)}
+                      {deltaDist >= 0 ? "▲ " : "▼ "}{fmtDistDelta(deltaDist)}
                     </span>
                   )}
                 </div>

@@ -105,8 +105,8 @@
   border-radius: var(--radius-pill);
   line-height: 1.4;
 }
-.cp-delta--up   { background: rgba(33,33,31,0.08); color: var(--color-text-primary); }
-.cp-delta--down { background: rgba(33,33,31,0.06); color: var(--color-text-muted); }
+.cp-delta--up   { background: rgba(33,33,31,0.05); color: var(--color-text-primary); }
+.cp-delta--down { background: rgba(33,33,31,0.04); color: var(--color-text-muted); }
 
 .cp-nav {
   display: flex;
@@ -187,11 +187,11 @@
 
 .cp-cell-num {
   font-family: var(--font-body);
-  font-size: var(--font-size-sm);
-  font-weight: var(--font-weight-medium);
+  font-size: 15px;
+  font-weight: var(--font-weight-semibold);
   color: var(--color-text-muted);
   line-height: 1;
-  margin-bottom: 2px;
+  margin-bottom: 6px;
 }
 
 .cp-cell--active .cp-cell-num { color: var(--color-text-primary); }
@@ -288,7 +288,7 @@
 }
 
 .cp-bigbet-sport-icon {
-  color: var(--color-text-secondary);
+  color: var(--color-text-primary);
 }
 
 .cp-bigbet-value {
