@@ -68,20 +68,20 @@ export function TheBigBet({ activities }: { activities: Activity[] }) {
 
       <div className="cp-bigbet-divider" />
 
-      {/* Run */}
-      <div className="cp-bigbet-sport">
-        <span className="cp-bigbet-sport-icon"><RunIcon size={22} strokeWidth={1.6} /></span>
-        <div className="cp-bigbet-value">{formatDistance(runDist)}</div>
-        {friend && <DeltaBadge myDist={runDist} friendDist={friendRun} friendPhoto={friend.photo} friendName={friend.name} />}
-      </div>
-
-      <div className="cp-bigbet-divider" />
-
       {/* Swim */}
       <div className="cp-bigbet-sport">
         <span className="cp-bigbet-sport-icon"><SwimIcon size={22} strokeWidth={1.6} /></span>
         <div className="cp-bigbet-value">{formatDistance(swimDist)}</div>
         {friend && <DeltaBadge myDist={swimDist} friendDist={friendSwim} friendPhoto={friend.photo} friendName={friend.name} />}
+      </div>
+
+      <div className="cp-bigbet-divider" />
+
+      {/* Run */}
+      <div className="cp-bigbet-sport">
+        <span className="cp-bigbet-sport-icon"><RunIcon size={22} strokeWidth={1.6} /></span>
+        <div className="cp-bigbet-value">{formatDistance(runDist)}</div>
+        {friend && <DeltaBadge myDist={runDist} friendDist={friendRun} friendPhoto={friend.photo} friendName={friend.name} />}
       </div>
     </div>
   );

@@ -4,24 +4,37 @@
 
 .cp-root { padding: 0; }
 
-/* ─── TOP SECTION: Calendar + The Big Bet ─── */
+/* ─── TOP SECTION: Calendar + The Big Bet — two separate cards ─── */
 .cp-top {
   display: flex;
-  gap: 0;
+  gap: 12px;
+  align-items: flex-start;
+  margin-bottom: 20px;
+}
+
+/* Calendar card (left, fills space) */
+.cp-calendar-card {
+  flex: 1;
+  min-width: 0;
   background: var(--color-surface);
   border-radius: var(--radius-lg);
   border: 1px solid var(--color-border);
   box-shadow: var(--shadow-card);
   overflow: hidden;
-  margin-bottom: 20px;
 }
 
-/* Calendar card (left, fills space) */
 .cp-calendar-wrapper {
-  flex: 1;
-  min-width: 0;
   padding: 24px 24px 20px;
-  border-right: 1px solid var(--color-border);
+}
+
+/* Big Bet card (right, fixed width) */
+.cp-bigbet-card {
+  background: var(--color-surface);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-card);
+  overflow: hidden;
+  flex-shrink: 0;
 }
 
 /* ─── Calendar Header ─── */
@@ -230,10 +243,10 @@
   border-color: var(--color-text-primary);
 }
 
-/* ─── The Big Bet sidebar (right panel) ─── */
+/* ─── The Big Bet panel ─── */
 .cp-bigbet {
-  width: 180px;
-  min-width: 180px;
+  width: 200px;
+  min-width: 200px;
   padding: 20px 16px;
   display: flex;
   flex-direction: column;

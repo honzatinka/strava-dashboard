@@ -205,8 +205,9 @@ export function CombinedActivityCalendarPage({
   return (
     <div className="cp-root">
 
-      {/* ─── TOP: Calendar + The Big Bet ─── */}
+      {/* ─── TOP: Calendar + The Big Bet (separate cards) ─── */}
       <div className="cp-top">
+        <div className="cp-calendar-card">
         <div className="cp-calendar-wrapper">
 
           {/* Calendar header */}
@@ -303,9 +304,12 @@ export function CombinedActivityCalendarPage({
             <button className="cp-clear-btn" onClick={() => setSelectedDay(null)}>✕ Clear filter</button>
           )}
         </div>
+        </div>{/* end cp-calendar-card */}
 
-        {/* The Big Bet */}
-        <TheBigBet activities={activities} />
+        {/* The Big Bet — separate card */}
+        <div className="cp-bigbet-card">
+          <TheBigBet activities={activities} />
+        </div>
       </div>
 
       {/* ─── Activity List ─── */}
