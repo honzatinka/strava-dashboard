@@ -210,44 +210,44 @@ export function CombinedActivityCalendarPage({
         <div className="cp-calendar-card">
         <div className="cp-calendar-wrapper">
 
-          {/* Calendar header */}
+          {/* Calendar header — single row: title | stats | nav */}
           <div className="cp-cal-header">
-            <div className="cp-cal-header-left">
-              <div className="cp-month-title">
-                <span className="cp-month-name">{czechMonth(month)}</span>
-                <span className="cp-year">{year}</span>
-              </div>
-              {monthActs.length > 0 && (
-                <div className="cp-month-stats">
-                  <div className="cp-month-stat">
-                    <span className="cp-month-stat-value">{monthActs.length} activities</span>
-                    {prevMonthActs.length > 0 && (
-                      <span className={`cp-month-stat-delta ${deltaCount >= 0 ? "cp-delta--up" : "cp-delta--down"}`}>
-                        {deltaCount >= 0 ? "▲" : "▼"}{Math.abs(deltaCount)}
-                      </span>
-                    )}
-                  </div>
-                  <span className="cp-month-stat-sep">·</span>
-                  <div className="cp-month-stat">
-                    <span className="cp-month-stat-value">{monthHH}h {monthMM}m</span>
-                    {prevMonthActs.length > 0 && (
-                      <span className={`cp-month-stat-delta ${deltaSecs >= 0 ? "cp-delta--up" : "cp-delta--down"}`}>
-                        {deltaSecs >= 0 ? "▲" : "▼"}{fmtDelta(deltaSecs)}
-                      </span>
-                    )}
-                  </div>
-                  <span className="cp-month-stat-sep">·</span>
-                  <div className="cp-month-stat">
-                    <span className="cp-month-stat-value">{formatDistance(monthDist)}</span>
-                    {prevMonthActs.length > 0 && (
-                      <span className={`cp-month-stat-delta ${deltaDist >= 0 ? "cp-delta--up" : "cp-delta--down"}`}>
-                        {deltaDist >= 0 ? "▲" : "▼"}{fmtDistDelta(deltaDist)}
-                      </span>
-                    )}
-                  </div>
-                </div>
-              )}
+            <div className="cp-month-title">
+              <span className="cp-month-name">{czechMonth(month)}</span>
+              <span className="cp-year">{year}</span>
             </div>
+
+            {monthActs.length > 0 && (
+              <div className="cp-month-stats">
+                <div className="cp-month-stat">
+                  <span className="cp-month-stat-value">{monthActs.length} activities</span>
+                  {prevMonthActs.length > 0 && (
+                    <span className={`cp-month-stat-delta ${deltaCount >= 0 ? "cp-delta--up" : "cp-delta--down"}`}>
+                      {deltaCount >= 0 ? "▲" : "▼"}{Math.abs(deltaCount)}
+                    </span>
+                  )}
+                </div>
+                <span className="cp-month-stat-sep">·</span>
+                <div className="cp-month-stat">
+                  <span className="cp-month-stat-value">{monthHH}h {monthMM}m</span>
+                  {prevMonthActs.length > 0 && (
+                    <span className={`cp-month-stat-delta ${deltaSecs >= 0 ? "cp-delta--up" : "cp-delta--down"}`}>
+                      {deltaSecs >= 0 ? "▲" : "▼"}{fmtDelta(deltaSecs)}
+                    </span>
+                  )}
+                </div>
+                <span className="cp-month-stat-sep">·</span>
+                <div className="cp-month-stat">
+                  <span className="cp-month-stat-value">{formatDistance(monthDist)}</span>
+                  {prevMonthActs.length > 0 && (
+                    <span className={`cp-month-stat-delta ${deltaDist >= 0 ? "cp-delta--up" : "cp-delta--down"}`}>
+                      {deltaDist >= 0 ? "▲" : "▼"}{fmtDistDelta(deltaDist)}
+                    </span>
+                  )}
+                </div>
+              </div>
+            )}
+
             <div className="cp-nav">
               <button className="cp-arrow" onClick={prevMonth}><ChevronLeft size={16} strokeWidth={2} /></button>
               <button className="cp-arrow" onClick={nextMonth}><ChevronRight size={16} strokeWidth={2} /></button>
