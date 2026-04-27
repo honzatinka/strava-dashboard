@@ -1,0 +1,34 @@
+✓ OPENAI_API_KEY loaded: sk-proj-An7BEcQsfkuf...
+✓ API server running on http://localhost:3001
+(node:76929) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+Analyzing 6 activities for this month
+OpenAI response: {
+  "id": "chatcmpl-DSiPfJVy3bqWZpmfnfD7vBIepekyL",
+  "object": "chat.completion",
+  "created": 1775
+Analyzing 6 activities for this month
+OpenAI response: {
+  "id": "chatcmpl-DSjdkDNpEeAhT4661VwMQ1pJB0ZuU",
+  "object": "chat.completion",
+  "created": 1775
+Analyzing 6 activities for this month
+OpenAI response: {
+  "id": "chatcmpl-DSjj79jVM3sh9P0dCnEWjDT5803Nf",
+  "object": "chat.completion",
+  "created": 1775
+Analyzing 6 activities for this month
+OpenAI response: {
+  "id": "chatcmpl-DSjjjHmztMsBeouzKK5PfBzyH9jLU",
+  "object": "chat.completion",
+  "created": 1775
+Analyzing 7 activities for this month
+OpenAI response: {
+  "id": "chatcmpl-DSoThMHy4olnk1lqhpQU4ut1yIOHo",
+  "object": "chat.completion",
+  "created": 1775
+Analyzing 7 activities for this month
+OpenAI response: {
+  "id": "chatcmpl-DSoW75xibwYshTszIWdmFEQ6oLhbZ",
+  "object": "chat.completion",
+  "created": 1775

@@ -1,0 +1,197 @@
+.cal-nav {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.cal-arrow {
+  width: 40px;
+  height: 40px;
+  border-radius: 0;
+  border: 1px solid #E8E4DE;
+  background: #FFFFFF;
+  color: #6B6560;
+  cursor: pointer;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.15s;
+}
+
+.cal-arrow:hover {
+  color: #E8825C;
+  border-color: rgba(232, 130, 92, 0.2);
+}
+
+.cal-month {
+  font-size: 18px;
+  font-weight: 600;
+  color: #1A1A1A;
+  min-width: 200px;
+  text-align: center;
+  letter-spacing: 0.5px;
+}
+
+.cal-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 4px;
+  margin-bottom: 16px;
+}
+
+.cal-day-header {
+  text-align: center;
+  font-size: 11px;
+  font-weight: 600;
+  color: #A8A29E;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  padding: 10px 0;
+}
+
+.cal-cell {
+  min-height: 84px;
+  border-radius: 0;
+  padding: 6px;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 3px;
+  cursor: default;
+  transition: all 0.2s;
+  border: 1px solid transparent;
+}
+
+.cal-cell.empty {
+  background: none;
+}
+
+.cal-cell.has-activity {
+  background: #FAF8F5;
+  border-color: #E8E4DE;
+  border-left: 3px solid rgba(232, 130, 92, 0.3);
+  cursor: pointer;
+}
+
+.cal-cell.has-activity:hover {
+  background: #F0EDE8;
+  border-color: #D4CFC9;
+  border-left-color: #E8825C;
+}
+
+.cal-cell.today .cal-day-num {
+  background: #E8825C;
+  color: #fff;
+  border-radius: 0;
+  width: 26px;
+  height: 26px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+}
+
+.cal-cell.selected {
+  background: rgba(232, 130, 92, 0.06);
+  border-color: #E8825C;
+  border-left-color: #E8825C;
+  box-shadow: 0 0 12px rgba(232, 130, 92, 0.1);
+}
+
+.cal-day-num {
+  font-size: 12px;
+  font-weight: 500;
+  color: #6B6560;
+  margin-bottom: 2px;
+  font-variant-numeric: tabular-nums;
+}
+
+.cal-activities {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.cal-activity {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  background: color-mix(in srgb, var(--sport-color) 15%, transparent);
+  border-radius: 0;
+  padding: 2px 5px;
+  border-left: 2px solid var(--sport-color);
+}
+
+.cal-act-icon {
+  font-size: 11px;
+  line-height: 1;
+}
+
+.cal-act-dur {
+  font-size: 10px;
+  font-weight: 600;
+  color: #1A1A1A;
+  font-variant-numeric: tabular-nums;
+}
+
+.cal-more {
+  font-size: 10px;
+  color: rgba(255, 255, 255, 0.3);
+  text-align: center;
+}
+
+.cal-summary {
+  font-size: 13px;
+  color: #A8A29E;
+  padding: 14px 0;
+  border-top: 1px solid #E8E4DE;
+  letter-spacing: 0.3px;
+}
+
+.cal-detail {
+  margin-top: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.cal-detail-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: #FFFFFF;
+  border: 1px solid #E8E4DE;
+  border-radius: 0;
+  padding: 14px 18px;
+  transition: all 0.2s;
+  cursor: pointer;
+  border-left: 3px solid #E8825C;
+}
+
+.cal-detail-item:hover {
+  background: #FAF8F5;
+  transform: translateX(4px);
+}
+
+.cal-detail-icon {
+  font-size: 26px;
+}
+
+.cal-detail-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.cal-detail-info strong {
+  font-size: 15px;
+  color: #1A1A1A;
+  font-weight: 600;
+}
+
+.cal-detail-meta {
+  font-size: 12px;
+  color: #6B6560;
+}

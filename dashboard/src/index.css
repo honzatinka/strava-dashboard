@@ -1,0 +1,43 @@
+@import "./design-tokens.css";
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "DM Sans", system-ui, -apple-system, sans-serif;
+  background: #F5F2ED;
+  color: #1A1A1A;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  min-height: 100vh;
+  font-size: 17px;
+  line-height: 1.6;
+}
+
+/* Smooth scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 0;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0.18);
+}
+
+/* Selection */
+::selection {
+  background: rgba(232, 130, 92, 0.2);
+  color: #1A1A1A;
+}

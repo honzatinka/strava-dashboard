@@ -1,0 +1,175 @@
+/* Stats Hero */
+.stats-hero {
+  background: #FFFFFF;
+  border: 1px solid #E8E4DE;
+  border-radius: 0;
+  padding: 32px;
+  margin-bottom: 28px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+}
+
+.stats-hero::before {
+  display: none;
+}
+
+.stats-hero-inner {
+  position: relative;
+}
+
+.stats-hero-title {
+  font-size: 28px;
+  font-weight: 700;
+  color: #1A1A1A;
+  margin: 0 0 20px;
+  letter-spacing: -0.5px;
+}
+
+.stats-hero-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 24px;
+}
+
+.stats-hero-item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.stats-hero-value {
+  font-size: 32px;
+  font-weight: 800;
+  color: #E8825C;
+  font-variant-numeric: tabular-nums;
+  line-height: 1.1;
+}
+
+.stats-hero-label {
+  font-size: 10px;
+  color: #A8A29E;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* Summary cards (used by other pages too) */
+.summary-card {
+  background: #FFFFFF;
+  border: 1px solid #E8E4DE;
+  border-radius: 0;
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+}
+
+.summary-value {
+  font-size: 22px;
+  font-weight: 700;
+  color: #E8825C;
+  font-variant-numeric: tabular-nums;
+}
+
+.summary-label {
+  font-size: 10px;
+  color: #A8A29E;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* Chart sections */
+.chart-section {
+  background: #FFFFFF;
+  border: 1px solid #E8E4DE;
+  border-radius: 0;
+  padding: 24px;
+  margin-bottom: 20px;
+  position: relative;
+  overflow: hidden;
+}
+
+.chart-section::before {
+  display: none;
+}
+
+.chart-section h2 {
+  font-size: 14px;
+  font-weight: 600;
+  color: #1A1A1A;
+  margin: 0 0 16px;
+  letter-spacing: 0.5px;
+}
+
+.chart-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.chart-header h2 {
+  margin: 0;
+}
+
+.year-tabs {
+  display: flex;
+  gap: 4px;
+}
+
+.year-tab {
+  padding: 5px 14px;
+  border-radius: 0;
+  border: 1px solid #E8E4DE;
+  background: transparent;
+  font-size: 12px;
+  cursor: pointer;
+  transition: all 0.15s;
+  font-family: inherit;
+  color: #6B6560;
+}
+
+.year-tab:hover {
+  background: #F0EDE8;
+  color: #1A1A1A;
+}
+
+.year-tab.active {
+  background: #E8825C;
+  color: #FFFFFF;
+  border-color: #E8825C;
+  font-weight: 600;
+}
+
+.charts-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.chart-half {
+  margin-bottom: 0;
+}
+
+@media (max-width: 900px) {
+  .stats-hero-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+  .charts-row {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .stats-hero-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .stats-hero-value {
+    font-size: 24px;
+  }
+  .stats-hero {
+    padding: 24px;
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "name": "strava-dashboard",
+  "version": "1.0.0",
+  "description": "Strava activity dashboard with friend comparison",
+  "scripts": {
+    "build": "cd dashboard && npm install && npm run build",
+    "start": "node api-server.js",
+    "dev": "node api-server.js"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

@@ -1,0 +1,138 @@
+/* Hero banner */
+.page-hero {
+  background: #FFFFFF;
+  border: 1px solid #E8E4DE;
+  border-radius: 0;
+  padding: 32px;
+  margin-bottom: 28px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+}
+
+.page-hero::before {
+  display: none;
+}
+
+.hero-text {
+  position: relative;
+}
+
+.hero-title {
+  font-size: 28px;
+  font-weight: 700;
+  color: #1A1A1A;
+  margin: 0 0 8px;
+  letter-spacing: -0.5px;
+}
+
+.hero-stats {
+  font-size: 14px;
+  color: #6B6560;
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.hero-stat-value {
+  font-size: 18px;
+  font-weight: 700;
+  color: #E8825C;
+  font-variant-numeric: tabular-nums;
+}
+
+.hero-dot {
+  color: #D4CFC9;
+}
+
+/* Page title fallback */
+.page-title {
+  font-size: 24px;
+  font-weight: 700;
+  color: #1A1A1A;
+  margin: 0 0 24px;
+  letter-spacing: -0.3px;
+}
+
+/* Filter pills */
+.filter-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 24px;
+}
+
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 7px 14px;
+  border-radius: 0;
+  border: 1px solid #E8E4DE;
+  background: #F0EDE8;
+  font-size: 12px;
+  font-weight: 400;
+  color: #6B6560;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-family: inherit;
+  letter-spacing: 0.3px;
+}
+
+.pill:hover {
+  background: #E8E4DE;
+  color: #1A1A1A;
+  border-color: #D4CFC9;
+}
+
+.pill.active {
+  background: var(--pill-color, #E8825C);
+  color: #FFFFFF;
+  border-color: var(--pill-color, #E8825C);
+  font-weight: 600;
+}
+
+/* Activity grid */
+.activity-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+@media (max-width: 768px) {
+  .activity-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .page-hero {
+    padding: 24px;
+  }
+
+  .hero-title {
+    font-size: 24px;
+  }
+}
+
+/* Load more */
+.load-more {
+  display: block;
+  margin: 32px auto 0;
+  padding: 12px 32px;
+  border-radius: 0;
+  border: 1px solid #E8E4DE;
+  background: #F0EDE8;
+  font-size: 13px;
+  font-weight: 500;
+  color: #6B6560;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-family: inherit;
+  letter-spacing: 0.5px;
+}
+
+.load-more:hover {
+  background: #F0EDE8;
+  color: #1A1A1A;
+  border-color: #E8825C;
+}

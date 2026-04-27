@@ -1,0 +1,232 @@
+.fc-root {
+  background: var(--color-surface);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-card);
+  padding: 24px;
+}
+
+.fc-header { margin-bottom: 20px; }
+
+.fc-title {
+  font-family: var(--font-display);
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+  margin: 0;
+  letter-spacing: -0.2px;
+}
+
+/* ─── Totals row ─── */
+.fc-totals {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 24px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.fc-athlete {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  min-width: 64px;
+}
+
+.fc-athlete--right { align-items: center; }
+
+.fc-avatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  object-fit: cover;
+  filter: grayscale(1);
+  border: 1.5px solid var(--color-border);
+}
+
+.fc-avatar--fallback {
+  background: var(--color-text-primary);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-weight: var(--font-weight-bold);
+  font-size: 16px;
+  border: none;
+}
+
+.fc-avatar--loading {
+  background: var(--color-surface-alt);
+  animation: fc-pulse 1.2s ease-in-out infinite;
+}
+
+@keyframes fc-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+
+.fc-athlete-name {
+  font-family: var(--font-body);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-muted);
+  white-space: nowrap;
+}
+
+.fc-total-stats {
+  flex: 1;
+  display: flex;
+  gap: 0;
+}
+
+.fc-total-stat {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 0 12px;
+  border-left: 1px solid var(--color-border);
+}
+
+.fc-total-stat:first-child { border-left: none; }
+
+.fc-total-label {
+  font-family: var(--font-body);
+  font-size: 9px;
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+}
+
+.fc-total-values {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.fc-total-mine {
+  font-family: var(--font-display);
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-accent);
+}
+
+.fc-total-friend {
+  font-family: var(--font-display);
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-secondary);
+}
+
+.fc-total-sep {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-muted);
+  font-weight: var(--font-weight-medium);
+}
+
+/* ─── Sport rows ─── */
+.fc-sports {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.fc-sport-row {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.fc-sport-header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.fc-sport-icon { display: flex; align-items: center; }
+
+.fc-sport-name {
+  font-family: var(--font-display);
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+}
+
+.fc-winner-badge {
+  margin-left: 6px;
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-medium);
+  padding: 1px 7px;
+  border-radius: var(--radius-pill);
+}
+
+.fc-winner-badge--me {
+  background: var(--color-accent-light);
+  color: var(--color-accent);
+}
+
+.fc-winner-badge--friend {
+  background: var(--color-surface-alt);
+  color: var(--color-text-secondary);
+}
+
+/* Bars */
+.fc-bars {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.fc-bar-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.fc-bar-label {
+  font-family: var(--font-display);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-accent);
+  min-width: 54px;
+  text-align: right;
+  white-space: nowrap;
+}
+
+.fc-bar-row--friend .fc-bar-label {
+  color: var(--color-text-secondary);
+}
+
+.fc-bar-track {
+  flex: 1;
+  height: 6px;
+  background: var(--color-surface-alt);
+  border-radius: var(--radius-pill);
+  overflow: hidden;
+}
+
+.fc-bar-fill {
+  height: 100%;
+  border-radius: var(--radius-pill);
+  transition: width 0.4s ease;
+}
+
+.fc-bar-sublabel {
+  font-family: var(--font-body);
+  font-size: var(--font-size-xs);
+  color: var(--color-text-muted);
+  min-width: 52px;
+  white-space: nowrap;
+}
+
+.fc-loading {
+  text-align: center;
+  padding: 32px;
+  color: var(--color-text-muted);
+  font-size: var(--font-size-base);
+}

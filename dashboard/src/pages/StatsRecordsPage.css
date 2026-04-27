@@ -1,0 +1,219 @@
+.sr-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  align-items: start;
+}
+
+.sr-section {
+  background: #FFFFFF;
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+  border: 1px solid #EDE9E3;
+}
+
+.sr-title {
+  font-size: 24px;
+  font-weight: 600;
+  color: #1A1A1A;
+  margin: 0 0 20px;
+  letter-spacing: -0.3px;
+}
+
+.sr-subtitle {
+  font-size: 13px;
+  color: #B0AAA4;
+  margin: 0 0 16px;
+  font-weight: 400;
+}
+
+/* Hero stats */
+.sr-hero {
+  margin-bottom: 24px;
+}
+
+.sr-hero-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+
+.sr-hero-item {
+  background: #F5F2ED;
+  padding: 14px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.sr-hero-value {
+  font-size: 18px;
+  font-weight: 700;
+  color: #1A1A1A;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+
+.sr-hero-label {
+  font-size: 11px;
+  color: #B0AAA4;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  font-weight: 500;
+}
+
+/* Charts */
+.sr-chart-section {
+  margin-bottom: 20px;
+}
+
+.sr-chart-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+  gap: 12px;
+}
+
+.sr-chart-header h3 {
+  font-size: 16px;
+  font-weight: 600;
+  color: #1A1A1A;
+  margin: 0;
+}
+
+.sr-year-tabs {
+  display: flex;
+  gap: 4px;
+}
+
+.sr-year-tab {
+  padding: 5px 10px;
+  border-radius: 6px;
+  border: 1px solid #E8E4DE;
+  background: #F5F2ED;
+  font-size: 11px;
+  font-weight: 500;
+  color: #6B6560;
+  cursor: pointer;
+  transition: all 0.15s;
+  font-family: inherit;
+}
+
+.sr-year-tab.active {
+  background: #1A1A1A;
+  color: #FFFFFF;
+  border-color: #1A1A1A;
+}
+
+.sr-year-tab:hover:not(.active) {
+  background: #EDE9E3;
+}
+
+.sr-charts-pair {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.sr-chart-half {
+  margin: 0;
+  padding: 0;
+  background: transparent;
+  box-shadow: none;
+  border: none;
+}
+
+.sr-chart-half h3 {
+  font-size: 14px;
+  margin-bottom: 12px;
+}
+
+/* Records */
+.sr-records-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+}
+
+.sr-record-card {
+  background: #F5F2ED;
+  padding: 14px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.15s;
+  border: 1px solid transparent;
+}
+
+.sr-record-card:hover {
+  background: #EDE9E3;
+  border-color: #D0CCC6;
+}
+
+.sr-record-top {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.sr-record-icon {
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #E8825C;
+  flex-shrink: 0;
+}
+
+.sr-record-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: #6B6560;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.sr-record-value {
+  font-size: 18px;
+  font-weight: 700;
+  color: #1A1A1A;
+  margin-bottom: 6px;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+
+.sr-record-activity {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.sr-record-name {
+  font-size: 12px;
+  color: #1A1A1A;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.sr-record-date {
+  font-size: 10px;
+  color: #B0AAA4;
+}
+
+@media (max-width: 900px) {
+  .sr-layout {
+    grid-template-columns: 1fr;
+  }
+  .sr-charts-pair {
+    grid-template-columns: 1fr;
+  }
+}

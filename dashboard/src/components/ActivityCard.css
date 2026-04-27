@@ -1,0 +1,139 @@
+.card {
+  background: #FFFFFF;
+  border-radius: 0;
+  padding: 24px;
+  border: 1px solid #E8E4DE;
+  border-left: 3px solid var(--accent-color, #E8825C);
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+  overflow: hidden;
+}
+
+.card-photo {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 120px;
+  background: var(--photo-url, none) center / cover;
+  background-color: var(--accent-color, #E8825C);
+  opacity: 0.15;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.card::before {
+  display: none;
+}
+
+.card:hover {
+  background: #FAF8F5;
+  border-color: #D4CFC9;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+  position: relative;
+  z-index: 1;
+}
+
+.sport-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--accent-color, #6B6560);
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  background: color-mix(in srgb, var(--accent-color, #95a5a6) 10%, transparent);
+  padding: 3px 10px;
+  border-radius: 0;
+}
+
+.sport-icon {
+  font-size: 14px;
+}
+
+.date {
+  font-size: 12px;
+  color: #A8A29E;
+  font-variant-numeric: tabular-nums;
+}
+
+.card-clickable {
+  cursor: pointer;
+}
+
+.card-title {
+  font-size: 17px;
+  font-weight: 600;
+  color: #1A1A1A;
+  margin: 0 0 4px;
+  line-height: 1.4;
+  position: relative;
+  z-index: 1;
+}
+
+.card-location {
+  display: block;
+  font-size: 11px;
+  color: #A8A29E;
+  margin-bottom: 16px;
+  letter-spacing: 0.3px;
+}
+
+.card-strava-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 11px;
+  font-weight: 500;
+  color: #E8825C;
+  text-decoration: none;
+  letter-spacing: 0.3px;
+  margin-bottom: 16px;
+  transition: color 0.15s;
+}
+
+.card-strava-link:hover {
+  color: #C4653A;
+  text-decoration: underline;
+}
+
+.card-stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  padding-top: 14px;
+  border-top: 1px solid #E8E4DE;
+  position: relative;
+  z-index: 1;
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+  min-width: 60px;
+}
+
+.stat-value {
+  font-size: 16px;
+  font-weight: 700;
+  color: #1A1A1A;
+  font-variant-numeric: tabular-nums;
+}
+
+.stat-label {
+  font-size: 10px;
+  color: #A8A29E;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-top: 2px;
+}

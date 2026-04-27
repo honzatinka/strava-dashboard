@@ -1,0 +1,515 @@
+/* ============================================================
+   Combined Activity Calendar Page — Figma redesign
+   ============================================================ */
+
+.cp-root { padding: 0; }
+
+/* ─── TOP SECTION: Calendar + The Big Bet ─── */
+.cp-top {
+  display: flex;
+  gap: 0;
+  background: var(--color-surface);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-card);
+  overflow: hidden;
+  margin-bottom: 20px;
+}
+
+/* Calendar card (left, fills space) */
+.cp-calendar-wrapper {
+  flex: 1;
+  min-width: 0;
+  padding: 24px 24px 20px;
+  border-right: 1px solid var(--color-border);
+}
+
+/* ─── Calendar Header ─── */
+.cp-cal-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.cp-cal-header-left { display: flex; flex-direction: column; gap: 8px; }
+
+.cp-month-title {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.cp-month-name {
+  font-family: var(--font-display);
+  font-size: var(--font-size-3xl);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+  letter-spacing: -0.3px;
+}
+
+.cp-year {
+  font-family: var(--font-body);
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+}
+
+/* Month stats row — orange values */
+.cp-month-stats {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.cp-month-stat {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.cp-month-stat-value {
+  font-family: var(--font-display);
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-accent);
+  white-space: nowrap;
+}
+
+.cp-month-stat-sep {
+  color: var(--color-border);
+  font-size: 16px;
+}
+
+.cp-month-stat-delta {
+  font-family: var(--font-body);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-medium);
+  white-space: nowrap;
+}
+.cp-delta--up   { color: var(--color-accent); }
+.cp-delta--down { color: var(--color-text-muted); }
+
+.cp-nav {
+  display: flex;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+.cp-arrow {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 1px solid var(--color-border);
+  background: transparent;
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.15s;
+  padding: 0;
+  font-family: inherit;
+}
+
+.cp-arrow:hover {
+  background: var(--color-text-primary);
+  color: #fff;
+  border-color: var(--color-text-primary);
+}
+
+/* Calendar Grid */
+.cp-day-headers {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  margin-bottom: 4px;
+}
+
+.cp-day-hdr {
+  text-align: center;
+  font-family: var(--font-body);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  padding: 6px 0;
+}
+
+.cp-cal-grid {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: 2px;
+}
+
+.cp-cell {
+  border-radius: var(--radius-sm);
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 3px;
+  padding: 6px 6px 4px;
+  min-height: 76px;
+  transition: background 0.12s;
+}
+
+.cp-cell--empty { background: var(--color-surface-alt); }
+.cp-cell--active { cursor: pointer; }
+.cp-cell--active:hover { background: var(--color-surface-alt); }
+
+.cp-cell--today .cp-cell-num {
+  color: var(--color-accent);
+  font-weight: var(--font-weight-bold);
+}
+
+.cp-cell--selected {
+  background: color-mix(in srgb, var(--sel-color, var(--color-accent)) 12%, #fff) !important;
+  outline: 1.5px solid var(--sel-color, var(--color-accent));
+  outline-offset: -1px;
+}
+
+.cp-cell-num {
+  font-family: var(--font-body);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-muted);
+  line-height: 1;
+  margin-bottom: 2px;
+}
+
+.cp-cell--active .cp-cell-num { color: var(--color-text-primary); }
+
+.cp-cell-acts {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.cp-cell-act {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  padding: 2px 4px;
+  border-radius: 4px;
+  line-height: 1;
+}
+
+.cp-cell-act-dur {
+  font-size: 9px;
+  font-weight: var(--font-weight-bold);
+  font-variant-numeric: tabular-nums;
+}
+
+.cp-dot-more {
+  font-size: 8px;
+  color: var(--color-text-muted);
+  font-weight: var(--font-weight-medium);
+  padding-left: 2px;
+}
+
+.cp-clear-btn {
+  display: block;
+  width: 100%;
+  margin-top: 12px;
+  padding: 8px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border);
+  background: var(--color-surface-alt);
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  transition: all 0.15s;
+  font-family: inherit;
+  font-weight: var(--font-weight-medium);
+}
+
+.cp-clear-btn:hover {
+  background: var(--color-text-primary);
+  color: #fff;
+  border-color: var(--color-text-primary);
+}
+
+/* ─── The Big Bet sidebar (right panel) ─── */
+.cp-bigbet {
+  width: 180px;
+  min-width: 180px;
+  padding: 20px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.cp-bigbet-year {
+  font-family: var(--font-body);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  margin-bottom: 4px;
+}
+
+.cp-bigbet-title {
+  font-family: var(--font-display);
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+  margin-bottom: 16px;
+  letter-spacing: -0.2px;
+}
+
+.cp-bigbet-divider {
+  height: 1px;
+  background: var(--color-border);
+  margin: 14px 0;
+}
+
+.cp-bigbet-sport {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.cp-bigbet-sport-icon {
+  color: var(--color-text-secondary);
+}
+
+.cp-bigbet-value {
+  font-family: var(--font-display);
+  font-size: 28px;
+  font-weight: var(--font-weight-bold);
+  color: var(--color-accent);
+  letter-spacing: -0.5px;
+  line-height: 1;
+}
+
+.cp-bigbet-breakdown {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  font-family: var(--font-body);
+  font-size: 10px;
+  color: var(--color-text-muted);
+  line-height: 1.3;
+}
+
+.cp-bigbet-breakdown strong {
+  color: var(--color-text-secondary);
+  font-weight: var(--font-weight-semibold);
+}
+
+/* Delta badge — compact pill with friend avatar */
+.cp-bigbet-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--color-surface-alt);
+  color: var(--color-text-primary);
+  font-family: var(--font-display);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  padding: 3px 8px 3px 3px;
+  border-radius: var(--radius-pill);
+  margin-top: 6px;
+  width: fit-content;
+}
+
+.cp-bigbet-badge--behind .cp-bigbet-badge-label {
+  color: var(--color-text-secondary);
+}
+
+.cp-bigbet-badge-avatar {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+  filter: grayscale(1);
+}
+
+.cp-bigbet-badge-avatar--fb {
+  background: var(--color-border);
+  color: var(--color-text-secondary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: var(--font-weight-bold);
+}
+
+.cp-bigbet-badge-label {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+}
+
+/* ─── Activity List ─── */
+.cp-list-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.cp-list-title {
+  font-family: var(--font-display);
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+  margin: 0;
+  letter-spacing: -0.2px;
+}
+
+.cp-list-count {
+  font-family: var(--font-body);
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+  font-weight: var(--font-weight-medium);
+}
+
+.cp-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+/* ─── Activity Row ─── */
+.act-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: var(--color-surface);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-border);
+  padding: 14px 16px;
+  cursor: pointer;
+  transition: box-shadow 0.15s;
+}
+
+.act-row:hover {
+  box-shadow: 0 2px 12px rgba(33, 33, 31, 0.08);
+}
+
+/* Sport icon circle */
+.act-row-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--row-color, var(--color-accent)) 15%, transparent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: var(--row-color, var(--color-accent));
+}
+
+/* Name + date */
+.act-row-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 180px;
+  width: 180px;
+  flex-shrink: 0;
+}
+
+.act-row-meta {
+  font-family: var(--font-body);
+  font-size: var(--font-size-xs);
+  color: var(--color-text-muted);
+  font-weight: var(--font-weight-medium);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.act-row-name {
+  font-family: var(--font-display);
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  letter-spacing: -0.1px;
+}
+
+/* Stats */
+.act-row-stats {
+  display: flex;
+  gap: 20px;
+  flex: 1;
+  min-width: 0;
+}
+
+.act-row-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  min-width: 50px;
+}
+
+.act-row-stat-label {
+  font-family: var(--font-body);
+  font-size: 9px;
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.act-row-stat-value {
+  font-family: var(--font-display);
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-primary);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.act-row-stat-value--accent {
+  color: var(--color-accent);
+}
+
+/* Photo thumbnail */
+.act-row-thumb {
+  flex-shrink: 0;
+  width: 64px;
+  height: 48px;
+  border-radius: var(--radius-md);
+  background-size: cover;
+  background-position: center;
+  filter: grayscale(1);
+  opacity: 0.85;
+}
+
+/* Load more */
+.cp-load-more {
+  display: block;
+  margin: 16px auto 0;
+  padding: 10px 28px;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+  font-family: var(--font-body);
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  transition: all 0.15s;
+  letter-spacing: 0.2px;
+}
+
+.cp-load-more:hover {
+  background: var(--color-text-primary);
+  color: #fff;
+  border-color: var(--color-text-primary);
+}
+
+.cp-empty {
+  text-align: center;
+  padding: 48px 20px;
+  color: var(--color-text-muted);
+  font-size: var(--font-size-base);
+}
