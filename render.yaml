@@ -2,8 +2,10 @@ services:
   - type: web
     name: strava-dashboard
     runtime: node
-    buildCommand: npm run build
-    startCommand: npm start
+    plan: free
+    buildCommand: cd dashboard && npm install && npm run build
+    startCommand: node api-server.js
+    healthCheckPath: /api/refresh-data
     envVars:
       - key: NODE_ENV
         value: production

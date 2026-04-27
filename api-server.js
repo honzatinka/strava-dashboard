@@ -760,8 +760,8 @@ ODPOVĚĎ: Napiš jednu-dvě věty o charakteru tréninku. NIČEHO JINÉHO!`;
 }
 
 const PORT = process.env.PORT || 3001;
-server.listen(PORT, () => {
-  console.log(`✓ API server running on http://localhost:${PORT}`);
+server.listen(PORT, "0.0.0.0", () => {
+  console.log(`✓ API server running on http://0.0.0.0:${PORT}`);
   if (!API_KEY) {
     console.log("  ⚠ Set OPENAI_API_KEY to enable AI analysis");
   }
