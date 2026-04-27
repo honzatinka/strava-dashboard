@@ -249,8 +249,8 @@ export function CombinedActivityCalendarPage({
               )}
             </div>
             <div className="cp-nav">
-              <button className="cp-arrow" onClick={prevMonth}><ChevronLeft size={14} strokeWidth={2.5} /></button>
-              <button className="cp-arrow" onClick={nextMonth}><ChevronRight size={14} strokeWidth={2.5} /></button>
+              <button className="cp-arrow" onClick={prevMonth}><ChevronLeft size={16} strokeWidth={2} /></button>
+              <button className="cp-arrow" onClick={nextMonth}><ChevronRight size={16} strokeWidth={2} /></button>
             </div>
           </div>
 

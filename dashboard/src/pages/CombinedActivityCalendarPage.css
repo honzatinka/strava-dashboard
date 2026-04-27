@@ -97,12 +97,17 @@
 
 .cp-month-stat-delta {
   font-family: var(--font-body);
-  font-size: var(--font-size-xs);
-  font-weight: var(--font-weight-medium);
+  font-size: 10px;
+  font-weight: var(--font-weight-semibold);
   white-space: nowrap;
+  background: var(--color-text-primary);
+  color: #fff;
+  padding: 2px 6px;
+  border-radius: var(--radius-pill);
+  line-height: 1.4;
 }
-.cp-delta--up   { color: var(--color-accent); }
-.cp-delta--down { color: var(--color-text-muted); }
+.cp-delta--up   { background: var(--color-text-primary); }
+.cp-delta--down { background: var(--color-text-secondary); }
 
 .cp-nav {
   display: flex;
@@ -113,23 +118,22 @@
 .cp-arrow {
   width: 28px;
   height: 28px;
-  border-radius: 50%;
-  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  border: none;
   background: transparent;
-  color: var(--color-text-secondary);
+  color: var(--color-text-muted);
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: all 0.15s;
+  transition: color 0.15s, background 0.15s;
   padding: 0;
   font-family: inherit;
 }
 
 .cp-arrow:hover {
-  background: var(--color-text-primary);
-  color: #fff;
-  border-color: var(--color-text-primary);
+  color: var(--color-text-primary);
+  background: var(--color-surface-alt);
 }
 
 /* Calendar Grid */
