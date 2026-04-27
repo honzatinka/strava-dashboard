@@ -160,12 +160,18 @@ export function CombinedActivityCalendarPage({
     load();
   }, [displayedActivities]);
 
-  // Calendar
+  // Calendar — always 42 cells (6 rows), with prev/next month filler days
   const daysInMonth = getDaysInMonth(year, month);
   const firstDay = getFirstDayOfWeek(year, month);
-  const cells: (number | null)[] = [];
-  for (let i = 0; i < firstDay; i++) cells.push(null);
-  for (let d = 1; d <= daysInMonth; d++) cells.push(d);
+  const prevMonthDaysCount = getDaysInMonth(month === 0 ? year - 1 : year, month === 0 ? 11 : month - 1);
+  type CalCell = { day: number; current: boolean };
+  const cells: CalCell[] = [];
+  for (let i = 0; i < firstDay; i++)
+    cells.push({ day: prevMonthDaysCount - firstDay + 1 + i, current: false });
+  for (let d = 1; d <= daysInMonth; d++)
+    cells.push({ day: d, current: true });
+  let nextDay = 1;
+  while (cells.length < 42) cells.push({ day: nextDay++, current: false });
   const today = now.toISOString().slice(0, 10);
 
   const prevMonth = () => { if (month === 0) { setYear(y=>y-1); setMonth(11); } else setMonth(m=>m-1); setSelectedDay(null); };
@@ -261,19 +267,20 @@ export function CombinedActivityCalendarPage({
 
           {/* Calendar cells */}
           <div className="cp-cal-grid">
-            {cells.map((day, i) => {
-              if (day === null) return <div key={`e${i}`} className="cp-cell cp-cell--empty" />;
-              const ds = `${year}-${String(month+1).padStart(2,"0")}-${String(day).padStart(2,"0")}`;
-              const dayActs = byDate.get(ds) || [];
+            {cells.map(({ day, current }, i) => {
+              const ds = current
+                ? `${year}-${String(month+1).padStart(2,"0")}-${String(day).padStart(2,"0")}`
+                : null;
+              const dayActs = ds ? byDate.get(ds) || [] : [];
               const isToday = ds === today;
-              const isSel = ds === selectedDay;
+              const isSel = ds !== null && ds === selectedDay;
               const firstSport = dayActs[0]?.sport_type || dayActs[0]?.type || "";
               const selColor = SPORT_COLORS[firstSport] || "#FF4400";
               return (
                 <div
-                  key={ds}
-                  className={["cp-cell", dayActs.length ? "cp-cell--active" : "", isToday ? "cp-cell--today" : "", isSel ? "cp-cell--selected" : ""].join(" ")}
-                  onClick={() => dayActs.length && setSelectedDay(isSel ? null : ds)}
+                  key={`cell-${i}`}
+                  className={["cp-cell", !current ? "cp-cell--other-month" : "", dayActs.length ? "cp-cell--active" : "", isToday ? "cp-cell--today" : "", isSel ? "cp-cell--selected" : ""].join(" ")}
+                  onClick={() => ds && dayActs.length && setSelectedDay(isSel ? null : ds)}
                   style={isSel ? { "--sel-color": selColor } as React.CSSProperties : undefined}
                 >
                   <span className="cp-cell-num">{day}</span>
@@ -285,8 +292,8 @@ export function CombinedActivityCalendarPage({
                         const Ic = SPORT_ICONS[s] || FALLBACK_SPORT_ICON;
                         return (
                           <div key={idx} className="cp-cell-act" style={{ background: c }}>
-                            <Ic size={9} strokeWidth={2.5} color="#fff" />
-                            <span className="cp-cell-act-dur" style={{ color: "#fff" }}>
+                            <Ic size={9} color={darken(c, 0.45)} />
+                            <span className="cp-cell-act-dur" style={{ color: darken(c, 0.45) }}>
                               {shortDur(a.moving_time)}
                             </span>
                           </div>

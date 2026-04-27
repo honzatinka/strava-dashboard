@@ -29,11 +29,8 @@ export interface Activity {
 }
 
 import type { LucideIcon } from "lucide-react";
-import {
-  ClipboardList, BarChart3, Target, Map,
-  Footprints, Bike, Mountain, MountainSnow, Waves, Snowflake,
-  Dumbbell, CircleDot, Heart, Activity,
-} from "lucide-react";
+import { ClipboardList, BarChart3, Target, Map } from "lucide-react";
+import React from "react";
 
 export type Page = "aktivity" | "statistiky" | "sporty" | "heatmapa" | "sporty-mesice";
 
@@ -44,14 +41,44 @@ export const PAGE_CONFIG: { id: Page; label: string; icon: LucideIcon }[] = [
   { id: "heatmapa", label: "Mapa", icon: Map },
 ];
 
-export const SPORT_ICONS: Record<string, LucideIcon> = {
-  Run: Footprints, GravelRide: Bike, Ride: Bike, MountainBikeRide: Mountain,
-  EBikeRide: Bike, Hike: MountainSnow, Walk: Footprints, Swim: Waves,
-  Surfing: Waves, Snowboard: Snowflake, Workout: Dumbbell, WeightTraining: Dumbbell,
-  Tennis: CircleDot, Padel: CircleDot, Yoga: Heart, VirtualRun: Footprints,
+// Material Symbols icon component — drop-in replacement for LucideIcon
+function makeMIcon(name: string) {
+  return function MIcon({ size = 18, color }: { size?: number; strokeWidth?: number; color?: string }) {
+    return React.createElement(
+      "span",
+      {
+        className: "material-symbols-outlined",
+        style: { fontSize: size, lineHeight: 1, userSelect: "none", display: "inline-flex", ...(color ? { color } : {}) },
+      },
+      name,
+    );
+  };
+}
+
+export const SPORT_ICONS: Record<string, ReturnType<typeof makeMIcon>> = {
+  Run:              makeMIcon("directions_run"),
+  VirtualRun:       makeMIcon("directions_run"),
+  TrailRun:         makeMIcon("hiking"),
+  GravelRide:       makeMIcon("directions_bike"),
+  Ride:             makeMIcon("directions_bike"),
+  MountainBikeRide: makeMIcon("directions_bike"),
+  EBikeRide:        makeMIcon("electric_bike"),
+  Hike:             makeMIcon("hiking"),
+  Walk:             makeMIcon("directions_walk"),
+  Swim:             makeMIcon("pool"),
+  Surfing:          makeMIcon("surfing"),
+  StandUpPaddling:  makeMIcon("kayaking"),
+  Snowboard:        makeMIcon("snowboarding"),
+  Skiing:           makeMIcon("downhill_skiing"),
+  Workout:          makeMIcon("fitness_center"),
+  WeightTraining:   makeMIcon("fitness_center"),
+  Tennis:           makeMIcon("sports_tennis"),
+  Padel:            makeMIcon("sports_tennis"),
+  Yoga:             makeMIcon("self_improvement"),
+  RockClimbing:     makeMIcon("landscape"),
 };
 
-export const FALLBACK_SPORT_ICON = Activity;
+export const FALLBACK_SPORT_ICON = makeMIcon("sports");
 
 export const SPORT_COLORS: Record<string, string> = {
   // Běh
