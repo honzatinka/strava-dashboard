@@ -31,7 +31,7 @@ export function ActivityListRow({
       <span className="act-row-date">{date}</span>
 
       <div className="act-row-sport">
-        <Icon size={14} strokeWidth={2.5} color={color} />
+        <Icon size={22} strokeWidth={1.6} color="var(--color-accent)" />
         <span className="act-row-type">{sportLabel(sport)}</span>
       </div>
 

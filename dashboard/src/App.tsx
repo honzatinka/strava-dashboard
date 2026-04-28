@@ -8,11 +8,12 @@ import { SportyPage } from "./pages/SportyPage";
 import { HeatmapaPage } from "./pages/HeatmapaPage";
 import { SportyMesicePage } from "./pages/SportyMesicePage";
 import { BigBetPage } from "./pages/BigBetPage";
+import { AktivityPage } from "./pages/AktivityPage";
 import "./App.css";
 
 function Dashboard() {
   const [activities, setActivities] = useState<Activity[]>([]);
-  const [activePage, setActivePage] = useState<Page>("aktivity");
+  const [activePage, setActivePage] = useState<Page>("dash");
   const [selectedActivity, setSelectedActivity] = useState<Activity | null>(null);
   const [athletePhoto, setAthletePhoto] = useState<string | null>(null);
 
@@ -42,9 +43,10 @@ function Dashboard() {
       />
       <main className="main-content">
         <div className="main-inner">
-          {activePage === "aktivity" && (
+          {activePage === "dash" && (
             <CombinedActivityCalendarPage activities={activities} onSelect={openActivity} />
           )}
+          {activePage === "activities" && <AktivityPage activities={activities} onSelect={openActivity} />}
           {activePage === "statistiky" && <StatsRecordsPage activities={activities} onSelect={openActivity} />}
           {activePage === "sporty" && <SportyPage activities={activities} onSelect={openActivity} />}
           {activePage === "heatmapa" && <HeatmapaPage activities={activities} />}

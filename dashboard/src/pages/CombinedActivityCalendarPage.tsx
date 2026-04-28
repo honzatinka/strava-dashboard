@@ -1,11 +1,10 @@
-import { useState, useMemo, useEffect } from "react";
+import { useState, useMemo } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import type { Activity } from "../types";
 import { SPORT_ICONS, SPORT_COLORS, FALLBACK_SPORT_ICON, COURT_SPORTS } from "../types";
 import {
   groupByDate, formatDistance, czechMonth, formatPace,
 } from "../utils";
-import { getCityName } from "../utils/geocode";
 import { TheBigBet } from "../components/TheBigBet";
 import "./CombinedActivityCalendarPage.css";
 
@@ -57,7 +56,7 @@ function ActivityRow({
     >
       {/* Sport icon */}
       <div className="act-row-icon">
-        <Icon size={18} strokeWidth={1.8} />
+        <Icon size={18} strokeWidth={1.8} color="var(--color-accent)" />
       </div>
 
       {/* Name + meta */}
@@ -112,53 +111,10 @@ export function CombinedActivityCalendarPage({
   const now = new Date();
   const [year, setYear] = useState(now.getFullYear());
   const [month, setMonth] = useState(now.getMonth());
-  const [selectedDay, setSelectedDay] = useState<string | null>(null);
-  const [visibleCount, setVisibleCount] = useState(PAGE_SIZE);
   const [photoCache, setPhotoCache] = useState<Record<number, string>>({});
   const [cityCache, setCityCache] = useState<Record<number, string>>({});
 
   const byDate = useMemo(() => groupByDate(activities), [activities]);
-
-  const displayedActivities = useMemo(() => {
-    if (selectedDay) return byDate.get(selectedDay) || [];
-    return activities.slice(0, visibleCount);
-  }, [selectedDay, activities, byDate, visibleCount]);
-
-  // Load Strava thumbnails
-  useEffect(() => {
-    const toLoad = displayedActivities
-      .filter((a) => (a.total_photo_count ?? 0) > 0 && !photoCache[a.id])
-      .map((a) => a.id)
-      .slice(0, 12);
-    if (!toLoad.length) return;
-    fetch("/api/batch-thumbs", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ activityIds: toLoad }),
-    })
-      .then((r) => r.json())
-      .then((data: Record<number, string>) => {
-        if (Object.keys(data).length) setPhotoCache((p) => ({ ...p, ...data }));
-      })
-      .catch(() => {});
-  }, [displayedActivities]);
-
-  // Load city names
-  useEffect(() => {
-    const load = async () => {
-      const toLoad = displayedActivities.filter(
-        (a) => a.start_latlng && a.start_latlng.length === 2 && !cityCache[a.id]
-      );
-      if (!toLoad.length) return;
-      const updates: Record<number, string> = {};
-      for (const a of toLoad) {
-        const name = await getCityName(a.start_latlng![0], a.start_latlng![1]);
-        if (name) updates[a.id] = name;
-      }
-      if (Object.keys(updates).length) setCityCache((p) => ({ ...p, ...updates }));
-    };
-    load();
-  }, [displayedActivities]);
 
   // Calendar — always 42 cells (6 rows), with prev/next month filler days
   const daysInMonth = getDaysInMonth(year, month);
@@ -174,8 +130,8 @@ export function CombinedActivityCalendarPage({
   while (cells.length < 42) cells.push({ day: nextDay++, current: false });
   const today = now.toISOString().slice(0, 10);
 
-  const prevMonth = () => { if (month === 0) { setYear(y=>y-1); setMonth(11); } else setMonth(m=>m-1); setSelectedDay(null); };
-  const nextMonth = () => { if (month === 11) { setYear(y=>y+1); setMonth(0); } else setMonth(m=>m+1); setSelectedDay(null); };
+  const prevMonth = () => { if (month === 0) { setYear(y=>y-1); setMonth(11); } else setMonth(m=>m-1); };
+  const nextMonth = () => { if (month === 11) { setYear(y=>y+1); setMonth(0); } else setMonth(m=>m+1); };
 
   const monthActs = activities.filter((a) =>
     a.start_date_local.startsWith(`${year}-${String(month+1).padStart(2,"0")}`)
@@ -273,15 +229,10 @@ export function CombinedActivityCalendarPage({
                 : null;
               const dayActs = ds ? byDate.get(ds) || [] : [];
               const isToday = ds === today;
-              const isSel = ds !== null && ds === selectedDay;
-              const firstSport = dayActs[0]?.sport_type || dayActs[0]?.type || "";
-              const selColor = SPORT_COLORS[firstSport] || "#FF4400";
               return (
                 <div
                   key={`cell-${i}`}
-                  className={["cp-cell", !current ? "cp-cell--other-month" : "", dayActs.length ? "cp-cell--active" : "", isToday ? "cp-cell--today" : "", isSel ? "cp-cell--selected" : ""].join(" ")}
-                  onClick={() => ds && dayActs.length && setSelectedDay(isSel ? null : ds)}
-                  style={isSel ? { "--sel-color": selColor } as React.CSSProperties : undefined}
+                  className={["cp-cell", !current ? "cp-cell--other-month" : "", isToday ? "cp-cell--today" : ""].join(" ")}
                 >
                   <span className="cp-cell-num">{day}</span>
                   {dayActs.length > 0 && (
@@ -291,8 +242,13 @@ export function CombinedActivityCalendarPage({
                         const c = SPORT_COLORS[s] || "#D4CFC9";
                         const Ic = SPORT_ICONS[s] || FALLBACK_SPORT_ICON;
                         return (
-                          <div key={idx} className="cp-cell-act" style={{ background: c }}>
-                            <Ic size={9} color={darken(c, 0.45)} />
+                          <div
+                            key={idx}
+                            className="cp-cell-act"
+                            style={{ background: c, cursor: "pointer" }}
+                            onClick={() => onSelect(a)}
+                          >
+                            <Ic size={11} color={darken(c, 0.45)} />
                             <span className="cp-cell-act-dur" style={{ color: darken(c, 0.45) }}>
                               {shortDur(a.moving_time)}
                             </span>
@@ -307,9 +263,6 @@ export function CombinedActivityCalendarPage({
             })}
           </div>
 
-          {selectedDay && (
-            <button className="cp-clear-btn" onClick={() => setSelectedDay(null)}>✕ Clear filter</button>
-          )}
         </div>
         </div>{/* end cp-calendar-card */}
 
@@ -319,32 +272,6 @@ export function CombinedActivityCalendarPage({
         </div>
       </div>
 
-      {/* ─── Activity List ─── */}
-      <div className="cp-list-header">
-        <h2 className="cp-list-title">{selectedDay ? selectedDay : "Latest activities"}</h2>
-        <span className="cp-list-count">{displayedActivities.length} activities</span>
-      </div>
-
-      <div className="cp-list">
-        {displayedActivities.map((a) => (
-          <ActivityRow
-            key={a.id}
-            activity={a}
-            onClick={() => onSelect(a)}
-            photoUrl={photoCache[a.id]}
-            city={cityCache[a.id]}
-          />
-        ))}
-      </div>
-
-      {!selectedDay && visibleCount < activities.length && (
-        <button className="cp-load-more" onClick={() => setVisibleCount((c) => c + PAGE_SIZE)}>
-          Load more
-        </button>
-      )}
-      {displayedActivities.length === 0 && (
-        <div className="cp-empty">No activities on this day</div>
-      )}
     </div>
   );
 }

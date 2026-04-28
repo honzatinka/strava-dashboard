@@ -32,7 +32,7 @@ import type { LucideIcon } from "lucide-react";
 import { ClipboardList, BarChart3, Target, Map } from "lucide-react";
 import React from "react";
 
-export type Page = "aktivity" | "statistiky" | "sporty" | "heatmapa" | "sporty-mesice";
+export type Page = "dash" | "activities" | "statistiky" | "sporty" | "heatmapa" | "sporty-mesice";
 
 export const PAGE_CONFIG: { id: Page; label: string; icon: LucideIcon }[] = [
   { id: "aktivity", label: "Aktivity", icon: ClipboardList },
@@ -79,6 +79,14 @@ export const SPORT_ICONS: Record<string, ReturnType<typeof makeMIcon>> = {
 };
 
 export const FALLBACK_SPORT_ICON = makeMIcon("sports");
+
+export const NAV_ICONS = {
+  dash:       makeMIcon("space_dashboard"),
+  activities: makeMIcon("checklist"),
+  statistiky: makeMIcon("bar_chart"),
+  sporty:     makeMIcon("donut_large"),
+  heatmapa:   makeMIcon("map"),
+};
 
 export const SPORT_COLORS: Record<string, string> = {
   // Běh

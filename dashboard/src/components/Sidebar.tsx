@@ -1,5 +1,5 @@
 import type { Activity, Page } from "../types";
-import { BarChart3, Bike, Map, Activity as ActivityIcon } from "lucide-react";
+import { NAV_ICONS } from "../types";
 import "./Sidebar.css";
 
 interface SidebarProps {
@@ -9,11 +9,12 @@ interface SidebarProps {
   athletePhoto: string | null;
 }
 
-const NAV_ITEMS: { id: Page; label: string; icon: React.ElementType }[] = [
-  { id: "aktivity",   label: "Activities", icon: ActivityIcon },
-  { id: "statistiky", label: "Statistics", icon: BarChart3 },
-  { id: "sporty",     label: "Sports",     icon: Bike },
-  { id: "heatmapa",   label: "Map",        icon: Map },
+const NAV_ITEMS: { id: Page; label: string }[] = [
+  { id: "dash",       label: "Dash & Bet" },
+  { id: "activities", label: "Activities" },
+  { id: "statistiky", label: "Statistics" },
+  { id: "sporty",     label: "Sports"     },
+  { id: "heatmapa",   label: "Map"        },
 ];
 
 export function Sidebar({ activePage, onNavigate, activities, athletePhoto }: SidebarProps) {
@@ -41,16 +42,19 @@ export function Sidebar({ activePage, onNavigate, activities, athletePhoto }: Si
 
       {/* Navigation */}
       <nav className="sidebar-nav">
-        {NAV_ITEMS.map(({ id, label, icon: Icon }) => (
-          <button
-            key={id}
-            className={`sidebar-item${activePage === id ? " sidebar-item--active" : ""}`}
-            onClick={() => onNavigate(id)}
-          >
-            <Icon size={15} strokeWidth={1.8} />
-            {label}
-          </button>
-        ))}
+        {NAV_ITEMS.map(({ id, label }) => {
+          const Icon = NAV_ICONS[id as keyof typeof NAV_ICONS];
+          return (
+            <button
+              key={id}
+              className={`sidebar-item${activePage === id ? " sidebar-item--active" : ""}`}
+              onClick={() => onNavigate(id)}
+            >
+              <Icon size={18} />
+              {label}
+            </button>
+          );
+        })}
       </nav>
 
       <div className="sidebar-spacer" />

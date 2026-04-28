@@ -8,7 +8,7 @@
 .cp-top {
   display: flex;
   gap: 12px;
-  align-items: flex-start;
+  align-items: stretch;
   margin-bottom: 20px;
 }
 
@@ -21,6 +21,7 @@
   border: 1px solid var(--color-border);
   box-shadow: var(--shadow-card);
   overflow: hidden;
+  zoom: 1.21;
 }
 
 .cp-calendar-wrapper {
@@ -213,7 +214,7 @@
   display: flex;
   align-items: center;
   gap: 3px;
-  padding: 3px 4px;   /* ~15% taller: 2px → 3px */
+  padding: 5px 4px;
   border-radius: 4px;
   line-height: 1;
   width: 62%;         /* 75% × 0.85 ≈ 64%, rounded to 62% */
@@ -262,6 +263,8 @@
   display: flex;
   flex-direction: column;
   gap: 0;
+  height: 100%;
+  box-sizing: border-box;
 }
 
 .cp-bigbet-year {
@@ -369,6 +372,13 @@
 }
 
 /* ─── Activity List ─── */
+.cp-list-header,
+.cp-list,
+.cp-load-more,
+.cp-empty {
+  zoom: 1.1;
+}
+
 .cp-list-header {
   display: flex;
   align-items: center;
@@ -415,17 +425,14 @@
   box-shadow: 0 2px 12px rgba(33, 33, 31, 0.08);
 }
 
-/* Sport icon circle */
+/* Sport icon — no background */
 .act-row-icon {
   width: 36px;
   height: 36px;
-  border-radius: 50%;
-  background: color-mix(in srgb, var(--row-color, var(--color-accent)) 15%, transparent);
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  color: var(--row-color, var(--color-accent));
 }
 
 /* Name + date */
