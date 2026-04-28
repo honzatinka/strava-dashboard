@@ -1,11 +1,11 @@
 import { useState, useMemo, useEffect } from "react";
 import {
-  BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, Cell, LabelList,
+  BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, LabelList,
 } from "recharts";
 import { Ruler, Timer, Mountain, MapPin } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 import type { Activity } from "../types";
-import { SPORT_ICONS, SPORT_COLORS, FALLBACK_SPORT_ICON } from "../types";
+import { SPORT_ICONS, FALLBACK_SPORT_ICON } from "../types";
 import {
   formatDistance, formatDuration, formatFullDate,
   groupBySport, sportLabel, locationFromTimezone,
@@ -14,6 +14,10 @@ import { getCityName } from "../utils/geocode";
 import "./StatsRecordsPage.css";
 
 const CZECH_DAYS = ["Ne", "Po", "Út", "St", "Čt", "Pá", "So"];
+const CZECH_MONTHS_FULL = [
+  "Leden", "Únor", "Březen", "Duben", "Květen", "Červen",
+  "Červenec", "Srpen", "Září", "Říjen", "Listopad", "Prosinec",
+];
 
 interface ActivityRecord {
   label: string;
@@ -101,12 +105,10 @@ export function StatsRecordsPage({
       .map(([sport, acts]) => ({
         name: sportLabel(sport),
         value: acts.length,
-        color: SPORT_COLORS[sport] || "#95a5a6",
       }))
       .sort((a, b) => b.value - a.value);
   }, [activities]);
 
-  // Day-of-week → pie chart data
   const dayData = useMemo(() => {
     const counts = [0, 0, 0, 0, 0, 0, 0];
     for (const a of activities) {
@@ -114,12 +116,9 @@ export function StatsRecordsPage({
       counts[day]++;
     }
     const ordered = [1, 2, 3, 4, 5, 6, 0];
-    // Generate accent-tinted palette (orange family)
-    const palette = ["#FF4400", "#FF6633", "#FF8855", "#FFA37A", "#FFBE9F", "#FFD4BA", "#E8E4DE"];
-    return ordered.map((d, i) => ({
+    return ordered.map((d) => ({
       name: CZECH_DAYS[d],
       value: counts[d],
-      color: palette[i],
     }));
   }, [activities]);
 
@@ -167,14 +166,21 @@ export function StatsRecordsPage({
                 axisLine={false}
                 tickLine={false}
               />
-              <Tooltip contentStyle={{ background: "#FFFFFF", border: "1px solid rgba(33,33,31,0.08)", borderRadius: 8, color: "#21211F", fontFamily: "inherit" }} />
+              <Tooltip
+                cursor={false}
+                labelFormatter={(label) => CZECH_MONTHS_FULL[parseInt(String(label)) - 1] || String(label)}
+                formatter={(value) => [`${value} aktivit`, ""] as [string, string]}
+                contentStyle={{ background: "#FFFFFF", border: "1px solid rgba(33,33,31,0.08)", borderRadius: 8, color: "#21211F", fontFamily: "inherit", padding: "8px 12px" }}
+                labelStyle={{ fontWeight: 600, marginBottom: 2 }}
+                itemStyle={{ color: "var(--color-accent)" }}
+              />
               <Bar dataKey="count" fill="var(--color-accent)" radius={[6, 6, 0, 0]} />
             </BarChart>
           </ResponsiveContainer>
         </div>
 
         <div className="sr-charts-pair">
-          {/* Rozložení sportů — horizontal bar */}
+          {/* Rozložení sportů — horizontal bar, all accent, no tooltip/hover */}
           <div className="sr-card sr-chart-half">
             <h3 className="sr-card-title">Rozložení sportů</h3>
             <ResponsiveContainer width="100%" height={Math.max(220, sportData.length * 30)}>
@@ -188,18 +194,14 @@ export function StatsRecordsPage({
                   tickLine={false}
                   width={90}
                 />
-                <Tooltip contentStyle={{ background: "#FFFFFF", border: "1px solid rgba(33,33,31,0.08)", borderRadius: 8, color: "#21211F", fontFamily: "inherit" }} />
-                <Bar dataKey="value" radius={[4, 4, 4, 4]}>
-                  {sportData.map((entry, i) => (
-                    <Cell key={i} fill={entry.color} />
-                  ))}
+                <Bar dataKey="value" fill="var(--color-accent)" radius={[4, 4, 4, 4]} isAnimationActive={false}>
                   <LabelList dataKey="value" position="right" style={{ fontSize: 11, fill: "rgba(33,33,31,0.6)", fontWeight: 600 }} />
                 </Bar>
               </BarChart>
             </ResponsiveContainer>
           </div>
 
-          {/* Aktivita podle dne — horizontal bar */}
+          {/* Aktivita podle dne — horizontal bar, no tooltip/hover */}
           <div className="sr-card sr-chart-half">
             <h3 className="sr-card-title">Aktivita podle dne</h3>
             <ResponsiveContainer width="100%" height={220}>
@@ -213,8 +215,7 @@ export function StatsRecordsPage({
                   tickLine={false}
                   width={36}
                 />
-                <Tooltip contentStyle={{ background: "#FFFFFF", border: "1px solid rgba(33,33,31,0.08)", borderRadius: 8, color: "#21211F", fontFamily: "inherit" }} />
-                <Bar dataKey="value" fill="var(--color-accent)" radius={[4, 4, 4, 4]}>
+                <Bar dataKey="value" fill="var(--color-accent)" radius={[4, 4, 4, 4]} isAnimationActive={false}>
                   <LabelList dataKey="value" position="right" style={{ fontSize: 11, fill: "rgba(33,33,31,0.6)", fontWeight: 600 }} />
                 </Bar>
               </BarChart>

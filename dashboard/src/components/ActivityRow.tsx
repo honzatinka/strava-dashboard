@@ -15,9 +15,12 @@ function formatRowDate(iso: string, city?: string | null): string {
   const d = new Date(iso);
   const month = d.toLocaleDateString("en-US", { month: "long" });
   const day = d.getDate();
+  const year = d.getFullYear();
+  const currentYear = new Date().getFullYear();
+  const yearPart = year !== currentYear ? `, ${year}` : "";
   const time = d.toLocaleTimeString("en-US", { hour: "numeric", minute: "2-digit" });
   const weekday = d.toLocaleDateString("en-US", { weekday: "short" });
-  return `${month} ${day} at ${time}, ${city || weekday}`;
+  return `${month} ${day}${yearPart} at ${time}, ${city || weekday}`;
 }
 
 interface Props {
