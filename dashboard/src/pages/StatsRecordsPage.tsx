@@ -1,7 +1,6 @@
 import { useState, useMemo, useEffect } from "react";
 import {
-  BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer,
-  PieChart, Pie, Cell,
+  BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, Cell, LabelList,
 } from "recharts";
 import { Ruler, Timer, Mountain, MapPin } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
@@ -175,33 +174,50 @@ export function StatsRecordsPage({
         </div>
 
         <div className="sr-charts-pair">
-          {/* Rozložení sportů */}
+          {/* Rozložení sportů — horizontal bar */}
           <div className="sr-card sr-chart-half">
             <h3 className="sr-card-title">Rozložení sportů</h3>
-            <ResponsiveContainer width="100%" height={220}>
-              <PieChart>
-                <Pie data={sportData} dataKey="value" nameKey="name" cx="50%" cy="50%" innerRadius={45} outerRadius={80} paddingAngle={2}>
+            <ResponsiveContainer width="100%" height={Math.max(220, sportData.length * 30)}>
+              <BarChart data={sportData} layout="vertical" margin={{ top: 4, right: 36, left: 4, bottom: 4 }}>
+                <XAxis type="number" hide />
+                <YAxis
+                  type="category"
+                  dataKey="name"
+                  tick={{ fontSize: 12, fill: "rgba(33,33,31,0.6)" }}
+                  axisLine={false}
+                  tickLine={false}
+                  width={90}
+                />
+                <Tooltip contentStyle={{ background: "#FFFFFF", border: "1px solid rgba(33,33,31,0.08)", borderRadius: 8, color: "#21211F", fontFamily: "inherit" }} />
+                <Bar dataKey="value" radius={[4, 4, 4, 4]}>
                   {sportData.map((entry, i) => (
                     <Cell key={i} fill={entry.color} />
                   ))}
-                </Pie>
-                <Tooltip contentStyle={{ background: "#FFFFFF", border: "1px solid rgba(33,33,31,0.08)", borderRadius: 8, color: "#21211F", fontFamily: "inherit" }} />
-              </PieChart>
+                  <LabelList dataKey="value" position="right" style={{ fontSize: 11, fill: "rgba(33,33,31,0.6)", fontWeight: 600 }} />
+                </Bar>
+              </BarChart>
             </ResponsiveContainer>
           </div>
 
-          {/* Aktivita podle dne — pie */}
+          {/* Aktivita podle dne — horizontal bar */}
           <div className="sr-card sr-chart-half">
             <h3 className="sr-card-title">Aktivita podle dne</h3>
             <ResponsiveContainer width="100%" height={220}>
-              <PieChart>
-                <Pie data={dayData} dataKey="value" nameKey="name" cx="50%" cy="50%" innerRadius={45} outerRadius={80} paddingAngle={2} label={({ name }) => name}>
-                  {dayData.map((entry, i) => (
-                    <Cell key={i} fill={entry.color} />
-                  ))}
-                </Pie>
+              <BarChart data={dayData} layout="vertical" margin={{ top: 4, right: 36, left: 4, bottom: 4 }}>
+                <XAxis type="number" hide />
+                <YAxis
+                  type="category"
+                  dataKey="name"
+                  tick={{ fontSize: 12, fill: "rgba(33,33,31,0.6)" }}
+                  axisLine={false}
+                  tickLine={false}
+                  width={36}
+                />
                 <Tooltip contentStyle={{ background: "#FFFFFF", border: "1px solid rgba(33,33,31,0.08)", borderRadius: 8, color: "#21211F", fontFamily: "inherit" }} />
-              </PieChart>
+                <Bar dataKey="value" fill="var(--color-accent)" radius={[4, 4, 4, 4]}>
+                  <LabelList dataKey="value" position="right" style={{ fontSize: 11, fill: "rgba(33,33,31,0.6)", fontWeight: 600 }} />
+                </Bar>
+              </BarChart>
             </ResponsiveContainer>
           </div>
         </div>

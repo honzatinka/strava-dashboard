@@ -2,7 +2,7 @@ import { useState, useMemo, useEffect } from "react";
 import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer } from "recharts";
 import { ChevronDown } from "lucide-react";
 import type { Activity } from "../types";
-import { SPORT_ICONS, SPORT_COLORS, FALLBACK_SPORT_ICON } from "../types";
+import { SPORT_ICONS, FALLBACK_SPORT_ICON } from "../types";
 import { ActivityRow } from "../components/ActivityRow";
 import {
   formatDistance, formatDuration, groupBySport, groupByMonth, sportLabel,
@@ -10,13 +10,14 @@ import {
 import "./AktivityPage.css";
 
 const PAGE_SIZE = 10;
-const MONTH_LABELS = ["I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X", "XI", "XII"];
 
 export function AktivityPage({ activities, onSelect }: { activities: Activity[]; onSelect: (a: Activity) => void }) {
   const [filter, setFilter] = useState<string | null>(null);
   const [visibleCount, setVisibleCount] = useState(PAGE_SIZE);
   const [open, setOpen] = useState(false);
+  const [chartOpen, setChartOpen] = useState(false);
   const [photoCache, setPhotoCache] = useState<Record<number, string>>({});
+  const currentYear = new Date().getFullYear();
 
   const sportCounts = useMemo(() => {
     const map = groupBySport(activities);
@@ -76,11 +77,13 @@ export function AktivityPage({ activities, onSelect }: { activities: Activity[];
       for (let m = mStart; m <= mEnd; m++) {
         const key = `${y}-${String(m).padStart(2, "0")}`;
         const acts = byMonth.get(key) || [];
-        data.push({ name: `${MONTH_LABELS[m - 1]} ${String(y).slice(2)}`, count: acts.length });
+        // numeric month, append year only if not current
+        const label = y === currentYear ? `${m}` : `${m}/${String(y).slice(2)}`;
+        data.push({ name: label, count: acts.length });
       }
     }
     return data;
-  }, [filtered]);
+  }, [filtered, currentYear]);
 
   const SelectedIcon = filter ? (SPORT_ICONS[filter] || FALLBACK_SPORT_ICON) : null;
 
@@ -163,36 +166,43 @@ export function AktivityPage({ activities, onSelect }: { activities: Activity[];
         )}
       </div>
 
-      {/* Trend chart */}
+      {/* Trend chart — toggleable, default closed */}
       {trendData.length > 2 && (
-        <div className="ap-chart-card">
-          <h3 className="ap-chart-title">Vývoj v čase</h3>
-          <ResponsiveContainer width="100%" height={220}>
-            <LineChart data={trendData}>
-              <XAxis
-                dataKey="name"
-                tick={{ fontSize: 11, fill: "rgba(33,33,31,0.4)" }}
-                interval={Math.max(0, Math.floor(trendData.length / 12) - 1)}
-                axisLine={{ stroke: "rgba(33,33,31,0.08)" }}
-                tickLine={false}
-              />
-              <YAxis
-                tick={{ fontSize: 11, fill: "rgba(33,33,31,0.4)" }}
-                allowDecimals={false}
-                axisLine={false}
-                tickLine={false}
-              />
-              <Tooltip contentStyle={{ background: "#FFFFFF", border: "1px solid rgba(33,33,31,0.08)", borderRadius: 8, color: "#21211F", fontFamily: "inherit" }} />
-              <Line
-                type="monotone"
-                dataKey="count"
-                name="Aktivit"
-                stroke="var(--color-accent)"
-                strokeWidth={2}
-                dot={{ r: 3, fill: "var(--color-accent)" }}
-              />
-            </LineChart>
-          </ResponsiveContainer>
+        <div className={`ap-chart-card ap-chart-card--toggle ${chartOpen ? "is-open" : ""}`}>
+          <button className="ap-chart-toggle" onClick={() => setChartOpen((v) => !v)}>
+            <span className="ap-chart-title">Vývoj v čase</span>
+            <ChevronDown size={16} strokeWidth={2} className="ap-chart-toggle-chevron" />
+          </button>
+          {chartOpen && (
+            <div className="ap-chart-body">
+              <ResponsiveContainer width="100%" height={220}>
+                <LineChart data={trendData}>
+                  <XAxis
+                    dataKey="name"
+                    tick={{ fontSize: 11, fill: "rgba(33,33,31,0.4)" }}
+                    interval={Math.max(0, Math.floor(trendData.length / 12) - 1)}
+                    axisLine={{ stroke: "rgba(33,33,31,0.08)" }}
+                    tickLine={false}
+                  />
+                  <YAxis
+                    tick={{ fontSize: 11, fill: "rgba(33,33,31,0.4)" }}
+                    allowDecimals={false}
+                    axisLine={false}
+                    tickLine={false}
+                  />
+                  <Tooltip contentStyle={{ background: "#FFFFFF", border: "1px solid rgba(33,33,31,0.08)", borderRadius: 8, color: "#21211F", fontFamily: "inherit" }} />
+                  <Line
+                    type="monotone"
+                    dataKey="count"
+                    name="Aktivit"
+                    stroke="var(--color-accent)"
+                    strokeWidth={2}
+                    dot={{ r: 3, fill: "var(--color-accent)" }}
+                  />
+                </LineChart>
+              </ResponsiveContainer>
+            </div>
+          )}
         </div>
       )}
 
