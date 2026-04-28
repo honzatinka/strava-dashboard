@@ -1,20 +1,20 @@
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import {
   BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer,
-  PieChart, Pie, Cell, Legend,
+  PieChart, Pie, Cell,
 } from "recharts";
+import { Ruler, Timer, Mountain, MapPin } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
-import { Ruler, Timer, Mountain, Heart, HeartPulse, Zap, ThumbsUp } from "lucide-react";
 import type { Activity } from "../types";
 import { SPORT_ICONS, SPORT_COLORS, FALLBACK_SPORT_ICON } from "../types";
 import {
-  formatDistance, formatDuration, formatFullDate, formatSpeed, formatPace,
-  groupBySport, sportLabel,
+  formatDistance, formatDuration, formatFullDate,
+  groupBySport, sportLabel, locationFromTimezone,
 } from "../utils";
+import { getCityName } from "../utils/geocode";
 import "./StatsRecordsPage.css";
 
 const CZECH_DAYS = ["Ne", "Po", "Út", "St", "Čt", "Pá", "So"];
-const MONTH_LABELS = ["I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X", "XI", "XII"];
 
 interface ActivityRecord {
   label: string;
@@ -38,15 +38,42 @@ function findRecord(
   return { label, icon, activity: best, value: formatter(selector(best)) };
 }
 
+function RecordCard({ rec, onSelect }: { rec: ActivityRecord; onSelect: (a: Activity) => void }) {
+  const sport = rec.activity.sport_type || rec.activity.type;
+  const SportIcon = SPORT_ICONS[sport] || FALLBACK_SPORT_ICON;
+  const [city, setCity] = useState<string | null>(locationFromTimezone(rec.activity.timezone));
+
+  useEffect(() => {
+    if (rec.activity.start_latlng && rec.activity.start_latlng.length === 2) {
+      getCityName(rec.activity.start_latlng[0], rec.activity.start_latlng[1]).then((name) => {
+        if (name) setCity(name);
+      });
+    }
+  }, [rec.activity.id]);
+
+  return (
+    <div className="sr-record-card" onClick={() => onSelect(rec.activity)}>
+      <div className="sr-record-top">
+        <span className="sr-record-icon"><rec.icon size={16} strokeWidth={1.8} /></span>
+        <span className="sr-record-label">{rec.label}</span>
+      </div>
+      <div className="sr-record-value">{rec.value}</div>
+      <div className="sr-record-activity">
+        <span className="sr-record-sport"><SportIcon size={14} color="var(--color-accent)" /></span>
+        <span className="sr-record-name">{rec.activity.name}</span>
+      </div>
+      <div className="sr-record-meta">
+        <span>{formatFullDate(rec.activity.start_date_local)}</span>
+        {city && <span className="sr-record-loc"><MapPin size={11} strokeWidth={1.8} /> {city}</span>}
+      </div>
+    </div>
+  );
+}
+
 export function StatsRecordsPage({
   activities, onSelect,
 }: { activities: Activity[]; onSelect: (a: Activity) => void }) {
   const [selectedYear, setSelectedYear] = useState<string | null>(null);
-
-  // Stats
-  const totalKm = activities.reduce((s, a) => s + a.distance, 0);
-  const totalTime = activities.reduce((s, a) => s + a.moving_time, 0);
-  const totalElev = activities.reduce((s, a) => s + a.total_elevation_gain, 0);
 
   const years = useMemo(() => {
     const set = new Set(activities.map((a) => a.start_date_local.slice(0, 4)));
@@ -64,7 +91,7 @@ export function StatsRecordsPage({
       months[m] = (months[m] || 0) + 1;
     }
     return Object.entries(months).map(([m, count]) => ({
-      name: MONTH_LABELS[parseInt(m) - 1],
+      name: m, // numeric month label per request
       count,
     }));
   }, [activities, selectedYear]);
@@ -80,6 +107,7 @@ export function StatsRecordsPage({
       .sort((a, b) => b.value - a.value);
   }, [activities]);
 
+  // Day-of-week → pie chart data
   const dayData = useMemo(() => {
     const counts = [0, 0, 0, 0, 0, 0, 0];
     for (const a of activities) {
@@ -87,19 +115,21 @@ export function StatsRecordsPage({
       counts[day]++;
     }
     const ordered = [1, 2, 3, 4, 5, 6, 0];
-    return ordered.map((d) => ({ name: CZECH_DAYS[d], count: counts[d] }));
+    // Generate accent-tinted palette (orange family)
+    const palette = ["#FF4400", "#FF6633", "#FF8855", "#FFA37A", "#FFBE9F", "#FFD4BA", "#E8E4DE"];
+    return ordered.map((d, i) => ({
+      name: CZECH_DAYS[d],
+      value: counts[d],
+      color: palette[i],
+    }));
   }, [activities]);
 
-  // Records
+  // Records — only distance, duration, elevation
   const records = useMemo((): ActivityRecord[] => {
     const recs: (ActivityRecord | null)[] = [
       findRecord(activities, "Nejdelší vzdálenost", Ruler, (a) => a.distance, formatDistance),
       findRecord(activities, "Nejdelší aktivita", Timer, (a) => a.moving_time, formatDuration),
       findRecord(activities, "Největší převýšení", Mountain, (a) => a.total_elevation_gain, (v) => `${Math.round(v)} m`),
-      findRecord(activities, "Nejvyšší průměrný tep", Heart, (a) => a.average_heartrate || 0, (v) => `${Math.round(v)} bpm`, (a) => !!a.average_heartrate),
-      findRecord(activities, "Nejvyšší max tep", HeartPulse, (a) => a.max_heartrate || 0, (v) => `${Math.round(v)} bpm`, (a) => !!a.max_heartrate),
-      findRecord(activities, "Nejvyšší rychlost", Zap, (a) => a.max_speed, formatSpeed),
-      findRecord(activities, "Nejvíce kudos", ThumbsUp, (a) => a.kudos_count, (v) => `${v} kudos`),
     ];
     return recs.filter((r): r is ActivityRecord => r !== null);
   }, [activities]);
@@ -108,31 +138,12 @@ export function StatsRecordsPage({
     <div className="sr-layout">
       {/* LEFT — Statistics */}
       <section className="sr-section">
-        <div className="sr-hero">
-          <h2 className="sr-title">Statistiky</h2>
-          <div className="sr-hero-grid">
-            <div className="sr-hero-item">
-              <span className="sr-hero-value">{formatDistance(totalKm)}</span>
-              <span className="sr-hero-label">Vzdálenost</span>
-            </div>
-            <div className="sr-hero-item">
-              <span className="sr-hero-value">{Math.round(totalTime / 3600)} h</span>
-              <span className="sr-hero-label">Čas</span>
-            </div>
-            <div className="sr-hero-item">
-              <span className="sr-hero-value">{(totalElev / 1000).toFixed(1)} km</span>
-              <span className="sr-hero-label">Převýšení</span>
-            </div>
-            <div className="sr-hero-item">
-              <span className="sr-hero-value">{activities.length}</span>
-              <span className="sr-hero-label">Aktivit</span>
-            </div>
-          </div>
-        </div>
+        <h2 className="sr-title">Statistiky</h2>
 
-        <div className="sr-chart-section">
-          <div className="sr-chart-header">
-            <h3>Měsíční objem</h3>
+        {/* Měsíční objem */}
+        <div className="sr-card">
+          <div className="sr-card-header">
+            <h3 className="sr-card-title">Měsíční objem</h3>
             <div className="sr-year-tabs">
               <button className={`sr-year-tab ${selectedYear === null ? "active" : ""}`} onClick={() => setSelectedYear(null)}>
                 Vše
@@ -144,40 +155,53 @@ export function StatsRecordsPage({
               ))}
             </div>
           </div>
-          <ResponsiveContainer width="100%" height={200}>
+          <ResponsiveContainer width="100%" height={220}>
             <BarChart data={monthlyData}>
-              <XAxis dataKey="name" tick={{ fontSize: 10, fill: "#A8A29E" }} />
-              <YAxis tick={{ fontSize: 10, fill: "#A8A29E" }} />
-              <Tooltip contentStyle={{ background: "#FFFFFF", border: "1px solid #E8E4DE", borderRadius: 8, color: "#1A1A1A", fontFamily: "inherit" }} />
-              <Bar dataKey="count" fill="#E8825C" radius={[4, 4, 0, 0]} />
+              <XAxis
+                dataKey="name"
+                tick={{ fontSize: 11, fill: "rgba(33,33,31,0.4)" }}
+                axisLine={{ stroke: "rgba(33,33,31,0.08)" }}
+                tickLine={false}
+              />
+              <YAxis
+                tick={{ fontSize: 11, fill: "rgba(33,33,31,0.4)" }}
+                axisLine={false}
+                tickLine={false}
+              />
+              <Tooltip contentStyle={{ background: "#FFFFFF", border: "1px solid rgba(33,33,31,0.08)", borderRadius: 8, color: "#21211F", fontFamily: "inherit" }} />
+              <Bar dataKey="count" fill="var(--color-accent)" radius={[6, 6, 0, 0]} />
             </BarChart>
           </ResponsiveContainer>
         </div>
 
         <div className="sr-charts-pair">
-          <div className="sr-chart-section sr-chart-half">
-            <h3>Rozložení sportů</h3>
-            <ResponsiveContainer width="100%" height={200}>
+          {/* Rozložení sportů */}
+          <div className="sr-card sr-chart-half">
+            <h3 className="sr-card-title">Rozložení sportů</h3>
+            <ResponsiveContainer width="100%" height={220}>
               <PieChart>
-                <Pie data={sportData} dataKey="value" nameKey="name" cx="50%" cy="50%" innerRadius={40} outerRadius={70} paddingAngle={2}>
+                <Pie data={sportData} dataKey="value" nameKey="name" cx="50%" cy="50%" innerRadius={45} outerRadius={80} paddingAngle={2}>
                   {sportData.map((entry, i) => (
                     <Cell key={i} fill={entry.color} />
                   ))}
                 </Pie>
-                <Tooltip contentStyle={{ background: "#FFFFFF", border: "1px solid #E8E4DE", borderRadius: 8, color: "#1A1A1A", fontFamily: "inherit" }} />
+                <Tooltip contentStyle={{ background: "#FFFFFF", border: "1px solid rgba(33,33,31,0.08)", borderRadius: 8, color: "#21211F", fontFamily: "inherit" }} />
               </PieChart>
             </ResponsiveContainer>
           </div>
 
-          <div className="sr-chart-section sr-chart-half">
-            <h3>Aktivita podle dne</h3>
-            <ResponsiveContainer width="100%" height={200}>
-              <BarChart data={dayData}>
-                <XAxis dataKey="name" tick={{ fontSize: 10, fill: "#A8A29E" }} />
-                <YAxis tick={{ fontSize: 10, fill: "#A8A29E" }} />
-                <Tooltip contentStyle={{ background: "#FFFFFF", border: "1px solid #E8E4DE", borderRadius: 8, color: "#1A1A1A", fontFamily: "inherit" }} />
-                <Bar dataKey="count" fill="#9B8574" radius={[4, 4, 0, 0]} />
-              </BarChart>
+          {/* Aktivita podle dne — pie */}
+          <div className="sr-card sr-chart-half">
+            <h3 className="sr-card-title">Aktivita podle dne</h3>
+            <ResponsiveContainer width="100%" height={220}>
+              <PieChart>
+                <Pie data={dayData} dataKey="value" nameKey="name" cx="50%" cy="50%" innerRadius={45} outerRadius={80} paddingAngle={2} label={({ name }) => name}>
+                  {dayData.map((entry, i) => (
+                    <Cell key={i} fill={entry.color} />
+                  ))}
+                </Pie>
+                <Tooltip contentStyle={{ background: "#FFFFFF", border: "1px solid rgba(33,33,31,0.08)", borderRadius: 8, color: "#21211F", fontFamily: "inherit" }} />
+              </PieChart>
             </ResponsiveContainer>
           </div>
         </div>
@@ -189,25 +213,9 @@ export function StatsRecordsPage({
         <p className="sr-subtitle">{records.length} osobních rekordů</p>
 
         <div className="sr-records-grid">
-          {records.map((rec) => {
-            const sport = rec.activity.sport_type || rec.activity.type;
-            return (
-              <div key={rec.label} className="sr-record-card" onClick={() => onSelect(rec.activity)}>
-                <div className="sr-record-top">
-                  <span className="sr-record-icon"><rec.icon size={18} strokeWidth={1.5} /></span>
-                  <span className="sr-record-label">{rec.label}</span>
-                </div>
-                <div className="sr-record-value">{rec.value}</div>
-                <div className="sr-record-activity">
-                  <span className="sr-record-name">{(() => {
-                    const SportIcon = SPORT_ICONS[sport] || FALLBACK_SPORT_ICON;
-                    return <SportIcon size={14} strokeWidth={1.5} />;
-                  })()} {rec.activity.name}</span>
-                  <span className="sr-record-date">{formatFullDate(rec.activity.start_date_local)}</span>
-                </div>
-              </div>
-            );
-          })}
+          {records.map((rec) => (
+            <RecordCard key={rec.label} rec={rec} onSelect={onSelect} />
+          ))}
         </div>
       </section>
     </div>

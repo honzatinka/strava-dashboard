@@ -13,7 +13,6 @@ const NAV_ITEMS: { id: Page; label: string }[] = [
   { id: "dash",       label: "Dash & Bet" },
   { id: "activities", label: "Activities" },
   { id: "statistiky", label: "Statistics" },
-  { id: "sporty",     label: "Sports"     },
   { id: "heatmapa",   label: "Map"        },
 ];
 

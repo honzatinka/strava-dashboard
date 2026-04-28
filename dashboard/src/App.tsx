@@ -4,7 +4,6 @@ import { Sidebar } from "./components/Sidebar";
 import { ActivityModal } from "./components/ActivityModal";
 import { CombinedActivityCalendarPage } from "./pages/CombinedActivityCalendarPage";
 import { StatsRecordsPage } from "./pages/StatsRecordsPage";
-import { SportyPage } from "./pages/SportyPage";
 import { HeatmapaPage } from "./pages/HeatmapaPage";
 import { SportyMesicePage } from "./pages/SportyMesicePage";
 import { BigBetPage } from "./pages/BigBetPage";
@@ -48,7 +47,6 @@ function Dashboard() {
           )}
           {activePage === "activities" && <AktivityPage activities={activities} onSelect={openActivity} />}
           {activePage === "statistiky" && <StatsRecordsPage activities={activities} onSelect={openActivity} />}
-          {activePage === "sporty" && <SportyPage activities={activities} onSelect={openActivity} />}
           {activePage === "heatmapa" && <HeatmapaPage activities={activities} />}
           {activePage === "sporty-mesice" && <SportyMesicePage activities={activities} />}
         </div>

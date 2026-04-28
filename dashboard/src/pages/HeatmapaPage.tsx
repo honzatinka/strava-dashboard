@@ -2,9 +2,10 @@ import { useEffect, useRef, useMemo, useState } from "react";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 import type { Activity } from "../types";
-import { SPORT_COLORS } from "../types";
 import { groupBySport, sportLabel, decodePolyline } from "../utils";
 import "./HeatmapaPage.css";
+
+const TRACE_COLOR = "#FF4400";
 
 export function HeatmapaPage({ activities }: { activities: Activity[] }) {
   const mapRef = useRef<HTMLDivElement>(null);
@@ -37,8 +38,14 @@ export function HeatmapaPage({ activities }: { activities: Activity[] }) {
       attributionControl: false,
     }).setView([49.8, 15.5], 7);
 
-    L.tileLayer("https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png", {
+    // Light desaturated basemap to make the orange routes pop
+    L.tileLayer("https://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}{r}.png", {
       maxZoom: 19,
+    }).addTo(map);
+    // Place labels on top so they appear above traces
+    L.tileLayer("https://{s}.basemaps.cartocdn.com/light_only_labels/{z}/{x}/{y}{r}.png", {
+      maxZoom: 19,
+      pane: "shadowPane",
     }).addTo(map);
 
     layerGroup.current = L.layerGroup().addTo(map);
@@ -65,17 +72,16 @@ export function HeatmapaPage({ activities }: { activities: Activity[] }) {
       const points = decodePolyline(encoded);
       if (points.length < 2) continue;
 
-      const sport = activity.sport_type || activity.type;
-      const color = SPORT_COLORS[sport] || "#ffffff";
-
       const latLngs = points.map(([lat, lng]) => L.latLng(lat, lng));
       allPoints.push(...latLngs);
 
       L.polyline(latLngs, {
-        color,
-        weight: 2,
-        opacity: 0.4,
+        color: TRACE_COLOR,
+        weight: 2.5,
+        opacity: 0.55,
         smoothFactor: 1,
+        lineCap: "round",
+        lineJoin: "round",
       }).addTo(layerGroup.current!);
     }
 
@@ -105,7 +111,6 @@ export function HeatmapaPage({ activities }: { activities: Activity[] }) {
               <button
                 key={sport}
                 className={`hm-pill ${filter === sport ? "active" : ""}`}
-                style={{ "--pill-color": SPORT_COLORS[sport] || "#95a5a6" } as React.CSSProperties}
                 onClick={() => setFilter(filter === sport ? null : sport)}
               >
                 {sportLabel(sport)} ({count})

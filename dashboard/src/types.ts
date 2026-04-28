@@ -28,18 +28,9 @@ export interface Activity {
   total_photo_count?: number;
 }
 
-import type { LucideIcon } from "lucide-react";
-import { ClipboardList, BarChart3, Target, Map } from "lucide-react";
 import React from "react";
 
-export type Page = "dash" | "activities" | "statistiky" | "sporty" | "heatmapa" | "sporty-mesice";
-
-export const PAGE_CONFIG: { id: Page; label: string; icon: LucideIcon }[] = [
-  { id: "aktivity", label: "Aktivity", icon: ClipboardList },
-  { id: "statistiky", label: "Přehledy", icon: BarChart3 },
-  { id: "sporty", label: "Sporty", icon: Target },
-  { id: "heatmapa", label: "Mapa", icon: Map },
-];
+export type Page = "dash" | "activities" | "statistiky" | "heatmapa" | "sporty-mesice";
 
 // Material Symbols icon component — drop-in replacement for LucideIcon
 function makeMIcon(name: string) {
@@ -84,7 +75,6 @@ export const NAV_ICONS = {
   dash:       makeMIcon("space_dashboard"),
   activities: makeMIcon("checklist"),
   statistiky: makeMIcon("bar_chart"),
-  sporty:     makeMIcon("donut_large"),
   heatmapa:   makeMIcon("map"),
 };
 
