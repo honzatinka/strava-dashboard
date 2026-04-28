@@ -14,6 +14,7 @@ const NAV_ITEMS: { id: Page; label: string }[] = [
   { id: "activities", label: "Activities" },
   { id: "statistiky", label: "Statistics" },
   { id: "heatmapa",   label: "Map"        },
+  { id: "changelog",  label: "Changelog"  },
 ];
 
 export function Sidebar({ activePage, onNavigate, activities, athletePhoto }: SidebarProps) {

@@ -1,0 +1,124 @@
+import "./ChangelogPage.css";
+
+interface ChangeEntry {
+  date: string;        // YYYY-MM-DD
+  title: string;
+  tag?: "feature" | "design" | "fix";
+  items: string[];
+}
+
+const ENTRIES: ChangeEntry[] = [
+  {
+    date: "2026-04-29",
+    title: "Detail aktivity v jednotném designu",
+    tag: "design",
+    items: [
+      "Detail aktivity přepsán: čisté bílé pozadí (žádné tónování dle sportu)",
+      "Mapa v detailu používá accent barvu trasy (#FF4400) s desaturovaným podkladem",
+      "Statistiky v gridu místo úzkého sloupce — žádné scrollování uvnitř",
+      "Sport badge a Strava link sjednocené s design systémem",
+    ],
+  },
+  {
+    date: "2026-04-29",
+    title: "Čistší grafy a mapa s piny",
+    tag: "design",
+    items: [
+      "Statistiky: rozložení sportů a aktivita podle dne — bez tooltipu, jednolitá accent barva",
+      "Měsíční objem: tooltip ukazuje český název měsíce, bez šedého hoveru",
+      "Mapa: vždy viditelné piny na startech aktivit, trasy se schovají při velkém zoomu",
+      "Datum aktivit zobrazuje rok pro starší aktivity (např. „April 25, 2024 at 10:00, Praha“)",
+    ],
+  },
+  {
+    date: "2026-04-28",
+    title: "Velký redesign — všechny stránky v jednom stylu",
+    tag: "design",
+    items: [
+      "Activities: hero blok pryč, místo pillů styled select-box (sport + počet)",
+      "Activities: seznam ve stylu homepage (fotky, lokality, accent ikony)",
+      "Statistics: rekordy v bílých kartách s lokalitami, jen vzdálenost/čas/převýšení",
+      "Statistics: měsíční graf s číselnou osou X, koláčové grafy → horizontální bary",
+      "Sports stránka odstraněna, obsah přesunut do Activities",
+      "Mapa: všechny trasy v accent barvě, světlejší podklad",
+    ],
+  },
+  {
+    date: "2026-04-28",
+    title: "Kalendář a navigace",
+    tag: "feature",
+    items: [
+      "Šipky v kalendáři vždy vpravo (i když měsíc nemá aktivity)",
+      "Klik na aktivitu v kalendáři otevře popup (místo filtrování)",
+      "Sekce Latest Activities přesunuta do nové položky Activities",
+      "Homepage přejmenován na „Dash & Bet“",
+      "Graf „Vývoj v čase“ je togglovatelný (defaultně zavřený)",
+    ],
+  },
+  {
+    date: "2026-04-28",
+    title: "UI refresh — Material Symbols ikony",
+    tag: "design",
+    items: [
+      "Levé menu používá Google Material Symbols ikony (sjednocení s kalendářem)",
+      "Sports v menu má ikonu koláčového grafu",
+      "Kalendář a Latest Activities zvětšeny o 10 %",
+      "Big Bet panel má stejnou výšku jako kalendář",
+      "Favicon odstraněn",
+    ],
+  },
+  {
+    date: "2026-04-27",
+    title: "Big Bet panel a Render deployment",
+    tag: "feature",
+    items: [
+      "Big Bet panel vytažen jako sdílená komponenta (i samostatná stránka /bet)",
+      "Sport-colored delta badges proti kamarádovi",
+      "Nasazení na Render.com s automatickým deployem z GitHubu",
+      "Strava tokeny přesunuté do environment variables",
+    ],
+  },
+];
+
+const TAG_LABELS: Record<NonNullable<ChangeEntry["tag"]>, string> = {
+  feature: "Nová funkce",
+  design: "Design",
+  fix: "Oprava",
+};
+
+function formatDate(iso: string): string {
+  const d = new Date(iso);
+  return d.toLocaleDateString("cs-CZ", { day: "numeric", month: "long", year: "numeric" });
+}
+
+export function ChangelogPage() {
+  return (
+    <div className="cl-root">
+      <div className="cl-header">
+        <h1 className="cl-title">Changelog</h1>
+        <p className="cl-subtitle">Klíčové změny v dashboardu</p>
+      </div>
+
+      <div className="cl-list">
+        {ENTRIES.map((entry, i) => (
+          <article key={i} className="cl-entry">
+            <div className="cl-entry-meta">
+              <time className="cl-entry-date">{formatDate(entry.date)}</time>
+              {entry.tag && (
+                <span className={`cl-entry-tag cl-entry-tag--${entry.tag}`}>
+                  {TAG_LABELS[entry.tag]}
+                </span>
+              )}
+            </div>
+            <h2 className="cl-entry-title">{entry.title}</h2>
+            <ul className="cl-entry-items">
+              {entry.items.map((item, j) => (
+                <li key={j}>{item}</li>
+              ))}
+            </ul>
+          </article>
+        ))}
+      </div>
+    </div>
+  );
+}

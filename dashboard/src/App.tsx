@@ -8,6 +8,7 @@ import { HeatmapaPage } from "./pages/HeatmapaPage";
 import { SportyMesicePage } from "./pages/SportyMesicePage";
 import { BigBetPage } from "./pages/BigBetPage";
 import { AktivityPage } from "./pages/AktivityPage";
+import { ChangelogPage } from "./pages/ChangelogPage";
 import "./App.css";
 
 function Dashboard() {
@@ -48,6 +49,7 @@ function Dashboard() {
           {activePage === "activities" && <AktivityPage activities={activities} onSelect={openActivity} />}
           {activePage === "statistiky" && <StatsRecordsPage activities={activities} onSelect={openActivity} />}
           {activePage === "heatmapa" && <HeatmapaPage activities={activities} />}
+          {activePage === "changelog" && <ChangelogPage />}
           {activePage === "sporty-mesice" && <SportyMesicePage activities={activities} />}
         </div>
       </main>
