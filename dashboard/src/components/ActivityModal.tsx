@@ -1,9 +1,9 @@
-import { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 import { MapPin, Watch, X, ExternalLink } from "lucide-react";
 import type { Activity } from "../types";
-import { SPORT_ICONS, SPORT_COLORS, FALLBACK_SPORT_ICON, COURT_SPORTS } from "../types";
+import { SPORT_ICONS, FALLBACK_SPORT_ICON, COURT_SPORTS } from "../types";
 import {
   formatDistance, formatDuration, formatFullDate, formatPace, formatSpeed,
   sportLabel, locationFromTimezone, decodePolyline,
@@ -26,7 +26,6 @@ export function ActivityModal({ activity, onClose }: Props) {
   const mapInstance = useRef<L.Map | null>(null);
   const sport = activity.sport_type || activity.type;
   const Icon = SPORT_ICONS[sport] || FALLBACK_SPORT_ICON;
-  const color = SPORT_COLORS[sport] || "#E8E4DE";
   const isCourtSport = COURT_SPORTS.has(sport);
   const pace = !isCourtSport ? formatPace(activity.average_speed, sport) : null;
   const [city, setCity] = useState<string | null>(locationFromTimezone(activity.timezone));
@@ -94,30 +93,42 @@ export function ActivityModal({ activity, onClose }: Props) {
       scrollWheelZoom: true,
     });
 
-    L.tileLayer("https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png", {
+    // Light desaturated basemap — matches HeatmapaPage style
+    L.tileLayer("https://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}{r}.png", {
       maxZoom: 19,
+    }).addTo(map);
+    L.tileLayer("https://{s}.basemaps.cartocdn.com/light_only_labels/{z}/{x}/{y}{r}.png", {
+      maxZoom: 19,
+      pane: "shadowPane",
     }).addTo(map);
 
     const points = decodePolyline(polyline!);
-    // Glow layer under main line
+
+    // Subtle white glow under the route for legibility
     L.polyline(points, {
-      color: "#3A3A3A",
-      weight: 10,
-      opacity: 0.18,
-    }).addTo(map);
-    const line = L.polyline(points, {
-      color: "#2C2C2C",
-      weight: 3.5,
-      opacity: 0.85,
+      color: "#ffffff",
+      weight: 6,
+      opacity: 0.7,
+      lineCap: "round",
+      lineJoin: "round",
     }).addTo(map);
 
-    // Start/end markers
+    // Main route in accent color
+    const line = L.polyline(points, {
+      color: "#FF4400",
+      weight: 3.5,
+      opacity: 0.95,
+      lineCap: "round",
+      lineJoin: "round",
+    }).addTo(map);
+
+    // Start/end markers — accent color
     if (points.length > 1) {
       L.circleMarker(points[0], {
-        radius: 6, color: "#E8825C", fillColor: "#E8825C", fillOpacity: 1, weight: 2,
+        radius: 6, color: "#fff", fillColor: "#FF4400", fillOpacity: 1, weight: 2,
       }).addTo(map);
       L.circleMarker(points[points.length - 1], {
-        radius: 6, color: "#9B8574", fillColor: "#9B8574", fillOpacity: 1, weight: 2,
+        radius: 5, color: "#fff", fillColor: "#21211F", fillOpacity: 1, weight: 2,
       }).addTo(map);
     }
 
@@ -128,32 +139,38 @@ export function ActivityModal({ activity, onClose }: Props) {
       map.remove();
       mapInstance.current = null;
     };
-  }, [hasRoute, polyline, color]);
+  }, [hasRoute, polyline]);
 
   const elapsedDiff = activity.elapsed_time - activity.moving_time;
 
+  const metaItems: React.ReactNode[] = [
+    <span key="date">{formatFullDate(activity.start_date_local)}</span>,
+  ];
+  if (!isCourtSport && city) {
+    metaItems.push(<span key="loc"><MapPin size={12} strokeWidth={1.8} /> {city}</span>);
+  }
+  if (activity.device_name) {
+    metaItems.push(<span key="dev"><Watch size={12} strokeWidth={1.8} /> {activity.device_name}</span>);
+  }
+
   return (
     <div className="modal-overlay" onClick={(e) => { if (e.target === e.currentTarget) onClose(); }}>
-      <div className="modal-content" style={{ "--modal-color": color } as React.CSSProperties}>
+      <div className="modal-content">
         <button className="modal-close" onClick={onClose}><X size={16} strokeWidth={2} /></button>
 
         <div className="modal-header">
-          <span className="modal-sport" style={{
-            background: `color-mix(in srgb, ${color} 25%, #fff)`,
-            color: `color-mix(in srgb, ${color} 50%, #1A1A1A)`,
-          }}>
-            <span className="modal-sport-icon"><Icon size={14} strokeWidth={2} /></span>
+          <span className="modal-sport">
+            <span className="modal-sport-icon"><Icon size={14} color="var(--color-accent)" /></span>
             {sportLabel(sport)}
           </span>
           <h2 className="modal-title">{activity.name}</h2>
           <div className="modal-meta">
-            <span>{formatFullDate(activity.start_date_local)}</span>
-            {isCourtSport ? (
-              <span>–</span>
-            ) : (
-              city && <span><MapPin size={12} strokeWidth={1.5} /> {city}</span>
-            )}
-            {activity.device_name && <span><Watch size={12} strokeWidth={1.5} /> {activity.device_name}</span>}
+            {metaItems.map((item, i) => (
+              <React.Fragment key={i}>
+                {i > 0 && <span className="modal-meta-sep">·</span>}
+                {item}
+              </React.Fragment>
+            ))}
           </div>
           <a
             className="modal-strava-link"
@@ -161,7 +178,7 @@ export function ActivityModal({ activity, onClose }: Props) {
             target="_blank"
             rel="noopener noreferrer"
           >
-            <ExternalLink size={13} strokeWidth={1.5} /> Zobrazit na Stravě
+            <ExternalLink size={13} strokeWidth={1.8} /> Zobrazit na Stravě
           </a>
         </div>
 
@@ -204,11 +221,14 @@ export function ActivityModal({ activity, onClose }: Props) {
           </div>
         )}
 
-        <div className="modal-body">
-          {hasRoute && (
+        {/* Map */}
+        {hasRoute && (
+          <div className="modal-map-wrap">
             <div className="modal-map" ref={mapRef} />
-          )}
+          </div>
+        )}
 
+        {/* Stats grid */}
         <div className="modal-stats">
           {!isCourtSport && activity.distance > 0 && (
             <div className="modal-stat">
@@ -286,7 +306,6 @@ export function ActivityModal({ activity, onClose }: Props) {
               <span className="modal-stat-label">Úspěchy</span>
             </div>
           )}
-        </div>
         </div>
       </div>
     </div>
