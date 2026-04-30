@@ -1,20 +1,21 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" fill="none" viewBox="0 0 64 64">
-  <defs>
-    <style>
-      @font-face {
-        font-family: 'DM Sans';
-        src: url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@700');
-      }
-    </style>
-  </defs>
-
-  <!-- Rounded square background -->
-  <rect width="64" height="64" rx="14" fill="#E8825C" />
-
-  <!-- S shape using bezier curves -->
-  <g transform="translate(32, 32)">
-    <!-- S path -->
-    <path d="M -8 -4 Q -8 -8 -4 -8 Q 0 -8 0 -5 Q 0 -2 -5 -1 Q 5 0 5 4 Q 5 8 1 8 Q -3 8 -8 5"
-          stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <rect width="64" height="64" rx="12" fill="#FF4400"/>
+  <!-- Sun -->
+  <g stroke="#21211F" stroke-width="2.5" stroke-linecap="round" fill="none">
+    <circle cx="32" cy="20" r="4.5" fill="#21211F"/>
+    <line x1="32" y1="9" x2="32" y2="11.5"/>
+    <line x1="32" y1="28.5" x2="32" y2="31"/>
+    <line x1="21" y1="20" x2="23.5" y2="20"/>
+    <line x1="40.5" y1="20" x2="43" y2="20"/>
+    <line x1="24.2" y1="12.2" x2="25.9" y2="13.9"/>
+    <line x1="38.1" y1="26.1" x2="39.8" y2="27.8"/>
+    <line x1="24.2" y1="27.8" x2="25.9" y2="26.1"/>
+    <line x1="38.1" y1="13.9" x2="39.8" y2="12.2"/>
   </g>
+  <!-- Ascending trace with arrow -->
+  <path d="M 10 52 L 22 38 L 30 46 L 42 30 L 54 38"
+        stroke="#21211F" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  <!-- Arrow head -->
+  <path d="M 47 33 L 54 38 L 49 45"
+        stroke="#21211F" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
 </svg>
