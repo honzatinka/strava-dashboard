@@ -9,6 +9,30 @@ interface ChangeEntry {
 
 const ENTRIES: ChangeEntry[] = [
   {
+    date: "2026-04-30",
+    title: "Mobile-friendly redesign",
+    tag: "feature",
+    items: [
+      "Bottom tab bar pro mobilní navigaci (5 tabů, vždy viditelný)",
+      "Sidebar se na mobilu skryje pod 768 px, bottom nav nahradí",
+      "Dash & Bet: Big Bet pod kalendářem, menší cells, vypnut +21% zoom",
+      "Activities: header stackovaný, 2-col stats, ActivityRow wrapuje",
+      "Mapa: full-width overlay, zoom controls nad tab barem",
+      "Modal: 2-col stats grid, 92 vh max výška",
+      "Touch-friendly: 56 px tap targets, safe-area pro iPhone notch",
+    ],
+  },
+  {
+    date: "2026-04-30",
+    title: "Changelog v menu",
+    tag: "feature",
+    items: [
+      "Nová stránka Changelog s historií změn (sdružené po dnech)",
+      "Karty v homepage stylu, barevné tagy (feature/design/fix)",
+      "Přidán CLAUDE.md design manuál do rootu projektu",
+    ],
+  },
+  {
     date: "2026-04-29",
     title: "Detail aktivity v jednotném designu",
     tag: "design",
