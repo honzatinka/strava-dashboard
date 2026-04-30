@@ -200,11 +200,17 @@
   gap: 3px;
 }
 
-@media (max-width: 900px) {
+@media (max-width: 768px) {
   .sr-layout {
     grid-template-columns: 1fr;
+    gap: 16px;
   }
   .sr-charts-pair {
     grid-template-columns: 1fr;
+    gap: 12px;
   }
+  .sr-card { padding: 16px; }
+  .sr-records-grid { grid-template-columns: 1fr; }
+  .sr-title { font-size: var(--font-size-2xl); }
+  .sr-record-value { font-size: 22px; }
 }

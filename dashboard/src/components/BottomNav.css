@@ -1,0 +1,56 @@
+/* ============================================================
+   Bottom Tab Bar — mobile only (≤768px)
+   ============================================================ */
+
+.bottom-nav {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .bottom-nav {
+    display: flex;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 900;
+    background: var(--color-surface);
+    border-top: 1px solid var(--color-border);
+    box-shadow: 0 -1px 8px rgba(33, 33, 31, 0.04);
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+
+  .bottom-nav-item {
+    flex: 1;
+    min-height: 56px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2px;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    padding: 6px 2px;
+    color: var(--color-text-muted);
+    font-family: var(--font-body);
+    font-size: 10px;
+    font-weight: var(--font-weight-medium);
+    letter-spacing: 0.3px;
+    transition: color 0.12s;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .bottom-nav-item:active {
+    background: var(--color-surface-alt);
+  }
+
+  .bottom-nav-item.is-active {
+    color: var(--color-accent);
+    font-weight: var(--font-weight-semibold);
+  }
+
+  .bottom-nav-label {
+    line-height: 1;
+  }
+}

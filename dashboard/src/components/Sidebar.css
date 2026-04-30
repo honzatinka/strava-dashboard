@@ -12,6 +12,10 @@
   overflow: hidden;
 }
 
+@media (max-width: 768px) {
+  .sidebar { display: none; }
+}
+
 /* ─── Header ─── */
 .sidebar-header {
   display: flex;

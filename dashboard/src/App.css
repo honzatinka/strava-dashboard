@@ -15,3 +15,12 @@
 .main-inner {
   max-width: 1200px;
 }
+
+@media (max-width: 768px) {
+  .main-content {
+    padding: 16px 16px calc(72px + env(safe-area-inset-bottom));
+  }
+  .main-inner {
+    max-width: 100%;
+  }
+}

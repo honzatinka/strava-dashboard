@@ -132,12 +132,22 @@
 
 @media (max-width: 768px) {
   .heatmapa {
-    margin: -20px -16px -40px;
+    margin: -16px -16px calc(-72px - env(safe-area-inset-bottom));
+  }
+  .heatmapa-container {
+    height: calc(100vh - 56px - env(safe-area-inset-bottom));
   }
   .heatmapa-overlay {
     top: 12px;
     left: 12px;
     right: 12px;
     max-width: none;
+    padding: 12px 14px;
+  }
+  .heatmapa-title { font-size: var(--font-size-xl); }
+  .hm-pill { font-size: 11px; padding: 5px 10px; }
+  .heatmapa .leaflet-control-zoom {
+    bottom: calc(72px + env(safe-area-inset-bottom)) !important;
+    right: 12px !important;
   }
 }

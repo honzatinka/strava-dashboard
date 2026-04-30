@@ -126,7 +126,9 @@
   background: var(--color-accent);
 }
 
-@media (max-width: 640px) {
+@media (max-width: 768px) {
+  .cl-title { font-size: var(--font-size-2xl); }
   .cl-entry { padding: 16px 18px; }
   .cl-entry-title { font-size: var(--font-size-lg); }
+  .cl-list { gap: 10px; }
 }

@@ -1,6 +1,7 @@
 import { useEffect, useState, useCallback } from "react";
 import type { Activity, Page } from "./types";
 import { Sidebar } from "./components/Sidebar";
+import { BottomNav } from "./components/BottomNav";
 import { ActivityModal } from "./components/ActivityModal";
 import { CombinedActivityCalendarPage } from "./pages/CombinedActivityCalendarPage";
 import { StatsRecordsPage } from "./pages/StatsRecordsPage";
@@ -53,6 +54,7 @@ function Dashboard() {
           {activePage === "sporty-mesice" && <SportyMesicePage activities={activities} />}
         </div>
       </main>
+      <BottomNav activePage={activePage} onNavigate={setActivePage} />
       {selectedActivity && (
         <ActivityModal activity={selectedActivity} onClose={closeActivity} />
       )}

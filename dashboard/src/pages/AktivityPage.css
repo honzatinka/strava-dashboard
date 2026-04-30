@@ -245,3 +245,21 @@
   color: #fff;
   border-color: var(--color-text-primary);
 }
+
+@media (max-width: 768px) {
+  .ap-header {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+  .ap-title { font-size: var(--font-size-2xl); }
+  .ap-select { min-width: 0; width: 100%; }
+  .ap-stats {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+  }
+  .ap-stat-card { padding: 12px; }
+  .ap-stat-value { font-size: var(--font-size-lg); }
+  .ap-chart-toggle { padding: 14px 16px; }
+  .ap-chart-body { padding: 0 12px 12px; }
+}

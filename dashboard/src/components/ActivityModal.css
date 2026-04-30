@@ -321,10 +321,11 @@
 }
 
 /* ─── Responsive ─── */
-@media (max-width: 640px) {
+@media (max-width: 768px) {
+  .modal-overlay { padding: 12px; }
   .modal-content {
-    border-radius: 12px;
-    max-height: 95vh;
+    border-radius: var(--radius-lg);
+    max-height: 92vh;
   }
   .modal-header {
     padding: var(--spacing-xl) var(--spacing-xl) var(--spacing-md);
@@ -338,7 +339,7 @@
   .modal-title { font-size: 20px; }
   .modal-map { height: 200px; }
   .modal-stats {
-    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    grid-template-columns: repeat(2, 1fr);
     gap: 8px;
   }
   .modal-stat { padding: 10px 12px; }

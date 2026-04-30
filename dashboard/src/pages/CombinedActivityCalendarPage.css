@@ -372,6 +372,28 @@
   color: var(--color-text-primary);
 }
 
+/* ─── Mobile (≤768px) ─── */
+@media (max-width: 768px) {
+  .cp-top { flex-direction: column; }
+  .cp-bigbet { width: 100%; min-width: 0; }
+  .cp-bigbet-card { width: 100%; }
+  .cp-calendar-card { zoom: 1; }
+  .cp-calendar-wrapper { padding: 16px; }
+  .cp-cal-header { flex-wrap: wrap; gap: 10px; }
+  .cp-month-stats {
+    order: 3;
+    flex-basis: 100%;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+  }
+  .cp-month-stat-sep { display: none; }
+  .cp-cal-grid { height: auto; }
+  .cp-cell { min-height: 56px; padding: 4px; }
+  .cp-cell-num { font-size: 12px; margin-bottom: 2px; }
+  .cp-cell-act { padding: 3px 4px; gap: 2px; width: 100%; }
+  .cp-cell-act-dur { font-size: 8px; }
+}
+
 /* ─── Activity List ─── */
 .cp-list-header,
 .cp-list,
