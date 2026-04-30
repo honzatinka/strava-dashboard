@@ -45,6 +45,7 @@ Před commitem: `cd dashboard && npm run build` (musí projít bez chyb).
 - Commituj jen na explicitní žádost uživatele.
 - Nikdy `--amend`, vždy nový commit.
 - Push na `main` triggeruje Render auto-deploy.
+- **Před commitem visible změn vždy přidej záznam do Changelogu** (`src/pages/ChangelogPage.tsx`, ENTRIES pole). Tagy: `feature` / `design` / `fix`. Datum dnešní (`YYYY-MM-DD`).
 
 ### Lokální spuštění
 ```bash
