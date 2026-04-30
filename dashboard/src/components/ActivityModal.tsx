@@ -49,7 +49,7 @@ export function ActivityModal({ activity, onClose }: Props) {
     const fetchPhotos = async () => {
       setPhotosLoading(true);
       try {
-        const response = await fetch("http://localhost:3001/api/fetch-activity-photos", {
+        const response = await fetch("/api/fetch-activity-photos", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ activityId: activity.id }),
