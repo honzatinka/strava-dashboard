@@ -10,6 +10,16 @@ interface ChangeEntry {
 const ENTRIES: ChangeEntry[] = [
   {
     date: "2026-04-30",
+    title: "Vlastní favicon",
+    tag: "design",
+    items: [
+      "Přidán vlastní favicon (slunce + rostoucí trasa v accent barvě)",
+      "Apple touch icon pro iOS home screen",
+      "Optimalizovaná velikost (1254 → 512 px, ~240 kB)",
+    ],
+  },
+  {
+    date: "2026-04-30",
     title: "Fotky v detailu aktivity na produkci",
     tag: "fix",
     items: [
