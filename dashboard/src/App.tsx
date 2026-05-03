@@ -19,7 +19,7 @@ function Dashboard() {
   const [athletePhoto, setAthletePhoto] = useState<string | null>(null);
 
   useEffect(() => {
-    fetch("/activities.json")
+    fetch("/api/activities")
       .then((r) => r.json())
       .then((data: Activity[]) => setActivities(data));
   }, []);

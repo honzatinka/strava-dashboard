@@ -75,6 +75,50 @@ function parsedReqPath(req) {
 // ─── In-memory cache for stats (populated by /api/refresh-data)
 let cachedFriendStats = null;
 let cachedMyStats     = null;
+let cachedActivities  = null; // fetched on server startup
+
+// ─── Fetch all activities from Strava (paginated)
+function fetchAllActivities(accessToken, callback) {
+  const accumulated = [];
+  const fetchPage = (page) => {
+    const opts = {
+      hostname: "www.strava.com",
+      path: `/api/v3/athlete/activities?per_page=200&page=${page}`,
+      method: "GET",
+      headers: { Authorization: `Bearer ${accessToken}` },
+    };
+    https.request(opts, (res) => {
+      let data = "";
+      res.on("data", (c) => { data += c; });
+      res.on("end", () => {
+        try {
+          const acts = JSON.parse(data);
+          if (!Array.isArray(acts) || acts.length === 0) {
+            callback(null, accumulated);
+            return;
+          }
+          accumulated.push(...acts);
+          if (acts.length < 200) { callback(null, accumulated); return; }
+          fetchPage(page + 1);
+        } catch (e) { callback(e, accumulated); }
+      });
+    }).on("error", (e) => callback(e, accumulated)).end();
+  };
+  fetchPage(1);
+}
+
+// ─── Preload activities on startup
+function preloadActivities() {
+  console.log("📥 Načítám aktivity ze Stravy při startu...");
+  refreshStravaToken((err, token) => {
+    if (err) { console.warn("⚠ Nelze načíst token při startu:", err.message); return; }
+    fetchAllActivities(token, (err, acts) => {
+      if (err) { console.warn("⚠ Chyba při načítání aktivit:", err.message); return; }
+      cachedActivities = acts;
+      console.log(`✓ Aktivit načteno: ${acts.length}`);
+    });
+  });
+}
 
 // Load / save friend tokens (env vars take priority for production/Koyeb)
 function loadFriendTokens() {
@@ -611,14 +655,36 @@ const server = http.createServer((req, res) => {
     return;
   }
 
-  // ─── Refresh data cache: GET /api/refresh-data (called by cron job at 20:00 CET)
+  // ─── Activities: GET /api/activities → full activity list (cached at startup)
+  if (req.method === "GET" && parsedUrl.pathname === "/api/activities") {
+    if (cachedActivities) {
+      res.writeHead(200, { "Content-Type": "application/json" });
+      res.end(JSON.stringify(cachedActivities));
+      return;
+    }
+    // Cache not ready yet (rare: request came before startup fetch finished)
+    refreshStravaToken((err, token) => {
+      if (err) { res.writeHead(500); res.end(JSON.stringify({ error: err.message })); return; }
+      fetchAllActivities(token, (err, acts) => {
+        if (err) { res.writeHead(500); res.end(JSON.stringify({ error: err.message })); return; }
+        cachedActivities = acts;
+        res.writeHead(200, { "Content-Type": "application/json" });
+        res.end(JSON.stringify(cachedActivities));
+      });
+    });
+    return;
+  }
+
+  // ─── Refresh data cache: GET /api/refresh-data
   if (req.method === "GET" && parsedUrl.pathname === "/api/refresh-data") {
-    // Clear caches so next fetch is fresh
     cachedMyStats     = null;
     cachedFriendStats = null;
-    console.log("🔄 Cache cleared by refresh-data request at", new Date().toISOString());
+    cachedActivities  = null;
+    console.log("🔄 Cache vymazána:", new Date().toISOString());
+    // Znovu načti aktivity na pozadí
+    preloadActivities();
     res.writeHead(200, { "Content-Type": "application/json" });
-    res.end(JSON.stringify({ ok: true, message: "Cache cleared, data will be fetched on next request" }));
+    res.end(JSON.stringify({ ok: true, message: "Cache cleared, activities reloading in background" }));
     return;
   }
 
@@ -774,4 +840,5 @@ server.listen(PORT, "0.0.0.0", () => {
   if (!API_KEY) {
     console.log("  ⚠ Set OPENAI_API_KEY to enable AI analysis");
   }
+  preloadActivities();
 });

@@ -9,6 +9,16 @@ interface ChangeEntry {
 
 const ENTRIES: ChangeEntry[] = [
   {
+    date: "2026-05-03",
+    title: "Živá data ze Stravy při startu serveru",
+    tag: "fix",
+    items: [
+      "Aktivity se nyní načítají přímo ze Strava API při startu serveru (ne ze statického activities.json)",
+      "Nové aktivity jsou viditelné ihned po restartu — žádný ruční export ani redeploy",
+      "/api/refresh-data nyní také znovu načte aktivity na pozadí",
+    ],
+  },
+  {
     date: "2026-04-30",
     title: "Vlastní favicon (SVG, optimalizovaná velikost)",
     tag: "design",
