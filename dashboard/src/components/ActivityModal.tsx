@@ -32,6 +32,7 @@ export function ActivityModal({ activity, onClose }: Props) {
   const [photos, setPhotos] = useState<PhotoData[]>([]);
   const [photosLoading, setPhotosLoading] = useState(false);
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
+  const [calories, setCalories] = useState<number | null>(null);
   const polyline = activity.map?.summary_polyline;
   const hasRoute = polyline && polyline.length > 0;
 
@@ -74,6 +75,20 @@ export function ActivityModal({ activity, onClose }: Props) {
     if (activity.id) {
       fetchPhotos();
     }
+  }, [activity.id]);
+
+  // Fetch detailed activity (for calories)
+  useEffect(() => {
+    if (!activity.id) return;
+    setCalories(null);
+    fetch(`/api/activity-detail?id=${activity.id}`)
+      .then((r) => r.json())
+      .then((d) => {
+        if (typeof d?.calories === "number" && d.calories > 0) {
+          setCalories(Math.round(d.calories));
+        }
+      })
+      .catch(() => {});
   }, [activity.id]);
 
   // Close on Escape
@@ -286,6 +301,12 @@ export function ActivityModal({ activity, onClose }: Props) {
             <div className="modal-stat">
               <span className="modal-stat-value">{activity.average_temp} °C</span>
               <span className="modal-stat-label">Teplota</span>
+            </div>
+          )}
+          {calories != null && (
+            <div className="modal-stat">
+              <span className="modal-stat-value">{calories} kcal</span>
+              <span className="modal-stat-label">Kalorie</span>
             </div>
           )}
           {activity.kudos_count > 0 && (

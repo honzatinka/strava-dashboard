@@ -9,6 +9,19 @@ interface ChangeEntry {
 
 const ENTRIES: ChangeEntry[] = [
   {
+    date: "2026-05-04",
+    title: "UI tweaks: sidebar, ActivityRow, statistiky, kalorie",
+    tag: "design",
+    items: [
+      "Sidebar: 'Honza Tinka' místo jen 'Honza', avatar grayscale",
+      "Big Bet: fotka soupeře se nyní fetchuje živě ze Stravy (grayscale)",
+      "ActivityRow: nové pořadí metrik — Time, Distance, Elevation, Tempo, Avg HR",
+      "Detail aktivity: nová dlaždice Kalorie (fetchuje se z detailního endpointu Stravy)",
+      "Statistiky: rozložení sportů zobrazí top 10, ostatní pod tlačítkem 'Zobrazit dalších X'",
+      "Statistiky: odstraněn nadbytečný subtitle 'X osobních rekordů'",
+    ],
+  },
+  {
     date: "2026-05-03",
     title: "Živá data ze Stravy při startu serveru",
     tag: "fix",

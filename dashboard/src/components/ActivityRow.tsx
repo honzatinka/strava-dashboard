@@ -68,18 +68,12 @@ export function ActivityRow({ activity, onClick, photoUrl, city: cityProp }: Pro
         <span className="act-row-name">{activity.name}</span>
       </div>
 
-      {/* Stats */}
+      {/* Stats — order: Time, Distance, Elevation, Tempo, Avg HR */}
       <div className="act-row-stats">
         <div className="act-row-stat">
           <span className="act-row-stat-label">Time</span>
           <span className="act-row-stat-value act-row-stat-value--accent">{shortDur(activity.moving_time)}</span>
         </div>
-        {activity.average_heartrate && (
-          <div className="act-row-stat">
-            <span className="act-row-stat-label">Avg HR</span>
-            <span className="act-row-stat-value">{Math.round(activity.average_heartrate)} bpm</span>
-          </div>
-        )}
         {!isCourtSport && activity.distance > 0 && (
           <div className="act-row-stat">
             <span className="act-row-stat-label">Distance</span>
@@ -96,6 +90,12 @@ export function ActivityRow({ activity, onClick, photoUrl, city: cityProp }: Pro
           <div className="act-row-stat">
             <span className="act-row-stat-label">Tempo</span>
             <span className="act-row-stat-value">{pace}</span>
+          </div>
+        )}
+        {activity.average_heartrate && (
+          <div className="act-row-stat">
+            <span className="act-row-stat-label">Avg HR</span>
+            <span className="act-row-stat-value">{Math.round(activity.average_heartrate)} bpm</span>
           </div>
         )}
       </div>

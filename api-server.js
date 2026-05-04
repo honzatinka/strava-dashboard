@@ -519,9 +519,19 @@ const server = http.createServer((req, res) => {
         }).on("error", e => done(e, accumulated)).end();
       };
 
-      fetchPage(1, [], (err, acts) => {
+      // Fetch friend athlete profile (live photo URL) in parallel with activities
+      let friendAthlete = null;
+      const fetchAthlete = (cb) => {
+        https.request({ hostname: "www.strava.com", path: "/api/v3/athlete", method: "GET",
+          headers: { Authorization: `Bearer ${token}` } }, (sr) => {
+          let d = ""; sr.on("data", c => d += c);
+          sr.on("end", () => { try { friendAthlete = JSON.parse(d); } catch(e) {} cb(); });
+        }).on("error", () => cb()).end();
+      };
+
+      fetchAthlete(() => fetchPage(1, [], (err, acts) => {
         const tokens = loadFriendTokens();
-        const athlete = tokens?.athlete || {};
+        const athlete = friendAthlete || tokens?.athlete || {};
         // Aggregate by sport — only Bike, Run, Swim
         const BIKE = ["Ride","GravelRide","MountainBikeRide","VirtualRide","EBikeRide"];
         const RUN  = ["Run","VirtualRun","TrailRun"];
@@ -548,7 +558,7 @@ const server = http.createServer((req, res) => {
         };
         res.writeHead(200, { "Content-Type": "application/json" });
         res.end(JSON.stringify(cachedFriendStats));
-      });
+      }));
     });
     return;
   }
@@ -651,6 +661,24 @@ const server = http.createServer((req, res) => {
         }).on("error", () => maybeFinish()).end();
       };
       fetchPage(1);
+    });
+    return;
+  }
+
+  // ─── Activity detail: GET /api/activity-detail?id=XXX → full activity (incl. calories)
+  if (req.method === "GET" && parsedUrl.pathname === "/api/activity-detail") {
+    const id = parsedUrl.query.id;
+    if (!id) { res.writeHead(400); res.end(JSON.stringify({ error: "Missing id" })); return; }
+    refreshStravaToken((err, token) => {
+      if (err) { res.writeHead(500); res.end(JSON.stringify({ error: err.message })); return; }
+      https.request({ hostname: "www.strava.com", path: `/api/v3/activities/${id}`,
+        method: "GET", headers: { Authorization: `Bearer ${token}` } }, (sr) => {
+        let d = ""; sr.on("data", c => d += c);
+        sr.on("end", () => {
+          res.writeHead(200, { "Content-Type": "application/json" });
+          res.end(d);
+        });
+      }).on("error", e => { res.writeHead(500); res.end(JSON.stringify({ error: e.message })); }).end();
     });
     return;
   }

@@ -34,7 +34,7 @@ export function Sidebar({ activePage, onNavigate, activities, athletePhoto }: Si
         )}
         <div>
           <div className="sidebar-title">Dashboard</div>
-          <div className="sidebar-sub">Honza</div>
+          <div className="sidebar-sub">Honza Tinka</div>
         </div>
       </div>
 

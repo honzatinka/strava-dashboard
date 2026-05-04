@@ -77,6 +77,7 @@ export function StatsRecordsPage({
   activities, onSelect,
 }: { activities: Activity[]; onSelect: (a: Activity) => void }) {
   const [selectedYear, setSelectedYear] = useState<string | null>(null);
+  const [showAllSports, setShowAllSports] = useState(false);
 
   const years = useMemo(() => {
     const set = new Set(activities.map((a) => a.start_date_local.slice(0, 4)));
@@ -180,25 +181,43 @@ export function StatsRecordsPage({
         </div>
 
         <div className="sr-charts-pair">
-          {/* Rozložení sportů — horizontal bar, all accent, no tooltip/hover */}
+          {/* Rozložení sportů — top 10 by default, toggle for the rest */}
           <div className="sr-card sr-chart-half">
             <h3 className="sr-card-title">Rozložení sportů</h3>
-            <ResponsiveContainer width="100%" height={Math.max(220, sportData.length * 30)}>
-              <BarChart data={sportData} layout="vertical" margin={{ top: 4, right: 36, left: 4, bottom: 4 }}>
-                <XAxis type="number" hide />
-                <YAxis
-                  type="category"
-                  dataKey="name"
-                  tick={{ fontSize: 12, fill: "rgba(33,33,31,0.6)" }}
-                  axisLine={false}
-                  tickLine={false}
-                  width={90}
-                />
-                <Bar dataKey="value" fill="var(--color-accent)" radius={[4, 4, 4, 4]} isAnimationActive={false}>
-                  <LabelList dataKey="value" position="right" style={{ fontSize: 11, fill: "rgba(33,33,31,0.6)", fontWeight: 600 }} />
-                </Bar>
-              </BarChart>
-            </ResponsiveContainer>
+            {(() => {
+              const displayed = showAllSports ? sportData : sportData.slice(0, 10);
+              return (
+                <>
+                  <ResponsiveContainer width="100%" height={Math.max(220, displayed.length * 30)}>
+                    <BarChart data={displayed} layout="vertical" margin={{ top: 4, right: 36, left: 4, bottom: 4 }}>
+                      <XAxis type="number" hide />
+                      <YAxis
+                        type="category"
+                        dataKey="name"
+                        tick={{ fontSize: 12, fill: "rgba(33,33,31,0.6)" }}
+                        axisLine={false}
+                        tickLine={false}
+                        width={90}
+                      />
+                      <Bar dataKey="value" fill="var(--color-accent)" radius={[4, 4, 4, 4]} isAnimationActive={false}>
+                        <LabelList dataKey="value" position="right" style={{ fontSize: 11, fill: "rgba(33,33,31,0.6)", fontWeight: 600 }} />
+                      </Bar>
+                    </BarChart>
+                  </ResponsiveContainer>
+                  {sportData.length > 10 && (
+                    <button
+                      type="button"
+                      className="sr-toggle-more"
+                      onClick={() => setShowAllSports((v) => !v)}
+                    >
+                      {showAllSports
+                        ? "Skrýt"
+                        : `Zobrazit dalších ${sportData.length - 10}`}
+                    </button>
+                  )}
+                </>
+              );
+            })()}
           </div>
 
           {/* Aktivita podle dne — horizontal bar, no tooltip/hover */}
@@ -227,7 +246,6 @@ export function StatsRecordsPage({
       {/* RIGHT — Records */}
       <section className="sr-section">
         <h2 className="sr-title">Rekordy</h2>
-        <p className="sr-subtitle">{records.length} osobních rekordů</p>
 
         <div className="sr-records-grid">
           {records.map((rec) => (
