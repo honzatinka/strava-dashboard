@@ -533,7 +533,7 @@ const server = http.createServer((req, res) => {
         const tokens = loadFriendTokens();
         const athlete = friendAthlete || tokens?.athlete || {};
         // Aggregate by sport — only Bike, Run, Swim
-        const BIKE = ["Ride","GravelRide","MountainBikeRide","VirtualRide","EBikeRide"];
+        const BIKE = ["Ride","GravelRide","MountainBikeRide","VirtualRide"];
         const RUN  = ["Run","VirtualRun","TrailRun"];
         const SWIM = ["Swim"];
         const normalize = s => BIKE.includes(s) ? "Ride" : RUN.includes(s) ? "Run" : SWIM.includes(s) ? "Swim" : null;
@@ -615,7 +615,7 @@ const server = http.createServer((req, res) => {
       let done = 0;
       const maybeFinish = () => {
         if (++done < 2) return;
-        const BIKE = ["Ride","GravelRide","MountainBikeRide","VirtualRide","EBikeRide"];
+        const BIKE = ["Ride","GravelRide","MountainBikeRide","VirtualRide"];
         const RUN  = ["Run","VirtualRun","TrailRun"];
         const SWIM = ["Swim"];
         const normalize = s => BIKE.includes(s) ? "Ride" : RUN.includes(s) ? "Run" : SWIM.includes(s) ? "Swim" : null;

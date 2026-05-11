@@ -37,10 +37,8 @@ export function TheBigBet({ activities }: { activities: Activity[] }) {
 
   const ytd = activities.filter(a => a.start_date_local.startsWith("2026"));
   const bikeDist  = ytd.filter(a => ["Ride","GravelRide","MountainBikeRide","VirtualRide"].includes(a.sport_type)).reduce((s,a)=>s+a.distance,0);
-  const ebikeDist = ytd.filter(a => a.sport_type==="EBikeRide").reduce((s,a)=>s+a.distance,0);
   const swimDist  = ytd.filter(a => a.sport_type==="Swim").reduce((s,a)=>s+a.distance,0);
   const runDist   = ytd.filter(a => ["Run","VirtualRun","TrailRun"].includes(a.sport_type)).reduce((s,a)=>s+a.distance,0);
-  const combined  = bikeDist + ebikeDist * 0.25;
 
   const friendBike = friend?.sports.find(s => s.sport === "Ride")?.dist ?? 0;
   const friendRun  = friend?.sports.find(s => s.sport === "Run")?.dist  ?? 0;
@@ -58,12 +56,8 @@ export function TheBigBet({ activities }: { activities: Activity[] }) {
       {/* Bike */}
       <div className="cp-bigbet-sport">
         <span className="cp-bigbet-sport-icon"><BikeIcon size={22} strokeWidth={1.6} /></span>
-        <div className="cp-bigbet-value">{formatDistance(combined)}</div>
-        <div className="cp-bigbet-breakdown">
-          <span>Bike <strong>{formatDistance(bikeDist)}</strong></span>
-          <span>Ebike <strong>{formatDistance(ebikeDist)}</strong></span>
-        </div>
-        {friend && <DeltaBadge myDist={combined} friendDist={friendBike} friendPhoto={friend.photo} friendName={friend.name} />}
+        <div className="cp-bigbet-value">{formatDistance(bikeDist)}</div>
+        {friend && <DeltaBadge myDist={bikeDist} friendDist={friendBike} friendPhoto={friend.photo} friendName={friend.name} />}
       </div>
 
       <div className="cp-bigbet-divider" />

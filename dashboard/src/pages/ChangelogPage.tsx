@@ -10,6 +10,16 @@ interface ChangeEntry {
 const ENTRIES: ChangeEntry[] = [
   {
     date: "2026-05-04",
+    title: "The Big Bet: vyřazeno elektrokolo z výpočtu",
+    tag: "design",
+    items: [
+      "Bike sekce ukazuje pouze klasické kolo (Ride, Gravel, MTB, Virtual)",
+      "Odstraněna váha × 0.25 pro EBikeRide a breakdown Bike/Ebike",
+      "Soupeřův součet též nezahrnuje elektrokolo — srovnání je férové",
+    ],
+  },
+  {
+    date: "2026-05-04",
     title: "UI tweaks: sidebar, ActivityRow, statistiky, kalorie",
     tag: "design",
     items: [
