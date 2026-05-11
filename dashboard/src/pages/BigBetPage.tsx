@@ -7,7 +7,7 @@ export function BigBetPage() {
   const [activities, setActivities] = useState<Activity[]>([]);
 
   useEffect(() => {
-    fetch("/activities.json")
+    fetch("/api/activities")
       .then(r => r.json())
       .then(setActivities)
       .catch(() => {});
