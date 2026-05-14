@@ -35,9 +35,9 @@ export function TheBigBet({ activities }: { activities: Activity[] }) {
       .catch(() => {});
   }, []);
 
-  // Exclude indoor/Technogym/Zwift trainer activities — fair Big Bet comparison
-  const ytd = activities.filter(a => a.start_date_local.startsWith("2026") && a.trainer !== true);
-  const bikeDist  = ytd.filter(a => ["Ride","GravelRide","MountainBikeRide","VirtualRide"].includes(a.sport_type)).reduce((s,a)=>s+a.distance,0);
+  const ytd = activities.filter(a => a.start_date_local.startsWith("2026"));
+  // Trainer flag excluded ONLY for bike (Technogym/Zwift). Pool swims & treadmill runs count.
+  const bikeDist  = ytd.filter(a => ["Ride","GravelRide","MountainBikeRide","VirtualRide"].includes(a.sport_type) && a.trainer !== true).reduce((s,a)=>s+a.distance,0);
   const swimDist  = ytd.filter(a => a.sport_type==="Swim").reduce((s,a)=>s+a.distance,0);
   const runDist   = ytd.filter(a => ["Run","VirtualRun","TrailRun"].includes(a.sport_type)).reduce((s,a)=>s+a.distance,0);
 

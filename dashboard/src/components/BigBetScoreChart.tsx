@@ -27,7 +27,7 @@ export function BigBetScoreChart({ myActivities, friendActivities, friendName }:
       <div className="bbsc-header">
         <div className="bbsc-titleblock">
           <h3 className="bbsc-title">Score Progress</h3>
-          <p className="bbsc-subtitle">Týdenní vývoj přes {data.length} bodů</p>
+          <p className="bbsc-subtitle">Týdenní vývoj v roce 2026</p>
         </div>
         <div className="bbsc-currentblock">
           <div className="bbsc-current bbsc-current--me">
@@ -47,11 +47,6 @@ export function BigBetScoreChart({ myActivities, friendActivities, friendName }:
             <div className="bbsc-current-sub">Current Score</div>
           </div>
         </div>
-      </div>
-
-      <div className="bbsc-capbadge">
-        <span className="material-symbols-outlined" style={{ fontSize: 14 }}>shield</span>
-        Combined cap: 6
       </div>
 
       <ResponsiveContainer width="100%" height={280}>

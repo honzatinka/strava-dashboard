@@ -166,10 +166,11 @@ function preloadFriendStats() {
         const normalize = s => BIKE.includes(s) ? "Ride" : RUN.includes(s) ? "Run" : SWIM.includes(s) ? "Swim" : null;
         const byS = {};
         for (const a of acts) {
-          if (a.trainer === true) continue;
           const raw = a.sport_type || a.type || "Other";
           const s = normalize(raw);
           if (!s) continue;
+          // Exclude trainer (Technogym/Zwift) ONLY for bike — pool swims/treadmill runs count
+          if (s === "Ride" && a.trainer === true) continue;
           if (!byS[s]) byS[s] = { count: 0, dist: 0, time: 0, elev: 0 };
           byS[s].count++;
           byS[s].dist += a.distance || 0;
@@ -656,10 +657,11 @@ const server = http.createServer((req, res) => {
         const normalize = s => BIKE.includes(s) ? "Ride" : RUN.includes(s) ? "Run" : SWIM.includes(s) ? "Swim" : null;
         const byS = {};
         for (const a of acts) {
-          if (a.trainer === true) continue; // exclude indoor/Technogym/Zwift trainer rides
           const raw = a.sport_type || a.type || "Other";
           const s = normalize(raw);
           if (!s) continue;
+          // Exclude trainer ONLY for bike (Technogym/Zwift). Pool swims/treadmill runs count.
+          if (s === "Ride" && a.trainer === true) continue;
           if (!byS[s]) byS[s] = { count: 0, dist: 0, time: 0, elev: 0 };
           byS[s].count++;
           byS[s].dist += a.distance || 0;
@@ -739,9 +741,10 @@ const server = http.createServer((req, res) => {
         const normalize = s => BIKE.includes(s) ? "Ride" : RUN.includes(s) ? "Run" : SWIM.includes(s) ? "Swim" : null;
         const byS = {};
         for (const a of activities) {
-          if (a.trainer === true) continue; // exclude indoor/Technogym/Zwift trainer rides
           const s = normalize(a.sport_type || a.type || "");
           if (!s) continue;
+          // Exclude trainer ONLY for bike (Technogym/Zwift). Pool swims/treadmill runs count.
+          if (s === "Ride" && a.trainer === true) continue;
           if (!byS[s]) byS[s] = { sport: s, count: 0, dist: 0, time: 0 };
           byS[s].count++; byS[s].dist += a.distance || 0; byS[s].time += a.moving_time || 0;
         }

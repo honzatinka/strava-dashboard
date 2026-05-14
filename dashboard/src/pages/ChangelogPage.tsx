@@ -10,6 +10,16 @@ interface ChangeEntry {
 const ENTRIES: ChangeEntry[] = [
   {
     date: "2026-05-14",
+    title: "Big Bet: trainer flag jen pro kolo + UI polish",
+    tag: "fix",
+    items: [
+      "Trainer aktivity vyloučeny pouze u kola (Technogym/Zwift). Pool swims a treadmill runs se počítají normálně.",
+      "Martin Kaniok: jeho dvě plavání byla nesprávně filtrována (Strava je tagovala jako trainer) — teď se započítají",
+      "Score Progress: odstraněn badge 'Combined cap: 6' a nejasný počet snímků v podtitulu",
+    ],
+  },
+  {
+    date: "2026-05-14",
     title: "/bet: Score Progress — týdenní časová osa + skóre systém",
     tag: "feature",
     items: [

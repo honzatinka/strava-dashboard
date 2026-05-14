@@ -9,7 +9,8 @@
  *      - leader.dist > 2 × loser.dist  →  leader 2 pts, loser 0
  *      - else                            →  leader 1 pt,  loser 0
  *  - Exact tie → 0 pts to both (rare)
- *  - Trainer activities (`trainer === true`) are excluded
+ *  - Trainer activities (`trainer === true`) are excluded ONLY for Bike
+ *    (Technogym/Zwift). Pool swims and treadmill runs DO count.
  *
  * Time axis: weekly snapshots from Jan 1 of competition year up to today.
  */
@@ -75,16 +76,19 @@ export function getWeeklySnapshots(from: Date, to: Date): Date[] {
   return out;
 }
 
-/** Sum distance (meters) of activities matching `types`, before `untilDate`, excluding trainer. */
+/** Sum distance (meters) of activities matching `types`, before `untilDate`.
+ *  Trainer rides (Technogym/Zwift) excluded ONLY for bike — pool swims & treadmill runs count.
+ */
 function sumDistance(
   activities: Activity[],
   types: string[],
   untilDate: Date,
+  excludeTrainer = false,
 ): number {
   let sum = 0;
   for (const a of activities) {
-    if (a.trainer === true) continue;
     if (!types.includes(a.sport_type)) continue;
+    if (excludeTrainer && a.trainer === true) continue;
     const d = new Date(a.start_date_local);
     if (d > untilDate) continue;
     sum += a.distance || 0;
@@ -121,19 +125,19 @@ export function computeScoreAt(
   friendActs: Activity[],
   untilDate: Date,
 ): { meScore: number; friendScore: number; perDiscipline: Record<string, PerDiscipline> } {
-  const disciplines: Array<{ key: keyof typeof THRESHOLDS; types: string[] }> = [
-    { key: "bike", types: BIKE_TYPES },
-    { key: "run",  types: RUN_TYPES  },
-    { key: "swim", types: SWIM_TYPES },
+  const disciplines: Array<{ key: keyof typeof THRESHOLDS; types: string[]; excludeTrainer: boolean }> = [
+    { key: "bike", types: BIKE_TYPES, excludeTrainer: true  },
+    { key: "run",  types: RUN_TYPES,  excludeTrainer: false },
+    { key: "swim", types: SWIM_TYPES, excludeTrainer: false },
   ];
 
   let meScore = 0;
   let friendScore = 0;
   const perDiscipline: Record<string, PerDiscipline> = {};
 
-  for (const { key, types } of disciplines) {
-    const meDist = sumDistance(meActs, types, untilDate);
-    const friendDist = sumDistance(friendActs, types, untilDate);
+  for (const { key, types, excludeTrainer } of disciplines) {
+    const meDist = sumDistance(meActs, types, untilDate, excludeTrainer);
+    const friendDist = sumDistance(friendActs, types, untilDate, excludeTrainer);
     const r = pointsForDiscipline(meDist, friendDist, THRESHOLDS[key]);
     meScore += r.mePoints;
     friendScore += r.friendPoints;
