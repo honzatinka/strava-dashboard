@@ -578,6 +578,49 @@ const server = http.createServer((req, res) => {
     return;
   }
 
+  // ─── Friend year: GET /api/friend-year?year=2025 → all activities for given year (lightweight)
+  if (req.method === "GET" && parsedUrl.pathname === "/api/friend-year") {
+    const year = parseInt(parsedUrl.query.year || String(new Date().getFullYear()));
+    if (!year || year < 2000 || year > 2100) { res.writeHead(400); res.end(JSON.stringify({error:"bad year"})); return; }
+    const afterTs  = Math.floor(new Date(`${year}-01-01T00:00:00Z`).getTime() / 1000);
+    const beforeTs = Math.floor(new Date(`${year+1}-01-01T00:00:00Z`).getTime() / 1000);
+    refreshFriendToken((err, token) => {
+      if (err) { res.writeHead(401); res.end(JSON.stringify({error:"not_authorized"})); return; }
+      const accumulated = [];
+      const finish = () => {
+        res.writeHead(200, { "Content-Type": "application/json" });
+        res.end(JSON.stringify(accumulated.map(a => ({
+          id: a.id,
+          start_date_local: a.start_date_local,
+          sport_type: a.sport_type || a.type,
+          distance: a.distance || 0,
+          trainer: a.trainer === true,
+        }))));
+      };
+      const fetchPage = (page) => {
+        https.request({
+          hostname: "www.strava.com",
+          path: `/api/v3/athlete/activities?after=${afterTs}&before=${beforeTs}&per_page=200&page=${page}`,
+          method: "GET",
+          headers: { Authorization: `Bearer ${token}` },
+        }, (sr) => {
+          let d = ""; sr.on("data", c => d += c);
+          sr.on("end", () => {
+            try {
+              const acts = JSON.parse(d);
+              if (!Array.isArray(acts) || acts.length === 0) return finish();
+              accumulated.push(...acts);
+              if (acts.length < 200) return finish();
+              fetchPage(page + 1);
+            } catch(e) { finish(); }
+          });
+        }).on("error", () => finish()).end();
+      };
+      fetchPage(1);
+    });
+    return;
+  }
+
   // ─── Friend recent activities: GET /api/friend-recent → last N activities (default 10)
   if (req.method === "GET" && parsedUrl.pathname === "/api/friend-recent") {
     const limit = Math.min(parseInt(parsedUrl.query.limit || "10"), 50);
