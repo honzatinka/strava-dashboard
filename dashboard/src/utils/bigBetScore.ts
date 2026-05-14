@@ -167,10 +167,16 @@ export function buildScoreSeries(
     ? now
     : new Date(Date.UTC(year, 11, 31, 23, 59, 59));
 
+  // CRITICAL: filter to competition year only. /api/activities returns all years,
+  // and without this filter prior-year totals get summed and trip thresholds at week 1.
+  const yearStr = String(year);
+  const meThisYear = meActs.filter(a => a.start_date_local?.startsWith(yearStr));
+  const friendThisYear = friendActs.filter(a => a.start_date_local?.startsWith(yearStr));
+
   const snapshots = getWeeklySnapshots(start, end);
 
   return snapshots.map((d, i) => {
-    const { meScore, friendScore } = computeScoreAt(meActs, friendActs, d);
+    const { meScore, friendScore } = computeScoreAt(meThisYear, friendThisYear, d);
     return {
       week: i === 0 ? "Start" : `W${i}`,
       date: d.toISOString(),

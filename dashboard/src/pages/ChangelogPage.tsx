@@ -10,6 +10,17 @@ interface ChangeEntry {
 const ENTRIES: ChangeEntry[] = [
   {
     date: "2026-05-14",
+    title: "Score Progress: KRITICKÁ oprava — filtrace na 2026",
+    tag: "fix",
+    items: [
+      "Bug: sumDistance počítala aktivity ze VŠECH let, ne jen 2026",
+      "Tím Honza měl 4384 km bike už od ledna → všechny thresholdy crossed → flat 6:0 na grafu",
+      "Fix: pre-filter activities na competition year před snapshotem",
+      "Nyní časový vývoj funguje: 0:0 → Martin 2 → Martin 1 → Honza 1 → Honza 2 → 1 → 2",
+    ],
+  },
+  {
+    date: "2026-05-14",
     title: "Big Bet: Honza vs Martin layout + reverted score rule",
     tag: "design",
     items: [
