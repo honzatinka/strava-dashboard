@@ -80,7 +80,6 @@
   left: 0;
   z-index: 10;
   width: 360px;
-  max-width: calc(100vw - 32px);
   background: #FFFFFF;
   border: 1px solid var(--color-border);
   border-radius: var(--radius-md);
@@ -89,6 +88,11 @@
   font-size: var(--font-size-sm);
   color: var(--color-text-secondary);
   line-height: 1.5;
+}
+
+/* Backdrop — hidden on desktop, visible on mobile as a modal dim */
+.bbsc-info-backdrop {
+  display: none;
 }
 
 .bbsc-info-title {
@@ -200,8 +204,22 @@
   .bbsc-current-sub { font-size: 10px; }
   .bbsc-title { font-size: var(--font-size-xl); }
   .bbsc-subtitle { font-size: var(--font-size-xs); }
+  /* Mobile: turn popover into a centered modal — no horizontal overflow */
+  .bbsc-info-backdrop {
+    display: block;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 99;
+  }
   .bbsc-info-popover {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     width: calc(100vw - 32px);
-    left: -8px; /* nudge so it fits within viewport */
+    max-height: 80vh;
+    overflow-y: auto;
+    z-index: 100;
   }
 }
