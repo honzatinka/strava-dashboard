@@ -5,7 +5,7 @@ import { SPORT_ICONS, SPORT_COLORS, FALLBACK_SPORT_ICON, COURT_SPORTS } from "..
 import {
   groupByDate, formatDistance, czechMonth, formatPace,
 } from "../utils";
-import { TheBigBet } from "../components/TheBigBet";
+import { TheBigBetCompact } from "../components/TheBigBetCompact";
 import "./CombinedActivityCalendarPage.css";
 
 const DAYS = ["M", "T", "W", "T", "F", "S", "S"];
@@ -268,7 +268,7 @@ export function CombinedActivityCalendarPage({
 
         {/* The Big Bet — separate card */}
         <div className="cp-bigbet-card">
-          <TheBigBet activities={activities} />
+          <TheBigBetCompact activities={activities} />
         </div>
       </div>
 

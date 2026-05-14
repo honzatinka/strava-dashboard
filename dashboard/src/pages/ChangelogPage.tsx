@@ -10,6 +10,17 @@ interface ChangeEntry {
 const ENTRIES: ChangeEntry[] = [
   {
     date: "2026-05-14",
+    title: "Big Bet: 2 varianty (compact homepage / full /bet) se sdílenými daty",
+    tag: "design",
+    items: [
+      "Homepage widget (200 px sloupec): TheBigBetCompact se starým layoutem (ikona + km + delta badge)",
+      "/bet stránka: TheBigBet zůstává s Honza vs Martin VS layoutem na celou šířku",
+      "Sdílený hook useBigBetData() — obě varianty mají identická čísla, jen jiný vzhled",
+      "Nový endpoint /api/friend-year?year=YYYY pro historická data soupeře",
+    ],
+  },
+  {
+    date: "2026-05-14",
     title: "Score Progress: KRITICKÁ oprava — filtrace na 2026",
     tag: "fix",
     items: [

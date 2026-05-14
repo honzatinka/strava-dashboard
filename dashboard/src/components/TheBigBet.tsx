@@ -1,14 +1,8 @@
-import { useState, useEffect } from "react";
 import type { Activity } from "../types";
 import { SPORT_ICONS, FALLBACK_SPORT_ICON } from "../types";
 import { formatDistance } from "../utils";
+import { useBigBetData } from "../hooks/useBigBetData";
 import "../pages/CombinedActivityCalendarPage.css";
-
-interface FriendStats {
-  name: string;
-  photo: string | null;
-  sports: { sport: string; dist: number; time: number }[];
-}
 
 interface ParticipantStatProps {
   name: string;
@@ -42,7 +36,6 @@ interface SportRowProps {
 }
 
 function SportRow({ Icon, label, myDist, friendDist, friendName, friendPhoto, myPhoto }: SportRowProps) {
-  // No leader if both 0 or exact tie with both > 0
   const myLeads = myDist > friendDist;
   const friendLeads = friendDist > myDist;
 
@@ -60,39 +53,22 @@ function SportRow({ Icon, label, myDist, friendDist, friendName, friendPhoto, my
   );
 }
 
+/**
+ * The Big Bet — FULL variant (used on /bet page).
+ * Wide layout with side-by-side Honza vs Martin participant rows.
+ */
 export function TheBigBet({ activities }: { activities: Activity[] }) {
-  const [friend, setFriend] = useState<FriendStats | null>(null);
-  const [myPhoto, setMyPhoto] = useState<string | null>(null);
-
-  useEffect(() => {
-    fetch("/api/friend-stats")
-      .then(r => r.json())
-      .then(d => !d.error && setFriend(d))
-      .catch(() => {});
-  }, []);
-
-  useEffect(() => {
-    fetch("/api/athlete-profile")
-      .then(r => r.json())
-      .then(d => { if (d?.photoUrl) setMyPhoto(d.photoUrl); })
-      .catch(() => {});
-  }, []);
-
-  const ytd = activities.filter(a => a.start_date_local.startsWith("2026"));
-  // Trainer flag excluded ONLY for bike (Technogym/Zwift). Pool swims & treadmill runs count.
-  const bikeDist = ytd.filter(a => ["Ride","GravelRide","MountainBikeRide","VirtualRide"].includes(a.sport_type) && a.trainer !== true).reduce((s,a) => s + a.distance, 0);
-  const swimDist = ytd.filter(a => a.sport_type === "Swim").reduce((s,a) => s + a.distance, 0);
-  const runDist  = ytd.filter(a => ["Run","VirtualRun","TrailRun"].includes(a.sport_type)).reduce((s,a) => s + a.distance, 0);
-
-  const friendBike = friend?.sports.find(s => s.sport === "Ride")?.dist ?? 0;
-  const friendRun  = friend?.sports.find(s => s.sport === "Run")?.dist  ?? 0;
-  const friendSwim = friend?.sports.find(s => s.sport === "Swim")?.dist ?? 0;
+  const {
+    bikeDist, runDist, swimDist,
+    friendBike, friendRun, friendSwim,
+    friend, myPhoto,
+  } = useBigBetData(activities);
 
   const BikeIcon = SPORT_ICONS["GravelRide"] || FALLBACK_SPORT_ICON;
   const RunIcon  = SPORT_ICONS["Run"]        || FALLBACK_SPORT_ICON;
   const SwimIcon = SPORT_ICONS["Swim"]       || FALLBACK_SPORT_ICON;
 
-  const friendName = friend?.name?.split(" ")[0] || "Martin";
+  const friendName  = friend?.name?.split(" ")[0] || "Martin";
   const friendPhoto = friend?.photo ?? null;
 
   return (
