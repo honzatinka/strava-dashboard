@@ -33,7 +33,7 @@ export function BigBetScoreChart({ myActivities, friendActivities, friendName }:
           <div className="bbsc-current bbsc-current--me">
             <div className="bbsc-current-label">
               <span className="bbsc-dot bbsc-dot--me" />
-              <span>Já</span>
+              <span>Honza</span>
             </div>
             <div className="bbsc-current-value">{meCurrent}</div>
             <div className="bbsc-current-sub">Current Score</div>
@@ -78,7 +78,7 @@ export function BigBetScoreChart({ myActivities, friendActivities, friendName }:
             }}
             labelStyle={{ fontWeight: 600, marginBottom: 4, color: "#21211F" }}
             formatter={(value, name) => {
-              const display = name === "meScore" ? "Já" : (friendName.split(" ")[0] || "Soupeř");
+              const display = name === "meScore" ? "Honza" : (friendName.split(" ")[0] || "Soupeř");
               return [`${value} b.`, display] as [string, string];
             }}
           />

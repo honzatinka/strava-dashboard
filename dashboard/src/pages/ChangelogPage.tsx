@@ -10,6 +10,19 @@ interface ChangeEntry {
 const ENTRIES: ChangeEntry[] = [
   {
     date: "2026-05-14",
+    title: "Big Bet: Honza vs Martin layout + reverted score rule",
+    tag: "design",
+    items: [
+      "Sport boxy předělány: místo 'moje km + delta' nyní side-by-side Honza vs Martin",
+      "Leader zvýrazněn accent barvou + jemným pozadím, loser muted",
+      "Avatary obou účastníků (grayscale) u jmen",
+      "BigBetScoreChart: popisek 'Já' → 'Honza'",
+      "Pravidlo skóre vráceno: leader >= 2× loser → 2 body (předtím chybně leader > 3× loser)",
+      "Aktuální skóre: Honza 2 (bike 474 vs 219 km, ratio 2.16) : Martin 0",
+    ],
+  },
+  {
+    date: "2026-05-14",
     title: "Score Progress: oprava pravidla 2 bodů",
     tag: "fix",
     items: [

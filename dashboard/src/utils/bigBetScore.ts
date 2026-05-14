@@ -6,9 +6,8 @@
  *  - Discipline becomes "active" when EITHER participant crosses its threshold
  *  - For each active discipline:
  *      - leader = higher cumulative distance
- *      - gap = leader.dist - loser.dist
- *      - gap > 2 × loser.dist  →  leader 2 pts (vede o dvojnásobek vzdálenosti)
- *      - else                  →  leader 1 pt   (těsné vedení)
+ *      - leader.dist >= 2 × loser.dist  →  leader 2 pts ("má 2× tolik než druhý")
+ *      - else                            →  leader 1 pt   (těsné vedení)
  *      - loser 0 v obou případech
  *      - Edge case: pokud loser = 0, leader dostává 2 body
  *  - Exact tie → 0 pts to both (rare)
@@ -112,10 +111,9 @@ function pointsForDiscipline(
   const leader = meLeads ? meDist : friendDist;
   const loser  = meLeads ? friendDist : meDist;
 
-  // "Leader vede o dvojnásobek vzdálenosti" = gap > 2 × loser → leader > 3 × loser
-  // Edge case: loser = 0 → leader gap > 0 trivially → 2 points
-  const gap = leader - loser;
-  const dominantLead = loser === 0 || gap > 2 * loser;
+  // "Má 2× tolik vzdálenosti než druhý" = leader >= 2 × loser
+  // Edge case: loser = 0 → leader >= 0 trivially → 2 points
+  const dominantLead = loser === 0 || leader >= 2 * loser;
   const pts = dominantLead ? 2 : 1;
 
   return meLeads
