@@ -483,6 +483,29 @@ const server = http.createServer((req, res) => {
     return;
   }
 
+  // ─── Friend recent activities: GET /api/friend-recent → last N activities (default 10)
+  if (req.method === "GET" && parsedUrl.pathname === "/api/friend-recent") {
+    const limit = Math.min(parseInt(parsedUrl.query.limit || "10"), 50);
+    refreshFriendToken((err, token) => {
+      if (err) { res.writeHead(401); res.end(JSON.stringify({ error: "not_authorized" })); return; }
+      const opts = {
+        hostname: "www.strava.com",
+        path: `/api/v3/athlete/activities?per_page=${limit}&page=1`,
+        method: "GET",
+        headers: { Authorization: `Bearer ${token}` },
+      };
+      https.request(opts, (sr) => {
+        let data = "";
+        sr.on("data", c => data += c);
+        sr.on("end", () => {
+          res.writeHead(200, { "Content-Type": "application/json" });
+          res.end(data);
+        });
+      }).on("error", e => { res.writeHead(500); res.end(JSON.stringify({ error: e.message })); }).end();
+    });
+    return;
+  }
+
   // ─── Friend stats: GET /api/friend-stats → { name, photo, sports: [{sport, count, dist, time}] }
   if (req.method === "GET" && parsedUrl.pathname === "/api/friend-stats") {
     if (cachedFriendStats) {
