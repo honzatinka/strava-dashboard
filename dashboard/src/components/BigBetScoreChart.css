@@ -1,0 +1,124 @@
+/* ============================================================
+   Big Bet — Score Progress chart card
+   ============================================================ */
+
+.bbsc-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  box-shadow: var(--shadow-card);
+  margin-top: 24px;
+}
+
+.bbsc-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+  margin-bottom: 8px;
+}
+
+.bbsc-titleblock {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.bbsc-title {
+  font-family: var(--font-display);
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+  margin: 0;
+  letter-spacing: -0.3px;
+}
+
+.bbsc-subtitle {
+  font-family: var(--font-body);
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+  margin: 0;
+}
+
+.bbsc-currentblock {
+  display: flex;
+  gap: 12px;
+}
+
+.bbsc-current {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px 16px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: #FFFFFF;
+  min-width: 92px;
+}
+
+.bbsc-current-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  font-weight: var(--font-weight-medium);
+}
+
+.bbsc-current-value {
+  font-family: var(--font-display);
+  font-size: 28px;
+  font-weight: var(--font-weight-bold);
+  line-height: 1;
+  margin-top: 4px;
+}
+
+.bbsc-current--me .bbsc-current-value { color: var(--color-accent); }
+.bbsc-current--friend .bbsc-current-value { color: rgba(33,33,31,0.7); }
+
+.bbsc-current-sub {
+  font-size: 11px;
+  color: var(--color-text-muted);
+  margin-top: 2px;
+  font-weight: var(--font-weight-medium);
+}
+
+.bbsc-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  display: inline-block;
+}
+.bbsc-dot--me { background: var(--color-accent); }
+.bbsc-dot--friend { background: rgba(33,33,31,0.45); }
+
+.bbsc-capbadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 12px;
+  padding: 6px 12px;
+  background: rgba(33,33,31,0.05);
+  border-radius: 999px;
+  font-size: 12px;
+  color: var(--color-text-secondary);
+  font-weight: var(--font-weight-medium);
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .bbsc-card { padding: 16px; }
+  .bbsc-header {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .bbsc-currentblock {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+  .bbsc-current { min-width: 0; padding: 8px 10px; }
+  .bbsc-current-value { font-size: 22px; }
+  .bbsc-title { font-size: var(--font-size-xl); }
+}

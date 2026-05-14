@@ -10,6 +10,18 @@ interface ChangeEntry {
 const ENTRIES: ChangeEntry[] = [
   {
     date: "2026-05-14",
+    title: "/bet: Score Progress — týdenní časová osa + skóre systém",
+    tag: "feature",
+    items: [
+      "Nová sekce 'Score Progress' pod The Big Bet ukazuje týdenní vývoj skóre",
+      "Skóre logika: discipline aktivní po překročení thresholdu (Bike 100km, Run 20km, Swim 5km), leader dostane 1 nebo 2 body podle margin (×2)",
+      "LineChart se dvěma seriemi: já (accent oranžová) vs soupeř (muted šedá)",
+      "Nový backend endpoint /api/friend-activities — raw aktivity pro client-side výpočet",
+      "Trainer aktivity vyloučeny stejně jako v hlavním Big Betu",
+    ],
+  },
+  {
+    date: "2026-05-14",
     title: "Sjednocení cache flow: friend data preload jako moje",
     tag: "fix",
     items: [

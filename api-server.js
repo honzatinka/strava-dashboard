@@ -73,9 +73,10 @@ function parsedReqPath(req) {
 }
 
 // ─── In-memory cache for stats (populated by /api/refresh-data)
-let cachedFriendStats = null;
-let cachedMyStats     = null;
-let cachedActivities  = null; // fetched on server startup
+let cachedFriendStats      = null;
+let cachedMyStats          = null;
+let cachedActivities       = null; // fetched on server startup
+let cachedFriendActivities = null; // raw friend activities for score chart
 
 // ─── Fetch all activities from Strava (paginated)
 function fetchAllActivities(accessToken, callback) {
@@ -183,6 +184,14 @@ function preloadFriendStats() {
             .map(([sport, v]) => ({ sport, ...v }))
             .sort((a, b) => b.time - a.time),
         };
+        // Also save lightweight raw activities for score chart
+        cachedFriendActivities = acts.map(a => ({
+          id: a.id,
+          start_date_local: a.start_date_local,
+          sport_type: a.sport_type || a.type,
+          distance: a.distance || 0,
+          trainer: a.trainer === true,
+        }));
         console.log(`✓ Friend stats načteny: ${acts.length} aktivit`);
       };
 
@@ -554,6 +563,20 @@ const server = http.createServer((req, res) => {
     return;
   }
 
+  // ─── Friend activities (lightweight): GET /api/friend-activities → all 2026 activities for score chart
+  if (req.method === "GET" && parsedUrl.pathname === "/api/friend-activities") {
+    if (cachedFriendActivities) {
+      res.writeHead(200, { "Content-Type": "application/json" });
+      res.end(JSON.stringify(cachedFriendActivities));
+      return;
+    }
+    // Trigger preload (which populates the cache) — return empty for now so frontend retries
+    preloadFriendStats();
+    res.writeHead(200, { "Content-Type": "application/json" });
+    res.end(JSON.stringify([]));
+    return;
+  }
+
   // ─── Friend recent activities: GET /api/friend-recent → last N activities (default 10)
   if (req.method === "GET" && parsedUrl.pathname === "/api/friend-recent") {
     const limit = Math.min(parseInt(parsedUrl.query.limit || "10"), 50);
@@ -801,9 +824,10 @@ const server = http.createServer((req, res) => {
 
   // ─── Refresh data cache: GET /api/refresh-data
   if (req.method === "GET" && parsedUrl.pathname === "/api/refresh-data") {
-    cachedMyStats     = null;
-    cachedFriendStats = null;
-    cachedActivities  = null;
+    cachedMyStats          = null;
+    cachedFriendStats      = null;
+    cachedActivities       = null;
+    cachedFriendActivities = null;
     console.log("🔄 Cache vymazána:", new Date().toISOString());
     // Znovu načti moje aktivity i friend stats na pozadí
     preloadActivities();
