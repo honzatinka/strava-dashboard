@@ -10,6 +10,18 @@ interface ChangeEntry {
 const ENTRIES: ChangeEntry[] = [
   {
     date: "2026-05-14",
+    title: "/bet: nový horizontální layout (řádky per účastník) + širší Score chart",
+    tag: "design",
+    items: [
+      "TheBigBet (full variant): Honza nahoře, Martin dole — každý ve vlastním řádku",
+      "V řádku: čtvercová grayscale fotka vlevo, pak Bike / Run / Swim vedle sebe oddělené vertikálními čarami",
+      "Bez jmen, bez Bike/Ebike breakdown, bez leader highlightu — čistý kontrast km hodnot",
+      "Layout /bet stránky přepnutý na column, max-width 1100 px — Score chart full width pod tím",
+      "Homepage widget (TheBigBetCompact) zůstává beze změny",
+    ],
+  },
+  {
+    date: "2026-05-14",
     title: "Big Bet: 2 varianty (compact homepage / full /bet) se sdílenými daty",
     tag: "design",
     items: [

@@ -4,50 +4,49 @@ import { formatDistance } from "../utils";
 import { useBigBetData } from "../hooks/useBigBetData";
 import "../pages/CombinedActivityCalendarPage.css";
 
-interface ParticipantStatProps {
-  name: string;
+type IconComp = React.ComponentType<{ size?: number; strokeWidth?: number; color?: string }>;
+
+interface SportCellProps {
+  Icon: IconComp;
   dist: number;
-  photo: string | null;
-  isLeader: boolean;
 }
 
-function ParticipantStat({ name, dist, photo, isLeader }: ParticipantStatProps) {
+function SportCell({ Icon, dist }: SportCellProps) {
   return (
-    <div className={`cp-bigbet-pstat${isLeader ? " cp-bigbet-pstat--leader" : ""}`}>
-      {photo ? (
-        <img className="cp-bigbet-pstat-avatar" src={photo} alt={name} />
-      ) : (
-        <div className="cp-bigbet-pstat-avatar cp-bigbet-pstat-avatar--fb">{name[0]}</div>
-      )}
-      <span className="cp-bigbet-pstat-name">{name}</span>
-      <span className="cp-bigbet-pstat-value">{formatDistance(dist)}</span>
+    <div className="cp-bigbet-row-sport">
+      <Icon size={26} strokeWidth={1.6} color="var(--color-text-primary)" />
+      <span className="cp-bigbet-row-km">{formatDistance(dist)}</span>
     </div>
   );
 }
 
-interface SportRowProps {
-  Icon: React.ComponentType<{ size?: number; strokeWidth?: number; color?: string }>;
-  label: string;
-  myDist: number;
-  friendDist: number;
-  friendName: string;
-  friendPhoto: string | null;
-  myPhoto: string | null;
+interface ParticipantRowProps {
+  photo: string | null;
+  name: string;
+  bike: number;
+  run: number;
+  swim: number;
+  BikeIcon: IconComp;
+  RunIcon: IconComp;
+  SwimIcon: IconComp;
 }
 
-function SportRow({ Icon, label, myDist, friendDist, friendName, friendPhoto, myPhoto }: SportRowProps) {
-  const myLeads = myDist > friendDist;
-  const friendLeads = friendDist > myDist;
-
+function ParticipantRow({
+  photo, name, bike, run, swim, BikeIcon, RunIcon, SwimIcon,
+}: ParticipantRowProps) {
   return (
-    <div className="cp-bigbet-sport">
-      <div className="cp-bigbet-sport-head">
-        <span className="cp-bigbet-sport-icon"><Icon size={20} strokeWidth={1.6} /></span>
-        <span className="cp-bigbet-sport-label">{label}</span>
-      </div>
-      <div className="cp-bigbet-versus">
-        <ParticipantStat name="Honza" dist={myDist} photo={myPhoto} isLeader={myLeads} />
-        <ParticipantStat name={friendName} dist={friendDist} photo={friendPhoto} isLeader={friendLeads} />
+    <div className="cp-bigbet-row">
+      {photo ? (
+        <img className="cp-bigbet-row-avatar" src={photo} alt={name} />
+      ) : (
+        <div className="cp-bigbet-row-avatar cp-bigbet-row-avatar--fb">{name[0]}</div>
+      )}
+      <div className="cp-bigbet-row-sports">
+        <SportCell Icon={BikeIcon} dist={bike} />
+        <div className="cp-bigbet-row-sep" />
+        <SportCell Icon={RunIcon}  dist={run} />
+        <div className="cp-bigbet-row-sep" />
+        <SportCell Icon={SwimIcon} dist={swim} />
       </div>
     </div>
   );
@@ -55,7 +54,7 @@ function SportRow({ Icon, label, myDist, friendDist, friendName, friendPhoto, my
 
 /**
  * The Big Bet — FULL variant (used on /bet page).
- * Wide layout with side-by-side Honza vs Martin participant rows.
+ * Two stacked horizontal participant rows with avatar + 3 sport cells.
  */
 export function TheBigBet({ activities }: { activities: Activity[] }) {
   const {
@@ -64,33 +63,27 @@ export function TheBigBet({ activities }: { activities: Activity[] }) {
     friend, myPhoto,
   } = useBigBetData(activities);
 
-  const BikeIcon = SPORT_ICONS["GravelRide"] || FALLBACK_SPORT_ICON;
-  const RunIcon  = SPORT_ICONS["Run"]        || FALLBACK_SPORT_ICON;
-  const SwimIcon = SPORT_ICONS["Swim"]       || FALLBACK_SPORT_ICON;
+  const BikeIcon = (SPORT_ICONS["GravelRide"] || FALLBACK_SPORT_ICON) as IconComp;
+  const RunIcon  = (SPORT_ICONS["Run"]        || FALLBACK_SPORT_ICON) as IconComp;
+  const SwimIcon = (SPORT_ICONS["Swim"]       || FALLBACK_SPORT_ICON) as IconComp;
 
-  const friendName  = friend?.name?.split(" ")[0] || "Martin";
-  const friendPhoto = friend?.photo ?? null;
+  const friendName = friend?.name?.split(" ")[0] || "Martin";
 
   return (
     <div className="cp-bigbet">
       <div className="cp-bigbet-year">2026</div>
       <div className="cp-bigbet-title">The Big Bet</div>
 
-      <SportRow Icon={BikeIcon} label="Bike"
-        myDist={bikeDist} friendDist={friendBike}
-        friendName={friendName} friendPhoto={friendPhoto} myPhoto={myPhoto} />
-
-      <div className="cp-bigbet-divider" />
-
-      <SportRow Icon={SwimIcon} label="Swim"
-        myDist={swimDist} friendDist={friendSwim}
-        friendName={friendName} friendPhoto={friendPhoto} myPhoto={myPhoto} />
-
-      <div className="cp-bigbet-divider" />
-
-      <SportRow Icon={RunIcon} label="Run"
-        myDist={runDist} friendDist={friendRun}
-        friendName={friendName} friendPhoto={friendPhoto} myPhoto={myPhoto} />
+      <ParticipantRow
+        photo={myPhoto} name="Honza"
+        bike={bikeDist} run={runDist} swim={swimDist}
+        BikeIcon={BikeIcon} RunIcon={RunIcon} SwimIcon={SwimIcon}
+      />
+      <ParticipantRow
+        photo={friend?.photo ?? null} name={friendName}
+        bike={friendBike} run={friendRun} swim={friendSwim}
+        BikeIcon={BikeIcon} RunIcon={RunIcon} SwimIcon={SwimIcon}
+      />
     </div>
   );
 }

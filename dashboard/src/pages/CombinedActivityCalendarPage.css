@@ -372,85 +372,70 @@
   color: var(--color-text-primary);
 }
 
-/* Sport row — Honza vs Martin VS layout */
-.cp-bigbet-sport-head {
+/* Participant row — horizontal layout for /bet page (TheBigBet full variant) */
+.cp-bigbet-row {
   display: flex;
-  align-items: center;
-  gap: 8px;
-  margin-bottom: 4px;
-}
-
-.cp-bigbet-sport-label {
-  font-family: var(--font-display);
-  font-size: var(--font-size-base);
-  font-weight: var(--font-weight-semibold);
-  color: var(--color-text-primary);
-  letter-spacing: -0.2px;
-}
-
-.cp-bigbet-versus {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
-
-.cp-bigbet-pstat {
-  display: grid;
-  grid-template-columns: 22px 1fr auto;
-  align-items: center;
-  gap: 8px;
-  padding: 6px 8px;
+  align-items: stretch;
+  gap: 20px;
+  background: var(--color-surface-alt);
   border-radius: var(--radius-md);
-  background: transparent;
-  transition: background 0.15s ease;
+  padding: 14px 20px;
+  margin-bottom: 12px;
 }
 
-.cp-bigbet-pstat--leader {
-  background: rgba(255, 68, 0, 0.06);
+.cp-bigbet-row:last-child {
+  margin-bottom: 0;
 }
 
-.cp-bigbet-pstat-avatar {
-  width: 22px;
-  height: 22px;
-  border-radius: 50%;
+.cp-bigbet-row-avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: var(--radius-md);
   object-fit: cover;
+  flex-shrink: 0;
   filter: grayscale(1);
 }
 
-.cp-bigbet-pstat-avatar--fb {
+.cp-bigbet-row-avatar--fb {
   background: var(--color-border);
   color: var(--color-text-secondary);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 11px;
+  font-family: var(--font-display);
+  font-size: 32px;
   font-weight: var(--font-weight-bold);
   filter: none;
 }
 
-.cp-bigbet-pstat-name {
-  font-family: var(--font-body);
-  font-size: var(--font-size-sm);
-  font-weight: var(--font-weight-medium);
-  color: var(--color-text-secondary);
+.cp-bigbet-row-sports {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  flex: 1;
+  min-width: 0;
 }
 
-.cp-bigbet-pstat-value {
+.cp-bigbet-row-sport {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+}
+
+.cp-bigbet-row-km {
   font-family: var(--font-display);
-  font-size: 18px;
+  font-size: 28px;
   font-weight: var(--font-weight-bold);
-  color: var(--color-text-secondary);
-  letter-spacing: -0.3px;
+  color: var(--color-accent);
+  letter-spacing: -0.5px;
   line-height: 1;
 }
 
-.cp-bigbet-pstat--leader .cp-bigbet-pstat-name,
-.cp-bigbet-pstat--leader .cp-bigbet-pstat-value {
-  color: var(--color-accent);
-}
-
-.cp-bigbet-pstat--leader .cp-bigbet-pstat-value {
-  font-size: 20px;
+.cp-bigbet-row-sep {
+  width: 1px;
+  align-self: stretch;
+  background: var(--color-border);
 }
 
 /* ─── Mobile (≤768px) ─── */
@@ -473,6 +458,28 @@
   .cp-cell-num { font-size: 12px; margin-bottom: 2px; }
   .cp-cell-act { padding: 3px 4px; gap: 2px; width: 100%; }
   .cp-cell-act-dur { font-size: 8px; }
+
+  /* Big Bet row layout — stack avatar above sports on mobile */
+  .cp-bigbet-row {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+    padding: 12px;
+  }
+  .cp-bigbet-row-avatar {
+    width: 64px;
+    height: 64px;
+    align-self: center;
+  }
+  .cp-bigbet-row-sports {
+    gap: 14px;
+    justify-content: space-around;
+    flex-wrap: wrap;
+  }
+  .cp-bigbet-row-sport {
+    gap: 8px;
+  }
+  .cp-bigbet-row-km { font-size: 20px; }
 }
 
 /* ─── Activity List ─── */
