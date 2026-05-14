@@ -44,9 +44,9 @@ function ParticipantRow({
       <div className="cp-bigbet-row-sports">
         <SportCell Icon={BikeIcon} dist={bike} />
         <div className="cp-bigbet-row-sep" />
-        <SportCell Icon={RunIcon}  dist={run} />
-        <div className="cp-bigbet-row-sep" />
         <SportCell Icon={SwimIcon} dist={swim} />
+        <div className="cp-bigbet-row-sep" />
+        <SportCell Icon={RunIcon}  dist={run} />
       </div>
     </div>
   );
