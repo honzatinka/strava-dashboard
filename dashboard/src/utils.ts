@@ -5,10 +5,21 @@ export function formatDistance(meters: number): string {
   return `${(meters / 1000).toFixed(1)} km`;
 }
 
-/** Always-km variant — used in Big Bet where totals are large & we want consistent units. */
+/** Always-km variant — used in Big Bet where totals are large & we want consistent units.
+ *  Future-proof:
+ *   - 0           → "0 km"
+ *   - < 100 km    → "3.6 km"     (1 decimal)
+ *   - < 1000 km   → "474.2 km"   (1 decimal)
+ *   - ≥ 1000 km   → "1 234 km"   (no decimal, space-separated thousands)
+ */
 export function formatDistanceKm(meters: number): string {
   if (meters === 0) return "0 km";
-  return `${(meters / 1000).toFixed(1)} km`;
+  const km = meters / 1000;
+  if (km >= 1000) {
+    // Use non-breaking thin space as thousands separator (looks clean, avoids confusion with comma=decimal in CS locale)
+    return `${Math.round(km).toLocaleString("cs-CZ").replace(/\s/g, " ")} km`;
+  }
+  return `${km.toFixed(1)} km`;
 }
 
 export function formatDuration(seconds: number): string {

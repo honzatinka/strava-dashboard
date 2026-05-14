@@ -21,30 +21,50 @@ export function BigBetScoreChart({ myActivities, friendActivities, friendName }:
   type Tab = "overall" | "bike" | "swim" | "run";
   const [tab, setTab] = useState<Tab>("overall");
 
-  // Pick data keys + max based on selected tab
+  // Score tab → points. Sport tabs → cumulative km.
+  const isKmMode = tab !== "overall";
   const meKey =
     tab === "overall" ? "meScore" :
-    tab === "bike"    ? "bike_me" :
-    tab === "swim"    ? "swim_me" :
-                        "run_me";
+    tab === "bike"    ? "bike_me_km" :
+    tab === "swim"    ? "swim_me_km" :
+                        "run_me_km";
   const friendKey =
     tab === "overall" ? "friendScore" :
-    tab === "bike"    ? "bike_friend" :
-    tab === "swim"    ? "swim_friend" :
-                        "run_friend";
+    tab === "bike"    ? "bike_friend_km" :
+    tab === "swim"    ? "swim_friend_km" :
+                        "run_friend_km";
 
   const last = data[data.length - 1];
   const meCurrent = (last?.[meKey as keyof typeof last] as number) ?? 0;
   const friendCurrent = (last?.[friendKey as keyof typeof last] as number) ?? 0;
+  const unitSuffix = isKmMode ? " km" : "";
 
-  // Dynamic Y-axis: max 2 for single-sport tabs (max points per discipline),
-  // capped at 6 for "Overall" (3 disciplines × 2 points).
+  // Score tab: Y 0–6 (capped); km tabs: Y dynamic to max value + 10% headroom.
   const yMax = useMemo(() => {
-    if (tab !== "overall") return 2;
-    let m = 2;
-    for (const p of data) m = Math.max(m, p.meScore, p.friendScore);
-    return Math.min(6, m + 1);
-  }, [data, tab]);
+    if (!isKmMode) {
+      let m = 2;
+      for (const p of data) m = Math.max(m, p.meScore, p.friendScore);
+      return Math.min(6, m + 1);
+    }
+    let m = 0;
+    for (const p of data) {
+      m = Math.max(m, (p[meKey as keyof typeof p] as number), (p[friendKey as keyof typeof p] as number));
+    }
+    if (m === 0) return 10; // empty data: show small axis
+    // Round up to nice number
+    const padded = m * 1.1;
+    const exponent = Math.pow(10, Math.floor(Math.log10(padded)));
+    return Math.ceil(padded / exponent) * exponent;
+  }, [data, tab, isKmMode, meKey, friendKey]);
+
+  const yTicks = useMemo(() => {
+    if (!isKmMode) {
+      return Array.from({ length: yMax + 1 }, (_, i) => i);
+    }
+    // 5 ticks for km axis
+    const step = yMax / 4;
+    return [0, step, step * 2, step * 3, yMax].map(v => Math.round(v));
+  }, [yMax, isKmMode]);
 
   // Info popover state — toggle on icon click, close on outside click
   const [showInfo, setShowInfo] = useState(false);
@@ -112,16 +132,16 @@ export function BigBetScoreChart({ myActivities, friendActivities, friendName }:
               <span className="bbsc-dot bbsc-dot--me" />
               <span>Honza</span>
             </div>
-            <div className="bbsc-current-value">{meCurrent}</div>
-            <div className="bbsc-current-sub">Current Score</div>
+            <div className="bbsc-current-value">{meCurrent}{unitSuffix}</div>
+            <div className="bbsc-current-sub">{isKmMode ? "Total distance" : "Current Score"}</div>
           </div>
           <div className="bbsc-current bbsc-current--friend">
             <div className="bbsc-current-label">
               <span className="bbsc-dot bbsc-dot--friend" />
               <span>{friendName.split(" ")[0] || "Soupeř"}</span>
             </div>
-            <div className="bbsc-current-value">{friendCurrent}</div>
-            <div className="bbsc-current-sub">Current Score</div>
+            <div className="bbsc-current-value">{friendCurrent}{unitSuffix}</div>
+            <div className="bbsc-current-sub">{isKmMode ? "Total distance" : "Current Score"}</div>
           </div>
         </div>
       </div>
@@ -129,7 +149,7 @@ export function BigBetScoreChart({ myActivities, friendActivities, friendName }:
       {/* Sport tabs — filter chart series */}
       <div className="bbsc-tabs" role="tablist">
         {([
-          ["overall", "Celkem"],
+          ["overall", "Score"],
           ["bike",    "Bike"],
           ["swim",    "Swim"],
           ["run",     "Run"],
@@ -159,11 +179,11 @@ export function BigBetScoreChart({ myActivities, friendActivities, friendName }:
           />
           <YAxis
             domain={[0, yMax]}
-            ticks={Array.from({ length: yMax + 1 }, (_, i) => i)}
+            ticks={yTicks}
             tick={{ fontSize: 11, fill: "rgba(33,33,31,0.5)" }}
             axisLine={false}
             tickLine={false}
-            width={28}
+            width={isKmMode ? 40 : 28}
           />
           <Line
             type="monotone"

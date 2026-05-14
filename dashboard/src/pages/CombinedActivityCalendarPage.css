@@ -418,9 +418,9 @@
 }
 
 .cp-bigbet-cell {
-  display: grid;
-  grid-template-columns: auto 1fr;
+  display: flex;
   align-items: center;
+  justify-content: center;   /* center cell content within its grid column */
   gap: 10px;
   min-width: 0;
 }
@@ -430,6 +430,7 @@
   align-items: center;
   justify-content: center;
   color: var(--color-text-primary);
+  flex-shrink: 0;
 }
 
 .cp-bigbet-cell-text {
@@ -446,9 +447,7 @@
   color: var(--color-text-muted);
   letter-spacing: -0.5px;
   line-height: 1;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  white-space: nowrap;   /* no wrap, no ellipsis — let it render fully */
 }
 
 .cp-bigbet-cell--leader .cp-bigbet-cell-km {
@@ -499,20 +498,28 @@
     height: 56px;
   }
   .cp-bigbet-row-sports {
-    gap: 8px;
-  }
-  .cp-bigbet-cell {
     gap: 6px;
   }
+  .cp-bigbet-cell {
+    gap: 4px;
+    justify-content: flex-start;   /* mobile: left-align to save space */
+  }
   .cp-bigbet-cell-icon .material-symbols-outlined {
-    font-size: 18px !important;
+    font-size: 16px !important;
   }
   .cp-bigbet-cell-km {
-    font-size: 14px;
+    font-size: 13px;
     letter-spacing: -0.2px;
   }
   .cp-bigbet-cell-gap {
     font-size: 9px;
+  }
+}
+
+/* Extra-narrow screens (≤360 px iPhone SE, smaller Androids): drop "km" suffix to fit */
+@media (max-width: 380px) {
+  .cp-bigbet-cell-km {
+    font-size: 12px;
   }
 }
 

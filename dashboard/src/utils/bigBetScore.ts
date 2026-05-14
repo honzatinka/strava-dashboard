@@ -38,13 +38,20 @@ export interface ScorePoint {
   date: string;
   meScore: number;
   friendScore: number;
-  // Per-discipline scores for sport tabs
+  // Per-discipline scores for sport tabs (0–2 points)
   bike_me: number;
   bike_friend: number;
   swim_me: number;
   swim_friend: number;
   run_me: number;
   run_friend: number;
+  // Per-discipline CUMULATIVE distance in km — for sport tabs showing km progress
+  bike_me_km: number;
+  bike_friend_km: number;
+  swim_me_km: number;
+  swim_friend_km: number;
+  run_me_km: number;
+  run_friend_km: number;
 }
 
 export interface PerDiscipline {
@@ -184,6 +191,7 @@ export function buildScoreSeries(
 
   return snapshots.map((d, i) => {
     const { meScore, friendScore, perDiscipline } = computeScoreAt(meThisYear, friendThisYear, d);
+    const toKm = (m: number) => Math.round(m / 100) / 10; // 1 decimal
     return {
       week: i === 0 ? "Start" : `W${i}`,
       date: d.toISOString(),
@@ -195,6 +203,12 @@ export function buildScoreSeries(
       swim_friend: perDiscipline.swim?.friendPoints ?? 0,
       run_me: perDiscipline.run?.mePoints ?? 0,
       run_friend: perDiscipline.run?.friendPoints ?? 0,
+      bike_me_km:     toKm(perDiscipline.bike?.meDist ?? 0),
+      bike_friend_km: toKm(perDiscipline.bike?.friendDist ?? 0),
+      swim_me_km:     toKm(perDiscipline.swim?.meDist ?? 0),
+      swim_friend_km: toKm(perDiscipline.swim?.friendDist ?? 0),
+      run_me_km:      toKm(perDiscipline.run?.meDist ?? 0),
+      run_friend_km:  toKm(perDiscipline.run?.friendDist ?? 0),
     };
   });
 }
