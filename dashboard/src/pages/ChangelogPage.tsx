@@ -10,6 +10,16 @@ interface ChangeEntry {
 const ENTRIES: ChangeEntry[] = [
   {
     date: "2026-05-14",
+    title: "Sjednocení cache flow: friend data preload jako moje",
+    tag: "fix",
+    items: [
+      "Friend stats se nyní také preloadují při startu serveru a po /api/refresh-data",
+      "Stejný pattern jako pro moje aktivity — odstraněna asymetrie 'lazy vs eager'",
+      "První user request po cold startu i po healthchecku je teď instant pro obě strany",
+    ],
+  },
+  {
+    date: "2026-05-14",
     title: "The Big Bet: vyloučeny trainer/Technogym jízdy",
     tag: "design",
     items: [

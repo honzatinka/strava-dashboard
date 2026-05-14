@@ -120,6 +120,77 @@ function preloadActivities() {
   });
 }
 
+// ─── Preload friend stats on startup (same pattern as preloadActivities)
+function preloadFriendStats() {
+  console.log("📥 Načítám friend stats ze Stravy při startu...");
+  refreshFriendToken((err, token) => {
+    if (err) { console.warn("⚠ Nelze načíst friend token při startu:", err.message); return; }
+    // Fetch friend athlete profile + 2026 activities, aggregate, store in cache
+    let friendAthlete = null;
+    https.request({ hostname: "www.strava.com", path: "/api/v3/athlete", method: "GET",
+      headers: { Authorization: `Bearer ${token}` } }, (sr) => {
+      let d = ""; sr.on("data", c => d += c);
+      sr.on("end", () => { try { friendAthlete = JSON.parse(d); } catch(e) {} loadActs(); });
+    }).on("error", () => loadActs()).end();
+
+    const loadActs = () => {
+      const accumulated = [];
+      const fetchPage = (page) => {
+        const opts = {
+          hostname: "www.strava.com",
+          path: `/api/v3/athlete/activities?after=1767222000&per_page=200&page=${page}`,
+          method: "GET",
+          headers: { Authorization: `Bearer ${token}` },
+        };
+        https.request(opts, (sr) => {
+          let d = ""; sr.on("data", c => d += c);
+          sr.on("end", () => {
+            try {
+              const acts = JSON.parse(d);
+              if (!Array.isArray(acts) || acts.length === 0) { aggregate(accumulated); return; }
+              accumulated.push(...acts);
+              if (acts.length < 200) { aggregate(accumulated); return; }
+              fetchPage(page + 1);
+            } catch(e) { aggregate(accumulated); }
+          });
+        }).on("error", () => aggregate(accumulated)).end();
+      };
+
+      const aggregate = (acts) => {
+        const tokens = loadFriendTokens();
+        const athlete = friendAthlete || tokens?.athlete || {};
+        const BIKE = ["Ride","GravelRide","MountainBikeRide","VirtualRide"];
+        const RUN  = ["Run","VirtualRun","TrailRun"];
+        const SWIM = ["Swim"];
+        const normalize = s => BIKE.includes(s) ? "Ride" : RUN.includes(s) ? "Run" : SWIM.includes(s) ? "Swim" : null;
+        const byS = {};
+        for (const a of acts) {
+          if (a.trainer === true) continue;
+          const raw = a.sport_type || a.type || "Other";
+          const s = normalize(raw);
+          if (!s) continue;
+          if (!byS[s]) byS[s] = { count: 0, dist: 0, time: 0, elev: 0 };
+          byS[s].count++;
+          byS[s].dist += a.distance || 0;
+          byS[s].time += a.moving_time || 0;
+          byS[s].elev += a.total_elevation_gain || 0;
+        }
+        cachedFriendStats = {
+          name: `${athlete.firstname || ""} ${athlete.lastname || ""}`.trim(),
+          photo: athlete.profile_medium || athlete.profile || null,
+          totalActivities: acts.length,
+          sports: Object.entries(byS)
+            .map(([sport, v]) => ({ sport, ...v }))
+            .sort((a, b) => b.time - a.time),
+        };
+        console.log(`✓ Friend stats načteny: ${acts.length} aktivit`);
+      };
+
+      fetchPage(1);
+    };
+  });
+}
+
 // Load / save friend tokens (env vars take priority for production/Koyeb)
 function loadFriendTokens() {
   // In production, tokens come from env vars
@@ -734,10 +805,11 @@ const server = http.createServer((req, res) => {
     cachedFriendStats = null;
     cachedActivities  = null;
     console.log("🔄 Cache vymazána:", new Date().toISOString());
-    // Znovu načti aktivity na pozadí
+    // Znovu načti moje aktivity i friend stats na pozadí
     preloadActivities();
+    preloadFriendStats();
     res.writeHead(200, { "Content-Type": "application/json" });
-    res.end(JSON.stringify({ ok: true, message: "Cache cleared, activities reloading in background" }));
+    res.end(JSON.stringify({ ok: true, message: "Cache cleared, data reloading in background" }));
     return;
   }
 
@@ -894,4 +966,5 @@ server.listen(PORT, "0.0.0.0", () => {
     console.log("  ⚠ Set OPENAI_API_KEY to enable AI analysis");
   }
   preloadActivities();
+  preloadFriendStats();
 });
