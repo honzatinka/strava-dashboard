@@ -5,6 +5,12 @@ export function formatDistance(meters: number): string {
   return `${(meters / 1000).toFixed(1)} km`;
 }
 
+/** Always-km variant — used in Big Bet where totals are large & we want consistent units. */
+export function formatDistanceKm(meters: number): string {
+  if (meters === 0) return "0 km";
+  return `${(meters / 1000).toFixed(1)} km`;
+}
+
 export function formatDuration(seconds: number): string {
   const h = Math.floor(seconds / 3600);
   const m = Math.floor((seconds % 3600) / 60);

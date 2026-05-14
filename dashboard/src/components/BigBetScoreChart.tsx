@@ -22,6 +22,14 @@ export function BigBetScoreChart({ myActivities, friendActivities, friendName }:
   const meCurrent = last?.meScore ?? 0;
   const friendCurrent = last?.friendScore ?? 0;
 
+  // Dynamic Y-axis: clamp to the highest score reached (min 2 so axis isn't flat near zero),
+  // capped at 6 (max possible: 3 disciplines × 2 points).
+  const yMax = useMemo(() => {
+    let m = 2;
+    for (const p of data) m = Math.max(m, p.meScore, p.friendScore);
+    return Math.min(6, m + 1);
+  }, [data]);
+
   return (
     <div className="bbsc-card">
       <div className="bbsc-header">
@@ -60,8 +68,8 @@ export function BigBetScoreChart({ myActivities, friendActivities, friendName }:
             interval="preserveStartEnd"
           />
           <YAxis
-            domain={[0, 6]}
-            ticks={[0, 1, 2, 3, 4, 5, 6]}
+            domain={[0, yMax]}
+            ticks={Array.from({ length: yMax + 1 }, (_, i) => i)}
             tick={{ fontSize: 11, fill: "rgba(33,33,31,0.5)" }}
             axisLine={false}
             tickLine={false}

@@ -10,6 +10,17 @@ interface ChangeEntry {
 const ENTRIES: ChangeEntry[] = [
   {
     date: "2026-05-14",
+    title: "/bet mobile vylepšení",
+    tag: "design",
+    items: [
+      "Participant rows: fotka vlevo (56 px) + 3 sporty v jednom řádku — žádné zalamování Run na druhý řádek",
+      "Nový utility formatDistanceKm — vždy 'X km' (žádné '0 m' vedle '474.2 km')",
+      "Score Progress: dynamický Y-axis (clamp na max score+1, ne fixní 0–6)",
+      "Score Progress: menší padding karty na mobilu (12 px), kompaktnější header",
+    ],
+  },
+  {
+    date: "2026-05-14",
     title: "/bet: nový horizontální layout (řádky per účastník) + širší Score chart",
     tag: "design",
     items: [

@@ -1,6 +1,6 @@
 import type { Activity } from "../types";
 import { SPORT_ICONS, FALLBACK_SPORT_ICON } from "../types";
-import { formatDistance } from "../utils";
+import { formatDistanceKm } from "../utils";
 import { useBigBetData } from "../hooks/useBigBetData";
 import "../pages/CombinedActivityCalendarPage.css";
 
@@ -15,7 +15,7 @@ function SportCell({ Icon, dist }: SportCellProps) {
   return (
     <div className="cp-bigbet-row-sport">
       <Icon size={26} strokeWidth={1.6} color="var(--color-text-primary)" />
-      <span className="cp-bigbet-row-km">{formatDistance(dist)}</span>
+      <span className="cp-bigbet-row-km">{formatDistanceKm(dist)}</span>
     </div>
   );
 }

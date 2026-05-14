@@ -459,27 +459,33 @@
   .cp-cell-act { padding: 3px 4px; gap: 2px; width: 100%; }
   .cp-cell-act-dur { font-size: 8px; }
 
-  /* Big Bet row layout — stack avatar above sports on mobile */
+  /* Big Bet row layout — compact horizontal: photo left, 3 sports in one row */
   .cp-bigbet-row {
-    flex-direction: column;
-    align-items: stretch;
-    gap: 12px;
-    padding: 12px;
+    gap: 10px;
+    padding: 10px 12px;
+    align-items: center;
   }
   .cp-bigbet-row-avatar {
-    width: 64px;
-    height: 64px;
-    align-self: center;
+    width: 56px;
+    height: 56px;
   }
   .cp-bigbet-row-sports {
-    gap: 14px;
-    justify-content: space-around;
-    flex-wrap: wrap;
+    gap: 4px;
+    justify-content: space-between;
   }
   .cp-bigbet-row-sport {
-    gap: 8px;
+    gap: 4px;
+    flex: 1;
+    justify-content: flex-start;
   }
-  .cp-bigbet-row-km { font-size: 20px; }
+  .cp-bigbet-row-sport .material-symbols-outlined {
+    font-size: 18px !important;
+  }
+  .cp-bigbet-row-km {
+    font-size: 14px;
+    letter-spacing: -0.2px;
+    white-space: nowrap;
+  }
 }
 
 /* ─── Activity List ─── */

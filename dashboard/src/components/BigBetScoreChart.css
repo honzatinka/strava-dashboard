@@ -108,17 +108,20 @@
 
 /* Mobile */
 @media (max-width: 768px) {
-  .bbsc-card { padding: 16px; }
+  .bbsc-card { padding: 12px; }
   .bbsc-header {
     flex-direction: column;
     align-items: stretch;
+    gap: 10px;
   }
   .bbsc-currentblock {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 10px;
+    gap: 8px;
   }
-  .bbsc-current { min-width: 0; padding: 8px 10px; }
+  .bbsc-current { min-width: 0; padding: 6px 10px; }
   .bbsc-current-value { font-size: 22px; }
+  .bbsc-current-sub { font-size: 10px; }
   .bbsc-title { font-size: var(--font-size-xl); }
+  .bbsc-subtitle { font-size: var(--font-size-xs); }
 }
