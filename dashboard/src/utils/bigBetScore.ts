@@ -38,6 +38,13 @@ export interface ScorePoint {
   date: string;
   meScore: number;
   friendScore: number;
+  // Per-discipline scores for sport tabs
+  bike_me: number;
+  bike_friend: number;
+  swim_me: number;
+  swim_friend: number;
+  run_me: number;
+  run_friend: number;
 }
 
 export interface PerDiscipline {
@@ -176,12 +183,18 @@ export function buildScoreSeries(
   const snapshots = getWeeklySnapshots(start, end);
 
   return snapshots.map((d, i) => {
-    const { meScore, friendScore } = computeScoreAt(meThisYear, friendThisYear, d);
+    const { meScore, friendScore, perDiscipline } = computeScoreAt(meThisYear, friendThisYear, d);
     return {
       week: i === 0 ? "Start" : `W${i}`,
       date: d.toISOString(),
       meScore,
       friendScore,
+      bike_me: perDiscipline.bike?.mePoints ?? 0,
+      bike_friend: perDiscipline.bike?.friendPoints ?? 0,
+      swim_me: perDiscipline.swim?.mePoints ?? 0,
+      swim_friend: perDiscipline.swim?.friendPoints ?? 0,
+      run_me: perDiscipline.run?.mePoints ?? 0,
+      run_friend: perDiscipline.run?.friendPoints ?? 0,
     };
   });
 }

@@ -10,6 +10,20 @@ interface ChangeEntry {
 const ENTRIES: ChangeEntry[] = [
   {
     date: "2026-05-14",
+    title: "/bet: leader highlight, gap (+X km), sport taby v chartu",
+    tag: "feature",
+    items: [
+      "Sport boxy: vedoucí v dané disciplíně má účinnou orange barvu, loser muted gray (jako VS layout dřív)",
+      "Pod km hodnotou leadera: '+X km' rozdíl proti druhému (jen v case kdy vede)",
+      "CSS grid 3 sloupce pro sporty — vždy zarovnané mezi Honzou a Martinem (vyřešilo i Messenger webview problém s nesedem)",
+      "Score chart: nové taby Celkem / Bike / Swim / Run — filtrují které sport scoringy se zobrazí",
+      "Score chart: vypnutý hover tooltip (pro klid)",
+      "Per-discipline body uloženy do ScorePoint (bike_me, bike_friend, …) pro filtrování",
+      "Mobile: taby full-width, gap subtitle menší (9 px), km 14 px",
+    ],
+  },
+  {
+    date: "2026-05-14",
     title: "/bet mobile vylepšení",
     tag: "design",
     items: [

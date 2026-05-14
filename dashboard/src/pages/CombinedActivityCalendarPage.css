@@ -408,35 +408,64 @@
   filter: none;
 }
 
+/* 3-column CSS grid — ensures Bike/Swim/Run align vertically between rows */
 .cp-bigbet-row-sports {
-  display: flex;
-  align-items: center;
-  gap: 28px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
   flex: 1;
   min-width: 0;
 }
 
-.cp-bigbet-row-sport {
-  display: flex;
+.cp-bigbet-cell {
+  display: grid;
+  grid-template-columns: auto 1fr;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
   min-width: 0;
 }
 
-.cp-bigbet-row-km {
-  font-family: var(--font-display);
-  font-size: 28px;
-  font-weight: var(--font-weight-bold);
-  color: var(--color-accent);
-  letter-spacing: -0.5px;
-  line-height: 1;
+.cp-bigbet-cell-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-text-primary);
 }
 
-.cp-bigbet-row-sep {
-  width: 1px;
-  align-self: stretch;
-  background: var(--color-border);
+.cp-bigbet-cell-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
 }
+
+.cp-bigbet-cell-km {
+  font-family: var(--font-display);
+  font-size: 24px;
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-muted);
+  letter-spacing: -0.5px;
+  line-height: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.cp-bigbet-cell--leader .cp-bigbet-cell-km {
+  color: var(--color-accent);
+}
+
+.cp-bigbet-cell-gap {
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-muted);
+  line-height: 1;
+  white-space: nowrap;
+}
+
+/* Legacy unused now — kept commented for reference, can be removed */
+/* .cp-bigbet-row-sport, .cp-bigbet-row-km, .cp-bigbet-row-sep */
 
 /* ─── Mobile (≤768px) ─── */
 @media (max-width: 768px) {
@@ -459,7 +488,7 @@
   .cp-cell-act { padding: 3px 4px; gap: 2px; width: 100%; }
   .cp-cell-act-dur { font-size: 8px; }
 
-  /* Big Bet row layout — compact horizontal: photo left, 3 sports in one row */
+  /* Big Bet row layout — compact horizontal on mobile */
   .cp-bigbet-row {
     gap: 10px;
     padding: 10px 12px;
@@ -470,21 +499,20 @@
     height: 56px;
   }
   .cp-bigbet-row-sports {
-    gap: 4px;
-    justify-content: space-between;
+    gap: 8px;
   }
-  .cp-bigbet-row-sport {
-    gap: 4px;
-    flex: 1;
-    justify-content: flex-start;
+  .cp-bigbet-cell {
+    gap: 6px;
   }
-  .cp-bigbet-row-sport .material-symbols-outlined {
+  .cp-bigbet-cell-icon .material-symbols-outlined {
     font-size: 18px !important;
   }
-  .cp-bigbet-row-km {
+  .cp-bigbet-cell-km {
     font-size: 14px;
     letter-spacing: -0.2px;
-    white-space: nowrap;
+  }
+  .cp-bigbet-cell-gap {
+    font-size: 9px;
   }
 }
 

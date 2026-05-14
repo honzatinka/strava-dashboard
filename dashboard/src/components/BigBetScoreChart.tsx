@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import {
-  LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer,
+  LineChart, Line, XAxis, YAxis, CartesianGrid, ResponsiveContainer,
 } from "recharts";
 import type { Activity } from "../types";
 import { buildScoreSeries } from "../utils/bigBetScore";
@@ -18,17 +18,33 @@ export function BigBetScoreChart({ myActivities, friendActivities, friendName }:
     [myActivities, friendActivities],
   );
 
-  const last = data[data.length - 1];
-  const meCurrent = last?.meScore ?? 0;
-  const friendCurrent = last?.friendScore ?? 0;
+  type Tab = "overall" | "bike" | "swim" | "run";
+  const [tab, setTab] = useState<Tab>("overall");
 
-  // Dynamic Y-axis: clamp to the highest score reached (min 2 so axis isn't flat near zero),
-  // capped at 6 (max possible: 3 disciplines × 2 points).
+  // Pick data keys + max based on selected tab
+  const meKey =
+    tab === "overall" ? "meScore" :
+    tab === "bike"    ? "bike_me" :
+    tab === "swim"    ? "swim_me" :
+                        "run_me";
+  const friendKey =
+    tab === "overall" ? "friendScore" :
+    tab === "bike"    ? "bike_friend" :
+    tab === "swim"    ? "swim_friend" :
+                        "run_friend";
+
+  const last = data[data.length - 1];
+  const meCurrent = (last?.[meKey as keyof typeof last] as number) ?? 0;
+  const friendCurrent = (last?.[friendKey as keyof typeof last] as number) ?? 0;
+
+  // Dynamic Y-axis: max 2 for single-sport tabs (max points per discipline),
+  // capped at 6 for "Overall" (3 disciplines × 2 points).
   const yMax = useMemo(() => {
+    if (tab !== "overall") return 2;
     let m = 2;
     for (const p of data) m = Math.max(m, p.meScore, p.friendScore);
     return Math.min(6, m + 1);
-  }, [data]);
+  }, [data, tab]);
 
   // Info popover state — toggle on icon click, close on outside click
   const [showInfo, setShowInfo] = useState(false);
@@ -110,6 +126,27 @@ export function BigBetScoreChart({ myActivities, friendActivities, friendName }:
         </div>
       </div>
 
+      {/* Sport tabs — filter chart series */}
+      <div className="bbsc-tabs" role="tablist">
+        {([
+          ["overall", "Celkem"],
+          ["bike",    "Bike"],
+          ["swim",    "Swim"],
+          ["run",     "Run"],
+        ] as Array<[Tab, string]>).map(([key, label]) => (
+          <button
+            key={key}
+            type="button"
+            role="tab"
+            aria-selected={tab === key}
+            className={`bbsc-tab${tab === key ? " bbsc-tab--active" : ""}`}
+            onClick={() => setTab(key)}
+          >
+            {label}
+          </button>
+        ))}
+      </div>
+
       <ResponsiveContainer width="100%" height={280}>
         <LineChart data={data} margin={{ top: 16, right: 16, left: 0, bottom: 4 }}>
           <CartesianGrid stroke="rgba(33,33,31,0.08)" strokeDasharray="3 3" />
@@ -128,24 +165,9 @@ export function BigBetScoreChart({ myActivities, friendActivities, friendName }:
             tickLine={false}
             width={28}
           />
-          <Tooltip
-            cursor={{ stroke: "rgba(33,33,31,0.15)", strokeWidth: 1 }}
-            contentStyle={{
-              background: "#FFFFFF",
-              border: "1px solid rgba(33,33,31,0.08)",
-              borderRadius: 8,
-              fontFamily: "inherit",
-              padding: "8px 12px",
-            }}
-            labelStyle={{ fontWeight: 600, marginBottom: 4, color: "#21211F" }}
-            formatter={(value, name) => {
-              const display = name === "meScore" ? "Honza" : (friendName.split(" ")[0] || "Soupeř");
-              return [`${value} b.`, display] as [string, string];
-            }}
-          />
           <Line
             type="monotone"
-            dataKey="meScore"
+            dataKey={meKey}
             stroke="var(--color-accent)"
             strokeWidth={2.5}
             dot={{ r: 3, fill: "var(--color-accent)" }}
@@ -154,7 +176,7 @@ export function BigBetScoreChart({ myActivities, friendActivities, friendName }:
           />
           <Line
             type="monotone"
-            dataKey="friendScore"
+            dataKey={friendKey}
             stroke="rgba(33,33,31,0.45)"
             strokeWidth={2.5}
             dot={{ r: 3, fill: "rgba(33,33,31,0.45)" }}
