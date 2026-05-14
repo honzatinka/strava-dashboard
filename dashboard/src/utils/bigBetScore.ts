@@ -6,8 +6,11 @@
  *  - Discipline becomes "active" when EITHER participant crosses its threshold
  *  - For each active discipline:
  *      - leader = higher cumulative distance
- *      - leader.dist > 2 × loser.dist  →  leader 2 pts, loser 0
- *      - else                            →  leader 1 pt,  loser 0
+ *      - gap = leader.dist - loser.dist
+ *      - gap > 2 × loser.dist  →  leader 2 pts (vede o dvojnásobek vzdálenosti)
+ *      - else                  →  leader 1 pt   (těsné vedení)
+ *      - loser 0 v obou případech
+ *      - Edge case: pokud loser = 0, leader dostává 2 body
  *  - Exact tie → 0 pts to both (rare)
  *  - Trainer activities (`trainer === true`) are excluded ONLY for Bike
  *    (Technogym/Zwift). Pool swims and treadmill runs DO count.
@@ -109,10 +112,11 @@ function pointsForDiscipline(
   const leader = meLeads ? meDist : friendDist;
   const loser  = meLeads ? friendDist : meDist;
 
-  // 2 points if leader's distance > 2× loser's distance, otherwise 1 point.
-  // Edge case: loser = 0 → leader automatically gets 2 points.
-  const doubleAhead = loser === 0 || leader > 2 * loser;
-  const pts = doubleAhead ? 2 : 1;
+  // "Leader vede o dvojnásobek vzdálenosti" = gap > 2 × loser → leader > 3 × loser
+  // Edge case: loser = 0 → leader gap > 0 trivially → 2 points
+  const gap = leader - loser;
+  const dominantLead = loser === 0 || gap > 2 * loser;
+  const pts = dominantLead ? 2 : 1;
 
   return meLeads
     ? { active: true, mePoints: pts, friendPoints: 0 }

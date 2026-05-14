@@ -10,6 +10,15 @@ interface ChangeEntry {
 const ENTRIES: ChangeEntry[] = [
   {
     date: "2026-05-14",
+    title: "Score Progress: oprava pravidla 2 bodů",
+    tag: "fix",
+    items: [
+      "Pravidlo '2 body za dvojnásobné vedení' znamená MEZERA > 2× loserova vzdálenost (leader > 3× loser), ne leader > 2× loser",
+      "Pro 474 km vs 219 km na kole: mezera 255 km < 2× 219 = 438 km → 1 bod (těsné vedení)",
+    ],
+  },
+  {
+    date: "2026-05-14",
     title: "Big Bet: trainer flag jen pro kolo + UI polish",
     tag: "fix",
     items: [
