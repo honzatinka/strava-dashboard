@@ -26,6 +26,8 @@ export interface Activity {
   timezone?: string;
   device_name?: string;
   total_photo_count?: number;
+  trainer?: boolean;
+  commute?: boolean;
 }
 
 import React from "react";

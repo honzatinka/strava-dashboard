@@ -562,6 +562,7 @@ const server = http.createServer((req, res) => {
         const normalize = s => BIKE.includes(s) ? "Ride" : RUN.includes(s) ? "Run" : SWIM.includes(s) ? "Swim" : null;
         const byS = {};
         for (const a of acts) {
+          if (a.trainer === true) continue; // exclude indoor/Technogym/Zwift trainer rides
           const raw = a.sport_type || a.type || "Other";
           const s = normalize(raw);
           if (!s) continue;
@@ -644,6 +645,7 @@ const server = http.createServer((req, res) => {
         const normalize = s => BIKE.includes(s) ? "Ride" : RUN.includes(s) ? "Run" : SWIM.includes(s) ? "Swim" : null;
         const byS = {};
         for (const a of activities) {
+          if (a.trainer === true) continue; // exclude indoor/Technogym/Zwift trainer rides
           const s = normalize(a.sport_type || a.type || "");
           if (!s) continue;
           if (!byS[s]) byS[s] = { sport: s, count: 0, dist: 0, time: 0 };

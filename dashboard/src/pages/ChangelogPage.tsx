@@ -9,6 +9,16 @@ interface ChangeEntry {
 
 const ENTRIES: ChangeEntry[] = [
   {
+    date: "2026-05-14",
+    title: "The Big Bet: vyloučeny trainer/Technogym jízdy",
+    tag: "design",
+    items: [
+      "Aktivity s flagem trainer=true (Technogym, Zwift, indoor) se nepočítají do Big Bet",
+      "Vyloučeno i v /api/friend-stats a /api/my-stats pro férové srovnání",
+      "Nový endpoint /api/friend-recent pro debug posledních aktivit soupeře",
+    ],
+  },
+  {
     date: "2026-05-04",
     title: "The Big Bet: vyřazeno elektrokolo z výpočtu",
     tag: "design",
