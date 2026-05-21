@@ -5,7 +5,7 @@ import {
 import { Ruler, Timer, Mountain, MapPin } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 import type { Activity } from "../types";
-import { SPORT_ICONS, FALLBACK_SPORT_ICON } from "../types";
+import { resolveSportIcon } from "../types";
 import {
   formatDistance, formatDuration, formatFullDate,
   groupBySport, sportLabel, locationFromTimezone,
@@ -43,7 +43,7 @@ function findRecord(
 
 function RecordCard({ rec, onSelect }: { rec: ActivityRecord; onSelect: (a: Activity) => void }) {
   const sport = rec.activity.sport_type || rec.activity.type;
-  const SportIcon = SPORT_ICONS[sport] || FALLBACK_SPORT_ICON;
+  const SportIcon = resolveSportIcon(sport, rec.activity.name);
   const [city, setCity] = useState<string | null>(locationFromTimezone(rec.activity.timezone));
 
   useEffect(() => {

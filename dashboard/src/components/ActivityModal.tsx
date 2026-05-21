@@ -3,7 +3,7 @@ import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 import { MapPin, Watch, X, ExternalLink } from "lucide-react";
 import type { Activity } from "../types";
-import { SPORT_ICONS, FALLBACK_SPORT_ICON, COURT_SPORTS } from "../types";
+import { COURT_SPORTS, resolveSportIcon } from "../types";
 import {
   formatDistance, formatDuration, formatFullDate, formatPace, formatSpeed,
   sportLabel, locationFromTimezone, decodePolyline,
@@ -25,7 +25,7 @@ export function ActivityModal({ activity, onClose }: Props) {
   const mapRef = useRef<HTMLDivElement>(null);
   const mapInstance = useRef<L.Map | null>(null);
   const sport = activity.sport_type || activity.type;
-  const Icon = SPORT_ICONS[sport] || FALLBACK_SPORT_ICON;
+  const Icon = resolveSportIcon(sport, activity.name);
   const isCourtSport = COURT_SPORTS.has(sport);
   const pace = !isCourtSport ? formatPace(activity.average_speed, sport) : null;
   const [city, setCity] = useState<string | null>(locationFromTimezone(activity.timezone));

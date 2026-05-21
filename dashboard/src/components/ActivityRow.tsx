@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import type { Activity } from "../types";
-import { SPORT_ICONS, SPORT_COLORS, FALLBACK_SPORT_ICON, COURT_SPORTS } from "../types";
+import { SPORT_COLORS, COURT_SPORTS, resolveSportIcon } from "../types";
 import { formatDistance, formatPace, locationFromTimezone } from "../utils";
 import { getCityName } from "../utils/geocode";
 import "./ActivityRow.css";
@@ -32,7 +32,7 @@ interface Props {
 
 export function ActivityRow({ activity, onClick, photoUrl, city: cityProp }: Props) {
   const sport = activity.sport_type || activity.type;
-  const Icon = SPORT_ICONS[sport] || FALLBACK_SPORT_ICON;
+  const Icon = resolveSportIcon(sport, activity.name);
   const color = SPORT_COLORS[sport] || "#FF4400";
   const isCourtSport = COURT_SPORTS.has(sport);
   const pace = !isCourtSport ? formatPace(activity.average_speed, sport) : null;

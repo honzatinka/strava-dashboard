@@ -69,7 +69,23 @@ export const SPORT_ICONS: Record<string, ReturnType<typeof makeMIcon>> = {
   Padel:            makeMIcon("sports_tennis"),
   Yoga:             makeMIcon("self_improvement"),
   RockClimbing:     makeMIcon("landscape"),
+  Gymnastics:       makeMIcon("sports_gymnastics"),
 };
+
+/**
+ * Resolve activity icon — checks activity name first for "gym" / "gymnastika" / "gymnastics",
+ * then falls back to sport_type. Lets us show a gymnast icon for activities tracked under
+ * Workout/WeightTraining but actually named "Gym" or "Gymnastika".
+ */
+export function resolveSportIcon(sportType: string, activityName?: string) {
+  if (activityName) {
+    const lower = activityName.toLowerCase();
+    if (/\b(gym|gymnastik\w*|gymnastics)\b/.test(lower)) {
+      return SPORT_ICONS.Gymnastics;
+    }
+  }
+  return SPORT_ICONS[sportType] || FALLBACK_SPORT_ICON;
+}
 
 export const FALLBACK_SPORT_ICON = makeMIcon("sports");
 

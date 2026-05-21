@@ -1,7 +1,7 @@
 import { useState, useMemo } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import type { Activity } from "../types";
-import { SPORT_ICONS, SPORT_COLORS, FALLBACK_SPORT_ICON, COURT_SPORTS } from "../types";
+import { SPORT_COLORS, COURT_SPORTS, resolveSportIcon } from "../types";
 import {
   groupByDate, formatDistance, czechMonth, formatPace,
 } from "../utils";
@@ -43,7 +43,7 @@ function ActivityRow({
   activity, onClick, photoUrl, city,
 }: { activity: Activity; onClick: () => void; photoUrl?: string; city?: string }) {
   const sport = activity.sport_type || activity.type;
-  const Icon = SPORT_ICONS[sport] || FALLBACK_SPORT_ICON;
+  const Icon = resolveSportIcon(sport, activity.name);
   const color = SPORT_COLORS[sport] || "#FF4400";
   const isCourtSport = COURT_SPORTS.has(sport);
   const pace = !isCourtSport ? formatPace(activity.average_speed, sport) : null;
@@ -240,7 +240,7 @@ export function CombinedActivityCalendarPage({
                       {dayActs.slice(0, 2).map((a, idx) => {
                         const s = a.sport_type || a.type;
                         const c = SPORT_COLORS[s] || "#D4CFC9";
-                        const Ic = SPORT_ICONS[s] || FALLBACK_SPORT_ICON;
+                        const Ic = resolveSportIcon(s, a.name);
                         return (
                           <div
                             key={idx}
