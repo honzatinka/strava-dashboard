@@ -73,14 +73,16 @@ export const SPORT_ICONS: Record<string, ReturnType<typeof makeMIcon>> = {
 };
 
 /**
- * Resolve activity icon — checks activity name first for "gym" / "gymnastika" / "gymnastics",
- * then falls back to sport_type. Lets us show a gymnast icon for activities tracked under
- * Workout/WeightTraining but actually named "Gym" or "Gymnastika".
+ * Resolve activity icon — checks activity name first for words starting with "gymna"
+ * (gymnastika, gymnastics, gymnasta, gymnastka...), then falls back to sport_type.
+ *
+ * IMPORTANT: bare "gym" is treated as posilovna (gym/weight training) and is NOT matched,
+ * so it keeps the default Workout/WeightTraining icon (fitness_center).
  */
 export function resolveSportIcon(sportType: string, activityName?: string) {
   if (activityName) {
     const lower = activityName.toLowerCase();
-    if (/\b(gym|gymnastik\w*|gymnastics)\b/.test(lower)) {
+    if (/\bgymna\w*\b/.test(lower)) {
       return SPORT_ICONS.Gymnastics;
     }
   }
