@@ -116,7 +116,21 @@ export const SPORT_COLORS: Record<string, string> = {
   Tennis: "#C5E880", Padel: "#C5E880",
   // Ostatní
   Yoga: "#F5C2E0",
+  // Gymnastika — teal (odlišný od posilovny i jogy)
+  Gymnastics: "#7DD9C7",
 };
+
+/**
+ * Resolve activity color — same rules as resolveSportIcon:
+ * activity name starting with "gymna" (gymnastika/gymnastics/...) → teal,
+ * jinak fallback na sport_type.
+ */
+export function resolveSportColor(sportType: string, activityName?: string): string {
+  if (activityName && /\bgymna\w*\b/.test(activityName.toLowerCase())) {
+    return SPORT_COLORS.Gymnastics;
+  }
+  return SPORT_COLORS[sportType] || "#D4CFC9";
+}
 
 /** Sports where GPS distance / pace doesn't make sense (court, gym, indoor) */
 export const COURT_SPORTS = new Set([
