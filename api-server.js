@@ -185,12 +185,15 @@ function preloadFriendStats() {
             .map(([sport, v]) => ({ sport, ...v }))
             .sort((a, b) => b.time - a.time),
         };
-        // Also save lightweight raw activities for score chart
+        // Also save lightweight raw activities for score chart + recent feed
         cachedFriendActivities = acts.map(a => ({
           id: a.id,
+          name: a.name,
           start_date_local: a.start_date_local,
           sport_type: a.sport_type || a.type,
           distance: a.distance || 0,
+          moving_time: a.moving_time || 0,
+          total_elevation_gain: a.total_elevation_gain || 0,
           trainer: a.trainer === true,
         }));
         console.log(`✓ Friend stats načteny: ${acts.length} aktivit`);

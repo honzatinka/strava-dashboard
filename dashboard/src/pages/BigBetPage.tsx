@@ -1,15 +1,20 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import type { Activity } from "../types";
 import { TheBigBet } from "../components/TheBigBet";
 import { BigBetScoreChart } from "../components/BigBetScoreChart";
+import { RecentActivitiesPair } from "../components/RecentActivitiesPair";
+import { ActivityModal } from "../components/ActivityModal";
 import "./BigBetPage.css";
 
-interface FriendInfo { name: string; }
+interface FriendInfo { name: string; photo: string | null }
 
 export function BigBetPage() {
   const [activities, setActivities] = useState<Activity[]>([]);
   const [friendActivities, setFriendActivities] = useState<Activity[]>([]);
   const [friendName, setFriendName] = useState<string>("Soupeř");
+  const [friendPhoto, setFriendPhoto] = useState<string | null>(null);
+  const [myPhoto, setMyPhoto] = useState<string | null>(null);
+  const [selectedActivity, setSelectedActivity] = useState<Activity | null>(null);
 
   useEffect(() => {
     fetch("/api/activities")
@@ -19,7 +24,14 @@ export function BigBetPage() {
   }, []);
 
   useEffect(() => {
-    // Friend raw activities (for score chart) — may return [] on cold start while preload runs.
+    fetch("/api/athlete-profile")
+      .then(r => r.json())
+      .then(d => { if (d?.photoUrl) setMyPhoto(d.photoUrl); })
+      .catch(() => {});
+  }, []);
+
+  useEffect(() => {
+    // Friend raw activities (for score chart + recent feed) — may return [] on cold start while preload runs.
     // Retry after 4s if empty.
     const fetchFriend = (attempt = 0) => {
       fetch("/api/friend-activities")
@@ -35,22 +47,40 @@ export function BigBetPage() {
     };
     fetchFriend();
 
-    // Friend name from /api/friend-stats (already cached)
+    // Friend name + photo from /api/friend-stats (already cached)
     fetch("/api/friend-stats")
       .then(r => r.json())
-      .then((d: FriendInfo) => { if (d?.name) setFriendName(d.name); })
+      .then((d: FriendInfo) => {
+        if (d?.name) setFriendName(d.name);
+        if (d?.photo) setFriendPhoto(d.photo);
+      })
       .catch(() => {});
   }, []);
+
+  const closeActivity = useCallback(() => setSelectedActivity(null), []);
 
   return (
     <div className="bb-standalone">
       <TheBigBet activities={activities} />
       {activities.length > 0 && friendActivities.length > 0 && (
-        <BigBetScoreChart
-          myActivities={activities}
-          friendActivities={friendActivities}
-          friendName={friendName}
-        />
+        <>
+          <BigBetScoreChart
+            myActivities={activities}
+            friendActivities={friendActivities}
+            friendName={friendName}
+          />
+          <RecentActivitiesPair
+            myActivities={activities}
+            friendActivities={friendActivities}
+            friendName={friendName.split(" ")[0] || "Soupeř"}
+            myPhoto={myPhoto}
+            friendPhoto={friendPhoto}
+            onMyActivityClick={setSelectedActivity}
+          />
+        </>
+      )}
+      {selectedActivity && (
+        <ActivityModal activity={selectedActivity} onClose={closeActivity} />
       )}
     </div>
   );
