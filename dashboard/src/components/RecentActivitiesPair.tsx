@@ -19,6 +19,7 @@ interface Props {
   myPhoto: string | null;
   friendPhoto: string | null;
   onMyActivityClick?: (a: Activity) => void;
+  onFriendActivityClick?: (a: ActivityCompact) => void;
 }
 
 function formatShortDate(iso: string): string {
@@ -102,7 +103,7 @@ function ParticipantColumn({
 }
 
 export function RecentActivitiesPair({
-  myActivities, friendActivities, friendName, myPhoto, friendPhoto, onMyActivityClick,
+  myActivities, friendActivities, friendName, myPhoto, friendPhoto, onMyActivityClick, onFriendActivityClick,
 }: Props) {
   const myRecent = [...myActivities]
     .filter(a => a.start_date_local)
@@ -128,6 +129,7 @@ export function RecentActivitiesPair({
           title={friendName}
           photo={friendPhoto}
           activities={friendRecent}
+          onItemClick={onFriendActivityClick}
         />
       </div>
     </div>

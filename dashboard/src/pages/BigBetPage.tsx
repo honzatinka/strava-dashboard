@@ -15,6 +15,7 @@ export function BigBetPage() {
   const [friendPhoto, setFriendPhoto] = useState<string | null>(null);
   const [myPhoto, setMyPhoto] = useState<string | null>(null);
   const [selectedActivity, setSelectedActivity] = useState<Activity | null>(null);
+  const [selectedFriendActivity, setSelectedFriendActivity] = useState<Activity | null>(null);
 
   useEffect(() => {
     fetch("/api/activities")
@@ -58,6 +59,7 @@ export function BigBetPage() {
   }, []);
 
   const closeActivity = useCallback(() => setSelectedActivity(null), []);
+  const closeFriendActivity = useCallback(() => setSelectedFriendActivity(null), []);
 
   return (
     <div className="bb-standalone">
@@ -76,11 +78,15 @@ export function BigBetPage() {
             myPhoto={myPhoto}
             friendPhoto={friendPhoto}
             onMyActivityClick={setSelectedActivity}
+            onFriendActivityClick={(a) => setSelectedFriendActivity(a as Activity)}
           />
         </>
       )}
       {selectedActivity && (
         <ActivityModal activity={selectedActivity} onClose={closeActivity} />
+      )}
+      {selectedFriendActivity && (
+        <ActivityModal activity={selectedFriendActivity} onClose={closeFriendActivity} isFriend />
       )}
     </div>
   );

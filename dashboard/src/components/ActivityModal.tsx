@@ -14,6 +14,8 @@ import "./ActivityModal.css";
 interface Props {
   activity: Activity;
   onClose: () => void;
+  /** True = use friend endpoints for photos & detail (Martin's data via his Strava token) */
+  isFriend?: boolean;
 }
 
 interface PhotoData {
@@ -21,7 +23,9 @@ interface PhotoData {
   [key: string]: unknown;
 }
 
-export function ActivityModal({ activity, onClose }: Props) {
+export function ActivityModal({ activity, onClose, isFriend = false }: Props) {
+  const photoEndpoint  = isFriend ? "/api/fetch-friend-activity-photos" : "/api/fetch-activity-photos";
+  const detailEndpoint = isFriend ? "/api/friend-activity-detail" : "/api/activity-detail";
   const mapRef = useRef<HTMLDivElement>(null);
   const mapInstance = useRef<L.Map | null>(null);
   const sport = activity.sport_type || activity.type;
@@ -50,7 +54,7 @@ export function ActivityModal({ activity, onClose }: Props) {
     const fetchPhotos = async () => {
       setPhotosLoading(true);
       try {
-        const response = await fetch("/api/fetch-activity-photos", {
+        const response = await fetch(photoEndpoint, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ activityId: activity.id }),
@@ -75,13 +79,13 @@ export function ActivityModal({ activity, onClose }: Props) {
     if (activity.id) {
       fetchPhotos();
     }
-  }, [activity.id]);
+  }, [activity.id, photoEndpoint]);
 
   // Fetch detailed activity (for calories)
   useEffect(() => {
     if (!activity.id) return;
     setCalories(null);
-    fetch(`/api/activity-detail?id=${activity.id}`)
+    fetch(`${detailEndpoint}?id=${activity.id}`)
       .then((r) => r.json())
       .then((d) => {
         if (typeof d?.calories === "number" && d.calories > 0) {
@@ -89,7 +93,7 @@ export function ActivityModal({ activity, onClose }: Props) {
         }
       })
       .catch(() => {});
-  }, [activity.id]);
+  }, [activity.id, detailEndpoint]);
 
   // Close on Escape
   useEffect(() => {

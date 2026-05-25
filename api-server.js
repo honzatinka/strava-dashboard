@@ -139,7 +139,8 @@ function preloadFriendStats() {
       const fetchPage = (page) => {
         const opts = {
           hostname: "www.strava.com",
-          path: `/api/v3/athlete/activities?after=1767222000&per_page=200&page=${page}`,
+          // Fetch FULL history (no 'after' filter) so Honza/Martin switch works for all years
+          path: `/api/v3/athlete/activities?per_page=200&page=${page}`,
           method: "GET",
           headers: { Authorization: `Bearer ${token}` },
         };
@@ -185,16 +186,37 @@ function preloadFriendStats() {
             .map(([sport, v]) => ({ sport, ...v }))
             .sort((a, b) => b.time - a.time),
         };
-        // Also save lightweight raw activities for score chart + recent feed
+        // Full activity summary fields for ActivityModal — Martin can be browsed same as Honza
         cachedFriendActivities = acts.map(a => ({
           id: a.id,
           name: a.name,
+          sport_type: a.sport_type || a.type || "",
+          type: a.type || "",
           start_date_local: a.start_date_local,
-          sport_type: a.sport_type || a.type,
+          start_date: a.start_date,
           distance: a.distance || 0,
           moving_time: a.moving_time || 0,
+          elapsed_time: a.elapsed_time || 0,
           total_elevation_gain: a.total_elevation_gain || 0,
+          average_speed: a.average_speed || 0,
+          max_speed: a.max_speed || 0,
+          average_heartrate: a.average_heartrate,
+          max_heartrate: a.max_heartrate,
+          average_temp: a.average_temp,
+          has_heartrate: a.has_heartrate || false,
+          kudos_count: a.kudos_count || 0,
+          achievement_count: a.achievement_count || 0,
+          pr_count: a.pr_count || 0,
+          elev_high: a.elev_high,
+          elev_low: a.elev_low,
+          start_latlng: a.start_latlng,
+          end_latlng: a.end_latlng,
+          map: a.map ? { summary_polyline: a.map.summary_polyline } : undefined,
+          timezone: a.timezone,
+          device_name: a.device_name,
+          total_photo_count: a.total_photo_count || 0,
           trainer: a.trainer === true,
+          commute: a.commute === true,
         }));
         console.log(`✓ Friend stats načteny: ${acts.length} aktivit`);
       };
@@ -451,6 +473,60 @@ const server = http.createServer((req, res) => {
         res.writeHead(400, { "Content-Type": "application/json" });
         res.end(JSON.stringify({ error: "Invalid request" }));
       }
+    });
+    return;
+  }
+
+  // Friend variant: fetch photos via Martin's token
+  if (req.method === "POST" && parsedUrl.pathname === "/api/fetch-friend-activity-photos") {
+    let body = "";
+    req.on("data", c => { body += c; });
+    req.on("end", () => {
+      try {
+        const { activityId } = JSON.parse(body);
+        if (!activityId) {
+          res.writeHead(400, { "Content-Type": "application/json" });
+          res.end(JSON.stringify({ error: "No activity ID" }));
+          return;
+        }
+        refreshFriendToken((err, token) => {
+          if (err) {
+            res.writeHead(200, { "Content-Type": "application/json" });
+            res.end(JSON.stringify({ photos: [], error: "Friend token refresh failed" }));
+            return;
+          }
+          fetchPhotosFromStrava(activityId, token, (err, photos) => {
+            if (err) {
+              res.writeHead(200, { "Content-Type": "application/json" });
+              res.end(JSON.stringify({ photos: [], error: "Fetch failed" }));
+              return;
+            }
+            res.writeHead(200, { "Content-Type": "application/json" });
+            res.end(JSON.stringify({ photos }));
+          });
+        });
+      } catch (err) {
+        res.writeHead(400, { "Content-Type": "application/json" });
+        res.end(JSON.stringify({ error: "Invalid request" }));
+      }
+    });
+    return;
+  }
+
+  // Friend variant: GET /api/friend-activity-detail?id=X → full activity (calories etc) via Martin's token
+  if (req.method === "GET" && parsedUrl.pathname === "/api/friend-activity-detail") {
+    const id = parsedUrl.query.id;
+    if (!id) { res.writeHead(400); res.end(JSON.stringify({ error: "Missing id" })); return; }
+    refreshFriendToken((err, token) => {
+      if (err) { res.writeHead(401); res.end(JSON.stringify({ error: "not_authorized" })); return; }
+      https.request({ hostname: "www.strava.com", path: `/api/v3/activities/${id}`,
+        method: "GET", headers: { Authorization: `Bearer ${token}` } }, (sr) => {
+        let d = ""; sr.on("data", c => d += c);
+        sr.on("end", () => {
+          res.writeHead(200, { "Content-Type": "application/json" });
+          res.end(d);
+        });
+      }).on("error", e => { res.writeHead(500); res.end(JSON.stringify({ error: e.message })); }).end();
     });
     return;
   }
