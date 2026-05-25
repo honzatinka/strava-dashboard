@@ -166,7 +166,10 @@ function preloadFriendStats() {
         const SWIM = ["Swim"];
         const normalize = s => BIKE.includes(s) ? "Ride" : RUN.includes(s) ? "Run" : SWIM.includes(s) ? "Swim" : null;
         const byS = {};
+        // The Big Bet je 2026 soutěž — agreguj jen letošní rok (full history ukládáme zvlášť)
+        const BET_YEAR = "2026";
         for (const a of acts) {
+          if (!a.start_date_local || !a.start_date_local.startsWith(BET_YEAR)) continue;
           const raw = a.sport_type || a.type || "Other";
           const s = normalize(raw);
           if (!s) continue;
@@ -772,13 +775,15 @@ const server = http.createServer((req, res) => {
       fetchAthlete(() => fetchPage(1, [], (err, acts) => {
         const tokens = loadFriendTokens();
         const athlete = friendAthlete || tokens?.athlete || {};
-        // Aggregate by sport — only Bike, Run, Swim
+        // Aggregate by sport — only Bike, Run, Swim. The Big Bet je 2026 — filter na rok.
         const BIKE = ["Ride","GravelRide","MountainBikeRide","VirtualRide"];
         const RUN  = ["Run","VirtualRun","TrailRun"];
         const SWIM = ["Swim"];
         const normalize = s => BIKE.includes(s) ? "Ride" : RUN.includes(s) ? "Run" : SWIM.includes(s) ? "Swim" : null;
         const byS = {};
+        const BET_YEAR = "2026";
         for (const a of acts) {
+          if (!a.start_date_local || !a.start_date_local.startsWith(BET_YEAR)) continue;
           const raw = a.sport_type || a.type || "Other";
           const s = normalize(raw);
           if (!s) continue;

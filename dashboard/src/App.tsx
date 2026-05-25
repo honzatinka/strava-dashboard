@@ -15,12 +15,35 @@ import "./App.css";
 type ViewAs = "honza" | "martin";
 const VIEW_AS_KEY = "strava-dashboard:view-as";
 
+/**
+ * Load initial view from URL (?view=martin) first, then localStorage, then default.
+ * URL takes priority — useful for sharing links like /?view=martin
+ */
 function loadViewAs(): ViewAs {
+  try {
+    const params = new URLSearchParams(window.location.search);
+    const urlView = params.get("view");
+    if (urlView === "martin" || urlView === "honza") return urlView;
+  } catch {}
   try {
     const v = localStorage.getItem(VIEW_AS_KEY);
     if (v === "martin" || v === "honza") return v;
   } catch {}
   return "honza";
+}
+
+/** Sync viewAs into URL (without reload) and localStorage. */
+function persistViewAs(view: ViewAs) {
+  try { localStorage.setItem(VIEW_AS_KEY, view); } catch {}
+  try {
+    const url = new URL(window.location.href);
+    if (view === "honza") {
+      url.searchParams.delete("view");
+    } else {
+      url.searchParams.set("view", view);
+    }
+    window.history.replaceState({}, "", url.toString());
+  } catch {}
 }
 
 function Dashboard() {
@@ -76,9 +99,9 @@ function Dashboard() {
       .catch(() => {});
   }, []);
 
-  // Persist viewAs choice
+  // Persist viewAs to URL (?view=martin) + localStorage
   useEffect(() => {
-    try { localStorage.setItem(VIEW_AS_KEY, viewAs); } catch {}
+    persistViewAs(viewAs);
   }, [viewAs]);
 
   const openActivity = useCallback((a: Activity) => setSelectedActivity(a), []);
