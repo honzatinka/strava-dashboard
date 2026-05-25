@@ -51,7 +51,10 @@ export function TheBigBetCompact({ activities }: { activities: Activity[] }) {
   return (
     <div className="cp-bigbet">
       <div className="cp-bigbet-year">2026</div>
-      <div className="cp-bigbet-title">The Big Bet</div>
+      <a className="cp-bigbet-title cp-bigbet-title--link" href="/bet" title="Otevřít detail Big Bet">
+        The Big Bet
+        <span className="cp-bigbet-title-arrow material-symbols-outlined">arrow_outward</span>
+      </a>
 
       {/* Bike */}
       <div className="cp-bigbet-sport">

@@ -174,14 +174,14 @@
 }
 
 .sidebar-viewas-btn--active {
-  background: var(--color-accent);
+  background: transparent;
   border-color: var(--color-accent);
-  color: #FFFFFF;
+  color: var(--color-accent);
 }
 
 .sidebar-viewas-btn--active:hover {
-  background: var(--color-accent);
-  color: #FFFFFF;
+  background: rgba(255, 68, 0, 0.05);
+  color: var(--color-accent);
 }
 
 .sidebar-viewas-btn span {
@@ -201,7 +201,6 @@
 
 .sidebar-viewas-btn--active .sidebar-viewas-avatar {
   filter: none;
-  border: 1px solid #FFFFFF;
 }
 
 .sidebar-viewas-avatar--fb {

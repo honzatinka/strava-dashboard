@@ -287,6 +287,31 @@
   letter-spacing: -0.2px;
 }
 
+/* When title is a link (in compact widget — leads to /bet) */
+.cp-bigbet-title--link {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: color 0.15s ease;
+}
+
+.cp-bigbet-title--link:hover {
+  color: var(--color-accent);
+}
+
+.cp-bigbet-title-arrow {
+  font-size: 14px !important;
+  opacity: 0.4;
+  transition: all 0.15s ease;
+}
+
+.cp-bigbet-title--link:hover .cp-bigbet-title-arrow {
+  opacity: 1;
+  transform: translate(2px, -2px);
+}
+
 .cp-bigbet-divider {
   height: 1px;
   background: var(--color-border);

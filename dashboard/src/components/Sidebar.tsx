@@ -47,7 +47,7 @@ export function Sidebar({
         )}
         <div>
           <div className="sidebar-title">Dashboard</div>
-          <div className="sidebar-sub">{activeName}{isFriend && <span className="sidebar-view-badge">view</span>}</div>
+          <div className="sidebar-sub">{activeName}</div>
         </div>
       </div>
 

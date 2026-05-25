@@ -73,12 +73,11 @@
     color: var(--color-text-secondary);
   }
   .mobile-viewas-btn--active {
-    background: var(--color-accent);
+    background: transparent;
     border-color: var(--color-accent);
-    color: #FFFFFF;
+    color: var(--color-accent);
   }
   .mobile-viewas-btn--active img {
     filter: none;
-    border: 1.5px solid #FFFFFF;
   }
 }
