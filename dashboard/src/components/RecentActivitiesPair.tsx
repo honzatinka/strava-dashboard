@@ -25,7 +25,11 @@ interface Props {
 function formatShortDate(iso: string): string {
   const d = new Date(iso);
   const today = new Date();
-  const diffDays = Math.floor((today.getTime() - d.getTime()) / 86_400_000);
+  // Compare CALENDAR DAYS (not raw ms) — aktivita ve 20:00 včera a teď v 8:00 ráno
+  // by jinak vyšla jako "Dnes" (rozdíl < 24h ⇒ Math.floor → 0).
+  const dStart = new Date(d.getFullYear(), d.getMonth(), d.getDate()).getTime();
+  const todayStart = new Date(today.getFullYear(), today.getMonth(), today.getDate()).getTime();
+  const diffDays = Math.round((todayStart - dStart) / 86_400_000);
   if (diffDays === 0) return "Dnes";
   if (diffDays === 1) return "Včera";
   if (diffDays < 7) return `Před ${diffDays} dny`;
