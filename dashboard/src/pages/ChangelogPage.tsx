@@ -9,6 +9,20 @@ interface ChangeEntry {
 
 const ENTRIES: ChangeEntry[] = [
   {
+    date: "2026-05-25",
+    title: "Honza/Martin view selector + Martin's ActivityModal",
+    tag: "feature",
+    items: [
+      "Sidebar: nový view-as switcher (Honza / Martin) s avatary",
+      "Volba se pamatuje v localStorage — po refreshi zůstává poslední výběr",
+      "Po přepnutí na Martina se data ve všech stránkách (Dash, Activities, Stats, Heatmapa) přepnou",
+      "Mobile: view-as bar v top části hlavního obsahu (sidebar je skrytý)",
+      "Backend: friend cache rozšířena na celou historii (ne jen 2026) a všechny Strava activity fields",
+      "Nové endpointy /api/fetch-friend-activity-photos a /api/friend-activity-detail — modal funguje pro Martina stejně jako pro Honzu (mapa, fotky, kalorie)",
+      "/bet: klik na Martinovu aktivitu v 'Poslední aktivity' otevře plnohodnotný modal",
+    ],
+  },
+  {
     date: "2026-05-14",
     title: "/bet: leader highlight, gap (+X km), sport taby v chartu",
     tag: "feature",
