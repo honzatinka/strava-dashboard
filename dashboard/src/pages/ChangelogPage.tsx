@@ -9,6 +9,27 @@ interface ChangeEntry {
 
 const ENTRIES: ChangeEntry[] = [
   {
+    date: "2026-06-16",
+    title: "Big Bet homepage box: oprava delty v Martin view",
+    tag: "fix",
+    items: [
+      "Bug: ve view=martin ukazoval box delty 0 — porovnával Martinova data s Martinovými",
+      "TheBigBetCompact je nyní view-aware: tahá oba sportovce nezávisle (Honza z /api/my-stats, Martin z /api/friend-stats)",
+      "Delta je vždy primary − soupeř (podle aktivního view), takže v Martin view vidíš jeho km s rozdílem proti Honzovi",
+      "viewAs prop protažen App → CombinedActivityCalendarPage → box",
+    ],
+  },
+  {
+    date: "2026-06-16",
+    title: "/bet: zpětný odkaz na Dashboard",
+    tag: "design",
+    items: [
+      "Nahoře na /bet stránce nový odkaz „← Dashboard“",
+      "Stejný duch jako homepage odkaz opačným směrem (title → /bet): ikona + hover animace",
+      "arrow_back se na hover posune doleva a zezelená do accent barvy",
+    ],
+  },
+  {
     date: "2026-05-25",
     title: "Honza/Martin view selector + Martin's ActivityModal",
     tag: "feature",
