@@ -1,0 +1,177 @@
+.routes-page {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* ─── Header (big total km + sublabel, Runna-style but light) ─── */
+.routes-header {
+  display: flex;
+  flex-direction: column;
+}
+
+.routes-total {
+  font-family: var(--font-display);
+  font-size: 40px;
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-primary);
+  letter-spacing: -1px;
+  line-height: 1;
+}
+
+.routes-sub {
+  margin-top: 6px;
+  font-size: var(--font-size-md);
+  color: var(--color-text-muted);
+}
+
+/* ─── Sport filter pills ─── */
+.routes-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.rp-pill {
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+  color: var(--color-text-secondary);
+  border-radius: var(--radius-pill);
+  padding: 6px 12px;
+  font-family: var(--font-body);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  cursor: pointer;
+  transition: all 0.15s ease;
+  white-space: nowrap;
+}
+
+.rp-pill:hover {
+  color: var(--color-text-primary);
+  border-color: rgba(33, 33, 31, 0.16);
+}
+
+.rp-pill.active {
+  background: var(--color-accent);
+  border-color: var(--color-accent);
+  color: #fff;
+}
+
+/* ─── Grid of route tiles ─── */
+.routes-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 12px;
+}
+
+.routes-tile {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+  border-radius: var(--radius-lg);
+  padding: 0;
+  cursor: pointer;
+  overflow: hidden;
+  text-align: left;
+  transition: box-shadow 0.15s ease, transform 0.15s ease, border-color 0.15s ease;
+}
+
+.routes-tile:hover {
+  box-shadow: var(--shadow-card);
+  transform: translateY(-2px);
+  border-color: rgba(33, 33, 31, 0.14);
+}
+
+.routes-tile-thumb {
+  aspect-ratio: 1 / 1;
+  background: var(--color-surface-alt);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.route-thumb {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.route-thumb--empty {
+  width: 100%;
+  height: 100%;
+}
+
+.routes-tile-meta {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 10px;
+}
+
+.routes-tile-icon {
+  color: var(--color-text-secondary);
+  display: inline-flex;
+}
+
+.routes-tile-dist {
+  font-family: var(--font-display);
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+}
+
+.routes-tile-date {
+  margin-left: auto;
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+}
+
+/* ─── Empty + load-more ─── */
+.routes-empty {
+  padding: 40px 0;
+  text-align: center;
+  color: var(--color-text-muted);
+  font-size: var(--font-size-md);
+}
+
+.routes-more {
+  align-self: center;
+  margin-top: 4px;
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+  color: var(--color-text-secondary);
+  border-radius: var(--radius-md);
+  padding: 8px 16px;
+  font-family: var(--font-body);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.routes-more:hover {
+  color: var(--color-text-primary);
+  border-color: rgba(33, 33, 31, 0.16);
+}
+
+/* ─── Mobile ─── */
+@media (max-width: 768px) {
+  .routes-total {
+    font-size: 32px;
+  }
+  .routes-grid {
+    grid-template-columns: repeat(auto-fill, minmax(104px, 1fr));
+    gap: 8px;
+  }
+  .routes-tile-meta {
+    padding: 6px 8px;
+    gap: 4px;
+  }
+  .routes-tile-dist {
+    font-size: var(--font-size-sm);
+  }
+  .routes-tile-date {
+    font-size: var(--font-size-xs);
+  }
+}

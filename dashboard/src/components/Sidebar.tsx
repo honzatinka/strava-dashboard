@@ -22,6 +22,7 @@ const NAV_ITEMS: { id: Page; label: string }[] = [
   { id: "activities", label: "Activities" },
   { id: "statistiky", label: "Statistics" },
   { id: "heatmapa",   label: "Map"        },
+  { id: "trasy",      label: "Routes"     },
   { id: "changelog",  label: "Changelog"  },
 ];
 

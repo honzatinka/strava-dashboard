@@ -10,6 +10,18 @@ interface ChangeEntry {
 const ENTRIES: ChangeEntry[] = [
   {
     date: "2026-06-16",
+    title: "Routes: Runna-style přehled tras",
+    tag: "feature",
+    items: [
+      "Nová stránka „Routes“ v menu — grid tvarů tras (SVG outline GPS stopy, bez mapového podkladu, jako Runna)",
+      "Každá dlaždice obarvená podle sportu (resolveSportColor), projekce aspect-correct (cos(lat)) — tvary se nedeformují",
+      "Header s celkovou vzdáleností + filtr podle sportu (Vše / Run / Ride …) jako na Heatmapě",
+      "Klik na dlaždici otevře detail aktivity (stejný modal), funguje i ve view=Martin",
+      "Nový reusable komponent RouteThumbnail; bez zásahu do backendu (summary_polyline už chodí s aktivitami)",
+    ],
+  },
+  {
+    date: "2026-06-16",
     title: "Big Bet homepage box: oprava delty v Martin view",
     tag: "fix",
     items: [

@@ -32,7 +32,7 @@ export interface Activity {
 
 import React from "react";
 
-export type Page = "dash" | "activities" | "statistiky" | "heatmapa" | "sporty-mesice" | "changelog";
+export type Page = "dash" | "activities" | "statistiky" | "heatmapa" | "trasy" | "sporty-mesice" | "changelog";
 
 // Material Symbols icon component — drop-in replacement for LucideIcon
 function makeMIcon(name: string) {
@@ -96,6 +96,7 @@ export const NAV_ICONS = {
   activities: makeMIcon("checklist"),
   statistiky: makeMIcon("bar_chart"),
   heatmapa:   makeMIcon("map"),
+  trasy:      makeMIcon("route"),
   changelog:  makeMIcon("history"),
 };
 

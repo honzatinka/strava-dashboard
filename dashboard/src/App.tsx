@@ -6,6 +6,7 @@ import { ActivityModal } from "./components/ActivityModal";
 import { CombinedActivityCalendarPage } from "./pages/CombinedActivityCalendarPage";
 import { StatsRecordsPage } from "./pages/StatsRecordsPage";
 import { HeatmapaPage } from "./pages/HeatmapaPage";
+import { RoutesPage } from "./pages/RoutesPage";
 import { SportyMesicePage } from "./pages/SportyMesicePage";
 import { BigBetPage } from "./pages/BigBetPage";
 import { AktivityPage } from "./pages/AktivityPage";
@@ -153,6 +154,7 @@ function Dashboard() {
           {activePage === "activities" && <AktivityPage activities={activeActivities} onSelect={openActivity} />}
           {activePage === "statistiky" && <StatsRecordsPage activities={activeActivities} onSelect={openActivity} />}
           {activePage === "heatmapa" && <HeatmapaPage activities={activeActivities} />}
+          {activePage === "trasy" && <RoutesPage activities={activeActivities} onSelect={openActivity} />}
           {activePage === "changelog" && <ChangelogPage />}
           {activePage === "sporty-mesice" && <SportyMesicePage activities={activeActivities} />}
         </div>
