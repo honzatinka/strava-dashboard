@@ -12,6 +12,33 @@
   box-sizing: border-box;
 }
 
+/* Back link → dashboard (mirror of homepage's title→/bet link) */
+.bb-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  align-self: flex-start;
+  text-decoration: none;
+  color: var(--color-text-secondary);
+  font-family: var(--font-display);
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-medium);
+  cursor: pointer;
+  transition: color 0.15s ease;
+}
+.bb-back:hover {
+  color: var(--color-accent);
+}
+.bb-back-arrow {
+  font-size: 16px !important;
+  opacity: 0.5;
+  transition: all 0.15s ease;
+}
+.bb-back:hover .bb-back-arrow {
+  opacity: 1;
+  transform: translateX(-3px);
+}
+
 /* The Big Bet card — full width on standalone page (overrides sidebar 200px) */
 .bb-standalone .cp-bigbet {
   width: 100%;

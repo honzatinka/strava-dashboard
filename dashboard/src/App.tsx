@@ -148,7 +148,7 @@ function Dashboard() {
             </button>
           </div>
           {activePage === "dash" && (
-            <CombinedActivityCalendarPage activities={activeActivities} onSelect={openActivity} />
+            <CombinedActivityCalendarPage activities={activeActivities} onSelect={openActivity} viewAs={viewAs} />
           )}
           {activePage === "activities" && <AktivityPage activities={activeActivities} onSelect={openActivity} />}
           {activePage === "statistiky" && <StatsRecordsPage activities={activeActivities} onSelect={openActivity} />}

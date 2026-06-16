@@ -106,8 +106,8 @@ function ActivityRow({
 }
 
 export function CombinedActivityCalendarPage({
-  activities, onSelect,
-}: { activities: Activity[]; onSelect: (a: Activity) => void }) {
+  activities, onSelect, viewAs,
+}: { activities: Activity[]; onSelect: (a: Activity) => void; viewAs: "honza" | "martin" }) {
   const now = new Date();
   const [year, setYear] = useState(now.getFullYear());
   const [month, setMonth] = useState(now.getMonth());
@@ -268,7 +268,7 @@ export function CombinedActivityCalendarPage({
 
         {/* The Big Bet — separate card */}
         <div className="cp-bigbet-card">
-          <TheBigBetCompact activities={activities} />
+          <TheBigBetCompact viewAs={viewAs} />
         </div>
       </div>
 

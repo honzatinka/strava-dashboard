@@ -63,6 +63,10 @@ export function BigBetPage() {
 
   return (
     <div className="bb-standalone">
+      <a className="bb-back" href="/" title="Zpět na dashboard">
+        <span className="bb-back-arrow material-symbols-outlined">arrow_back</span>
+        Dashboard
+      </a>
       <TheBigBet activities={activities} />
       {activities.length > 0 && friendActivities.length > 0 && (
         <>
