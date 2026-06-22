@@ -143,25 +143,26 @@ export function BigBetScoreChart({ myActivities, friendActivities, friendName }:
               <span className="bbsc-dot bbsc-dot--me" />
               <span>Honza</span>
             </div>
-            {meDeficit > 0 && (
-              <div className="bbsc-current-deficit" title="Chybí do více než poloviny vedoucího — jinak vede 2:0">
-                chybí {meDeficit} km na 50 %
-              </div>
-            )}
             <div className="bbsc-current-value">{meCurrent}{unitSuffix}</div>
             <div className="bbsc-current-sub">{isKmMode ? "Total distance" : "Current Score"}</div>
+            {meDeficit > 0 && (
+              <div className="bbsc-current-deficit" title="Missing to cross half the leader's distance — otherwise they lead 2:0">
+                Missing {meDeficit} km to 50%
+              </div>
+            )}
           </div>
           <div className="bbsc-current bbsc-current--friend">
             <div className="bbsc-current-label">
               <span className="bbsc-dot bbsc-dot--friend" />
               <span>{friendName.split(" ")[0] || "Soupeř"}</span>
             </div>
+            <div className="bbsc-current-value">{friendCurrent}{unitSuffix}</div>
+            <div className="bbsc-current-sub">{isKmMode ? "Total distance" : "Current Score"}</div>
             {friendDeficit > 0 && (
-              <div className="bbsc-current-deficit" title="Chybí do více než poloviny vedoucího — jinak vede 2:0">
-                chybí {friendDeficit} km na 50 %
+              <div className="bbsc-current-deficit" title="Missing to cross half the leader's distance — otherwise they lead 2:0">
+                Missing {friendDeficit} km to 50%
               </div>
             )}
-            <div className="bbsc-current-value">{friendCurrent}{unitSuffix}</div>
             <div className="bbsc-current-sub">{isKmMode ? "Total distance" : "Current Score"}</div>
           </div>
         </div>
