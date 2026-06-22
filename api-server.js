@@ -122,6 +122,44 @@ function preloadActivities() {
 }
 
 // ─── Preload friend stats on startup (same pattern as preloadActivities)
+// Bike variants that count as plain cycling for Big Bet totals (EBikeRide stays separate — motor-assisted).
+const BET_BIKE_TYPES = ["Ride", "GravelRide", "MountainBikeRide", "VirtualRide"];
+const BET_RUN_TYPES  = ["Run", "VirtualRun", "TrailRun"];
+const BET_SWIM_TYPES = ["Swim"];
+function normalizeBetSport(s) {
+  return BET_BIKE_TYPES.includes(s) ? "Ride" : BET_RUN_TYPES.includes(s) ? "Run" : BET_SWIM_TYPES.includes(s) ? "Swim" : null;
+}
+
+/**
+ * Aggregate this-year Big Bet sport totals from a raw activities array.
+ * Single source of truth for the {name, photo, sports} shape served by /api/friend-stats
+ * and /api/my-stats — both the startup preload AND any on-demand cache-miss path must call
+ * this with the SAME activities array used elsewhere, so the two never drift apart.
+ */
+function aggregateBetStats(acts, name, photo) {
+  const BET_YEAR = "2026";
+  const byS = {};
+  for (const a of acts) {
+    if (!a.start_date_local || !a.start_date_local.startsWith(BET_YEAR)) continue;
+    const raw = a.sport_type || a.type || "Other";
+    const s = normalizeBetSport(raw);
+    if (!s) continue;
+    // Exclude trainer (Technogym/Zwift) ONLY for bike — pool swims/treadmill runs count.
+    if (s === "Ride" && a.trainer === true) continue;
+    if (!byS[s]) byS[s] = { count: 0, dist: 0, time: 0, elev: 0 };
+    byS[s].count++;
+    byS[s].dist += a.distance || 0;
+    byS[s].time += a.moving_time || 0;
+    byS[s].elev += a.total_elevation_gain || 0;
+  }
+  return {
+    name: name || "",
+    photo: photo || null,
+    totalActivities: acts.length,
+    sports: Object.entries(byS).map(([sport, v]) => ({ sport, ...v })).sort((a, b) => b.time - a.time),
+  };
+}
+
 function preloadFriendStats() {
   console.log("📥 Načítám friend stats ze Stravy při startu...");
   refreshFriendToken((err, token) => {
@@ -161,34 +199,11 @@ function preloadFriendStats() {
       const aggregate = (acts) => {
         const tokens = loadFriendTokens();
         const athlete = friendAthlete || tokens?.athlete || {};
-        const BIKE = ["Ride","GravelRide","MountainBikeRide","VirtualRide"];
-        const RUN  = ["Run","VirtualRun","TrailRun"];
-        const SWIM = ["Swim"];
-        const normalize = s => BIKE.includes(s) ? "Ride" : RUN.includes(s) ? "Run" : SWIM.includes(s) ? "Swim" : null;
-        const byS = {};
-        // The Big Bet je 2026 soutěž — agreguj jen letošní rok (full history ukládáme zvlášť)
-        const BET_YEAR = "2026";
-        for (const a of acts) {
-          if (!a.start_date_local || !a.start_date_local.startsWith(BET_YEAR)) continue;
-          const raw = a.sport_type || a.type || "Other";
-          const s = normalize(raw);
-          if (!s) continue;
-          // Exclude trainer (Technogym/Zwift) ONLY for bike — pool swims/treadmill runs count
-          if (s === "Ride" && a.trainer === true) continue;
-          if (!byS[s]) byS[s] = { count: 0, dist: 0, time: 0, elev: 0 };
-          byS[s].count++;
-          byS[s].dist += a.distance || 0;
-          byS[s].time += a.moving_time || 0;
-          byS[s].elev += a.total_elevation_gain || 0;
-        }
-        cachedFriendStats = {
-          name: `${athlete.firstname || ""} ${athlete.lastname || ""}`.trim(),
-          photo: athlete.profile_medium || athlete.profile || null,
-          totalActivities: acts.length,
-          sports: Object.entries(byS)
-            .map(([sport, v]) => ({ sport, ...v }))
-            .sort((a, b) => b.time - a.time),
-        };
+        cachedFriendStats = aggregateBetStats(
+          acts,
+          `${athlete.firstname || ""} ${athlete.lastname || ""}`.trim(),
+          athlete.profile_medium || athlete.profile || null,
+        );
         // Full activity summary fields for ActivityModal — Martin can be browsed same as Honza
         cachedFriendActivities = acts.map(a => ({
           id: a.id,
@@ -727,86 +742,34 @@ const server = http.createServer((req, res) => {
   }
 
   // ─── Friend stats: GET /api/friend-stats → { name, photo, sports: [{sport, count, dist, time}] }
+  // Derives ONLY from cachedFriendActivities (the single source of truth, populated by
+  // preloadFriendStats) — never its own independent Strava fetch. Two separate fetches used to
+  // exist here, hitting Strava at different moments; if a new activity landed in between, this
+  // endpoint and /api/friend-activities (and the Score Progress chart built from it) would
+  // silently disagree on the current totals. Deriving from the same cache guarantees they match.
   if (req.method === "GET" && parsedUrl.pathname === "/api/friend-stats") {
     if (cachedFriendStats) {
       res.writeHead(200, { "Content-Type": "application/json" });
       res.end(JSON.stringify(cachedFriendStats));
       return;
     }
-    refreshFriendToken((err, token) => {
-      if (err) {
-        res.writeHead(200, { "Content-Type": "application/json" });
-        res.end(JSON.stringify({ error: "not_authorized", authUrl: "/api/friend-authorize" }));
-        return;
-      }
-      // Fetch 2026 activities (after 2026-01-01 = 1735689600)
-      const fetchPage = (page, accumulated, done) => {
-        const opts = {
-          hostname: "www.strava.com",
-          path: `/api/v3/athlete/activities?after=1767222000&per_page=200&page=${page}`,
-          method: "GET",
-          headers: { Authorization: `Bearer ${token}` },
-        };
-        https.request(opts, (sr) => {
-          let data = "";
-          sr.on("data", c => data += c);
-          sr.on("end", () => {
-            try {
-              const acts = JSON.parse(data);
-              if (!Array.isArray(acts) || acts.length === 0) { done(null, accumulated); return; }
-              accumulated.push(...acts);
-              if (acts.length < 200) { done(null, accumulated); return; }
-              fetchPage(page + 1, accumulated, done);
-            } catch (e) { done(e, accumulated); }
-          });
-        }).on("error", e => done(e, accumulated)).end();
-      };
-
-      // Fetch friend athlete profile (live photo URL) in parallel with activities
-      let friendAthlete = null;
-      const fetchAthlete = (cb) => {
-        https.request({ hostname: "www.strava.com", path: "/api/v3/athlete", method: "GET",
-          headers: { Authorization: `Bearer ${token}` } }, (sr) => {
-          let d = ""; sr.on("data", c => d += c);
-          sr.on("end", () => { try { friendAthlete = JSON.parse(d); } catch(e) {} cb(); });
-        }).on("error", () => cb()).end();
-      };
-
-      fetchAthlete(() => fetchPage(1, [], (err, acts) => {
-        const tokens = loadFriendTokens();
-        const athlete = friendAthlete || tokens?.athlete || {};
-        // Aggregate by sport — only Bike, Run, Swim. The Big Bet je 2026 — filter na rok.
-        const BIKE = ["Ride","GravelRide","MountainBikeRide","VirtualRide"];
-        const RUN  = ["Run","VirtualRun","TrailRun"];
-        const SWIM = ["Swim"];
-        const normalize = s => BIKE.includes(s) ? "Ride" : RUN.includes(s) ? "Run" : SWIM.includes(s) ? "Swim" : null;
-        const byS = {};
-        const BET_YEAR = "2026";
-        for (const a of acts) {
-          if (!a.start_date_local || !a.start_date_local.startsWith(BET_YEAR)) continue;
-          const raw = a.sport_type || a.type || "Other";
-          const s = normalize(raw);
-          if (!s) continue;
-          // Exclude trainer ONLY for bike (Technogym/Zwift). Pool swims/treadmill runs count.
-          if (s === "Ride" && a.trainer === true) continue;
-          if (!byS[s]) byS[s] = { count: 0, dist: 0, time: 0, elev: 0 };
-          byS[s].count++;
-          byS[s].dist += a.distance || 0;
-          byS[s].time += a.moving_time || 0;
-          byS[s].elev += a.total_elevation_gain || 0;
-        }
-        cachedFriendStats = {
-          name: `${athlete.firstname || ""} ${athlete.lastname || ""}`.trim(),
-          photo: athlete.profile_medium || athlete.profile || null,
-          totalActivities: acts.length,
-          sports: Object.entries(byS)
-            .map(([sport, v]) => ({ sport, ...v }))
-            .sort((a, b) => b.time - a.time),
-        };
-        res.writeHead(200, { "Content-Type": "application/json" });
-        res.end(JSON.stringify(cachedFriendStats));
-      }));
-    });
+    if (cachedFriendActivities) {
+      const tokens = loadFriendTokens();
+      const athlete = tokens?.athlete || {};
+      cachedFriendStats = aggregateBetStats(
+        cachedFriendActivities,
+        `${athlete.firstname || ""} ${athlete.lastname || ""}`.trim(),
+        athlete.profile_medium || athlete.profile || null,
+      );
+      res.writeHead(200, { "Content-Type": "application/json" });
+      res.end(JSON.stringify(cachedFriendStats));
+      return;
+    }
+    // True cold start — neither cache populated yet. Trigger the one shared preload and let the
+    // frontend retry shortly (same pattern as /api/friend-activities below).
+    preloadFriendStats();
+    res.writeHead(200, { "Content-Type": "application/json" });
+    res.end(JSON.stringify({ error: "not_ready" }));
     return;
   }
 
@@ -847,70 +810,27 @@ const server = http.createServer((req, res) => {
   }
 
   // ─── My stats: GET /api/my-stats → 2026 aggregated Ride/Run/Swim + athlete info
+  // Same single-source-of-truth fix as /api/friend-stats above: derive from cachedActivities
+  // (populated by preloadActivities, the same cache /api/activities serves) instead of an
+  // independent Strava fetch that could land at a different moment and drift out of sync.
   if (req.method === "GET" && parsedUrl.pathname === "/api/my-stats") {
     if (cachedMyStats) {
       res.writeHead(200, { "Content-Type": "application/json" });
       res.end(JSON.stringify(cachedMyStats));
       return;
     }
-    refreshStravaToken((err, token) => {
-      if (err) { res.writeHead(500); res.end(JSON.stringify({ error: err.message })); return; }
-
-      // Fetch athlete info + activities in parallel
-      let athleteData = null;
-      let activities = [];
-      let done = 0;
-      const maybeFinish = () => {
-        if (++done < 2) return;
-        const BIKE = ["Ride","GravelRide","MountainBikeRide","VirtualRide"];
-        const RUN  = ["Run","VirtualRun","TrailRun"];
-        const SWIM = ["Swim"];
-        const normalize = s => BIKE.includes(s) ? "Ride" : RUN.includes(s) ? "Run" : SWIM.includes(s) ? "Swim" : null;
-        const byS = {};
-        for (const a of activities) {
-          const s = normalize(a.sport_type || a.type || "");
-          if (!s) continue;
-          // Exclude trainer ONLY for bike (Technogym/Zwift). Pool swims/treadmill runs count.
-          if (s === "Ride" && a.trainer === true) continue;
-          if (!byS[s]) byS[s] = { sport: s, count: 0, dist: 0, time: 0 };
-          byS[s].count++; byS[s].dist += a.distance || 0; byS[s].time += a.moving_time || 0;
-        }
-        cachedMyStats = {
-          name: athleteData ? `${athleteData.firstname || ""} ${athleteData.lastname || ""}`.trim() : "Honza",
-          photo: athleteData?.profile_medium || athleteData?.profile || null,
-          sports: Object.values(byS).sort((a,b) => b.time - a.time),
-          updatedAt: new Date().toISOString(),
-        };
-        res.writeHead(200, { "Content-Type": "application/json" });
-        res.end(JSON.stringify(cachedMyStats));
-      };
-
-      // Fetch athlete
-      https.request({ hostname: "www.strava.com", path: "/api/v3/athlete", method: "GET",
-        headers: { Authorization: `Bearer ${token}` } }, (sr) => {
-        let d = ""; sr.on("data", c => d += c);
-        sr.on("end", () => { try { athleteData = JSON.parse(d); } catch(e) {} maybeFinish(); });
-      }).on("error", () => maybeFinish()).end();
-
-      // Fetch 2026 activities (paginated)
-      const fetchPage = (page) => {
-        https.request({ hostname: "www.strava.com",
-          path: `/api/v3/athlete/activities?after=1767222000&per_page=200&page=${page}`,
-          method: "GET", headers: { Authorization: `Bearer ${token}` } }, (sr) => {
-          let d = ""; sr.on("data", c => d += c);
-          sr.on("end", () => {
-            try {
-              const acts = JSON.parse(d);
-              if (!Array.isArray(acts) || acts.length === 0) { maybeFinish(); return; }
-              activities.push(...acts);
-              if (acts.length < 200) { maybeFinish(); return; }
-              fetchPage(page + 1);
-            } catch(e) { maybeFinish(); }
-          });
-        }).on("error", () => maybeFinish()).end();
-      };
-      fetchPage(1);
-    });
+    if (cachedActivities) {
+      const stats = aggregateBetStats(cachedActivities, "Honza", null);
+      cachedMyStats = { ...stats, updatedAt: new Date().toISOString() };
+      res.writeHead(200, { "Content-Type": "application/json" });
+      res.end(JSON.stringify(cachedMyStats));
+      return;
+    }
+    // True cold start — neither cache populated yet. Trigger the shared preload and let the
+    // frontend retry shortly.
+    preloadActivities();
+    res.writeHead(200, { "Content-Type": "application/json" });
+    res.end(JSON.stringify({ error: "not_ready" }));
     return;
   }
 
