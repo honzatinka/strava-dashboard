@@ -163,7 +163,6 @@ export function BigBetScoreChart({ myActivities, friendActivities, friendName }:
                 Missing {friendDeficit} km to 50%
               </div>
             )}
-            <div className="bbsc-current-sub">{isKmMode ? "Total distance" : "Current Score"}</div>
           </div>
         </div>
       </div>
