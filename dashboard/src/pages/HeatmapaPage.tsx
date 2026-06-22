@@ -2,6 +2,7 @@ import { useEffect, useRef, useMemo, useState } from "react";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 import type { Activity } from "../types";
+import { normalizeDisplaySport } from "../types";
 import { groupBySport, sportLabel, decodePolyline } from "../utils";
 import "./HeatmapaPage.css";
 
@@ -26,7 +27,7 @@ export function HeatmapaPage({ activities }: { activities: Activity[] }) {
   }, [withPolyline]);
 
   const filtered = filter
-    ? withPolyline.filter((a) => (a.sport_type || a.type) === filter)
+    ? withPolyline.filter((a) => normalizeDisplaySport(a.sport_type || a.type) === filter)
     : withPolyline;
 
   // Init map

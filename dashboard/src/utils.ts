@@ -1,4 +1,5 @@
 import type { Activity } from "./types";
+import { normalizeDisplaySport } from "./types";
 
 export function formatDistance(meters: number): string {
   if (meters < 1000) return `${Math.round(meters)} m`;
@@ -85,7 +86,7 @@ export function groupByDate(activities: Activity[]): Map<string, Activity[]> {
 export function groupBySport(activities: Activity[]): Map<string, Activity[]> {
   const map = new Map<string, Activity[]>();
   for (const a of activities) {
-    const key = a.sport_type || a.type;
+    const key = normalizeDisplaySport(a.sport_type || a.type);
     const arr = map.get(key) || [];
     arr.push(a);
     map.set(key, arr);

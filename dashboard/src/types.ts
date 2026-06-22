@@ -91,6 +91,17 @@ export function resolveSportIcon(sportType: string, activityName?: string) {
 
 export const FALLBACK_SPORT_ICON = makeMIcon("sports");
 
+/**
+ * Bike variants that are all plain human-powered cycling and should be grouped
+ * under a single "Ride" bucket everywhere (filters, counts, stats, map). EBikeRide
+ * stays separate since it's motor-assisted — a different category, not just a label.
+ */
+const RIDE_ALIASES = new Set(["GravelRide", "MountainBikeRide", "VirtualRide"]);
+
+export function normalizeDisplaySport(sportType: string): string {
+  return RIDE_ALIASES.has(sportType) ? "Ride" : sportType;
+}
+
 export const NAV_ICONS = {
   dash:       makeMIcon("space_dashboard"),
   activities: makeMIcon("checklist"),

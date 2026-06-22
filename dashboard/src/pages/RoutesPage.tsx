@@ -1,6 +1,6 @@
 import { useMemo, useState } from "react";
 import type { Activity } from "../types";
-import { resolveSportIcon } from "../types";
+import { resolveSportIcon, normalizeDisplaySport } from "../types";
 import { groupBySport, sportLabel, formatDistanceKm, formatDate } from "../utils";
 import { RouteThumbnail } from "../components/RouteThumbnail";
 import "./RoutesPage.css";
@@ -39,7 +39,7 @@ export function RoutesPage({
   }, [withPolyline]);
 
   const filtered = filter
-    ? withPolyline.filter((a) => (a.sport_type || a.type) === filter)
+    ? withPolyline.filter((a) => normalizeDisplaySport(a.sport_type || a.type) === filter)
     : withPolyline;
 
   const totalDist = useMemo(

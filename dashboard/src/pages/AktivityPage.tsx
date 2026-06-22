@@ -2,7 +2,7 @@ import { useState, useMemo, useEffect } from "react";
 import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer } from "recharts";
 import { ChevronDown } from "lucide-react";
 import type { Activity } from "../types";
-import { SPORT_ICONS, FALLBACK_SPORT_ICON } from "../types";
+import { SPORT_ICONS, FALLBACK_SPORT_ICON, normalizeDisplaySport } from "../types";
 import { ActivityRow } from "../components/ActivityRow";
 import {
   formatDistance, formatDuration, groupBySport, groupByMonth, sportLabel,
@@ -27,7 +27,7 @@ export function AktivityPage({ activities, onSelect }: { activities: Activity[];
   }, [activities]);
 
   const filtered = filter
-    ? activities.filter((a) => (a.sport_type || a.type) === filter)
+    ? activities.filter((a) => normalizeDisplaySport(a.sport_type || a.type) === filter)
     : activities;
 
   const visible = filtered.slice(0, visibleCount);
