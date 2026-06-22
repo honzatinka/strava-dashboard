@@ -39,6 +39,17 @@ export function BigBetScoreChart({ myActivities, friendActivities, friendName }:
   const friendCurrent = (last?.[friendKey as keyof typeof last] as number) ?? 0;
   const unitSuffix = isKmMode ? " km" : "";
 
+  // Kolik chybí aktuálně poraženému (v km), aby měl VÍCE než polovinu vedoucího
+  // — skórovací pravidlo dává vedoucímu 2 body místo 1, dokud loser <= leader/2.
+  // Relevantní jen na km tabech (Bike/Swim/Run), ne na celkovém Score.
+  const leaderKm = Math.max(meCurrent, friendCurrent);
+  const loserKm  = Math.min(meCurrent, friendCurrent);
+  const deficitKm = isKmMode && loserKm > 0 && leaderKm >= 2 * loserKm
+    ? Math.round((leaderKm / 2 - loserKm) * 10) / 10
+    : 0;
+  const meDeficit     = deficitKm > 0 && meCurrent < friendCurrent ? deficitKm : 0;
+  const friendDeficit = deficitKm > 0 && friendCurrent < meCurrent ? deficitKm : 0;
+
   // Score tab: Y 0–6 (capped); km tabs: Y dynamic to max value + 10% headroom.
   const yMax = useMemo(() => {
     if (!isKmMode) {
@@ -132,6 +143,11 @@ export function BigBetScoreChart({ myActivities, friendActivities, friendName }:
               <span className="bbsc-dot bbsc-dot--me" />
               <span>Honza</span>
             </div>
+            {meDeficit > 0 && (
+              <div className="bbsc-current-deficit" title="Chybí do více než poloviny vedoucího — jinak vede 2:0">
+                chybí {meDeficit} km na 50 %
+              </div>
+            )}
             <div className="bbsc-current-value">{meCurrent}{unitSuffix}</div>
             <div className="bbsc-current-sub">{isKmMode ? "Total distance" : "Current Score"}</div>
           </div>
@@ -140,6 +156,11 @@ export function BigBetScoreChart({ myActivities, friendActivities, friendName }:
               <span className="bbsc-dot bbsc-dot--friend" />
               <span>{friendName.split(" ")[0] || "Soupeř"}</span>
             </div>
+            {friendDeficit > 0 && (
+              <div className="bbsc-current-deficit" title="Chybí do více než poloviny vedoucího — jinak vede 2:0">
+                chybí {friendDeficit} km na 50 %
+              </div>
+            )}
             <div className="bbsc-current-value">{friendCurrent}{unitSuffix}</div>
             <div className="bbsc-current-sub">{isKmMode ? "Total distance" : "Current Score"}</div>
           </div>
