@@ -11,9 +11,10 @@ interface SportCellProps {
   dist: number;
   isLeader: boolean;
   gap: number; // positive value: how much this participant leads by (only meaningful when isLeader)
+  deficit: number; // positive value: how much this loser is missing to exceed half the leader's distance (only meaningful when !isLeader)
 }
 
-function SportCell({ Icon, dist, isLeader, gap }: SportCellProps) {
+function SportCell({ Icon, dist, isLeader, gap, deficit }: SportCellProps) {
   return (
     <div className={`cp-bigbet-cell${isLeader ? " cp-bigbet-cell--leader" : ""}`}>
       <span className="cp-bigbet-cell-icon">
@@ -23,6 +24,11 @@ function SportCell({ Icon, dist, isLeader, gap }: SportCellProps) {
         <span className="cp-bigbet-cell-km">{formatDistanceKm(dist)}</span>
         {isLeader && gap > 0 && (
           <span className="cp-bigbet-cell-gap">+{formatDistanceKm(gap)}</span>
+        )}
+        {!isLeader && deficit > 0 && (
+          <span className="cp-bigbet-cell-deficit" title="Chybí do více než poloviny vedoucího — jinak vede 2:0">
+            chybí {formatDistanceKm(deficit)} na 50 %
+          </span>
         )}
       </div>
     </div>
@@ -35,6 +41,7 @@ interface RowProps {
   bike: number; swim: number; run: number;
   bikeLeader: boolean; swimLeader: boolean; runLeader: boolean;
   bikeGap: number; swimGap: number; runGap: number;
+  bikeDeficit: number; swimDeficit: number; runDeficit: number;
   BikeIcon: IconComp; SwimIcon: IconComp; RunIcon: IconComp;
 }
 
@@ -43,6 +50,7 @@ function ParticipantRow({
   bike, swim, run,
   bikeLeader, swimLeader, runLeader,
   bikeGap, swimGap, runGap,
+  bikeDeficit, swimDeficit, runDeficit,
   BikeIcon, SwimIcon, RunIcon,
 }: RowProps) {
   return (
@@ -53,9 +61,9 @@ function ParticipantRow({
         <div className="cp-bigbet-row-avatar cp-bigbet-row-avatar--fb">{name[0]}</div>
       )}
       <div className="cp-bigbet-row-sports">
-        <SportCell Icon={BikeIcon} dist={bike} isLeader={bikeLeader} gap={bikeGap} />
-        <SportCell Icon={SwimIcon} dist={swim} isLeader={swimLeader} gap={swimGap} />
-        <SportCell Icon={RunIcon}  dist={run}  isLeader={runLeader}  gap={runGap}  />
+        <SportCell Icon={BikeIcon} dist={bike} isLeader={bikeLeader} gap={bikeGap} deficit={bikeDeficit} />
+        <SportCell Icon={SwimIcon} dist={swim} isLeader={swimLeader} gap={swimGap} deficit={swimDeficit} />
+        <SportCell Icon={RunIcon}  dist={run}  isLeader={runLeader}  gap={runGap}  deficit={runDeficit}  />
       </div>
     </div>
   );
@@ -91,6 +99,20 @@ export function TheBigBet({ activities }: { activities: Activity[] }) {
   const swimGap = Math.abs(swimDist - friendSwim);
   const runGap  = Math.abs(runDist - friendRun);
 
+  // Kolik chybí loserovi, aby měl VÍCE než polovinu leaderovy vzdálenosti
+  // (skórovací pravidlo: leader >= 2× loser → 2 body; jinak 1 bod).
+  // Zobrazí se jen když aktuálně hrozí 2:0 (leader >= 2× loser, loser>0).
+  const deficitToHalf = (leader: number, loser: number) =>
+    loser > 0 && leader >= 2 * loser ? leader / 2 - loser : 0;
+
+  // "Já" jsem loser jen když přítel vede (a naopak) — deficit se počítá vůči AKTUÁLNÍMU leaderovi.
+  const bikeDeficitForMe     = friendBikeLeads ? deficitToHalf(friendBike, bikeDist) : 0;
+  const bikeDeficitForFriend = meBikeLeads     ? deficitToHalf(bikeDist, friendBike) : 0;
+  const swimDeficitForMe     = friendSwimLeads ? deficitToHalf(friendSwim, swimDist) : 0;
+  const swimDeficitForFriend = meSwimLeads     ? deficitToHalf(swimDist, friendSwim) : 0;
+  const runDeficitForMe      = friendRunLeads  ? deficitToHalf(friendRun, runDist)   : 0;
+  const runDeficitForFriend  = meRunLeads      ? deficitToHalf(runDist, friendRun)   : 0;
+
   return (
     <div className="cp-bigbet">
       <div className="cp-bigbet-year">2026</div>
@@ -103,12 +125,14 @@ export function TheBigBet({ activities }: { activities: Activity[] }) {
         bikeGap={meBikeLeads ? bikeGap : 0}
         swimGap={meSwimLeads ? swimGap : 0}
         runGap={meRunLeads ? runGap : 0}
+        bikeDeficit={bikeDeficitForMe} swimDeficit={swimDeficitForMe} runDeficit={runDeficitForMe}
         BikeIcon={BikeIcon} SwimIcon={SwimIcon} RunIcon={RunIcon}
       />
       <ParticipantRow
         photo={friend?.photo ?? null} name={friendName}
         bike={friendBike} swim={friendSwim} run={friendRun}
         bikeLeader={friendBikeLeads} swimLeader={friendSwimLeads} runLeader={friendRunLeads}
+        bikeDeficit={bikeDeficitForFriend} swimDeficit={swimDeficitForFriend} runDeficit={runDeficitForFriend}
         bikeGap={friendBikeLeads ? bikeGap : 0}
         swimGap={friendSwimLeads ? swimGap : 0}
         runGap={friendRunLeads ? runGap : 0}

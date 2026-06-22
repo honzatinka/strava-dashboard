@@ -488,6 +488,15 @@
   white-space: nowrap;
 }
 
+.cp-bigbet-cell-deficit {
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: var(--font-weight-medium);
+  color: rgba(255, 68, 0, 0.55);
+  line-height: 1;
+  white-space: nowrap;
+}
+
 /* Legacy unused now — kept commented for reference, can be removed */
 /* .cp-bigbet-row-sport, .cp-bigbet-row-km, .cp-bigbet-row-sep */
 
@@ -537,6 +546,9 @@
     letter-spacing: -0.2px;
   }
   .cp-bigbet-cell-gap {
+    font-size: 9px;
+  }
+  .cp-bigbet-cell-deficit {
     font-size: 9px;
   }
 }
