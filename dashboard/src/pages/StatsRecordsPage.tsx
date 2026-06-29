@@ -6,6 +6,7 @@ import { Ruler, Timer, Mountain, MapPin } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 import type { Activity } from "../types";
 import { resolveSportIcon } from "../types";
+import { YearOverYearChart } from "../components/YearOverYearChart";
 import {
   formatDistance, formatDuration, formatFullDate,
   groupBySport, sportLabel, locationFromTimezone,
@@ -179,6 +180,9 @@ export function StatsRecordsPage({
             </BarChart>
           </ResponsiveContainer>
         </div>
+
+        {/* Meziroční srovnání — letošní rok (k dnešku) vs. loňský (celý rok) */}
+        <YearOverYearChart activities={activities} />
 
         <div className="sr-charts-pair">
           {/* Rozložení sportů — top 10 by default, toggle for the rest */}

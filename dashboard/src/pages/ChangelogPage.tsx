@@ -9,6 +9,18 @@ interface ChangeEntry {
 
 const ENTRIES: ChangeEntry[] = [
   {
+    date: "2026-06-29",
+    title: "Statistiky: meziroční srovnání km",
+    tag: "feature",
+    items: [
+      "Nová karta „Meziroční srovnání“ na stránce Statistiky — kumulativní km letos (k dnešku) vs. loni (celý rok)",
+      "Přepínač sportu Kolo / Běh / Plavání — stejné disciplíny jako Big Bet, kolo bez trainer jízd",
+      "Letošní křivka se zastaví na dnešním datu, loňská jde celý rok pro srovnání s finálním součtem",
+      "Funguje i ve view=Martin — karta dostává activities prop jako zbytek stránky, žádné extra zapojení",
+      "Zarovnání podle kalendářního dne (měsíc+den), ne syrového pořadí dne v roce — Únor 29 nezpůsobí posun o den v neprůstupných letech",
+    ],
+  },
+  {
     date: "2026-06-16",
     title: "Routes: Runna-style přehled tras",
     tag: "feature",
