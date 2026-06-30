@@ -9,6 +9,16 @@ interface ChangeEntry {
 
 const ENTRIES: ChangeEntry[] = [
   {
+    date: "2026-06-30",
+    title: "Score Progress: tooltip při najetí na graf",
+    tag: "feature",
+    items: [
+      "Score tab: tooltip ukáže datum týdne, skóre obou hráčů a breakdown per disciplínu (Bike / Run / Swim — km obou hráčů + aktuální bodový výsledek)",
+      "Neaktivní disciplíny (threshold ještě nebyl překročen) zobrazeny šedě s „—"",
+      "Bike / Run / Swim tab: tooltip ukáže km obou, vedoucího (+X km), aktuální body v disciplíně a „Chybí X km k 50 %" pokud platí pravidlo 2:0",
+    ],
+  },
+  {
     date: "2026-06-29",
     title: "Statistiky: meziroční srovnání km",
     tag: "feature",
