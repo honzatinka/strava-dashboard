@@ -14,8 +14,8 @@ const ENTRIES: ChangeEntry[] = [
     tag: "feature",
     items: [
       "Score tab: tooltip ukáže datum týdne, skóre obou hráčů a breakdown per disciplínu (Bike / Run / Swim — km obou hráčů + aktuální bodový výsledek)",
-      "Neaktivní disciplíny (threshold ještě nebyl překročen) zobrazeny šedě s „—"",
-      "Bike / Run / Swim tab: tooltip ukáže km obou, vedoucího (+X km), aktuální body v disciplíně a „Chybí X km k 50 %" pokud platí pravidlo 2:0",
+      "Neaktivní disciplíny (threshold ještě nebyl překročen) zobrazeny šedě s pomlčkou",
+      "Bike / Run / Swim tab: tooltip ukáže km obou, vedoucího (+X km), aktuální body v disciplíně a upozornění 'Chybí X km k 50 %' pokud platí pravidlo 2:0",
     ],
   },
   {
