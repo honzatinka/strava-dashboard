@@ -11,6 +11,47 @@ const url = require("url");
 const fs = require("fs");
 const path = require("path");
 
+// Auto-update Render env vars when Strava tokens rotate so they survive the next deploy.
+// Requires RENDER_API_KEY + RENDER_SERVICE_ID env vars (set once in the Render dashboard).
+function persistRenderEnvVars(updates) {
+  const apiKey = process.env.RENDER_API_KEY;
+  const serviceId = process.env.RENDER_SERVICE_ID;
+  if (!apiKey || !serviceId) return;
+  const getOpts = {
+    hostname: "api.render.com",
+    path: `/v1/services/${serviceId}/env-vars`,
+    method: "GET",
+    headers: { "Authorization": `Bearer ${apiKey}`, "Accept": "application/json" },
+  };
+  https.request(getOpts, (res) => {
+    let data = "";
+    res.on("data", c => data += c);
+    res.on("end", () => {
+      try {
+        const items = JSON.parse(data);
+        const merged = items.map(item => ({
+          key: item.envVar.key,
+          value: updates[item.envVar.key] !== undefined ? updates[item.envVar.key] : item.envVar.value,
+        }));
+        const putData = JSON.stringify(merged);
+        const req = https.request({
+          hostname: "api.render.com",
+          path: `/v1/services/${serviceId}/env-vars`,
+          method: "PUT",
+          headers: {
+            "Authorization": `Bearer ${apiKey}`,
+            "Content-Type": "application/json",
+            "Content-Length": Buffer.byteLength(putData),
+          },
+        }, () => console.log("✓ Render env vars updated:", Object.keys(updates).join(", ")));
+        req.on("error", e => console.warn("⚠ Render API PUT error:", e.message));
+        req.write(putData);
+        req.end();
+      } catch(e) { console.warn("⚠ Render API parse error:", e.message); }
+    });
+  }).on("error", e => console.warn("⚠ Render API GET error:", e.message)).end();
+}
+
 // Load API key from .env or env var
 let API_KEY = process.env.OPENAI_API_KEY;
 const envPath = path.join(__dirname, ".env");
@@ -245,15 +286,33 @@ function preloadFriendStats() {
 }
 
 // In-memory cache for friend tokens — survives multiple preload calls within one server lifetime.
-// Without this, every refreshFriendToken() call after the first re-reads the original env var
-// refresh_token (already consumed by Strava), causing a 401 on the second call.
 let friendTokensMemCache = null;
 
-// Load / save friend tokens (env vars take priority for production/Render)
+// Load / save friend tokens.
+// Priority: memory cache > file (has rotated tokens) > env vars (initial seed only).
+// Strava rotates refresh_token on every exchange — the env var goes stale after the first use,
+// so we always persist the latest token to file and prefer it on subsequent reads.
 function loadFriendTokens() {
-  // Prefer in-memory cache so a refreshed token is reused across multiple preload calls
   if (friendTokensMemCache) return friendTokensMemCache;
-  // In production, seed from env vars on first load
+  // File takes priority over env vars when it exists (has fresher rotated token)
+  try {
+    if (fs.existsSync(FRIEND_TOKENS_FILE)) {
+      const file = JSON.parse(fs.readFileSync(FRIEND_TOKENS_FILE, "utf-8"));
+      // Merge env-var athlete/client fields in case file predates them
+      if (process.env.FRIEND_ACCESS_TOKEN && !file.client_secret) {
+        file.client_id     = file.client_id     || process.env.FRIEND_CLIENT_ID     || "231345";
+        file.client_secret = file.client_secret || process.env.FRIEND_CLIENT_SECRET || "";
+        file.athlete = file.athlete || {
+          id: 12184759,
+          firstname: process.env.FRIEND_FIRSTNAME || "Martin",
+          lastname:  process.env.FRIEND_LASTNAME  || "Kaniok",
+          profile_medium: process.env.FRIEND_PHOTO || null,
+        };
+      }
+      return file;
+    }
+  } catch (e) {}
+  // Fall back to env vars on first deploy (before any refresh has written the file)
   if (process.env.FRIEND_ACCESS_TOKEN) {
     return {
       access_token:  process.env.FRIEND_ACCESS_TOKEN,
@@ -269,21 +328,19 @@ function loadFriendTokens() {
       },
     };
   }
-  try {
-    if (fs.existsSync(FRIEND_TOKENS_FILE)) {
-      return JSON.parse(fs.readFileSync(FRIEND_TOKENS_FILE, "utf-8"));
-    }
-  } catch (e) {}
   return null;
 }
 
 function saveFriendTokens(tokens) {
-  // Always keep in memory so subsequent calls reuse the refreshed token
   friendTokensMemCache = tokens;
-  // Only persist to disk in local dev (not when using env vars)
-  if (!process.env.FRIEND_ACCESS_TOKEN) {
-    try { fs.writeFileSync(FRIEND_TOKENS_FILE, JSON.stringify(tokens, null, 2)); } catch(e) {}
+  try { fs.writeFileSync(FRIEND_TOKENS_FILE, JSON.stringify(tokens, null, 2)); } catch(e) {
+    console.warn("⚠ Nelze zapsat friend_tokens.json:", e.message);
   }
+  // Auto-update Render env vars so the rotated token survives the next deploy
+  persistRenderEnvVars({
+    FRIEND_REFRESH_TOKEN: tokens.refresh_token,
+    FRIEND_EXPIRES_AT: String(tokens.expires_at),
+  });
 }
 
 function refreshFriendToken(callback) {
@@ -631,9 +688,12 @@ const server = http.createServer((req, res) => {
 
   // ─── Friend OAuth: GET /api/friend-authorize → redirect to Strava
   if (req.method === "GET" && parsedUrl.pathname === "/api/friend-authorize") {
-    const authUrl = `https://www.strava.com/oauth/authorize?client_id=${STRAVA_CLIENT_ID}` +
-      `&redirect_uri=http://localhost:3001/api/friend-callback` +
-      `&response_type=code&approval_prompt=auto&scope=activity:read_all`;
+    const host = req.headers.host || "localhost:3001";
+    const proto = host.includes("onrender.com") ? "https" : "http";
+    const redirectUri = `${proto}://${host}/api/friend-callback`;
+    const authUrl = `https://www.strava.com/oauth/authorize?client_id=${process.env.FRIEND_CLIENT_ID || STRAVA_CLIENT_ID}` +
+      `&redirect_uri=${encodeURIComponent(redirectUri)}` +
+      `&response_type=code&approval_prompt=force&scope=activity:read_all`;
     res.writeHead(302, { Location: authUrl });
     res.end();
     return;
@@ -644,8 +704,8 @@ const server = http.createServer((req, res) => {
     const code = parsedUrl.query.code;
     if (!code) { res.writeHead(400); res.end("Missing code"); return; }
     const postData = JSON.stringify({
-      client_id: STRAVA_CLIENT_ID,
-      client_secret: STRAVA_CLIENT_SECRET,
+      client_id: process.env.FRIEND_CLIENT_ID || STRAVA_CLIENT_ID,
+      client_secret: process.env.FRIEND_CLIENT_SECRET || STRAVA_CLIENT_SECRET,
       code,
       grant_type: "authorization_code",
     });
@@ -659,15 +719,22 @@ const server = http.createServer((req, res) => {
         try {
           const r = JSON.parse(data);
           if (r.errors || r.error) { res.writeHead(400); res.end(JSON.stringify(r)); return; }
-          fs.writeFileSync(FRIEND_TOKENS_FILE, JSON.stringify({
+          const tokens = {
             access_token: r.access_token,
             refresh_token: r.refresh_token,
             expires_at: r.expires_at,
+            client_id: process.env.FRIEND_CLIENT_ID || STRAVA_CLIENT_ID,
+            client_secret: process.env.FRIEND_CLIENT_SECRET || STRAVA_CLIENT_SECRET,
             athlete: r.athlete,
-          }, null, 2));
+          };
+          saveFriendTokens(tokens);
+          // Reload cache with fresh token
+          cachedFriendActivities = null;
+          cachedFriendStats = null;
+          preloadFriendStats();
           console.log(`✓ Friend authorized: ${r.athlete?.firstname} ${r.athlete?.lastname}`);
-          res.writeHead(200, { "Content-Type": "text/html" });
-          res.end(`<h2>✅ Authorized: ${r.athlete?.firstname} ${r.athlete?.lastname}</h2><p>You can close this tab.</p>`);
+          res.writeHead(200, { "Content-Type": "text/html; charset=utf-8" });
+          res.end(`<h2>✅ Autorizováno: ${r.athlete?.firstname} ${r.athlete?.lastname}</h2><p>Můžeš zavřít záložku. Data se načítají...</p>`);
         } catch (e) { res.writeHead(500); res.end(e.message); }
       });
     });
