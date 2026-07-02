@@ -244,9 +244,16 @@ function preloadFriendStats() {
   });
 }
 
-// Load / save friend tokens (env vars take priority for production/Koyeb)
+// In-memory cache for friend tokens — survives multiple preload calls within one server lifetime.
+// Without this, every refreshFriendToken() call after the first re-reads the original env var
+// refresh_token (already consumed by Strava), causing a 401 on the second call.
+let friendTokensMemCache = null;
+
+// Load / save friend tokens (env vars take priority for production/Render)
 function loadFriendTokens() {
-  // In production, tokens come from env vars
+  // Prefer in-memory cache so a refreshed token is reused across multiple preload calls
+  if (friendTokensMemCache) return friendTokensMemCache;
+  // In production, seed from env vars on first load
   if (process.env.FRIEND_ACCESS_TOKEN) {
     return {
       access_token:  process.env.FRIEND_ACCESS_TOKEN,
@@ -271,7 +278,9 @@ function loadFriendTokens() {
 }
 
 function saveFriendTokens(tokens) {
-  // Only save to disk in local dev (not when using env vars)
+  // Always keep in memory so subsequent calls reuse the refreshed token
+  friendTokensMemCache = tokens;
+  // Only persist to disk in local dev (not when using env vars)
   if (!process.env.FRIEND_ACCESS_TOKEN) {
     try { fs.writeFileSync(FRIEND_TOKENS_FILE, JSON.stringify(tokens, null, 2)); } catch(e) {}
   }
