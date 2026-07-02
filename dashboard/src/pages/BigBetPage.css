@@ -13,6 +13,14 @@
 }
 
 /* Back link → dashboard (mirror of homepage's title→/bet link) */
+.bb-loading {
+  text-align: center;
+  padding: 40px 0;
+  font-family: var(--font-body);
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+}
+
 .bb-back {
   display: inline-flex;
   align-items: center;

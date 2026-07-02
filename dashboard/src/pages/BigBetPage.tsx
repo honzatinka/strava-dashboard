@@ -16,6 +16,7 @@ export function BigBetPage() {
   const [myPhoto, setMyPhoto] = useState<string | null>(null);
   const [selectedActivity, setSelectedActivity] = useState<Activity | null>(null);
   const [selectedFriendActivity, setSelectedFriendActivity] = useState<Activity | null>(null);
+  const [friendLoading, setFriendLoading] = useState(true);
 
   useEffect(() => {
     fetch("/api/activities")
@@ -32,19 +33,24 @@ export function BigBetPage() {
   }, []);
 
   useEffect(() => {
-    // Friend raw activities (for score chart + recent feed) — may return [] on cold start while preload runs.
-    // Retry after 4s if empty.
+    // Friend raw activities — may return [] on cold start (Render free tier sleeps, preload takes
+    // up to ~30s on wake). Retry generously: every 5s for up to 2 minutes (24 attempts).
+    let cancelled = false;
     const fetchFriend = (attempt = 0) => {
       fetch("/api/friend-activities")
         .then(r => r.json())
         .then((data: Activity[]) => {
+          if (cancelled) return;
           if (Array.isArray(data) && data.length > 0) {
             setFriendActivities(data);
-          } else if (attempt < 3) {
-            setTimeout(() => fetchFriend(attempt + 1), 4000);
+            setFriendLoading(false);
+          } else if (attempt < 24) {
+            setTimeout(() => fetchFriend(attempt + 1), 5000);
+          } else {
+            setFriendLoading(false);
           }
         })
-        .catch(() => {});
+        .catch(() => { if (!cancelled && attempt < 24) setTimeout(() => fetchFriend(attempt + 1), 5000); });
     };
     fetchFriend();
 
@@ -56,6 +62,8 @@ export function BigBetPage() {
         if (d?.photo) setFriendPhoto(d.photo);
       })
       .catch(() => {});
+
+    return () => { cancelled = true; };
   }, []);
 
   const closeActivity = useCallback(() => setSelectedActivity(null), []);
@@ -68,7 +76,9 @@ export function BigBetPage() {
         Dashboard
       </a>
       <TheBigBet activities={activities} />
-      {activities.length > 0 && friendActivities.length > 0 && (
+      {friendLoading && friendActivities.length === 0 ? (
+        <div className="bb-loading">Načítám data soupeře…</div>
+      ) : friendActivities.length > 0 && activities.length > 0 ? (
         <>
           <BigBetScoreChart
             myActivities={activities}
@@ -85,7 +95,7 @@ export function BigBetPage() {
             onFriendActivityClick={(a) => setSelectedFriendActivity(a as Activity)}
           />
         </>
-      )}
+      ) : null}
       {selectedActivity && (
         <ActivityModal activity={selectedActivity} onClose={closeActivity} />
       )}
