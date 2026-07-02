@@ -321,8 +321,14 @@ function refreshFriendToken(callback) {
   req.end();
 }
 
+// In-memory cache for Strava tokens — same fix as friendTokensMemCache.
+// refreshStravaToken() consumes the env var refresh_token on first call;
+// without caching, a second call re-reads the already-consumed env var token → 401.
+let stravaTokensMemCache = null;
+
 // Load Strava tokens (env vars take priority for production/Render)
 function loadStravaTokens() {
+  if (stravaTokensMemCache) return stravaTokensMemCache;
   if (process.env.STRAVA_REFRESH_TOKEN) {
     return {
       access_token:  process.env.STRAVA_ACCESS_TOKEN  || "",
@@ -387,10 +393,11 @@ function refreshStravaToken(callback) {
           return;
         }
 
-        // Update tokens (only write to file in local dev)
+        // Update tokens in memory so subsequent calls reuse the new refresh_token
         tokens.access_token = response.access_token;
         tokens.refresh_token = response.refresh_token;
         tokens.expires_at = response.expires_at;
+        stravaTokensMemCache = tokens;
         if (!process.env.STRAVA_REFRESH_TOKEN) {
           fs.writeFileSync(TOKENS_FILE, JSON.stringify(tokens, null, 2));
         }
