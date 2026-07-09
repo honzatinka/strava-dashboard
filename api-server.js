@@ -118,6 +118,8 @@ let cachedFriendStats      = null;
 let cachedMyStats          = null;
 let cachedActivities       = null; // fetched on server startup
 let cachedFriendActivities = null; // raw friend activities for score chart
+let cachedActivitiesAt       = null; // timestamp of last successful load (for MCP data-age reporting)
+let cachedFriendActivitiesAt = null;
 
 // ─── Fetch all activities from Strava (paginated)
 function fetchAllActivities(accessToken, callback) {
@@ -157,6 +159,7 @@ function preloadActivities() {
     fetchAllActivities(token, (err, acts) => {
       if (err) { console.warn("⚠ Chyba při načítání aktivit:", err.message); return; }
       cachedActivities = acts;
+      cachedActivitiesAt = Date.now();
       console.log(`✓ Aktivit načteno: ${acts.length}`);
     });
   });
@@ -277,6 +280,7 @@ function preloadFriendStats() {
           trainer: a.trainer === true,
           commute: a.commute === true,
         }));
+        cachedFriendActivitiesAt = Date.now();
         console.log(`✓ Friend stats načteny: ${acts.length} aktivit`);
       };
 
@@ -509,6 +513,338 @@ function fetchPhotosFromStrava(activityId, accessToken, callback) {
   req.end();
 }
 
+// ════════════════════════════════════════════════════════════════════════════
+// MCP server — exposes cached Strava data as tools for claude.ai custom connector
+// Endpoint: POST /mcp (Streamable HTTP transport, JSON responses).
+// Optional auth: set MCP_SECRET env var → requests need ?key=<secret>.
+// ════════════════════════════════════════════════════════════════════════════
+
+// Google polyline decoder (same algorithm as frontend utils.ts)
+function decodePolyline(encoded) {
+  const points = [];
+  let index = 0, lat = 0, lng = 0;
+  while (index < encoded.length) {
+    let b, shift = 0, result = 0;
+    do { b = encoded.charCodeAt(index++) - 63; result |= (b & 0x1f) << shift; shift += 5; } while (b >= 0x20);
+    lat += (result & 1) ? ~(result >> 1) : (result >> 1);
+    shift = 0; result = 0;
+    do { b = encoded.charCodeAt(index++) - 63; result |= (b & 0x1f) << shift; shift += 5; } while (b >= 0x20);
+    lng += (result & 1) ? ~(result >> 1) : (result >> 1);
+    points.push([lat / 1e5, lng / 1e5]);
+  }
+  return points;
+}
+
+function haversineKm(lat1, lng1, lat2, lng2) {
+  const R = 6371;
+  const dLat = (lat2 - lat1) * Math.PI / 180;
+  const dLng = (lng2 - lng1) * Math.PI / 180;
+  const a = Math.sin(dLat / 2) ** 2 +
+    Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) * Math.sin(dLng / 2) ** 2;
+  return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+}
+
+// Display-level sport normalization (mirror of frontend types.ts): bike variants → Ride, e-bike separate
+function mcpDisplaySport(sportType) {
+  return ["GravelRide", "MountainBikeRide", "VirtualRide"].includes(sportType) ? "Ride" : sportType;
+}
+
+// Wait for a cache to be populated (cold start / after refresh). Polls every 500 ms, max ~20 s.
+function mcpWaitForData(getter, preload, cb) {
+  if (getter()) { cb(getter()); return; }
+  preload();
+  let waited = 0;
+  const iv = setInterval(() => {
+    waited += 500;
+    if (getter()) { clearInterval(iv); cb(getter()); }
+    else if (waited >= 20000) { clearInterval(iv); cb(null); }
+  }, 500);
+}
+
+function mcpActivityRow(a) {
+  return {
+    date: a.start_date_local,
+    name: a.name,
+    sport: a.sport_type || a.type,
+    km: Math.round((a.distance || 0) / 100) / 10,
+    moving_time_min: Math.round((a.moving_time || 0) / 60),
+    elevation_m: Math.round(a.total_elevation_gain || 0),
+    trainer: a.trainer === true,
+    strava_url: `https://www.strava.com/activities/${a.id}`,
+  };
+}
+
+function mcpGetAthleteActs(athlete, cb) {
+  if (athlete === "martin") {
+    mcpWaitForData(() => cachedFriendActivities, preloadFriendStats, cb);
+  } else {
+    mcpWaitForData(() => cachedActivities, preloadActivities, cb);
+  }
+}
+
+const MCP_TOOLS = [
+  {
+    name: "list_activities",
+    description: "List recent Strava activities for Honza or Martin, newest first. Optionally filter by sport (Ride includes GravelRide/MountainBikeRide/VirtualRide; EBikeRide is separate) and year. Returns date, name, sport, km, time, elevation and Strava URL.",
+    inputSchema: {
+      type: "object",
+      properties: {
+        athlete: { type: "string", enum: ["honza", "martin"], description: "Whose activities" },
+        sport: { type: "string", description: "Optional sport filter, e.g. Ride, Run, Swim, Hike, EBikeRide, WeightTraining" },
+        year: { type: "number", description: "Optional year filter, e.g. 2026" },
+        limit: { type: "number", description: "Max results, default 10, max 50" },
+      },
+      required: ["athlete"],
+    },
+  },
+  {
+    name: "get_stats",
+    description: "Aggregated Strava stats (activity count, km, hours, elevation) grouped by sport for Honza or Martin. Filter by year; to_date=true limits to Jan 1 through today's month+day (useful for year-over-year comparisons of partial years).",
+    inputSchema: {
+      type: "object",
+      properties: {
+        athlete: { type: "string", enum: ["honza", "martin"] },
+        year: { type: "number", description: "Year, e.g. 2026. Omit for all-time." },
+        to_date: { type: "boolean", description: "If true, only count activities up to today's month+day of that year" },
+      },
+      required: ["athlete"],
+    },
+  },
+  {
+    name: "find_routes_near",
+    description: "Find activities whose GPS track passes within radius_km of a coordinate. Provide lat/lng of the place (you know coordinates of towns). Checks the full route polyline, so it catches ride-throughs, not just starts.",
+    inputSchema: {
+      type: "object",
+      properties: {
+        lat: { type: "number", description: "Latitude of the place" },
+        lng: { type: "number", description: "Longitude of the place" },
+        radius_km: { type: "number", description: "Search radius in km, default 5" },
+        athlete: { type: "string", enum: ["honza", "martin", "both"], description: "Default both" },
+        limit: { type: "number", description: "Max results, default 10" },
+      },
+      required: ["lat", "lng"],
+    },
+  },
+  {
+    name: "get_bet_status",
+    description: "Current Big Bet 2026 standings between Honza and Martin: per-discipline km (Bike/Run/Swim), whether each discipline is active (thresholds: Bike 100 km, Run 20 km, Swim 5 km), points (leader gets 2 if >= 2x opponent's distance, else 1), total score, and how many km the trailing athlete needs to cross 50% of the leader.",
+    inputSchema: { type: "object", properties: {} },
+  },
+  {
+    name: "refresh_data",
+    description: "Force re-download of fresh data from Strava for both athletes and report how old the cached data was. Use when the user says data looks stale. Takes ~20-30 s.",
+    inputSchema: { type: "object", properties: {} },
+  },
+];
+
+function mcpToolCall(name, args, done) {
+  const reply = (obj) => done(null, JSON.stringify(obj, null, 1));
+  const noData = (who) => done(null, JSON.stringify({ error: `Data pro ${who} nejsou k dispozici (možná cold start nebo chybí autorizace). Zkus to za ~30 s, případně zavolej refresh_data.` }));
+
+  if (name === "list_activities") {
+    const athlete = args.athlete === "martin" ? "martin" : "honza";
+    mcpGetAthleteActs(athlete, (acts) => {
+      if (!acts) { noData(athlete); return; }
+      let list = acts;
+      if (args.year) list = list.filter(a => (a.start_date_local || "").startsWith(String(args.year)));
+      if (args.sport) {
+        const want = String(args.sport);
+        list = list.filter(a => mcpDisplaySport(a.sport_type || a.type || "") === want);
+      }
+      const limit = Math.min(Math.max(1, args.limit || 10), 50);
+      list = [...list]
+        .sort((a, b) => (b.start_date_local || "").localeCompare(a.start_date_local || ""))
+        .slice(0, limit);
+      reply({ athlete, count: list.length, activities: list.map(mcpActivityRow) });
+    });
+    return;
+  }
+
+  if (name === "get_stats") {
+    const athlete = args.athlete === "martin" ? "martin" : "honza";
+    mcpGetAthleteActs(athlete, (acts) => {
+      if (!acts) { noData(athlete); return; }
+      const now = new Date();
+      const cutMonth = now.getMonth() + 1, cutDay = now.getDate();
+      let list = acts;
+      if (args.year) list = list.filter(a => (a.start_date_local || "").startsWith(String(args.year)));
+      if (args.to_date) {
+        list = list.filter(a => {
+          const m = parseInt((a.start_date_local || "").slice(5, 7), 10);
+          const d = parseInt((a.start_date_local || "").slice(8, 10), 10);
+          return m < cutMonth || (m === cutMonth && d <= cutDay);
+        });
+      }
+      const byS = {};
+      for (const a of list) {
+        const s = mcpDisplaySport(a.sport_type || a.type || "Other");
+        if (!byS[s]) byS[s] = { count: 0, km: 0, hours: 0, elevation_m: 0 };
+        byS[s].count++;
+        byS[s].km += (a.distance || 0) / 1000;
+        byS[s].hours += (a.moving_time || 0) / 3600;
+        byS[s].elevation_m += a.total_elevation_gain || 0;
+      }
+      for (const s of Object.keys(byS)) {
+        byS[s].km = Math.round(byS[s].km * 10) / 10;
+        byS[s].hours = Math.round(byS[s].hours * 10) / 10;
+        byS[s].elevation_m = Math.round(byS[s].elevation_m);
+      }
+      reply({
+        athlete,
+        year: args.year || "all",
+        to_date: !!args.to_date,
+        total_activities: list.length,
+        by_sport: byS,
+        data_age_minutes: Math.round(((Date.now() - ((athlete === "martin" ? cachedFriendActivitiesAt : cachedActivitiesAt) || Date.now())) / 60000)),
+      });
+    });
+    return;
+  }
+
+  if (name === "find_routes_near") {
+    const radius = args.radius_km || 5;
+    const limit = Math.min(Math.max(1, args.limit || 10), 30);
+    const who = args.athlete === "martin" ? ["martin"] : args.athlete === "honza" ? ["honza"] : ["honza", "martin"];
+    const results = [];
+    let pending = who.length;
+    const finish = () => {
+      if (--pending > 0) return;
+      results.sort((a, b) => (b.date || "").localeCompare(a.date || ""));
+      reply({ near: { lat: args.lat, lng: args.lng, radius_km: radius }, matches: results.slice(0, limit) });
+    };
+    for (const ath of who) {
+      mcpGetAthleteActs(ath, (acts) => {
+        if (acts) {
+          for (const a of acts) {
+            const poly = a.map && a.map.summary_polyline;
+            if (!poly) continue;
+            let hit = false;
+            try {
+              const pts = decodePolyline(poly);
+              // Sample every 3rd point — plenty for a 5 km radius, 3x faster
+              for (let i = 0; i < pts.length; i += 3) {
+                if (haversineKm(args.lat, args.lng, pts[i][0], pts[i][1]) <= radius) { hit = true; break; }
+              }
+            } catch (e) {}
+            if (hit) results.push({ athlete: ath, ...mcpActivityRow(a) });
+          }
+        }
+        finish();
+      });
+    }
+    return;
+  }
+
+  if (name === "get_bet_status") {
+    mcpGetAthleteActs("honza", (mine) => {
+      if (!mine) { noData("honza"); return; }
+      mcpGetAthleteActs("martin", (theirs) => {
+        // Martin's data may be unavailable (authorization pending) or empty (failed fetch) — report partial
+        const my = aggregateBetStats(mine, "Honza", null);
+        const fr = theirs && theirs.length > 0 ? aggregateBetStats(theirs, cachedFriendStats?.name || "Martin", null) : null;
+        const thresholdsKm = { Ride: 100, Run: 20, Swim: 5 };
+        const distOf = (stats, sport) => (stats?.sports.find(x => x.sport === sport)?.dist || 0) / 1000;
+        const disciplines = {};
+        let honzaScore = 0, martinScore = 0;
+        for (const sport of ["Ride", "Run", "Swim"]) {
+          const h = Math.round(distOf(my, sport) * 10) / 10;
+          const m = fr ? Math.round(distOf(fr, sport) * 10) / 10 : null;
+          const active = fr ? Math.max(h, m) >= thresholdsKm[sport] : h >= thresholdsKm[sport];
+          let points = "0:0", trailing_needs_km = 0;
+          if (fr && active && h !== m) {
+            const leader = Math.max(h, m), loser = Math.min(h, m);
+            const pts = (loser === 0 || leader >= 2 * loser) ? 2 : 1;
+            if (h > m) { honzaScore += pts; points = `${pts}:0`; } else { martinScore += pts; points = `0:${pts}`; }
+            if (pts === 2 && loser > 0) trailing_needs_km = Math.round((leader / 2 - loser) * 10) / 10;
+          }
+          disciplines[sport] = {
+            honza_km: h, martin_km: m, threshold_km: thresholdsKm[sport],
+            active, points_honza_martin: points,
+            ...(trailing_needs_km > 0 ? { trailing_needs_km_to_50pct: trailing_needs_km } : {}),
+          };
+        }
+        reply({
+          year: 2026,
+          score: { honza: honzaScore, martin: martinScore },
+          disciplines,
+          note: fr ? "Trainer rides (Technogym/Zwift) excluded from Bike only." : "Martinova data nejsou dostupná — skóre je neúplné.",
+        });
+      });
+    });
+    return;
+  }
+
+  if (name === "refresh_data") {
+    const ageMin = cachedActivitiesAt ? Math.round((Date.now() - cachedActivitiesAt) / 60000) : null;
+    const friendAgeMin = cachedFriendActivitiesAt ? Math.round((Date.now() - cachedFriendActivitiesAt) / 60000) : null;
+    cachedMyStats = null; cachedFriendStats = null;
+    cachedActivities = null; cachedFriendActivities = null;
+    preloadActivities();
+    preloadFriendStats();
+    reply({
+      ok: true,
+      message: "Cache vymazána, data se stahují na pozadí (~20-30 s). Další dotaz už uvidí čerstvá data.",
+      previous_data_age_minutes: { honza: ageMin, martin: friendAgeMin },
+    });
+    return;
+  }
+
+  done(new Error(`Unknown tool: ${name}`));
+}
+
+function handleMcpRequest(body, res) {
+  let msg;
+  try { msg = JSON.parse(body); } catch (e) {
+    res.writeHead(400, { "Content-Type": "application/json" });
+    res.end(JSON.stringify({ jsonrpc: "2.0", id: null, error: { code: -32700, message: "Parse error" } }));
+    return;
+  }
+
+  const respond = (obj, status = 200) => {
+    res.writeHead(status, { "Content-Type": "application/json" });
+    res.end(JSON.stringify(obj));
+  };
+
+  // Notifications (no id) — acknowledge with 202, no body
+  if (msg.id === undefined || msg.id === null) {
+    res.writeHead(202); res.end();
+    return;
+  }
+
+  if (msg.method === "initialize") {
+    respond({
+      jsonrpc: "2.0", id: msg.id,
+      result: {
+        protocolVersion: msg.params?.protocolVersion || "2025-03-26",
+        capabilities: { tools: {} },
+        serverInfo: { name: "strava-dashboard", version: "1.0.0" },
+      },
+    });
+    return;
+  }
+
+  if (msg.method === "ping") { respond({ jsonrpc: "2.0", id: msg.id, result: {} }); return; }
+
+  if (msg.method === "tools/list") {
+    respond({ jsonrpc: "2.0", id: msg.id, result: { tools: MCP_TOOLS } });
+    return;
+  }
+
+  if (msg.method === "tools/call") {
+    const { name, arguments: args } = msg.params || {};
+    mcpToolCall(name, args || {}, (err, text) => {
+      if (err) {
+        respond({ jsonrpc: "2.0", id: msg.id, result: { content: [{ type: "text", text: err.message }], isError: true } });
+      } else {
+        respond({ jsonrpc: "2.0", id: msg.id, result: { content: [{ type: "text", text }], isError: false } });
+      }
+    });
+    return;
+  }
+
+  respond({ jsonrpc: "2.0", id: msg.id, error: { code: -32601, message: `Method not found: ${msg.method}` } });
+}
+
 const server = http.createServer((req, res) => {
   // CORS headers
   res.setHeader("Access-Control-Allow-Origin", "*");
@@ -522,6 +858,26 @@ const server = http.createServer((req, res) => {
   }
 
   const parsedUrl = url.parse(req.url, true);
+
+  // ─── MCP endpoint (claude.ai custom connector): POST /mcp
+  if (parsedUrl.pathname === "/mcp") {
+    if (process.env.MCP_SECRET && parsedUrl.query.key !== process.env.MCP_SECRET) {
+      res.writeHead(401, { "Content-Type": "application/json" });
+      res.end(JSON.stringify({ error: "Unauthorized — missing or wrong ?key=" }));
+      return;
+    }
+    if (req.method === "GET" || req.method === "DELETE") {
+      // Streamable HTTP: GET opens an optional SSE stream (we don't push), DELETE ends a session
+      res.writeHead(405, { "Content-Type": "application/json", "Allow": "POST" });
+      res.end(JSON.stringify({ error: "Only POST supported" }));
+      return;
+    }
+    if (req.method !== "POST") { res.writeHead(405); res.end(); return; }
+    let body = "";
+    req.on("data", c => { body += c; });
+    req.on("end", () => handleMcpRequest(body, res));
+    return;
+  }
 
   // New endpoint for fetching activity photos
   if (req.method === "POST" && parsedUrl.pathname === "/api/fetch-activity-photos") {

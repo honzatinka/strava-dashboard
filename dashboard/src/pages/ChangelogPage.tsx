@@ -9,6 +9,17 @@ interface ChangeEntry {
 
 const ENTRIES: ChangeEntry[] = [
   {
+    date: "2026-07-03",
+    title: "MCP server: dotazy na data odkudkoli (Claude appka)",
+    tag: "feature",
+    items: [
+      "Nový endpoint /mcp — vystavuje data dashboardu jako nástroje pro claude.ai custom konektor",
+      "5 nástrojů: list_activities, get_stats, find_routes_near (hledání tras podle místa), get_bet_status, refresh_data",
+      "Funguje z Claude mobilní appky i webu — otázky typu 'kolik mám letos km proti Martinovi' zodpoví odkudkoli",
+      "Volitelné zabezpečení přes MCP_SECRET env var (?key= v URL)",
+    ],
+  },
+  {
     date: "2026-06-30",
     title: "Score Progress: tooltip při najetí na graf",
     tag: "feature",
