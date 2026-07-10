@@ -6,6 +6,10 @@ Kontext pro AI agenty pracující v tomto repu.
 
 Strava Dashboard — React + TypeScript + Vite app, která stahuje aktivity ze Stravy a zobrazuje je v přehledném dashboardu. Backend `api-server.js` (Node.js) zprostředkovává Strava API. Nasazené na Render.com s automatickým deployem z `main`.
 
+**Produkce: https://strava-dashboard-g708.onrender.com** (GitHub: `honzatinka/strava-dashboard`)
+- Refresh dat na produkci: `curl -s https://strava-dashboard-g708.onrender.com/api/refresh-data`
+- Render free tier: env vars a paměť nepřežijí redeploy — persistentní věci (tokeny) patří do Render env vars přes dashboard, ne do souborů.
+
 ## Struktura
 
 ```
@@ -43,8 +47,10 @@ Před commitem: `cd dashboard && npm run build` (musí projít bez chyb).
 
 ### Git workflow
 - Commituj jen na explicitní žádost uživatele.
+- **Když commituješ, vždy rovnou pushni na `main`** (local → GitHub → Render) a ověř, že se změna nasadila na produkci — Honza to výslovně chce, změny nenechávej jen lokálně.
 - Nikdy `--amend`, vždy nový commit.
 - Push na `main` triggeruje Render auto-deploy.
+- GitHub auth: PAT s 90denní expirací (vytvořen ~21. 4. 2026 → **expiruje ~20. 7. 2026**). Když push selže na auth, tohle je pravděpodobná příčina — Honza musí vygenerovat nový token.
 - **Před commitem visible změn vždy přidej záznam do Changelogu** (`src/pages/ChangelogPage.tsx`, ENTRIES pole). Tagy: `feature` / `design` / `fix`. Datum dnešní (`YYYY-MM-DD`).
 
 ### Lokální spuštění

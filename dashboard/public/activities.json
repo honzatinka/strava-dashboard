@@ -5,7 +5,1946 @@
       "id": 46123336,
       "resource_state": 1
     },
-    "name": "Afternoon Ride, kolo po dědovi",
+    "name": "Afternoon Run",
+    "distance": 6044.0,
+    "moving_time": 2672,
+    "elapsed_time": 2681,
+    "total_elevation_gain": 49.0,
+    "type": "Run",
+    "sport_type": "Run",
+    "workout_type": null,
+    "device_name": "Garmin fēnix 6X",
+    "id": 18999163598,
+    "start_date": "2026-06-20T15:17:33Z",
+    "start_date_local": "2026-06-20T17:17:33Z",
+    "timezone": "(GMT+01:00) Europe/Prague",
+    "utc_offset": 7200.0,
+    "location_city": null,
+    "location_state": null,
+    "location_country": null,
+    "achievement_count": 0,
+    "kudos_count": 2,
+    "comment_count": 0,
+    "athlete_count": 2,
+    "photo_count": 0,
+    "map": {
+      "id": "a18999163598",
+      "summary_polyline": "wbqnHcxrpA?}@Mw@Sa@Ek@IOSqAGOIc@E?m@\\[VW^[\\OHWGGAGFCIKk@K{@SaAWk@a@OKKAG@UGqAEe@AC@g@Ai@AAKHKQO]QAGOGu@COKWAIYa@KRi@?o@Yc@a@C?y@a@eD@CGa@ACKBiAM_@Qs@SUQ[G[Ca@c@wAEa@FGFUFBOJO?CAMBo@\\IL}@VGHQBEDg@?OTMHI@?H@cACYB]AQGg@K[Q]IA[@GAa@]]@YEO@UNYCGCKMO[Y]EMKGGUa@gAUa@w@{AWYIk@MKIQ]kAGa@a@wAa@k@_@kAOUe@qBCBMMW{@QMMPIOIYMKM?GIk@Oi@_AI[YY[QYg@MCg@YCBa@]gAe@OMeAWSCYMOAc@K[Cm@Sc@M{@]]Ui@Yc@YOSYOa@[{@k@WW]Kq@[AEGEKOSc@c@[GFgAv@_@\\QHOMi@kBQg@g@m@Wi@_AeB_@i@yAsBYW_@w@gAmA]Sk@c@WOML[Ig@_@MWw@}@MEe@@e@j@On@]vCOx@MbAE@ITQHk@SYW}BwAi@a@y@_@_@[sA{@qBiA_CwAQOOE[WwCeBcBgAMESQm@gAy@u@qAyA[Qm@Si@IkA?ICO[w@aA]k@e@aAUs@[y@y@qAa@g@QYEQg@u@gCiFKSQSa@}@w@uA?m@Ec@@SOIOD_@GMOGQIm@e@qA]{AAYY]K[M{@Yu@Km@U{@cAq@Y_@GDUd@U`Ai@dA]dAe@v@w@r@OFe@DGCq@_AMI_@s@c@c@a@u@Ia@q@aA",
+      "resource_state": 2
+    },
+    "trainer": false,
+    "commute": false,
+    "manual": false,
+    "private": false,
+    "visibility": "followers_only",
+    "flagged": false,
+    "gear_id": null,
+    "start_latlng": [
+      49.736213,
+      13.370241
+    ],
+    "end_latlng": [
+      49.774105,
+      13.405285
+    ],
+    "average_speed": 2.262,
+    "max_speed": 5.42,
+    "average_cadence": 86.4,
+    "average_temp": 31,
+    "has_heartrate": true,
+    "average_heartrate": 160.6,
+    "max_heartrate": 186.0,
+    "heartrate_opt_out": false,
+    "display_hide_heartrate_option": true,
+    "elev_high": 346.0,
+    "elev_low": 322.8,
+    "upload_id": 20112810434,
+    "upload_id_str": "20112810434",
+    "external_id": "garmin_ping_587524732213",
+    "from_accepted_tag": false,
+    "pr_count": 0,
+    "total_photo_count": 1,
+    "has_kudoed": false,
+    "suffer_score": 116.0
+  },
+  {
+    "resource_state": 2,
+    "athlete": {
+      "id": 46123336,
+      "resource_state": 1
+    },
+    "name": "Evening Ride",
+    "distance": 13000.5,
+    "moving_time": 4522,
+    "elapsed_time": 11926,
+    "total_elevation_gain": 59.0,
+    "type": "Ride",
+    "sport_type": "Ride",
+    "workout_type": null,
+    "device_name": "Garmin fēnix 6X",
+    "id": 18988395604,
+    "start_date": "2026-06-19T16:45:54Z",
+    "start_date_local": "2026-06-19T18:45:54Z",
+    "timezone": "(GMT+01:00) Europe/Prague",
+    "utc_offset": 7200.0,
+    "location_city": null,
+    "location_state": null,
+    "location_country": null,
+    "achievement_count": 0,
+    "kudos_count": 5,
+    "comment_count": 0,
+    "athlete_count": 1,
+    "photo_count": 0,
+    "map": {
+      "id": "a18988395604",
+      "summary_polyline": "abqnHajrpAJg@IRAVI@CM?OQYiBs@u@GOD]\\C@eAUQKDABH@[EYKU?IDGdAq@f@m@K]D]g@sC[cCMYQU@o@Ls@?K[oADQ@]BEfAu@XU@EAa@AIk@m@Ue@?I^iFVyBLiCHq@LyAR[CEGADYG[@MC]F{@Fm@JiBx@gKIqA[iA@gBF_A@y@Ek@Y]gCwAq@Qs@@o@Py@n@oApA{@xAmAhC_ChEIHk@VU`@Kj@UVWN_@ZAHIFOBc@RYTc@Do@PcC|@y@@o@O_@F[CcBUWKw@o@[m@_@sA_@qB_@sAIg@]uAu@}Ay@uAQDQ\\I^o@He@y@q@aBWC_@e@e@QeAqAiAmAoCsAiBi@yCo@}Ag@w@_@u@e@gCkBoAgA_@Ss@_AYYI@eAlAc@Tq@sBk@}@}@kBa@s@kCuDy@cAwCsCa@NiBkBg@OWE?CDABD?Dk@f@Of@}@~GSb@S?aDqB_IwEaOgJUUk@w@cCmC}@_@cC]mAkBa@y@gAsC_CeDi@{@cAsB}AcDu@iBQ{@C}@AIOIi@EEG[{@GYi@yAKk@ASg@eAQm@o@_Bu@}Ao@e@CSYUYJITa@pBg@vAy@nBSNa@L[Gc@S{@aAuBsDgC{Dy@eASc@m@aAo@a@qA[e@HWhBY~CExADzA?`AM|@S`@Sx@MTMb@m@jCm@zA]nAKHEC?EBCFFDG\\{ATi@DW?c@^eBR_@DQ?MJ[D]f@iADm@CMDwCBa@\\mBAO@QHi@BMF@EmODDSe@BDF@DIHBA?NKPiALg@CIUOO@_EsAmAWWAYOEK@FFD\\PzFzA|@PNN?H[nAM\\?FDRCNDj@DxBFv@Jp@@ZEnABRPVhATXRf@h@fC~Df@f@BPRZdAhBj@p@zAdCXNjAMvA_CTw@`@aBZy@NMPBdAjAb@dAjAlDZp@J^Dj@x@jBT~@RZXCBENNDJ@b@Hp@r@lBv@jBnCpFpCtDrAnD^t@bAvA\\Np@DdAPn@XvAdBj@f@v@bAx@n@nPdKlCvA`C~A~@f@RPh@THCLMGN?NNRrD~BzDpCh@f@b@j@f@`BlBxEFX`A|BhAbC^`AZrAp@jD\\jCf@pFZ`CbAtFDp@LXZV`@n@\\pA|@EhGcBd@FhAZR@JCFTRT",
+      "resource_state": 2
+    },
+    "trainer": false,
+    "commute": false,
+    "manual": false,
+    "private": false,
+    "visibility": "followers_only",
+    "flagged": false,
+    "gear_id": null,
+    "start_latlng": [
+      49.735621,
+      13.367814
+    ],
+    "end_latlng": [
+      49.747902,
+      13.377433
+    ],
+    "average_speed": 2.875,
+    "max_speed": 6.84,
+    "average_temp": 31,
+    "has_heartrate": true,
+    "average_heartrate": 100.7,
+    "max_heartrate": 131.0,
+    "heartrate_opt_out": false,
+    "display_hide_heartrate_option": true,
+    "elev_high": 346.4,
+    "elev_low": 296.4,
+    "upload_id": 20101867009,
+    "upload_id_str": "20101867009",
+    "external_id": "garmin_ping_587164638951",
+    "from_accepted_tag": false,
+    "pr_count": 0,
+    "total_photo_count": 1,
+    "has_kudoed": false,
+    "suffer_score": 12.0
+  },
+  {
+    "resource_state": 2,
+    "athlete": {
+      "id": 46123336,
+      "resource_state": 1
+    },
+    "name": "Evening Gravel Ride",
+    "distance": 32373.4,
+    "moving_time": 5642,
+    "elapsed_time": 6288,
+    "total_elevation_gain": 221.0,
+    "type": "Ride",
+    "sport_type": "GravelRide",
+    "workout_type": null,
+    "device_name": "Garmin fēnix 6X",
+    "id": 18975178649,
+    "start_date": "2026-06-18T16:41:25Z",
+    "start_date_local": "2026-06-18T18:41:25Z",
+    "timezone": "(GMT+01:00) Europe/Prague",
+    "utc_offset": 7200.0,
+    "location_city": null,
+    "location_state": null,
+    "location_country": null,
+    "achievement_count": 29,
+    "kudos_count": 5,
+    "comment_count": 0,
+    "athlete_count": 1,
+    "photo_count": 0,
+    "map": {
+      "id": "a18975178649",
+      "summary_polyline": "o~ljHoz`dBKGEe@PsBA{AIu@_A_FAmF{@OcNa@k@EGSpJc^pGkWrCsJzFoPrNod@vCyFF]DcCl@mGAcGXqE~@cDLkBrEgOFyAOkBF_AlDkOJkAOY_FkBqBa@cDwA_DaAiAK]e@Jg@bCmG`DgJL{A\\qNH[hAeBlDkDwCnCiBfCODMOy@wCeA@kB}C]DqBrAeATeBi@_B}@kDqCcBiByCkEsAkA`At@j@fAxGrHdF`DrA`@q@v@g@V{Dh@c@KiC_C_Eb@cAq@g@w@mCiKu@uA_@UaFPcLSwCNWMo@wA[{B@o@r@cDD{@Mo@Uc@gA_@wBMgDjBoAh@i@@u^wFw@SMM?OBNu@lDi@f@w@H}Gg@kD~@wAd@yAoAmC}C_b@ub@[Og@AwUnF}LfHy@z@KIa@gBk@{Au@gAeD_Cm@o@Ys@aCqLPeIISsEMmBYc@UqG{FkRkN}K{IoPoGcIgAEm@RiR]u@c@gB}BmFIe@FiAjAoCPeAKSkBgAmF}Ic@JcIxFsGxDoB|@eExA}@lAcBtAaBpB{Bh@uCVcDc@iBDUMeBuCeC{BUGqWvDwFwAus@_BiAPo@^sGhHYj@g@d@CZZr@Et@uGIqC[KnIv@nDEdAKVSBi_@eA_ANGxBIRwDK{ITq@GkCo@iJ@mEkAqAyAc@QyAG}BXcVhKqDjBiBr@o@?_Cz@}@d@KC_@kCSKyDrAaBFuEYi@L_DY[?k@`@iAMy@LmBi@w@|@{GfCgG`EyD`B}D\\yAf@aFJ}C`@qD|@uDjBeApAiC`CeB`C_CzAkC~@_B`AeGl@kIhEu@RK~@sAfBqA`DcH`OgBlCkOlQeBrCgAjEYzCL|@QnCGdELbCSzCQnAoCnIiBjDaCrF{AdFg@bDQd@gAfIMpDTxHh@lI`@jDhAxGlCpKrE|Nh@`DfBpHp@fGFnCCbEq@nFoAjE}FtKyBxCiCnEiB~DoBjGXx@dB~Bj@MjA|BX`A?`@kC|CkBtCqA~@sCrA]j@UfBY\\o@a@aHeCiAUcAToCiBaBFkEhBKEOq@wAaICy@FsAxCoNjDaNzA}EKQq@?eCwAaFqDe@m@UsDa@_UI{@CgFYsCQcFBuAa@}Bg@@Qb@[RmFx@o@XgZjVaDvDQHiBkE]@cAdAk@LeXiFc@i@wC_H{@aHY{@w@y@sGcDp@_GrAmElCoDnP}RGcAoAsGB[T]h@NwA}@m@y@mEmSSW",
+      "resource_state": 2
+    },
+    "trainer": false,
+    "commute": false,
+    "manual": false,
+    "private": false,
+    "visibility": "followers_only",
+    "flagged": false,
+    "gear_id": "b13521117",
+    "start_latlng": [
+      49.058865,
+      16.557701
+    ],
+    "end_latlng": [
+      49.20907,
+      16.601099
+    ],
+    "average_speed": 5.738,
+    "max_speed": 12.36,
+    "average_temp": 29,
+    "has_heartrate": true,
+    "average_heartrate": 139.9,
+    "max_heartrate": 182.0,
+    "heartrate_opt_out": false,
+    "display_hide_heartrate_option": true,
+    "elev_high": 289.0,
+    "elev_low": 186.4,
+    "upload_id": 20088464077,
+    "upload_id_str": "20088464077",
+    "external_id": "garmin_ping_586709007374",
+    "from_accepted_tag": false,
+    "pr_count": 17,
+    "total_photo_count": 2,
+    "has_kudoed": false,
+    "suffer_score": 108.0
+  },
+  {
+    "resource_state": 2,
+    "athlete": {
+      "id": 46123336,
+      "resource_state": 1
+    },
+    "name": "Tretrotest",
+    "distance": 8802.2,
+    "moving_time": 1991,
+    "elapsed_time": 4871,
+    "total_elevation_gain": 70.0,
+    "type": "Ride",
+    "sport_type": "GravelRide",
+    "workout_type": null,
+    "device_name": "Garmin fēnix 6X",
+    "id": 18961514708,
+    "start_date": "2026-06-17T16:45:05Z",
+    "start_date_local": "2026-06-17T18:45:05Z",
+    "timezone": "(GMT+01:00) Europe/Prague",
+    "utc_offset": 7200.0,
+    "location_city": null,
+    "location_state": null,
+    "location_country": null,
+    "achievement_count": 2,
+    "kudos_count": 2,
+    "comment_count": 0,
+    "athlete_count": 1,
+    "photo_count": 0,
+    "map": {
+      "id": "a18961514708",
+      "summary_polyline": "s{jkHuigdBb@|BNnALj@PhAIZKEO?_@FDJB@?DWx@BZGXg@K[MOCUNEJe@hB{A~GUt@Sv@mEvQc@zAyCfJe@~AKr@Er@i@jA}@hADJPBNG\\[b@u@HGB?R`@@TAr@@Fn@bANJNAF[GC?u@EWBU`@cA_@`B?r@AFEJE@GRGH_@VKNKv@KHsCR_@@s@AMDCFAFAxAHZAjBBzAAJOTMZcA|ESj@IBMEAEQu@?uBE]w@}Ek@yFm@uDqAaMUgAUsBOaAg@{Aa@q@MGGQG[GmAQy@g@gAKe@@UBGNK@SM}@Cc@CIIMECEeADCiAl@g@JiDnB}@b@aDdB}BfAuCdBMM_@aCiAqFG]@MDKHEzAcAj@[r@g@|@g@`DyBz@g@|Aw@r@e@d@SXWtD}BlAk@dAu@~@g@h@c@lBiAf@Q|@q@H[@o@gBaKCi@DIv@[lDqB|Ay@xAk@p@c@RUtAo@j@_@z@_@bAk@bBu@bAi@NO~CuAXSnDiB`EkBpBsAzAkAd@QZE`Ac@v@a@~@_@b@MDBJN|@jEHRRPXEvDkBt@e@p@i@TUfCmB~@aAz@eAb@cAMi@MSS{@IWCe@EI@WDIPMnBkAf@i@r@cA@IGa@i@gCAOHWp@i@DGfBiEdCkHd@w@IEl@cANQFAR[?_@IU?UG_@]@gC|@k@NGCEO[iEg@kEE{@a@gDCyAEGWAa@LOIIUMeC@eAAiCEOA?GIC?@DTB@MCcACPDPPhDCfBBdAN`Bz@fETvAF`A?`AE|AOjBObAWnAQb@MJyA\\YPs@LEDGP?RLj@D@JEFP?JATFj@PZ\\VF^JRXlAf@~CBVAZEd@CHs@^sBz@{@b@i@^",
+      "resource_state": 2
+    },
+    "trainer": false,
+    "commute": false,
+    "manual": false,
+    "private": false,
+    "visibility": "followers_only",
+    "flagged": false,
+    "gear_id": "b13521117",
+    "start_latlng": [
+      49.213639,
+      16.593686
+    ],
+    "end_latlng": [
+      49.207487,
+      16.601461
+    ],
+    "average_speed": 4.421,
+    "max_speed": 7.8,
+    "average_temp": 29,
+    "has_heartrate": true,
+    "average_heartrate": 130.4,
+    "max_heartrate": 170.0,
+    "heartrate_opt_out": false,
+    "display_hide_heartrate_option": true,
+    "elev_high": 261.2,
+    "elev_low": 202.6,
+    "upload_id": 20074618535,
+    "upload_id_str": "20074618535",
+    "external_id": "garmin_ping_586260619757",
+    "from_accepted_tag": false,
+    "pr_count": 2,
+    "total_photo_count": 0,
+    "has_kudoed": false,
+    "suffer_score": 23.0
+  },
+  {
+    "resource_state": 2,
+    "athlete": {
+      "id": 46123336,
+      "resource_state": 1
+    },
+    "name": "Lunch Boulder",
+    "distance": 0.0,
+    "moving_time": 4695,
+    "elapsed_time": 4695,
+    "total_elevation_gain": 0,
+    "type": "RockClimbing",
+    "sport_type": "RockClimbing",
+    "workout_type": 28,
+    "device_name": "Garmin fēnix 6X",
+    "id": 18956953202,
+    "start_date": "2026-06-17T10:49:15Z",
+    "start_date_local": "2026-06-17T12:49:15Z",
+    "timezone": "(GMT+02:00) Africa/Blantyre",
+    "utc_offset": 7200.0,
+    "location_city": null,
+    "location_state": null,
+    "location_country": null,
+    "achievement_count": 0,
+    "kudos_count": 1,
+    "comment_count": 0,
+    "athlete_count": 1,
+    "photo_count": 0,
+    "map": {
+      "id": "a18956953202",
+      "summary_polyline": "",
+      "resource_state": 2
+    },
+    "trainer": true,
+    "commute": false,
+    "manual": false,
+    "private": false,
+    "visibility": "followers_only",
+    "flagged": false,
+    "gear_id": null,
+    "start_latlng": [],
+    "end_latlng": [],
+    "average_speed": 0.0,
+    "max_speed": 0.0,
+    "average_temp": 31,
+    "has_heartrate": true,
+    "average_heartrate": 120.6,
+    "max_heartrate": 165.0,
+    "heartrate_opt_out": false,
+    "display_hide_heartrate_option": true,
+    "elev_high": 154.6,
+    "elev_low": 141.0,
+    "upload_id": 20069996595,
+    "upload_id_str": "20069996595",
+    "external_id": "garmin_ping_586140739111",
+    "from_accepted_tag": false,
+    "pr_count": 0,
+    "total_photo_count": 0,
+    "has_kudoed": false,
+    "suffer_score": 32.0
+  },
+  {
+    "resource_state": 2,
+    "athlete": {
+      "id": 46123336,
+      "resource_state": 1
+    },
+    "name": "Evening Run",
+    "distance": 2220.3,
+    "moving_time": 1083,
+    "elapsed_time": 1095,
+    "total_elevation_gain": 34.0,
+    "type": "Run",
+    "sport_type": "Run",
+    "workout_type": null,
+    "device_name": "Garmin fēnix 6X",
+    "id": 18920243067,
+    "start_date": "2026-06-14T16:33:16Z",
+    "start_date_local": "2026-06-14T18:33:16Z",
+    "timezone": "(GMT+01:00) Europe/Prague",
+    "utc_offset": 7200.0,
+    "location_city": null,
+    "location_state": null,
+    "location_country": null,
+    "achievement_count": 0,
+    "kudos_count": 4,
+    "comment_count": 0,
+    "athlete_count": 1,
+    "photo_count": 0,
+    "map": {
+      "id": "a18920243067",
+      "summary_polyline": "irhkHst|kBJ@XRJNJDLVRVZn@NP^p@XJRPLTn@t@NVb@^T\\NHr@p@d@VvATZ?LDb@GRD~@@HFn@PLFJ@PFV?\\FV\\F`@Az@U~C?lCApBJ`@RN^PZO\\a@ROPKXAXDNFh@`@FP?RCViAtBs@bBg@t@]\\[Vg@H}@HWJU@c@Iu@WWS_@a@]k@_CmGm@gAk@_B[i@{@qB{@yAGUk@aAO]m@w@yAyAaAkA[e@e@i@We@i@s@",
+      "resource_state": 2
+    },
+    "trainer": false,
+    "commute": false,
+    "manual": false,
+    "private": false,
+    "visibility": "followers_only",
+    "flagged": false,
+    "gear_id": null,
+    "start_latlng": [
+      49.202078,
+      17.846892
+    ],
+    "end_latlng": [
+      49.203028,
+      17.846172
+    ],
+    "average_speed": 2.05,
+    "max_speed": 3.28,
+    "average_cadence": 82.5,
+    "average_temp": 24,
+    "has_heartrate": true,
+    "average_heartrate": 136.3,
+    "max_heartrate": 163.0,
+    "heartrate_opt_out": false,
+    "display_hide_heartrate_option": true,
+    "elev_high": 389.0,
+    "elev_low": 329.2,
+    "upload_id": 20032759741,
+    "upload_id_str": "20032759741",
+    "external_id": "garmin_ping_584900366304",
+    "from_accepted_tag": false,
+    "pr_count": 0,
+    "total_photo_count": 0,
+    "has_kudoed": false,
+    "suffer_score": 13.0
+  },
+  {
+    "resource_state": 2,
+    "athlete": {
+      "id": 46123336,
+      "resource_state": 1
+    },
+    "name": "Evening Run",
+    "distance": 2222.7,
+    "moving_time": 859,
+    "elapsed_time": 859,
+    "total_elevation_gain": 20.0,
+    "type": "Run",
+    "sport_type": "Run",
+    "workout_type": null,
+    "device_name": "Garmin fēnix 6X",
+    "id": 18906619259,
+    "start_date": "2026-06-13T16:40:38Z",
+    "start_date_local": "2026-06-13T18:40:38Z",
+    "timezone": "(GMT+01:00) Europe/Prague",
+    "utc_offset": 7200.0,
+    "location_city": null,
+    "location_state": null,
+    "location_country": null,
+    "achievement_count": 0,
+    "kudos_count": 5,
+    "comment_count": 0,
+    "athlete_count": 1,
+    "photo_count": 0,
+    "map": {
+      "id": "a18906619259",
+      "summary_polyline": "_nikHo_jdBGsAKWCWUu@O{@I@Ok@EIo@GqAZi@De@LwAFSMQs@CW@_@C{@Oq@Im@Ag@Mq@sA}Bs@gCEc@Z}ADENm@V_@`@[x@WXu@n@gAx@uArAcCt@cAPc@^oAJSp@e@f@URIZC`@h@Nh@RjDCx@BvBLbALl@LZXzBLh@TpBBh@Hn@MxAIvBIt@e@hBSj@c@P]Hc@R]L]T[LCHL`@NDTRCv@LZJJDTNZ^nADt@",
+      "resource_state": 2
+    },
+    "trainer": false,
+    "commute": false,
+    "manual": false,
+    "private": false,
+    "visibility": "followers_only",
+    "flagged": false,
+    "gear_id": null,
+    "start_latlng": [
+      49.204918,
+      16.602246
+    ],
+    "end_latlng": [
+      49.204541,
+      16.602164
+    ],
+    "average_speed": 2.588,
+    "max_speed": 4.567,
+    "average_cadence": 82.4,
+    "average_temp": 26,
+    "has_heartrate": true,
+    "average_heartrate": 167.0,
+    "max_heartrate": 183.0,
+    "heartrate_opt_out": false,
+    "display_hide_heartrate_option": true,
+    "elev_high": 234.0,
+    "elev_low": 214.4,
+    "upload_id": 20018911301,
+    "upload_id_str": "20018911301",
+    "external_id": "garmin_ping_584461966992",
+    "from_accepted_tag": false,
+    "pr_count": 0,
+    "total_photo_count": 0,
+    "has_kudoed": false,
+    "suffer_score": 48.0
+  },
+  {
+    "resource_state": 2,
+    "athlete": {
+      "id": 46123336,
+      "resource_state": 1
+    },
+    "name": "Afternoon Gravel Ride",
+    "distance": 30418.9,
+    "moving_time": 6348,
+    "elapsed_time": 7992,
+    "total_elevation_gain": 336.0,
+    "type": "Ride",
+    "sport_type": "GravelRide",
+    "workout_type": null,
+    "device_name": "Garmin fēnix 6X",
+    "id": 18904300061,
+    "start_date": "2026-06-13T11:56:50Z",
+    "start_date_local": "2026-06-13T13:56:50Z",
+    "timezone": "(GMT+01:00) Europe/Prague",
+    "utc_offset": 7200.0,
+    "location_city": null,
+    "location_state": null,
+    "location_country": null,
+    "achievement_count": 11,
+    "kudos_count": 5,
+    "comment_count": 0,
+    "athlete_count": 2,
+    "photo_count": 0,
+    "map": {
+      "id": "a18904300061",
+      "summary_polyline": "inikHskidBdC}BPo@wCoMkAcG@{At@mC\\kCRWlB@|AhCh@?@cAFj@E^e@@_AoAPiDIqCQmBo@_EUo@U{KUwAhBiA`Q_AjAa@|AuAmA{E`@mEAqB{@_JkAuFSaC_@oa@k@mDuAeBi@kCyAyAa\\wTmBwC_@oAGuEa@mEc@iANg@dAiAj@Ud@VMhB?`GLjAXZa@iAA{I_@iBaIaG{AmBiWyTg@s@{AeFkAqBuBCoFhCoAXeMc@oEeAqBeDeAq@eSg@yAg@oAgAq@uAc@cBwFs\\aA_J_@i@iAYC_AbBoQ|@_FfBkFzBqEpBaGlEaFh@kANwAWqBq@yBkHiIsJcCmEmC{BkCyB_GsCmFkBeFoBgBwBl@c@f@sA~ER`ByAnAGoAFNOxA_A|AuDrJm@x@yAnAoA^qLZu@Ue@k@{F_Ls@mC?m@^_BJcC\\cBJwDi@cEqAoC{EuCoKoAaKLmBn@gEzBaA|@}@dBxAbCy@fAcF~CaCv@oDtByEdBaD\\iJ]}CNoOfDcJpDiCxBuBvCuAbC{ArIk@xAsBrBgB~@aEp@{GyC{CYcDN?|Aw@hBe@b@@d@sAd@[r@Iv@s@p@K\\FpBsBlFmCnCq@xA_ApDiCnSi@xBgAvCUPeBpFaBpBiKfIiD|HeBhDe@`@gJk@gEZyBpBoAzCgBlAa@dABbAQvAi@bA}AdAsJn@cC~AyClEgBpEwC|EgA|I{AbEq@nD}AhGT~ECbElBpE~FeB`@GNVRzNb@vF@~N_@nFwAbLR`NQvIH|FK|DpElPvCpDdCxF|KhIjAk@rDh@nAp@dCq@hBdALG`@}DrCt@`IvDUfCk@nBL`@`NmAxC~AVE\\u@j@TTd@FxCjA`HvAfBbDrBh@IvGcHbASpByA|Bi@dBE^XnDtEtDtCj@UlCsClCi@fAbAVjAp@Nt@fBz@Zr@~@V`An@nIvAvBDzLs@rGHfAPX|A^v@vDZl@`EhAzC?hDwEb@ESxEJzA~BtPx@rCRPrEiChAWrS|Bl@n@d@LdRfCLAFe@VKz@x@dDN|FUjH}BtGm@?i@_@IbBFgBJGc@AV\\AV_AbBBbAmEl@[dADdAvBXHxHGrBm@dCl@lBiC`Di@`HgEtD}CbD_E|B}@xAsD`GwChEgEh@d@vAW`@zAsDdGSz@Bj@v@fBtAQ|@rCbAvAzDsCzH{C`QmHdCsA`EOfEo@fC}@`w@k`@h@URNjAdJdAtE",
+      "resource_state": 2
+    },
+    "trainer": false,
+    "commute": false,
+    "manual": false,
+    "private": false,
+    "visibility": "followers_only",
+    "flagged": false,
+    "gear_id": "b13521117",
+    "start_latlng": [
+      49.206768,
+      16.600636
+    ],
+    "end_latlng": [
+      49.207529,
+      16.601487
+    ],
+    "average_speed": 4.792,
+    "max_speed": 12.36,
+    "average_temp": 27,
+    "has_heartrate": true,
+    "average_heartrate": 129.9,
+    "max_heartrate": 177.0,
+    "heartrate_opt_out": false,
+    "display_hide_heartrate_option": true,
+    "elev_high": 465.6,
+    "elev_low": 217.2,
+    "upload_id": 20016559365,
+    "upload_id_str": "20016559365",
+    "external_id": "garmin_ping_584404064259",
+    "from_accepted_tag": false,
+    "pr_count": 9,
+    "total_photo_count": 1,
+    "has_kudoed": false,
+    "suffer_score": 72.0
+  },
+  {
+    "resource_state": 2,
+    "athlete": {
+      "id": 46123336,
+      "resource_state": 1
+    },
+    "name": "Gymnastika",
+    "distance": 0.0,
+    "moving_time": 3300,
+    "elapsed_time": 3300,
+    "total_elevation_gain": 0.0,
+    "type": "Workout",
+    "sport_type": "Workout",
+    "workout_type": null,
+    "id": 18877036315,
+    "start_date": "2026-06-11T12:50:00Z",
+    "start_date_local": "2026-06-11T12:50:00Z",
+    "timezone": "(GMT+00:00) GMT",
+    "utc_offset": 0.0,
+    "location_city": null,
+    "location_state": null,
+    "location_country": null,
+    "achievement_count": 0,
+    "kudos_count": 2,
+    "comment_count": 0,
+    "athlete_count": 1,
+    "photo_count": 0,
+    "map": {
+      "id": "a18877036315",
+      "summary_polyline": "",
+      "resource_state": 2
+    },
+    "trainer": false,
+    "commute": false,
+    "manual": true,
+    "private": false,
+    "visibility": "followers_only",
+    "flagged": false,
+    "gear_id": null,
+    "start_latlng": [],
+    "end_latlng": [],
+    "average_speed": 0.0,
+    "max_speed": 0,
+    "has_heartrate": false,
+    "heartrate_opt_out": false,
+    "display_hide_heartrate_option": false,
+    "upload_id": null,
+    "external_id": null,
+    "from_accepted_tag": false,
+    "pr_count": 0,
+    "total_photo_count": 0,
+    "has_kudoed": false
+  },
+  {
+    "resource_state": 2,
+    "athlete": {
+      "id": 46123336,
+      "resource_state": 1
+    },
+    "name": "Afternoon Swim",
+    "distance": 1550.0,
+    "moving_time": 2167,
+    "elapsed_time": 2746,
+    "total_elevation_gain": 0,
+    "type": "Swim",
+    "sport_type": "Swim",
+    "device_name": "Garmin fēnix 6X",
+    "id": 18864837100,
+    "start_date": "2026-06-10T12:36:11Z",
+    "start_date_local": "2026-06-10T14:36:11Z",
+    "timezone": "(GMT+02:00) Africa/Blantyre",
+    "utc_offset": 7200.0,
+    "location_city": null,
+    "location_state": null,
+    "location_country": null,
+    "achievement_count": 0,
+    "kudos_count": 4,
+    "comment_count": 0,
+    "athlete_count": 1,
+    "photo_count": 0,
+    "map": {
+      "id": "a18864837100",
+      "summary_polyline": "",
+      "resource_state": 2
+    },
+    "trainer": true,
+    "commute": false,
+    "manual": false,
+    "private": false,
+    "visibility": "followers_only",
+    "flagged": false,
+    "gear_id": null,
+    "start_latlng": [],
+    "end_latlng": [],
+    "average_speed": 0.715,
+    "max_speed": 8.34,
+    "has_heartrate": true,
+    "average_heartrate": 140.8,
+    "max_heartrate": 165.0,
+    "heartrate_opt_out": false,
+    "display_hide_heartrate_option": true,
+    "elev_high": 0.0,
+    "elev_low": 0.0,
+    "upload_id": 19976498688,
+    "upload_id_str": "19976498688",
+    "external_id": "garmin_ping_583085325745",
+    "from_accepted_tag": false,
+    "pr_count": 0,
+    "total_photo_count": 0,
+    "has_kudoed": false,
+    "suffer_score": 87.0
+  },
+  {
+    "resource_state": 2,
+    "athlete": {
+      "id": 46123336,
+      "resource_state": 1
+    },
+    "name": "Afternoon Gravel Ride",
+    "distance": 19673.3,
+    "moving_time": 4125,
+    "elapsed_time": 10280,
+    "total_elevation_gain": 94.0,
+    "type": "Ride",
+    "sport_type": "GravelRide",
+    "workout_type": null,
+    "device_name": "Garmin fēnix 6X",
+    "id": 18825007427,
+    "start_date": "2026-06-07T11:22:25Z",
+    "start_date_local": "2026-06-07T13:22:25Z",
+    "timezone": "(GMT+01:00) Europe/Prague",
+    "utc_offset": 7200.0,
+    "location_city": null,
+    "location_state": null,
+    "location_country": null,
+    "achievement_count": 2,
+    "kudos_count": 3,
+    "comment_count": 0,
+    "athlete_count": 1,
+    "photo_count": 0,
+    "map": {
+      "id": "a18825007427",
+      "summary_polyline": "eiikHcfhdBeA`B_D`Ek@bAaAz@E`@iGtGcEbFyA~A{A~Co@fCKnAYx@UhAUfCiBxL{BpIu@pDcAfMmAjHsBzHu@`Ec@pAYxAgC|O]hD@X}@rJ@RnAnDl@bAx@h@dD`BjAz@rAd@\\l@aDr_@]fD[fBHXk@hBH|@ENi@tA{@vAsRlTiClDCLh@dAJCVa@G_@A\\KMFmAKhA[^AMT_@fGjBq@GCIyAk@[UYu@q@CShAx@{@KEWXVGKh@[^g@e@U?o@jAaAzC_ArE_@lFCvFH|BzAlSPjDBbCU`Ha@vDk@zCaApD{AjEk@nAyAtBcAz@wAx@mCt@EEG_BD_@IGyCMa@[Ym@WUu@FUh@EEBNEBGOf@g@d@C`@Pn@~@zALDb@dAPLtAPHz@QpBw@~@m@z@{@l@_AlA_CdB{Ex@{Cr@qE^oFJyECsBUkDi@_Hw@aHGkGFkCRkDbAuG`@yAtA_DVGf@j@r@q@|Bc@nBm@^A`BZ\\CbBw@jFwAhDcCn@WhG}@n@e@nA{B^oAXyC|GpGJ\\IXOPIIHCOTP]@FTFHh@?QISHOFk@kBmBy@cAkCgC`AgEb@kAdB_Cr@YvAQl@]Rw@XqDTw@x@qAb@_Bb@k@xEsB|Bs@x@q@dFsFlBuCvCeCh@}AhAfAlAe@|BEZKrAHJ[MSAKDKVBP^APPp@`@_@UHFM}@s@AODb@EXe@Je@KkDRmAh@_AkAIO@UnAqBr@g@nCWnHn@~HPhBNdD?dAUhAo@tHkFdBq@RNLh@HpBP`ACn@f@`CL@~BmAxAg@v@?hCpAXVz@OxAVhC~@pDbB^DLiATs@V_@|EcDpB{CKl@DWvBgCj@e@?UmAcC[}@KGg@PwB}CEQDUbBqFlCeGjBeDbCaD`F_Jn@{Af@eB^kB^{DFcFg@yGaAqEs@iCgAiFaEeNcCiJa@kBm@kEo@{Gq@mM?_FjCqQj@eCvAiEhB_ELm@f@oAJMRFRaA_@k@c@Ks@m@qHuHiBaC}EgFmFoI{BuCmAyEiAkD}AcHaAgDk@YyBSkIyDuBmAiCm@a@Dq@j@aA`@yHjGo@n@ERj@lBFf@Cn@y@xBcAjDo@fBoBzGARBj@FLzCtD@`@Sf@sF~Gu@t@eAbBuAnCSEwBsFc@s@SB}A~ASEk@}@Q?{AhBOh@qAhB}B|By@`AmBlC",
+      "resource_state": 2
+    },
+    "trainer": false,
+    "commute": false,
+    "manual": false,
+    "private": false,
+    "visibility": "followers_only",
+    "flagged": false,
+    "gear_id": "b13521117",
+    "start_latlng": [
+      49.20296,
+      16.598134
+    ],
+    "end_latlng": [
+      49.205825,
+      16.602542
+    ],
+    "average_speed": 4.769,
+    "max_speed": 11.579,
+    "average_temp": 29,
+    "has_heartrate": true,
+    "average_heartrate": 115.4,
+    "max_heartrate": 143.0,
+    "heartrate_opt_out": false,
+    "display_hide_heartrate_option": true,
+    "elev_high": 257.8,
+    "elev_low": 213.8,
+    "upload_id": 19935938482,
+    "upload_id_str": "19935938482",
+    "external_id": "garmin_ping_581754314840",
+    "from_accepted_tag": false,
+    "pr_count": 0,
+    "total_photo_count": 1,
+    "has_kudoed": false,
+    "suffer_score": 18.0
+  },
+  {
+    "resource_state": 2,
+    "athlete": {
+      "id": 46123336,
+      "resource_state": 1
+    },
+    "name": "Morning Gravel Ride",
+    "distance": 99404.3,
+    "moving_time": 17365,
+    "elapsed_time": 35026,
+    "total_elevation_gain": 851.0,
+    "type": "Ride",
+    "sport_type": "GravelRide",
+    "workout_type": null,
+    "device_name": "Garmin fēnix 6X",
+    "id": 18814197029,
+    "start_date": "2026-06-06T08:44:59Z",
+    "start_date_local": "2026-06-06T10:44:59Z",
+    "timezone": "(GMT+01:00) Europe/Prague",
+    "utc_offset": 7200.0,
+    "location_city": null,
+    "location_state": null,
+    "location_country": null,
+    "achievement_count": 6,
+    "kudos_count": 8,
+    "comment_count": 0,
+    "athlete_count": 3,
+    "photo_count": 0,
+    "map": {
+      "id": "a18814197029",
+      "summary_polyline": "optnHwxgbBxNoOfSkGbQlFlTo@nPzOvb@xGvj@p@dv@uNjIzCtDvPt@{Ek@lA`FwD~G~f@hCzFfCr|@GlUrFvQRnUrAdHpJlJrH|h@hQcBzOlHfR{DtLjHrNg@xHhDxPrVrHzD|KeA~J}LxJBzFpZvUt[|Hv`@jHnQ|DrCqAnB|B}@p@nJlBrBhGHtG}AdG}HfQyg@pIeSzb@aUnHkK|VyRhc@kSn_@`M`I}BnE}JdDqAlH~FvGxPdJxCjMsAb\\eX~KjJdTfCnXiGtLqJ`\\hM~a@uZlKaO|N_^hQwO|FiKlHp@fD{XwFsLpJs]zNg[pA}MjEsHfIiF`QtDdUoRdT^lMuD`EoRgCsUgDcRfRsA`HuItAiHsCiSL_J|KwGlG_JjEgUqFq[_F}GkH_BoEqHeAoGz@oHpNmObJeVbG{DYgB|E~Ht@fG~O_HyHwC_CyHbByBtDhEbEcBrCq\\bPiOI~HuDdDo@xI|@kJhDqCrB{XgFg\\fAyOaA}DpAvDlJqIbD^aCMT_DpJmNtc@m]@eHoO}Q~BqPvDuCnGr@fI`GlLpTbJEtTya@bTqPf@i\\|BaFzH_@xk@zt@|f@XjKvl@xGbLxEcA~McUjg@qBzK|PhK``@j[xOjHm@pJqHvT_AxLqLjU}BlIuHcG}XnOe]hHgKdJiDlAbDpNcN`JyChL`LzJrTh@tNnSdV`LxBfHvJ`SDhMxMdJfDnMoq@fW_P`LqQ|GgDzS`E~MxI`d@yA~SmF`]kd@jRkG|dA|J~K{F`HlZvLrAfNy\\lCiONaLpGw`@uAea@bAoBnI{ErNW~^_e@r]mLtXu[`b@qYvSsUlAn@`m@_z@x[iInTiT_A{FxLyNt\\en@`^o\\~F}ONiWpJyRf`@eh@~C}Kl@}U~CsP{@aGcKqRgAgPrL{cB~Hom@xIyChCwEj~@zLzTjHrVkLlMyV{A}_@dHiYjCe@xFql@pK}g@bLpApRdMxb@}DxZnI|RkK~To[nOaF|BePhl@iqA`\\j@`F_JnE[E{H`G]bAqGhPQfZ{R`BnCfGwCnU|DdGqBxGrPvQ_RfPd@`D}LtJwCzArAnD~V`PDjDxQjTiIxw@{k@nKiD`GtB~HuE|HcXwAgn@nEuYfOy@dYeKjG{StHwEdDoNrKeFtSiXx`@`@hPwH|AfKxGoCrSvHbOwQc@iEqE_FlVyf@vBaT_Roy@aC_ZqHmDWqNeF_Jl@wGEv@aAs@zA_h@{Lm_@oWgJsMfKf@lDaHhVzC`Hm^`h@",
+      "resource_state": 2
+    },
+    "trainer": false,
+    "commute": false,
+    "manual": false,
+    "private": false,
+    "visibility": "followers_only",
+    "flagged": false,
+    "gear_id": "b13521117",
+    "start_latlng": [
+      49.756103,
+      16.265066
+    ],
+    "end_latlng": [
+      49.203057,
+      16.598437
+    ],
+    "average_speed": 5.724,
+    "max_speed": 15.98,
+    "average_temp": 27,
+    "has_heartrate": true,
+    "average_heartrate": 138.0,
+    "max_heartrate": 184.0,
+    "heartrate_opt_out": false,
+    "display_hide_heartrate_option": true,
+    "elev_high": 612.0,
+    "elev_low": 233.6,
+    "upload_id": 19924918052,
+    "upload_id_str": "19924918052",
+    "external_id": "garmin_ping_581401754767",
+    "from_accepted_tag": false,
+    "pr_count": 3,
+    "total_photo_count": 3,
+    "has_kudoed": false,
+    "suffer_score": 309.0
+  },
+  {
+    "resource_state": 2,
+    "athlete": {
+      "id": 46123336,
+      "resource_state": 1
+    },
+    "name": "Afternoon Gravel Ride",
+    "distance": 91855.6,
+    "moving_time": 16935,
+    "elapsed_time": 29405,
+    "total_elevation_gain": 808.0,
+    "type": "Ride",
+    "sport_type": "GravelRide",
+    "workout_type": null,
+    "device_name": "Garmin fēnix 6X",
+    "id": 18800960036,
+    "start_date": "2026-06-05T11:24:34Z",
+    "start_date_local": "2026-06-05T13:24:34Z",
+    "timezone": "(GMT+01:00) Europe/Prague",
+    "utc_offset": 7200.0,
+    "location_city": null,
+    "location_state": null,
+    "location_country": null,
+    "achievement_count": 0,
+    "kudos_count": 9,
+    "comment_count": 0,
+    "athlete_count": 3,
+    "photo_count": 0,
+    "map": {
+      "id": "a18800960036",
+      "summary_polyline": "eqbqHayk}AaDbDe@qA?wRtXef@pOm}ApA{@dDqT|d@wFbG_HzDkMvByQtOy{B~CiKfR{_@~BkKhCyk@hAcd@pDsJnRcU`F}KbB{LxC}~@hD_JzMcKpH{P`Naz@vMkT`^qkBt@sUlAoBnHgCfCsHdFuAnA_C`McdApAyb@nB_VnFoIf[sx@fPqu@z_@mmAjEu^fBuG|BwEzYs[rVu`@nSgOnMa^v@sRlTyqAhKqa@lBwC|NcHpNiSBuMeFicAgGsg@Wso@|A{PxLeq@rBoBWkFjGg^|OoOlAA~B}DHyBlTs]bA[`A`Fi@p@zA_AwAgAk@cEnKgQlU_RrGkAg@eBd@kEtCkQfBwCnQaK~VyBhL}IxK_@rIvCNeE`JoF|BuRjLeE]qHiGmj@`@oWf@aOa@oM_Ei^BoOzAcU~Ei_@|AcDe@aFhDeh@UyLzHaYdG{i@fDmD`SVjSk\\jOsPjGhIzFeCf]gq@hEw^dGwM|_@qQr]_DfPiEtHoSzDiRfIeH|GaPhUebAhH|@~G_[dMqCxH`M|Ch@tK}VnI_HdWg_@vIeCfMcLlFoBiDo\\x@mNe@{Cp@b@tCmJdHuJfK}XdH{XfJcS_Bkh@_IuCvAoQx@ei@nBmDfCu@`Nq[jI{IfEgVhHu@zXsPt\\_KzCRfAvGhEzAfFeSz@{KjKjEn[pVnAm[jBiOuF_r@T}n@vBuCoCq[jVyd@dHqVxGkl@v@wn@~GqDnIaAJuInAcCpOyHnQcEd]`FvKhKfEa@bDtBfOrVhRxBrQcj@cFkVlAkCpEz@wByHzFaFwB}BvBhCoBpBwEyAfAbFf@QUvATe@_AYrAj@q@OvAuCdIgFvNuTxUgk@hFmS~CwTpAo^|Gcy@hBsKGmD_CeI|BgCbBoWlHuN~Jcb@zB{M|JoF|CaKbT{]dLgk@dGyb@bGyQhPc]oEkTiJaDwIsNqCMkFwQmK{FyDmEyA~AJ_DoAkBLeXmC_s@cDec@\\cb@gCyb@DaJh@cC~FgAiBgIOqKhB{b@~N}j@fCeObTci@pBqV|w@ae@jJyC`MfJl@oA_B_EhBu@hAgIzLvBdI}RtQgTrQsb@tYcd@M_KxIkLxNoc@nNeYvBiT`Rqv@YyPdEcThTgSpLuG`BcEbO{CtJnGtA~I`BxCrL`ExGbK~K|YhCzLNvQpCpSnG`@l^wIfMhEiGwAj@VHRGw@|EmCjOs_@tWaPda@gn@jSsUdl@~AtRhEbDsBlJhG`InQbAJ`@qDaFwMYqJbXoZ`J_F|JqNtRwArKmZpBaDbFaA",
+      "resource_state": 2
+    },
+    "trainer": false,
+    "commute": false,
+    "manual": false,
+    "private": false,
+    "visibility": "followers_only",
+    "flagged": false,
+    "gear_id": "b13521117",
+    "start_latlng": [
+      50.152581,
+      15.467516
+    ],
+    "end_latlng": [
+      49.755918,
+      16.2651
+    ],
+    "average_speed": 5.424,
+    "max_speed": 14.133,
+    "average_temp": 23,
+    "has_heartrate": true,
+    "average_heartrate": 137.6,
+    "max_heartrate": 179.0,
+    "heartrate_opt_out": false,
+    "display_hide_heartrate_option": true,
+    "elev_high": 502.6,
+    "elev_low": 210.8,
+    "upload_id": 19911422895,
+    "upload_id_str": "19911422895",
+    "external_id": "garmin_ping_580979201383",
+    "from_accepted_tag": false,
+    "pr_count": 0,
+    "total_photo_count": 0,
+    "has_kudoed": false,
+    "suffer_score": 293.0
+  },
+  {
+    "resource_state": 2,
+    "athlete": {
+      "id": 46123336,
+      "resource_state": 1
+    },
+    "name": "Morning Gravel Ride",
+    "distance": 108852.0,
+    "moving_time": 20794,
+    "elapsed_time": 31992,
+    "total_elevation_gain": 709.0,
+    "type": "Ride",
+    "sport_type": "GravelRide",
+    "workout_type": null,
+    "device_name": "Garmin fēnix 6X",
+    "id": 18786760964,
+    "start_date": "2026-06-04T08:30:05Z",
+    "start_date_local": "2026-06-04T10:30:05Z",
+    "timezone": "(GMT+01:00) Europe/Prague",
+    "utc_offset": 7200.0,
+    "location_city": null,
+    "location_state": null,
+    "location_country": null,
+    "achievement_count": 0,
+    "kudos_count": 11,
+    "comment_count": 0,
+    "athlete_count": 4,
+    "photo_count": 0,
+    "map": {
+      "id": "a18786760964",
+      "summary_polyline": "cjupHqsawA}BkSqDwB~DaPgEwKSsSuCcK~AgBuDor@tAwAT~Ec@cQkGmZkMsUaIeg@aIgVwG{IpAuC{Xss@qB{b@rGiPfOqMiFo|@bN}KqRya@wD{ByBmX|CmNoAcEF}n@yJ{RoM|CzEkHxGJdAgNtDkBoGkQyCsj@sAgI{CmJjCc@rCi\\nI\\aDyMu@}TnHqTeFwv@~m@_[rGq{@`NfM_A{z@pIYIuFsKKmJ{^cBid@qOoRcGmeAdQop@c@ed@oE}a@J{^~FgMcDyc@h@k~@aa@{UrCsO_R_OjC}KqY{`@uUmIoRtF{N`Q{}@|c@{GzHsHhT{TxTsHjOyN`H{I_AoIaP{C`Eat@io@}PkVm]cwAaTc[}Qky@yi@mj@kDEoAbDiIwD~AaaAmQqm@kA_NrAcRfHaOxNeSxPoGlGuJ~Dqc@{FsDiEag@g[weALeZzEB{BwKyAg}@dIib@`Co\\bFgKyCiG{Gid@wVew@k@yPhDeq@oCqWcHyQlAqNsI`BiLoUaBqVtGgQiFe^`@yTfByJ|QiLiD{Jp^g{@Asv@zCqYzYj_@`N]pDa`@p]gyAfAsWsCqs@yU}~AvDu^i@u[bEgMfEs`@~B]xBsSEaHmIeFtVme@`c@mh@lAee@hHo|@pEyTvPed@gn@P_@se@oHmi@o@aqAyYaQ}E_J_Cp@_^sT_K}]{DoE_^jPmIaX}Dw\\\\fHiANgDm[qOue@n@oBmKdPqHnBDdCgNxBFhHdBl@uBP`C{@`BrEgBcGVxBqTm@@q[yKe@gA{j@eIqAyEaRp@iBaAxC|@pD|F|AnTMhBgKtF_Bp@mLtKe]jQaVrGmQtAmR}@yb@hH{\\fGmJpb@aHnMuKrD{LvGql@l^ug@dFy]fLk^rPwMni@r@hJeC`FiGhWok@tJco@`Xwo@|c@q_AlTsLpGgMvBep@vL}d@jBwc@aRkUoAiQaGkK|DqM`NuPfGs[d@wq@oFqb@fUrDzEaItStE~E{n@bG{B~@yViOudAzo@goBrEgWnF{m@lFm{ArNa`AjMgs@tMgfBdIiWo@kIgHiQ{h@s~@aQuU{VuJ_Sch@_[smAok@unCRsMfOw`@yMwUsq@uj@{GmOe@uDjLqT]}EyFeIhHua@{Q}[jJej@lMmn@eAs^{OwVHuI_y@}aBo[_\\e`@mn@cD@w@{k@nGgKxEpF",
+      "resource_state": 2
+    },
+    "trainer": false,
+    "commute": false,
+    "manual": false,
+    "private": false,
+    "visibility": "followers_only",
+    "flagged": false,
+    "gear_id": "b13521117",
+    "start_latlng": [
+      50.084695,
+      14.431449
+    ],
+    "end_latlng": [
+      50.15109,
+      15.467762
+    ],
+    "average_speed": 5.235,
+    "max_speed": 12.62,
+    "average_temp": 28,
+    "has_heartrate": true,
+    "average_heartrate": 136.2,
+    "max_heartrate": 183.0,
+    "heartrate_opt_out": false,
+    "display_hide_heartrate_option": true,
+    "elev_high": 295.6,
+    "elev_low": 197.2,
+    "upload_id": 19896992354,
+    "upload_id_str": "19896992354",
+    "external_id": "garmin_ping_580501435953",
+    "from_accepted_tag": false,
+    "pr_count": 0,
+    "total_photo_count": 3,
+    "has_kudoed": false,
+    "suffer_score": 330.0
+  },
+  {
+    "resource_state": 2,
+    "athlete": {
+      "id": 46123336,
+      "resource_state": 1
+    },
+    "name": "Afternoon Gravel Ride",
+    "distance": 24333.5,
+    "moving_time": 5652,
+    "elapsed_time": 10103,
+    "total_elevation_gain": 263.0,
+    "type": "Ride",
+    "sport_type": "GravelRide",
+    "workout_type": null,
+    "device_name": "Garmin fēnix 6X",
+    "id": 18731515968,
+    "start_date": "2026-05-31T13:07:55Z",
+    "start_date_local": "2026-05-31T15:07:55Z",
+    "timezone": "(GMT+01:00) Europe/Prague",
+    "utc_offset": 7200.0,
+    "location_city": null,
+    "location_state": null,
+    "location_country": null,
+    "achievement_count": 0,
+    "kudos_count": 4,
+    "comment_count": 0,
+    "athlete_count": 1,
+    "photo_count": 0,
+    "map": {
+      "id": "a18731515968",
+      "summary_polyline": "oejkHi{hdBA`@IJmBhAi@Lg@n@}Bp@kBrAeAb@e@DeI`FwBn@qEtByBdBqClAaB^yGhE{B`AGNDd@fBdK?h@aF|CwCbCwCrBgB~@u@@{CpBgEnDiB^uDnCYZBh@|@vDh@pDc@h@eC|@kOt@}@`@y@x@Wb@mF`RkAzCoAxAcDrBe@bBqBh@}@f@}D`Du@v@sCtEoDtKaB`IeDjEWxAWlEiA~BsC|CaLxFkGnFa@l@Kz@VbREdR[jOQhCPjFdIzz@r@nDpAnEW~@{AxAo@rA]lCTbBq@`Bg@jDUf@}@~@Mn@[jBK`EUj@_A\\NCMFLXh@Vn@~G^jBF`BbB~GV\\vABL^^xD`@tNSpBAhBQLiB[a@v@QjC_AtFuBzRA`Dp@jGE`AYp@I|@IvFJrC]t@AXRjB_AdIx@Fm@FUp@g@t@M@j@e@EOLq@rAY^gAj@c@RoBp@}BXFd@lALjA?`AQv@B\\XPx@ELkBfAcAh@sAbBaAhAiBzBe@xAaBhDqCvC_Hb@yAlAmAhAA|@m@|L{@`Ef@Zb@BvCRtBf@jAzAd@h@[Xg@^_AfCoLxBwIhDaJtBaExBgDnIuJFi@KgCFO~@}@x@yCbEoJz@O^oIP}A`@_BnAqBf@e@vGcBZsB?[{@_EdCyAzByBvBaF`B}ElA_GNuAV}GByDQ}DaBmUGmBDuDXwFv@eEj@gBvA}CV?Xb@V?d@[jF_BdDR|BeAdDy@~EwClHeAt@o@rAaCZuAVgCr@d@nFnFBRWh@@UMLAYFBGNIKXNOBZERg@EOiGuGYg@`B}FhB_Cp@i@xBMX_@\\oE\\eAt@qA^aBR]j@c@pHqCt@k@pGeHvAoBbCmB`@s@PaAd@kAxAkBrDa@nFl@fS\\pAYvJsGfBi@Nn@\\vDAn@j@bCfGuBbDbB\\Jr@MnB`@zHvCf@w@A{@\\w@fD_BrCyDl@_@zBeCWe@WiAaAgBc@HoAeBOi@WWC]bCgIhAmC~AoCdDmElFuJp@_BhAuELgALiBFiFc@kFaBkIy@uCc@gCeHuVqAcGu@kFuAiS]BOi@k@HeBdBuATq@AyAu@u@GmCzAk@mAyAqGOS]C_Bb@gH@_FbBgC`@gElBiAFsFlBi@?aEbA_A@}CfAyDz@cEXk@ViAMkGLkBwAkCqCe@cFnCqFbEeGPs@o@kBUFXH}AkCaAeDiEmJMGcAz@",
+      "resource_state": 2
+    },
+    "trainer": false,
+    "commute": false,
+    "manual": false,
+    "private": false,
+    "visibility": "followers_only",
+    "flagged": false,
+    "gear_id": "b13521117",
+    "start_latlng": [
+      49.207786,
+      16.601786
+    ],
+    "end_latlng": [
+      49.206024,
+      16.60054
+    ],
+    "average_speed": 4.305,
+    "max_speed": 12.15,
+    "average_temp": 30,
+    "has_heartrate": true,
+    "average_heartrate": 122.0,
+    "max_heartrate": 157.0,
+    "heartrate_opt_out": false,
+    "display_hide_heartrate_option": true,
+    "elev_high": 299.2,
+    "elev_low": 204.0,
+    "upload_id": 19840728197,
+    "upload_id_str": "19840728197",
+    "external_id": "garmin_ping_578703262889",
+    "from_accepted_tag": false,
+    "pr_count": 0,
+    "total_photo_count": 1,
+    "has_kudoed": false,
+    "suffer_score": 37.0
+  },
+  {
+    "resource_state": 2,
+    "athlete": {
+      "id": 46123336,
+      "resource_state": 1
+    },
+    "name": "Gymnastika 🤸‍♂️",
+    "distance": 0.0,
+    "moving_time": 3653,
+    "elapsed_time": 3653,
+    "total_elevation_gain": 0,
+    "type": "Workout",
+    "sport_type": "Workout",
+    "workout_type": null,
+    "device_name": "Garmin fēnix 6X",
+    "id": 18688337288,
+    "start_date": "2026-05-28T10:04:07Z",
+    "start_date_local": "2026-05-28T12:04:07Z",
+    "timezone": "(GMT+02:00) Africa/Blantyre",
+    "utc_offset": 7200.0,
+    "location_city": null,
+    "location_state": null,
+    "location_country": null,
+    "achievement_count": 0,
+    "kudos_count": 2,
+    "comment_count": 0,
+    "athlete_count": 1,
+    "photo_count": 0,
+    "map": {
+      "id": "a18688337288",
+      "summary_polyline": "",
+      "resource_state": 2
+    },
+    "trainer": true,
+    "commute": false,
+    "manual": false,
+    "private": false,
+    "visibility": "followers_only",
+    "flagged": false,
+    "gear_id": null,
+    "start_latlng": [],
+    "end_latlng": [],
+    "average_speed": 0.0,
+    "max_speed": 0.0,
+    "average_temp": 28,
+    "has_heartrate": true,
+    "average_heartrate": 123.5,
+    "max_heartrate": 165.0,
+    "heartrate_opt_out": false,
+    "display_hide_heartrate_option": true,
+    "elev_high": 0.0,
+    "elev_low": 0.0,
+    "upload_id": 19796735654,
+    "upload_id_str": "19796735654",
+    "external_id": "garmin_ping_577327002807",
+    "from_accepted_tag": false,
+    "pr_count": 0,
+    "total_photo_count": 0,
+    "has_kudoed": false,
+    "suffer_score": 36.0
+  },
+  {
+    "resource_state": 2,
+    "athlete": {
+      "id": 46123336,
+      "resource_state": 1
+    },
+    "name": "Afternoon Gravel Ride",
+    "distance": 24616.2,
+    "moving_time": 5480,
+    "elapsed_time": 7984,
+    "total_elevation_gain": 252.0,
+    "type": "Ride",
+    "sport_type": "GravelRide",
+    "workout_type": null,
+    "device_name": "Garmin fēnix 6X",
+    "id": 18675335810,
+    "start_date": "2026-05-27T11:28:43Z",
+    "start_date_local": "2026-05-27T13:28:43Z",
+    "timezone": "(GMT+01:00) Europe/Prague",
+    "utc_offset": 7200.0,
+    "location_city": null,
+    "location_state": null,
+    "location_country": null,
+    "achievement_count": 1,
+    "kudos_count": 6,
+    "comment_count": 0,
+    "athlete_count": 1,
+    "photo_count": 0,
+    "map": {
+      "id": "a18675335810",
+      "summary_polyline": "oblkHscgdBeNbIyArAs@RmBfAU`@sBhAaBvAgBl@sBvAo@l@g@JhBrJFf@IViCtAkPl@sAv@_A~A_FlQeBvDgAhAoCbBONO~@[ViCfAuCtBoC|CuBlDw@bBoAvDqAbFq@vDsDxEa@fHMf@iAtBgCbCaNnHgCvBuAvAWf@CvCTtHA`QSzPKhDStBPjGjIv{@pBdILv@O`@mBhBs@dBShBVpA?\\q@fBM|A_@pAu@rAq@tBKx@G~CSrAS^i@Bj@BRTNpATlEP~@RlCfBzH\\N`ACRZPbATlDZpLWpF]HyAYYZOb@OfDu@dEiB`QYvAHpCn@`F@`Ai@bBIfFH~DEb@]n@AVVhByA`LJmApAQTYLu@j@c@TeBb@qBPWR@Vh@\\xBAx@Qz@DXlAJLwAfAiAn@_Bx@Yh@m@bAqB`C]jGyFdD_JbAiAhAIzAu@nLw@bDXp@LLTJbFPhAd@z@b@Zh@Dz@a@Va@~GkZ|AeE`AyBfFwIpI{JJoACwBt@k@tAoErDuI`AEd@kKn@sClBcC~DcAtAe@LUTqBy@wD@O|CkBfCeDrA}ChCqIh@eER}CPgFA{BaBeVS_F?}Cb@uHf@cDl@gCnA}Cd@Eb@j@b@_@rG_BjCN~CoAxB_@tFuDxHqAXSjAwB\\yAZqCJ?lBdBVjCl@bC~ADGGVRD?i@aA`@`@?[[Q@JQJ\\HFTSc@XW@e@cHuHpAkFzA}B`A{@`CUJOt@aGdAiBf@iBZg@fAm@|FoB|AmAdFqFjBoCfCeBZk@h@uBb@y@vAsAhA[rBIlEb@`Nh@tDC`Bi@|C_ChFyCnAHHnB^~AC|@\\~ANLvEkB|@?xC`B~@OvDz@pExBX@VMN[Ek@d@oAjCmAjBiArC_E~AcBY_@YeBg@cB`B_@~@y@lA_BrBoDvF}Fj@iAd@yBSu@Aa@b@}AJ_Ab@kAJ{@Iq@sA}@UcAH_BN{@\\eAFu@EyCZcFEeAaB{Li@wA}@gEoD}JgE_PgAaF_AwIe@eIOiITaDpAyJ`AyElL}Xh@wBVyCQtCk@nByAdEaG`NqBlG_CdPGlCDnFISMsB]BQm@q@Rw@bAyAx@uAImCkAg@LcBhAQGkAoC{@mDe@_@qBf@{G?wCv@eClAoGpBoH~AgGt@YQEs@^kF`@aMu@DsEjAQWa@mBSc@SsDyDlAMKKw@e@mAe@m@qAdBaDnFICe@e@Sy@_@Io@w@wD}IcAsC",
+      "resource_state": 2
+    },
+    "trainer": false,
+    "commute": false,
+    "manual": false,
+    "private": false,
+    "visibility": "followers_only",
+    "flagged": false,
+    "gear_id": "b13521117",
+    "start_latlng": [
+      49.217919,
+      16.593178
+    ],
+    "end_latlng": [
+      49.205766,
+      16.602506
+    ],
+    "average_speed": 4.492,
+    "max_speed": 10.6,
+    "average_temp": 31,
+    "has_heartrate": true,
+    "average_heartrate": 128.7,
+    "max_heartrate": 167.0,
+    "heartrate_opt_out": false,
+    "display_hide_heartrate_option": true,
+    "elev_high": 312.2,
+    "elev_low": 212.6,
+    "upload_id": 19783490264,
+    "upload_id_str": "19783490264",
+    "external_id": "garmin_ping_576917298972",
+    "from_accepted_tag": false,
+    "pr_count": 0,
+    "total_photo_count": 1,
+    "has_kudoed": false,
+    "suffer_score": 56.0
+  },
+  {
+    "resource_state": 2,
+    "athlete": {
+      "id": 46123336,
+      "resource_state": 1
+    },
+    "name": "Lunch Gravel Ride",
+    "distance": 37818.4,
+    "moving_time": 9654,
+    "elapsed_time": 21068,
+    "total_elevation_gain": 703.0,
+    "type": "Ride",
+    "sport_type": "GravelRide",
+    "workout_type": null,
+    "device_name": "Garmin fēnix 6X",
+    "id": 18638882741,
+    "start_date": "2026-05-24T09:41:38Z",
+    "start_date_local": "2026-05-24T11:41:38Z",
+    "timezone": "(GMT+01:00) Europe/Prague",
+    "utc_offset": 7200.0,
+    "location_city": null,
+    "location_state": null,
+    "location_country": null,
+    "achievement_count": 3,
+    "kudos_count": 8,
+    "comment_count": 0,
+    "athlete_count": 1,
+    "photo_count": 0,
+    "map": {
+      "id": "a18638882741",
+      "summary_polyline": "iiwmHwlxoBmA{AcFqL_BqBaTyDkByAaBnAq@iC}A^Mj@Vq@lAi@n@bDtBoAzB`BlSnDpDbG`DhIhC|ArAqCb@H[AaAvCnClCnEfAL`Ae@`Lf]dQrFK~AtAhCh@rFOxDwAnBiBbLwShEyE`DaFz@mHf@gCv@a@nEFbBgAtDaGZmAT}GiAuEu@iGIoE~@wCbHmHnBNdBsB\\D|ApBdE|AnFaDvDcEpC{AvFoBpACl@`@vA`GdClDtDbEvBL~@y@hFePrRoT~EiDlFaCL`@k@lPHzHh@dGbArC|ANlSuKx@rIr@~Ej@jAnA~@nAHnDy@xBkEpDiSZ]vBKrDn@~E{F|DiLvAqAfAg@~EMnKTxBgBtAeCJsAc@gC{DsFeDkG{G_GiFuLaD{Du@sBAgAv@oCzE}I~KeKlEiF`Bm@hNL~EnDpFjIbCnAfAA`AiArGiWDoAcA_I?oBjBkIfMwQ~EqFpDyAtC[pBVtCjBxBL|FuL|@aAvDeA~DtBp@ArCgEnGuG`PkIfCeF~D}EvDgBbL}BrB`AjAzAr@dB|AvI~BfE|AvA~DzAwAjBn@m@IOxBQrJbAnEeD~De@ZXo@vC_@bHTzJU|D`@~Dk@rM~AdQUzEh@fCKnEdAxCBrAkBpIMbDi@hA`@~JErGp@nELxHm@nDG`MvA|G~@dIv@fR?tEbCpMpChF|DbQNbDg@fEpAhH|AhERvBAvFcAxDx@gAd@cBbAcAbLqFxGzEpC\\lHaAt@rAxMlJ`Cb@hB`BnBn@lC[~B~@nBfDnBtAnBxExCzB~Ab@zAfCF|AaCnL`Gp@lAlAFlASDz@~Ai@cDIVAmDl@`AgApBBlAbA^yAs@bATgAuA\\p@b@_@MXeGaWq@_AmBm@sCeDyB{D_CmBqD}E_@K_B|@mCm@wNmI_DeDeC{AaGtAcCJ_A_@{E_G_MbHyAvCcAv@]iBl@aDOmCeC{Gy@iEiAwBm@wEi@qAeIeH_C^cGnDuD@eBhAsDw@sGSqBaEYaCRuDuBuF_ErBqFiAoEl@SyBJsDeA_HcAmAiAU`APIkERcAzGo@IcAoA{BsDmDwAaCoEkAqCqBcLgAoDoBqE{@}EzBcMhAqDjBwExDgOi@qInCiEtEgFjKo@TmCq@kAf@_K~S{E~GeUxNwFrB_C~DeEjB_IpHwHvC}JxIcLhCgD|AaCD_HbCyMnBaPvFqP~DeG~@aDYoD{BaCaEwCaCeHqEgBSad@fG}DhAg`@`SqAhBuAxD_FjFyE|AuFByEdEeGjAwCx@cEiGwAiFoEoB{GsFGo@j@kF{C_C`@yLa@e@qE}@}BuC",
+      "resource_state": 2
+    },
+    "trainer": false,
+    "commute": false,
+    "manual": false,
+    "private": false,
+    "visibility": "followers_only",
+    "flagged": false,
+    "gear_id": "b13521117",
+    "start_latlng": [
+      49.603522,
+      18.480511
+    ],
+    "end_latlng": [
+      49.603257,
+      18.480685
+    ],
+    "average_speed": 3.917,
+    "max_speed": 12.98,
+    "average_temp": 28,
+    "has_heartrate": true,
+    "average_heartrate": 146.3,
+    "max_heartrate": 182.0,
+    "heartrate_opt_out": false,
+    "display_hide_heartrate_option": true,
+    "elev_high": 927.4,
+    "elev_low": 421.0,
+    "upload_id": 19746331057,
+    "upload_id_str": "19746331057",
+    "external_id": "garmin_ping_575679335752",
+    "from_accepted_tag": false,
+    "pr_count": 0,
+    "total_photo_count": 2,
+    "has_kudoed": false,
+    "suffer_score": 260.0
+  },
+  {
+    "resource_state": 2,
+    "athlete": {
+      "id": 46123336,
+      "resource_state": 1
+    },
+    "name": "Morning Gravel Ride",
+    "distance": 29642.2,
+    "moving_time": 8188,
+    "elapsed_time": 11733,
+    "total_elevation_gain": 684.0,
+    "type": "Ride",
+    "sport_type": "GravelRide",
+    "workout_type": null,
+    "device_name": "Garmin fēnix 6X",
+    "id": 18620512967,
+    "start_date": "2026-05-23T08:38:21Z",
+    "start_date_local": "2026-05-23T10:38:21Z",
+    "timezone": "(GMT+01:00) Europe/Prague",
+    "utc_offset": 7200.0,
+    "location_city": null,
+    "location_state": null,
+    "location_country": null,
+    "achievement_count": 12,
+    "kudos_count": 8,
+    "comment_count": 0,
+    "athlete_count": 1,
+    "photo_count": 0,
+    "map": {
+      "id": "a18620512967",
+      "summary_polyline": "wzvmHubxoBe@dLL^hCzAc@rG|@jAzCxAfAbAnB^`A|@Z^~ArEbC`DlAhAh@FrJ}BrD}C|DBjGuA|AiApCiDfA}CnBiCxb@gTvf@cHfDr@|IfGlApAvBxECpAo@`B]tCEpFg@zCMxHd@~DJxDl@pB~BfMf@dFj@fLw@fEL|@KdGLjEz@~CjAlK~@|Er@jB~BjD~D`Ov@nBp@jIb@m@A_EhBaMLuAn@_AjDy@j@DOfBMzPh@rHv@vCzCzE^TtFzC|Dz@|A`A`GpBPG{@_AwF{Jm@uFVoCV_Ah@s@l@aCvAuB`Ae@MnAx@zMd@`AvAxA{@}BFeDJwAz@eE`BqDfBcHTiFmAmSJ[]cJW}@U{CqCyIAcDpBcEbHiIhE_BtBSnBLz@t@xAfBdAjDzBfQZb@z@`DfCvHxBxCjBnD`D`DTd@vEbDhIpDtC\\nDWj@g@lA}GnA_DrBeH\\i@L{@hCsBxAoBpBm@zA~@dB^vDu@hAeAbFyIrDwJnF{JlAcBl@G]nF[z@e@vDYr@kCbCS`AhBDn@|@Jj@fApOInDUb@EjAuEdOg@t@eFzNkAhFw@tEg@c@Io@AcG_@u@i@v@_AvK@tL_@bE]Nm@_AsAoGu@yAkAgA_AHSn@lBbDWfCq@zA`AqD@q@uA}BOq@T_@~@KxA~@zCdLVRb@MNqULwCh@}Cn@iAVJJf@AlHVh@XEpAqHpA}EfHeSjDkLVoBG_DiAmNu@qAeB?Og@Tm@bCeCj@cAvAsJDq@Q[aAb@oCfG}B|C{ApCyCbIuB|DgB~By@r@gDn@wD_BqBj@}AfByA~@o@fAoAtD{@nE{ArDqA~EmA|@kFPaLmDy@}@kC}AmEaFyAgD_CoDuAgDiDeMSeBAgD_@qDk@mCiCoD_Be@qDRcDv@qA~@sDxEqBbDgAzCJpBpDdKn@lPAhCp@~JBzHq@`F_DvHaAhGEvDZlCu@e@oAoBq@_CReDDgHWMeAjAcCzH[tDp@zFrA|DvDhFeFaA{NqEmCiByA_CsAcFiAmLAgJl@kDEk@WOyCh@e@x@s@hEoAbPId@i@LUm@a@kGqCwLmB}FgAgC{AaCm@mBkAyEGkBe@qCg@uAEu@AkQj@wDQ{Kq@gHaD_Ps@yJjAwVPuAp@mB?kAC_@_CuCgAeBgJsGwCi@sf@dHsc@tTo@t@mAdD}CbEaBtAwCpA{E`@}EeAoj@oYIs@b@uIQ{AgEw@uCwC",
+      "resource_state": 2
+    },
+    "trainer": false,
+    "commute": false,
+    "manual": false,
+    "private": false,
+    "visibility": "followers_only",
+    "flagged": false,
+    "gear_id": "b13521117",
+    "start_latlng": [
+      49.603322,
+      18.480476
+    ],
+    "end_latlng": [
+      49.603263,
+      18.480685
+    ],
+    "average_speed": 3.62,
+    "max_speed": 13.7,
+    "average_temp": 25,
+    "has_heartrate": true,
+    "average_heartrate": 145.7,
+    "max_heartrate": 183.0,
+    "heartrate_opt_out": false,
+    "display_hide_heartrate_option": true,
+    "elev_high": 1275.4,
+    "elev_low": 429.6,
+    "upload_id": 19727549747,
+    "upload_id_str": "19727549747",
+    "external_id": "garmin_ping_575103957520",
+    "from_accepted_tag": false,
+    "pr_count": 8,
+    "total_photo_count": 2,
+    "has_kudoed": false,
+    "suffer_score": 218.0
+  },
+  {
+    "resource_state": 2,
+    "athlete": {
+      "id": 46123336,
+      "resource_state": 1
+    },
+    "name": "Evening Gravel Ride",
+    "distance": 19040.9,
+    "moving_time": 4196,
+    "elapsed_time": 4791,
+    "total_elevation_gain": 157.0,
+    "type": "Ride",
+    "sport_type": "GravelRide",
+    "workout_type": null,
+    "device_name": "Garmin fēnix 6X",
+    "id": 18612102037,
+    "start_date": "2026-05-22T17:35:15Z",
+    "start_date_local": "2026-05-22T19:35:15Z",
+    "timezone": "(GMT+01:00) Europe/Prague",
+    "utc_offset": 7200.0,
+    "location_city": null,
+    "location_state": null,
+    "location_country": null,
+    "achievement_count": 1,
+    "kudos_count": 5,
+    "comment_count": 0,
+    "athlete_count": 1,
+    "photo_count": 0,
+    "map": {
+      "id": "a18612102037",
+      "summary_polyline": "kfwmH}jxoBWG}A}@W[gCeHyBcEsAgB[Q}Fw@aKkBi@Wa@g@}@iBWu@?OXy@`@qIHwBIiFLoDJmAZkCv@oBj@cA?_@QSeCLeAISMu@}@_CmDGUCe@GMg@Ga@QMSe@qAIg@@IZ]t@e@TYP}@C_EIc@a@cAYiCAgAXmDVqDJqDXoB~@}Cb@mBNeAXiDTkAbAmHfCwMvAyElAqBvA}AxAoFjCeI~@kAx@sA~GqTD_@DkAZaAl@a@PW`BwAtEgDl@S`BGLIvBiEVeAJyAf@gC`@}Dj@eDJgAVgALcAIyBFuACkADs@X}@n@_@l@@zBb@l@f@n@lAn@t@h@j@XNT@jBq@~CJJJLj@HjBDlBNh@`Bj@dCvA`@L`AEbAJZ_@tH}Uv@qCxC_JjBiFhBwDtBcD`CyBvAu@pBw@rEkAhFs@zD}@d@OjBsAv@Wp@e@VKd@BHLsAR_BfAmA`@aGrAaJ`B_Cp@_D|Ae@ZqArAaApA_BlCu@vAu@hBmAhDmIpWaC|G_D`K{@rAgBdB_@@g@Yg@Ig@JaAp@}AdB{Ax@u@IgBq@[?_@NiB|AcAn@qB`@YTmA|AUt@aAxEc@zAW^G?_@k@oBmBi@WuALu@QqAy@QAg@TaDrCU\\Kr@SzBcAjCgBpFmAbEi@|AcCzDQt@gB`F{AvE_@n@m@p@cBjDsAhFoBdKe@lCuArJStC_AhDc@nB]vBOpEg@`FGvAHzBLhAZxARnCAl@G^IZOR_B|ASx@iBhBi@x@yAlCYt@SpAKvAS^UJCLA\\Fd@GrA]fC[~@Cj@cBtEmAvDQ~A@n@UnHOp@c@dAg@pBm@rAgAfAiAl@cATqE\\cBd@QNu@Js@j@_DvDkB~@_D~@uAv@}@fAgAnB_@~@e@jBSnA[zCA~@JlH@vCGT[XUlCi@`E[vAoC~HmGxRk@~BSbBQzCI\\c@^i@JJ^`@p@fBlAp@G`Ag@LAnD\\dAXXMLWNsAXy@x@m@rCeCj@u@b@gAZgAl@uAVmAlA_IXmApBqEtB}Fb@wAj@cCL[VsAPMh@AK_@M}@R}@\\{@jBuA|CWb@DlBw@p@I|@TfGNdBVnElArC`@xEbAbD|AnA`@nBd@bBRfHrBtEfBpI~BrDh@x@TVNpDr@z@D`BQPi@x@kHt@mEVyBNyBGc@mB_A]YCKAm@^kH",
+      "resource_state": 2
+    },
+    "trainer": false,
+    "commute": false,
+    "manual": false,
+    "private": false,
+    "visibility": "followers_only",
+    "flagged": false,
+    "gear_id": "b13521117",
+    "start_latlng": [
+      49.603238,
+      18.480704
+    ],
+    "end_latlng": [
+      49.603331,
+      18.480297
+    ],
+    "average_speed": 4.538,
+    "max_speed": 12.64,
+    "average_temp": 22,
+    "has_heartrate": true,
+    "average_heartrate": 117.7,
+    "max_heartrate": 145.0,
+    "heartrate_opt_out": false,
+    "display_hide_heartrate_option": true,
+    "elev_high": 493.8,
+    "elev_low": 373.4,
+    "upload_id": 19718966506,
+    "upload_id_str": "19718966506",
+    "external_id": "garmin_ping_574799406008",
+    "from_accepted_tag": false,
+    "pr_count": 1,
+    "total_photo_count": 0,
+    "has_kudoed": false,
+    "suffer_score": 22.0
+  },
+  {
+    "resource_state": 2,
+    "athlete": {
+      "id": 46123336,
+      "resource_state": 1
+    },
+    "name": "Lunch Gymnastics",
+    "distance": 3722.6,
+    "moving_time": 3368,
+    "elapsed_time": 3760,
+    "total_elevation_gain": 28.0,
+    "type": "Workout",
+    "sport_type": "Workout",
+    "workout_type": null,
+    "device_name": "Garmin fēnix 6X",
+    "id": 18593664085,
+    "start_date": "2026-05-21T09:59:58Z",
+    "start_date_local": "2026-05-21T11:59:58Z",
+    "timezone": "(GMT+01:00) Europe/Prague",
+    "utc_offset": 7200.0,
+    "location_city": null,
+    "location_state": null,
+    "location_country": null,
+    "achievement_count": 0,
+    "kudos_count": 4,
+    "comment_count": 0,
+    "athlete_count": 1,
+    "photo_count": 0,
+    "map": {
+      "id": "a18593664085",
+      "summary_polyline": "g_ikHytidB",
+      "resource_state": 2
+    },
+    "trainer": false,
+    "commute": false,
+    "manual": false,
+    "private": false,
+    "visibility": "followers_only",
+    "flagged": false,
+    "gear_id": null,
+    "start_latlng": [
+      49.203888,
+      16.60053
+    ],
+    "end_latlng": [
+      49.203895,
+      16.600585
+    ],
+    "average_speed": 1.105,
+    "max_speed": 10.814,
+    "average_cadence": 63.1,
+    "average_temp": 27,
+    "has_heartrate": true,
+    "average_heartrate": 119.4,
+    "max_heartrate": 154.0,
+    "heartrate_opt_out": false,
+    "display_hide_heartrate_option": true,
+    "elev_high": 244.2,
+    "elev_low": 201.4,
+    "upload_id": 19700183925,
+    "upload_id_str": "19700183925",
+    "external_id": "garmin_ping_574225485839",
+    "from_accepted_tag": false,
+    "pr_count": 0,
+    "total_photo_count": 1,
+    "has_kudoed": false,
+    "suffer_score": 15.0
+  },
+  {
+    "resource_state": 2,
+    "athlete": {
+      "id": 46123336,
+      "resource_state": 1
+    },
+    "name": "Afternoon Gravel Ride",
+    "distance": 26258.7,
+    "moving_time": 5259,
+    "elapsed_time": 6628,
+    "total_elevation_gain": 235.0,
+    "type": "Ride",
+    "sport_type": "GravelRide",
+    "workout_type": null,
+    "device_name": "Garmin fēnix 6X",
+    "id": 18584594224,
+    "start_date": "2026-05-20T15:20:34Z",
+    "start_date_local": "2026-05-20T17:20:34Z",
+    "timezone": "(GMT+01:00) Europe/Prague",
+    "utc_offset": 7200.0,
+    "location_city": null,
+    "location_state": null,
+    "location_country": null,
+    "achievement_count": 1,
+    "kudos_count": 4,
+    "comment_count": 0,
+    "athlete_count": 1,
+    "photo_count": 0,
+    "map": {
+      "id": "a18584594224",
+      "summary_polyline": "oejkHqzhdBoCzAcCx@iAfAaGpCgD|BaGrBsRdKyFhC_At@Br@nBhLqPrKmD|AyJdH{B|@{B~AGPJp@f@tCx@|DEj@qB~@oQvA}@j@eBxBo@QGV\\a@PXKbAwEtP{@`BeApA}CjB_@rAuD~AqC|BoC`DqAvBeBbEwAjE}AfIcA~AuBnCa@zGeA~BgCtCgLvFcCjB{DxDGzBT`I@nHEvQWtMSjBLvErAzObClUrBfUZdBfB~Ga@|@eB`B_@~@WpBPlACv@y@rBMhBaCfGMx@IvCUhAw@r@f@d@`@|@dA|KfBhHT\\lAAV`@ZdDd@rOUpEUPeBSYNUj@WrDq@zDuBtRJxDh@vGs@pBHx@?~AO`APtEe@fAXfBiA|IrAU^gAh@k@p@}DT[`@VZnBH~@OdBtARFWGe@He@~A{A\\y@`BgA`AsBjC_@|CiCbBuB|BaGv@gBfAiAjDy@tKw@jE`@RNJ^BnEL~@Zr@fAn@v@G`@_@z@gCfBiIrAyE`A{Ef@{AjCaG|DaHpEyFzCcDDu@KcCfAeAx@{C`EqJ|@?b@sKj@iCtAsB\\Y`HyBTeB_@mBSgB~BwAhAaAj@y@pCoGx@_C`AoDt@qGPcCFkEQ{F_ByUEeHNaD`@wDfAqElAyCb@Ad@d@z@g@hFwAnCZ~Aw@bEgAtF{CzGcAh@[l@w@~@sBh@uEf@wAbAiE|BqCnCe@XSr@uGbA{At@}Bb@_@`HmCdAo@hFqFxBaDpB_Bt@{@`AuCbBqBtDc@fHn@lQ\\xAa@fJkGf@SpAEZbG`@~BNNjAs@lE_A~CjB~@KtEdAxB`Ah@f@f@Jb@q@F_AnAoBfE{CrFaG{AcDK]@[vA_@x@m@zBwC`BmDjFmFp@kA\\oBOo@@c@nA}EJ}@Qu@sAgAMqAXgCVq@Di@AiE\\_DCoB{AgL{@cCi@sCeC{GaCcI{DwOeA{I_@aIQqGJiEzCaShBsG|AkDx@aCJSNBNgACOaA[mAeAkNiOgDcEmHkKqCsKiAeFyA}Ea@Us@DqQ{HwAq@sDhCiIpHRlA^`ABf@oBvFoDbMBj@Rd@lCxCHz@S\\}C`EyDdE}C~E[g@sBkHOK{A`BWAi@u@SB{AhB{AtCeG~Gg@bA@t@{@lAmDpCaA`@cBdBmExCcDv@KYImAcDmUl@o@`E_CJMa@\\E{@b@m@`Bm@DVVtD",
+      "resource_state": 2
+    },
+    "trainer": false,
+    "commute": false,
+    "manual": false,
+    "private": false,
+    "visibility": "followers_only",
+    "flagged": false,
+    "gear_id": "b13521117",
+    "start_latlng": [
+      49.207542,
+      16.60147
+    ],
+    "end_latlng": [
+      49.207507,
+      16.601727
+    ],
+    "average_speed": 4.993,
+    "max_speed": 11.7,
+    "average_temp": 26,
+    "has_heartrate": true,
+    "average_heartrate": 130.2,
+    "max_heartrate": 164.0,
+    "heartrate_opt_out": false,
+    "display_hide_heartrate_option": true,
+    "elev_high": 304.4,
+    "elev_low": 191.0,
+    "upload_id": 19690997191,
+    "upload_id_str": "19690997191",
+    "external_id": "garmin_ping_573910898958",
+    "from_accepted_tag": false,
+    "pr_count": 0,
+    "total_photo_count": 1,
+    "has_kudoed": false,
+    "suffer_score": 57.0
+  },
+  {
+    "resource_state": 2,
+    "athlete": {
+      "id": 46123336,
+      "resource_state": 1
+    },
+    "name": "Evening Gravel Ride",
+    "distance": 24770.0,
+    "moving_time": 4231,
+    "elapsed_time": 4582,
+    "total_elevation_gain": 223.0,
+    "type": "Ride",
+    "sport_type": "GravelRide",
+    "workout_type": null,
+    "device_name": "Garmin fēnix 6X",
+    "id": 18571458003,
+    "start_date": "2026-05-19T16:31:25Z",
+    "start_date_local": "2026-05-19T18:31:25Z",
+    "timezone": "(GMT+01:00) Europe/Prague",
+    "utc_offset": 7200.0,
+    "location_city": null,
+    "location_state": null,
+    "location_country": null,
+    "achievement_count": 7,
+    "kudos_count": 7,
+    "comment_count": 0,
+    "athlete_count": 1,
+    "photo_count": 0,
+    "map": {
+      "id": "a18571458003",
+      "summary_polyline": "{tjkHyphdB}CdBmGbDoBr@k\\nPMTBVbCxKAReJlFeFlDqCxAeKpH}@XgB`A{AjADf@~AlGPpAGToAr@oDn@{Lj@w@\\o@l@g@r@_FtQuAnDkBzBqCzAINBb@Q^}CpAuCtBsCfDkBxC_BxDgB`GiAjGuAnBcAfA_@t@YtFSbAm@jAqA`BqB`ByIhEwBvAmC`CqArAIVAxBZ|NEzROfJ_@jHLrErF~j@b@`Gv@fHh@rCjAfEZh@XP?NID]c@I@k@|@mB|Be@xBCd@Vz@?h@g@fA_AhEw@`Bu@jCB|C]xAmAbAhAPZ~BJdCZdBNzBdBxHXJnAEb@pCN|B^`MSbDAlAWNeBWUXUr@SpDi@pCmBdRUjA@dEb@bEAh@c@|BD~AOzA\\tECZYv@NvBcAnIh@?^QR}@r@m@PuAh@cCPSPHLV`@lCB`@O|@?f@p@Tr@M?aAFMh@k@pA}BtAcA~@kBzB_@xFcFn@aAvA}DrA}C^_@`B_@Z_@nASlKs@hEb@^l@NnFHh@Tj@d@h@j@Nl@Ml@u@b@sA~F}Vn@uBpB_F~EwI~IqKJm@IuBD_@n@m@lAuD~DgJv@UFQTqFNoBV}AZcAfAiB^WpGaBJOVcB?[s@oD?UrCoBnAqAfBgDrCmIhAkGT}BTqHImDuBeXAqFPkEh@{Dh@cCjB{E`@Oj@v@h@]nGwBbB`@h@AjIwCbD{BnHwAt@i@t@iAl@uA`@sDdBaHh@aAdBoBfCa@b@c@XaEJo@~@cBv@{Bz@u@zH{CzBqBlD{DrA_ChCmBnB}EtAuAvC[|Eb@dOj@dDAdAS|J}G|Ag@^DDLL`DTfAE\\ZjBNRPBrDcBrAOpAx@pAr@fAQbB\\hDdAhCvAR@H}@Tw@t@yAnBaAlB}A`FeGWi@_AsCA]rAg@tAqArEmHlAyAlCaCbAuBNsASs@@[n@qC\\aANiAGi@sA{@Uy@JwBHk@Z{@J_AEuDZwDGiB]eDaA{Fi@uAcAsEcBoEwBcHwDcOi@sCa@iDk@kH_@_HAaGNkBbCaQn@mCjAmD~AeDr@yBLWV@RmAQYy@UaB{AaN}N{AiB_IwLq@k@cCaJyBmJaAsC}@MaBa@}HkD}BsA}@KkAk@e@DgA~@I\\qAv@qExDyA|AG^n@xBIr@kGdR}@xAyDh@oObD}HfDqHbEC`@FZbAnDbA~ES`@uAj@oDpC",
+      "resource_state": 2
+    },
+    "trainer": false,
+    "commute": false,
+    "manual": false,
+    "private": false,
+    "visibility": "followers_only",
+    "flagged": false,
+    "gear_id": "b13521117",
+    "start_latlng": [
+      49.209367,
+      16.598453
+    ],
+    "end_latlng": [
+      49.207428,
+      16.601457
+    ],
+    "average_speed": 5.854,
+    "max_speed": 11.14,
+    "average_temp": 23,
+    "has_heartrate": true,
+    "average_heartrate": 147.9,
+    "max_heartrate": 187.0,
+    "heartrate_opt_out": false,
+    "display_hide_heartrate_option": true,
+    "elev_high": 302.0,
+    "elev_low": 196.6,
+    "upload_id": 19677690735,
+    "upload_id_str": "19677690735",
+    "external_id": "garmin_ping_573487311081",
+    "from_accepted_tag": false,
+    "pr_count": 3,
+    "total_photo_count": 0,
+    "has_kudoed": false,
+    "suffer_score": 121.0
+  },
+  {
+    "resource_state": 2,
+    "athlete": {
+      "id": 46123336,
+      "resource_state": 1
+    },
+    "name": "Evening Swim",
+    "distance": 1000.0,
+    "moving_time": 1671,
+    "elapsed_time": 2901,
+    "total_elevation_gain": 0,
+    "type": "Swim",
+    "sport_type": "Swim",
+    "device_name": "Garmin fēnix 6X",
+    "id": 18560485392,
+    "start_date": "2026-05-18T16:43:27Z",
+    "start_date_local": "2026-05-18T18:43:27Z",
+    "timezone": "(GMT+02:00) Africa/Blantyre",
+    "utc_offset": 7200.0,
+    "location_city": null,
+    "location_state": null,
+    "location_country": null,
+    "achievement_count": 0,
+    "kudos_count": 5,
+    "comment_count": 0,
+    "athlete_count": 1,
+    "photo_count": 0,
+    "map": {
+      "id": "a18560485392",
+      "summary_polyline": "",
+      "resource_state": 2
+    },
+    "trainer": true,
+    "commute": false,
+    "manual": false,
+    "private": false,
+    "visibility": "followers_only",
+    "flagged": false,
+    "gear_id": null,
+    "start_latlng": [],
+    "end_latlng": [],
+    "average_speed": 0.598,
+    "max_speed": 15.38,
+    "has_heartrate": true,
+    "average_heartrate": 138.3,
+    "max_heartrate": 171.0,
+    "heartrate_opt_out": false,
+    "display_hide_heartrate_option": true,
+    "elev_high": 0.0,
+    "elev_low": 0.0,
+    "upload_id": 19666611885,
+    "upload_id_str": "19666611885",
+    "external_id": "garmin_ping_573120504445",
+    "from_accepted_tag": false,
+    "pr_count": 0,
+    "total_photo_count": 1,
+    "has_kudoed": false,
+    "suffer_score": 85.0
+  },
+  {
+    "resource_state": 2,
+    "athlete": {
+      "id": 46123336,
+      "resource_state": 1
+    },
+    "name": "Evening gym",
+    "distance": 0.0,
+    "moving_time": 2599,
+    "elapsed_time": 2599,
+    "total_elevation_gain": 0,
+    "type": "Workout",
+    "sport_type": "Workout",
+    "workout_type": null,
+    "device_name": "Garmin fēnix 6X",
+    "id": 18533485795,
+    "start_date": "2026-05-16T17:50:11Z",
+    "start_date_local": "2026-05-16T19:50:11Z",
+    "timezone": "(GMT+02:00) Africa/Blantyre",
+    "utc_offset": 7200.0,
+    "location_city": null,
+    "location_state": null,
+    "location_country": null,
+    "achievement_count": 0,
+    "kudos_count": 4,
+    "comment_count": 0,
+    "athlete_count": 1,
+    "photo_count": 0,
+    "map": {
+      "id": "a18533485795",
+      "summary_polyline": "",
+      "resource_state": 2
+    },
+    "trainer": true,
+    "commute": false,
+    "manual": false,
+    "private": false,
+    "visibility": "followers_only",
+    "flagged": false,
+    "gear_id": null,
+    "start_latlng": [],
+    "end_latlng": [],
+    "average_speed": 0.0,
+    "max_speed": 0.0,
+    "average_cadence": 57.4,
+    "average_temp": 28,
+    "has_heartrate": true,
+    "average_heartrate": 108.1,
+    "max_heartrate": 129.0,
+    "heartrate_opt_out": false,
+    "display_hide_heartrate_option": true,
+    "elev_high": 357.4,
+    "elev_low": 343.4,
+    "upload_id": 19639275918,
+    "upload_id_str": "19639275918",
+    "external_id": "garmin_ping_572201785123",
+    "from_accepted_tag": false,
+    "pr_count": 0,
+    "total_photo_count": 0,
+    "has_kudoed": false,
+    "suffer_score": 8.0
+  },
+  {
+    "resource_state": 2,
+    "athlete": {
+      "id": 46123336,
+      "resource_state": 1
+    },
+    "name": "Morning Gravel Ride",
+    "distance": 67028.9,
+    "moving_time": 11358,
+    "elapsed_time": 18226,
+    "total_elevation_gain": 183.0,
+    "type": "Ride",
+    "sport_type": "GravelRide",
+    "workout_type": null,
+    "device_name": "Garmin fēnix 6X",
+    "id": 18453032555,
+    "start_date": "2026-05-10T08:41:59Z",
+    "start_date_local": "2026-05-10T10:41:59Z",
+    "timezone": "(GMT+01:00) Europe/Bratislava",
+    "utc_offset": 7200.0,
+    "location_city": null,
+    "location_state": null,
+    "location_country": null,
+    "achievement_count": 14,
+    "kudos_count": 7,
+    "comment_count": 0,
+    "athlete_count": 1,
+    "photo_count": 0,
+    "map": {
+      "id": "a18453032555",
+      "summary_polyline": "oxrgH}hjkB?m@Zm@|CaAVm@aA}IIcK{@k@Mk@tUmF~CqCrB{Ep@wD|RkbB\\cHfAio@D{YUoIuDqV]_L~Cum@C{Gs@sFqBoEsAg@}FaEuFMgFgFu`@qWuEQsJ}A[eBiBu@_AqAmIgBm@BmKjFyALhAqRMeL\\mBz@{BxA}{@GuA_AWo@_HsAaJrM{KM}FuIc@eMr@ym@rLcSJkNiBqdDmdAcQ_F_@]\\eEa@mAsUeIqAq@}DgFwBwAk]oKiDLsBp@kDo@{SwG}F}BaBqAoB?al@mQyMaC_HWu^b@uHc@_Ct@sq@~AoSjEyACyB~Am^bJeBJmGc@oH}BsWkRuEaA_EDyFhBcErDwCjFqCrIqCdGgD`FyDvD{H~DmR|DcPhGcLpHiSxRyCbBkJdCmE~@iF^gLeAmMmEqJoHoF{CyF{@gGx@{DlBgMnIoI~ByHRgSmBoTrB}Jw@e@PNd@pAGdAm[IaC{Fk@{EmAqEwBiE{C{FuGcW}d@mE{GsF_HuLoK_QeKgG}GwCsFoCgIwJuj@eCiI{BuEmDuEmEkDeKkGCi@^wAZQdBFn@sCj@cWQmT[gAZwHC_@MJCdKRVDn@?pKNdGm@`Ve@vBJVw@ViA[q@fB?j@nOtJtDbEnCxErBlF|@pD~Hhe@dApEjCtHhEjHbEhEnT|MnJ`JbIrKrWve@bG~HjFdEzC|AzAnCsA_CxEtAvIdAJdAyA|\\YX}@KCm@bAKdGn@bFInQiBtRxB`GMtHmBlUcNtGs@fC^pCfAjRxMnHzB|KvAzD@`Fm@pKmCrDaB|C_CdOiOpL}HjLcFtU}E~GaDxFkFvDkF|BgFtCaJhDaG|FiEtDaAjDG~Ch@vDlBrRhOjHfCdHj@zCO`]wIpCgBbB@rI{BnIoAhp@yAhBo@fEZn@I?i@Fp@nAFp_@g@zL~@|KjCrg@zOhCDlB|AbHjCrR~FnCd@jD}@tBBp\\bKhCxAnFlGzVxI`@~@a@nEd@^neDzdAjSrF|PtAdMYrLoBvXgG`PiBnI^nXWfKVfq@k@f@z@fC?|@zA~BtGHx@q@f@]x@~FvT{Da@yCoBcKxB}AzAsClJsBnEi@rCWxI]|A[zEQN{@dLYj@JtAuApQ[|IcAdKDnC~AdBDjAlAvCtSpNt@pB}@`ErBObH|EfA^`BhDt@`DXxD@zC_Dnm@DpG\\vGlD`TNbC?l]uAfv@_AvKuRb`BiAfDeA`B{CbCsUnF@XhA~@JlJbAfJ]t@aD`ASv@",
+      "resource_state": 2
+    },
+    "trainer": false,
+    "commute": false,
+    "manual": false,
+    "private": false,
+    "visibility": "followers_only",
+    "flagged": false,
+    "gear_id": "b13521117",
+    "start_latlng": [
+      48.598125,
+      17.748961
+    ],
+    "end_latlng": [
+      48.598118,
+      17.748942
+    ],
+    "average_speed": 5.901,
+    "max_speed": 10.057,
+    "average_temp": 27,
+    "has_heartrate": true,
+    "average_heartrate": 125.7,
+    "max_heartrate": 153.0,
+    "heartrate_opt_out": false,
+    "display_hide_heartrate_option": true,
+    "elev_high": 204.8,
+    "elev_low": 152.8,
+    "upload_id": 19558091764,
+    "upload_id_str": "19558091764",
+    "external_id": "garmin_ping_569549456876",
+    "from_accepted_tag": false,
+    "pr_count": 2,
+    "total_photo_count": 4,
+    "has_kudoed": false,
+    "suffer_score": 96.0
+  },
+  {
+    "resource_state": 2,
+    "athlete": {
+      "id": 46123336,
+      "resource_state": 1
+    },
+    "name": "Afternoon Gravel Ride",
+    "distance": 33429.1,
+    "moving_time": 6853,
+    "elapsed_time": 11752,
+    "total_elevation_gain": 284.0,
+    "type": "Ride",
+    "sport_type": "GravelRide",
+    "workout_type": null,
+    "device_name": "Garmin fēnix 6X",
+    "id": 18428809258,
+    "start_date": "2026-05-08T14:57:21Z",
+    "start_date_local": "2026-05-08T16:57:21Z",
+    "timezone": "(GMT+01:00) Europe/Bratislava",
+    "utc_offset": 7200.0,
+    "location_city": null,
+    "location_state": null,
+    "location_country": null,
+    "achievement_count": 2,
+    "kudos_count": 5,
+    "comment_count": 0,
+    "athlete_count": 1,
+    "photo_count": 0,
+    "map": {
+      "id": "a18428809258",
+      "summary_polyline": "}fsgHcfjkBKyBUGcBNoB~@u@{Dy@q@uBVcErAq@GoBcAe@t@SnBwA@k[zn@g\\rv@sAdCmHzPaAxCH`@|@jAGXmB~CiGnG{EpJqDlGaFpKsB~BiHhC_OlK}@z@wBvDyBvCoB|B{@tEuBrA_CYqCvAcCnB_G~GgAfBe@vDoBnHmIlP}@\\}JdQ}I`NmA`GaHrHgGzJy@v@aBv@m@r@yCjG_CbGq@bAeAhE{A`BIt@fAzB@h@uErEqFzGsBjEu@fCgAxA_ArBSPa@MqC{E_DkEk@?]~EOd@kDhBuC`H{DbHgAjAkFzCwD`E{CjF_J|JkDlHkAdAyBjAm@rCgAfAoD~FwInGeK|NuDtEwF|MaFtQc@bAmFbFoB`DsD~B}CbGgCxDiEtLqApHi@jEGdHYpEa@fFo@rDWdASV}DnCwBpI_@|G}AzM?nAVhDz@~ECnAq@lINhBZjAxE~Kn@z@~At@tGh@|I{B~CfCnAr@rCz@lBLhHaAVRrA`HDfAaAzEQvCPlE@fGi@lC{@rBQbBVpCT~JhAnCH`Bi@t@y@pBq@jFx@sFxAuDI{Aq@sAWsAc@{MFiB`AuCd@iCBoEQqHVkCp@uCB{@mAiHq@c@qGt@sCMgCw@_FaEwHdCyIy@wAaA_A_BmEkLUoBB{A\\gDBkCo@{DOeFTgEjAiKRiE|BoJd@k@`DkB^u@l@uHVw@VeCZuLb@kDzAaJpDcKl@oAbAiA|D{Hj@o@|CeB~AwC|FwFvFiSfG}NtD{DvB_EdGeIzE_DtCkC|BgE|AcBbAeDrD}BvD{HpCkCxE{FnBsDvEiFtEkChByBlDsGxBiFr@y@rCqAZkFr@[Pj@lCnDdBbDt@r@ZC~ByDlAyD|AmCdEkGxFuFF}@s@aBAcAzAeBRyAd@wAdIqQp@_ApCiB|CmFlG_IvBmBf@aAz@{ExDkFvHkNtCaEhBkD`Ae@`IgPhB_Hb@oDn@uAfHeItAgAlDmBtBTl@QhG_Fx@YtAyA~@gBpAy@Vr@PCbHcFhGsDdCiDlBiDAm@[aAbCoCvEiKrJ{QbB}B`EyDvAsBh@iAEWyAgBFg@pMoY`]ww@Ke@uCcDuC}FsCgFLY~C{Bp@oBnB_CrBiL_@iCZk@AUcBgDw@_AcDu@wBL?~@j@S_@EN\\OCJMCLGs@KEXVU\\LeArC?pAZpAhApBxDdAgAp@\\Zd@tBM`ClAlBbBpDz@bHR\\}B^g@~ChArAQhB_A|BIr@b@r@zDv@K[vDJvDp@CZg@d@I",
+      "resource_state": 2
+    },
+    "trainer": false,
+    "commute": false,
+    "manual": false,
+    "private": false,
+    "visibility": "followers_only",
+    "flagged": false,
+    "gear_id": "b13521117",
+    "start_latlng": [
+      48.598135,
+      17.749055
+    ],
+    "end_latlng": [
+      48.598139,
+      17.748981
+    ],
+    "average_speed": 4.878,
+    "max_speed": 15.36,
+    "average_temp": 26,
+    "has_heartrate": true,
+    "average_heartrate": 121.8,
+    "max_heartrate": 167.0,
+    "heartrate_opt_out": false,
+    "display_hide_heartrate_option": true,
+    "elev_high": 329.0,
+    "elev_low": 156.2,
+    "upload_id": 19533552919,
+    "upload_id_str": "19533552919",
+    "external_id": "garmin_ping_568773802184",
+    "from_accepted_tag": false,
+    "pr_count": 0,
+    "total_photo_count": 1,
+    "has_kudoed": false,
+    "suffer_score": 51.0
+  },
+  {
+    "resource_state": 2,
+    "athlete": {
+      "id": 46123336,
+      "resource_state": 1
+    },
+    "name": "Gymnastika",
+    "distance": 0.0,
+    "moving_time": 3540,
+    "elapsed_time": 3540,
+    "total_elevation_gain": 0,
+    "type": "Workout",
+    "sport_type": "Workout",
+    "workout_type": null,
+    "id": 18410867982,
+    "start_date": "2026-05-07T10:04:36Z",
+    "start_date_local": "2026-05-07T10:04:36Z",
+    "timezone": "(GMT+00:00) GMT",
+    "utc_offset": 0.0,
+    "location_city": null,
+    "location_state": null,
+    "location_country": null,
+    "achievement_count": 0,
+    "kudos_count": 3,
+    "comment_count": 0,
+    "athlete_count": 1,
+    "photo_count": 0,
+    "map": {
+      "id": "a18410867982",
+      "summary_polyline": "",
+      "resource_state": 2
+    },
+    "trainer": false,
+    "commute": false,
+    "manual": true,
+    "private": false,
+    "visibility": "followers_only",
+    "flagged": false,
+    "gear_id": null,
+    "start_latlng": [],
+    "end_latlng": [],
+    "average_speed": 0.0,
+    "max_speed": 0,
+    "has_heartrate": false,
+    "heartrate_opt_out": false,
+    "display_hide_heartrate_option": false,
+    "upload_id": null,
+    "external_id": null,
+    "from_accepted_tag": false,
+    "pr_count": 0,
+    "total_photo_count": 0,
+    "has_kudoed": false
+  },
+  {
+    "resource_state": 2,
+    "athlete": {
+      "id": 46123336,
+      "resource_state": 1
+    },
+    "name": "Evening Yoga",
+    "distance": 0.0,
+    "moving_time": 3840,
+    "elapsed_time": 3840,
+    "total_elevation_gain": 0.0,
+    "type": "Yoga",
+    "sport_type": "Yoga",
+    "workout_type": 31,
+    "id": 18376051617,
+    "start_date": "2026-05-04T19:00:00Z",
+    "start_date_local": "2026-05-04T19:00:00Z",
+    "timezone": "(GMT+00:00) GMT",
+    "utc_offset": 0.0,
+    "location_city": null,
+    "location_state": null,
+    "location_country": null,
+    "achievement_count": 0,
+    "kudos_count": 2,
+    "comment_count": 0,
+    "athlete_count": 1,
+    "photo_count": 0,
+    "map": {
+      "id": "a18376051617",
+      "summary_polyline": "",
+      "resource_state": 2
+    },
+    "trainer": false,
+    "commute": false,
+    "manual": true,
+    "private": false,
+    "visibility": "followers_only",
+    "flagged": false,
+    "gear_id": null,
+    "start_latlng": [],
+    "end_latlng": [],
+    "average_speed": 0.0,
+    "max_speed": 0,
+    "has_heartrate": false,
+    "heartrate_opt_out": false,
+    "display_hide_heartrate_option": false,
+    "upload_id": null,
+    "external_id": null,
+    "from_accepted_tag": false,
+    "pr_count": 0,
+    "total_photo_count": 0,
+    "has_kudoed": false
+  },
+  {
+    "resource_state": 2,
+    "athlete": {
+      "id": 46123336,
+      "resource_state": 1
+    },
+    "name": "Evening Gravel Ride",
+    "distance": 22119.7,
+    "moving_time": 3539,
+    "elapsed_time": 3960,
+    "total_elevation_gain": 148.0,
+    "type": "Ride",
+    "sport_type": "GravelRide",
+    "workout_type": null,
+    "device_name": "Garmin fēnix 6X",
+    "id": 18363911949,
+    "start_date": "2026-05-03T17:19:19Z",
+    "start_date_local": "2026-05-03T19:19:19Z",
+    "timezone": "(GMT+01:00) Europe/Prague",
+    "utc_offset": 7200.0,
+    "location_city": null,
+    "location_state": null,
+    "location_country": null,
+    "achievement_count": 17,
+    "kudos_count": 5,
+    "comment_count": 0,
+    "athlete_count": 1,
+    "photo_count": 0,
+    "map": {
+      "id": "a18363911949",
+      "summary_polyline": "owjkHyohdBeJjEcAXmCnA{GtDyGbDcDrBwBdAEX@^Lf@Xb@Nr@lE|Uw@n@eEdC_D~BmAp@qCtBVJ@P\\VRZDTYj@nApFHxAXz@f@n@l@vAJ`@r@xFXnDjC~Rv@`I@lBVhAh@zA|@fBKN[??bA|AvIn@nExAjH`B`FvCrHHn@IdAk@hBkA~BcDnEa@jAS~@WxEa@jAEd@LrBYvP@bC[vES`AQ`@yAzAHd@h@z@\\`@XLhAhBNFbAs@vEsAzCVbIsCtEoCzEo@xA]l@m@bA_Ch@kE\\iAr@oDh@oAtBwBxCi@NOJe@LqDHg@dAiBz@gCj@i@xGaCjAm@xGmHnAmBfAaAz@m@\\i@r@mCl@_A|@{@x@OlCGxK|@fEDtANfDC|@QdAi@hBwAfFgDt@WZBPJD^LdBP`ABdA^bBLNhDyArA[^H`Ap@tAn@X@d@U\\DpG|BzA|@\\Bf@g@By@t@aBpAu@nA}@`A_Av@iAdDiDq@cADYw@sBCUfBk@jBeBhBcDhBuCzDoDh@w@Xw@Py@@a@My@F_@nAuFBg@G_@gAq@a@u@H}BJo@`@_BAmFZmDEmAWiCgA}Gw@_Cc@_Co@uBaCwGw@qCyDeOg@kCc@aDq@oHWgGMoFFyBpAiK`AgFdBiFlAqCjD{Gb@aBl@yAv@eDJaCIyCzABLQJaBQ{CDiBr@cFn@qBlAmBxJyKzAwB~@yAh@gBlCsDjEqJv@sA`EmFn@Wt@GvCoA^Bh@KxIaCtCS`DqA`Es@DI@_@i@mD@g@P[v@w@hCeA@U[eCRS~DeAdLq@j@[|CYnGuC`DsBpCuAjEsA\\k@TAr@X`@B|@Ov@FoBLgB_@y@x@iI|CaF~CwAj@gAp@aATyADiBd@eBDwLtA{Ab@iDjBgArAkCdCuAfB{AdAeAbA{Ah@mBfAwF`@c@NaJhEEHCv@ITsA~AmGxMu@pBkAtBc@RmAzB_BlBO\\aD`E{EhFmAjBk@zAg@`DOdCGxHGlALpCKxC_AjDaBpEk@v@mDtH}BpHq@~CqAzJIjA?dBNjDCh@SgCc@BK_@QGi@RoAxAo@ZaBEgAo@{@Ia@BgBlAOA]a@i@wAcA{EOUSIqBl@sHBaB^sC~@aBx@qHbAwBfAuHdBqE|@wCbAyAHoB`@uELeCCyBe@{@g@wCuCMg@Q}AEy@DIAQEWeAkCkBuDWo@Ec@a@oA",
+      "resource_state": 2
+    },
+    "trainer": false,
+    "commute": false,
+    "manual": false,
+    "private": false,
+    "visibility": "followers_only",
+    "flagged": false,
+    "gear_id": "b13521117",
+    "start_latlng": [
+      49.209351,
+      16.598172
+    ],
+    "end_latlng": [
+      49.206578,
+      16.600239
+    ],
+    "average_speed": 6.25,
+    "max_speed": 12.56,
+    "average_temp": 24,
+    "has_heartrate": true,
+    "average_heartrate": 153.9,
+    "max_heartrate": 188.0,
+    "heartrate_opt_out": false,
+    "display_hide_heartrate_option": true,
+    "elev_high": 261.6,
+    "elev_low": 191.4,
+    "upload_id": 19468122981,
+    "upload_id_str": "19468122981",
+    "external_id": "garmin_ping_566645527194",
+    "from_accepted_tag": false,
+    "pr_count": 9,
+    "total_photo_count": 1,
+    "has_kudoed": false,
+    "suffer_score": 128.0
+  },
+  {
+    "resource_state": 2,
+    "athlete": {
+      "id": 46123336,
+      "resource_state": 1
+    },
+    "name": "Afternoon Ride",
     "distance": 15480.3,
     "moving_time": 2976,
     "elapsed_time": 3600,
@@ -23,7 +1962,7 @@
     "location_state": null,
     "location_country": null,
     "achievement_count": 5,
-    "kudos_count": 0,
+    "kudos_count": 6,
     "comment_count": 0,
     "athlete_count": 1,
     "photo_count": 0,
@@ -63,7 +2002,8 @@
     "from_accepted_tag": false,
     "pr_count": 3,
     "total_photo_count": 1,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 43.0
   },
   {
     "resource_state": 2,
@@ -129,7 +2069,8 @@
     "from_accepted_tag": false,
     "pr_count": 4,
     "total_photo_count": 5,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 123.0
   },
   {
     "resource_state": 2,
@@ -195,7 +2136,8 @@
     "from_accepted_tag": false,
     "pr_count": 0,
     "total_photo_count": 2,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 55.0
   },
   {
     "resource_state": 2,
@@ -261,7 +2203,8 @@
     "from_accepted_tag": false,
     "pr_count": 8,
     "total_photo_count": 2,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 218.0
   },
   {
     "resource_state": 2,
@@ -327,7 +2270,8 @@
     "from_accepted_tag": false,
     "pr_count": 1,
     "total_photo_count": 1,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 26.0
   },
   {
     "resource_state": 2,
@@ -393,7 +2337,8 @@
     "from_accepted_tag": false,
     "pr_count": 9,
     "total_photo_count": 3,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 324.0
   },
   {
     "resource_state": 2,
@@ -454,7 +2399,8 @@
     "from_accepted_tag": false,
     "pr_count": 0,
     "total_photo_count": 0,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 26.0
   },
   {
     "resource_state": 2,
@@ -572,7 +2518,8 @@
     "from_accepted_tag": false,
     "pr_count": 7,
     "total_photo_count": 3,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 77.0
   },
   {
     "resource_state": 2,
@@ -632,7 +2579,8 @@
     "from_accepted_tag": false,
     "pr_count": 0,
     "total_photo_count": 0,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 7.0
   },
   {
     "resource_state": 2,
@@ -697,7 +2645,8 @@
     "from_accepted_tag": false,
     "pr_count": 0,
     "total_photo_count": 4,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 281.0
   },
   {
     "resource_state": 2,
@@ -763,7 +2712,8 @@
     "from_accepted_tag": false,
     "pr_count": 0,
     "total_photo_count": 1,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 21.0
   },
   {
     "resource_state": 2,
@@ -828,7 +2778,8 @@
     "from_accepted_tag": false,
     "pr_count": 0,
     "total_photo_count": 1,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 27.0
   },
   {
     "resource_state": 2,
@@ -894,7 +2845,8 @@
     "from_accepted_tag": false,
     "pr_count": 1,
     "total_photo_count": 1,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 43.0
   },
   {
     "resource_state": 2,
@@ -955,7 +2907,8 @@
     "from_accepted_tag": false,
     "pr_count": 0,
     "total_photo_count": 1,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 23.0
   },
   {
     "resource_state": 2,
@@ -1016,7 +2969,8 @@
     "from_accepted_tag": false,
     "pr_count": 0,
     "total_photo_count": 1,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 23.0
   },
   {
     "resource_state": 2,
@@ -1077,7 +3031,8 @@
     "from_accepted_tag": false,
     "pr_count": 0,
     "total_photo_count": 0,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 12.0
   },
   {
     "resource_state": 2,
@@ -1137,7 +3092,8 @@
     "from_accepted_tag": false,
     "pr_count": 0,
     "total_photo_count": 0,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 14.0
   },
   {
     "resource_state": 2,
@@ -1203,7 +3159,8 @@
     "from_accepted_tag": false,
     "pr_count": 0,
     "total_photo_count": 0,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 230.0
   },
   {
     "resource_state": 2,
@@ -1264,7 +3221,8 @@
     "from_accepted_tag": false,
     "pr_count": 0,
     "total_photo_count": 1,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 12.0
   },
   {
     "resource_state": 2,
@@ -1323,7 +3281,8 @@
     "from_accepted_tag": false,
     "pr_count": 0,
     "total_photo_count": 0,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 65.0
   },
   {
     "resource_state": 2,
@@ -1389,7 +3348,8 @@
     "from_accepted_tag": false,
     "pr_count": 0,
     "total_photo_count": 1,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 3.0
   },
   {
     "resource_state": 2,
@@ -1454,7 +3414,8 @@
     "from_accepted_tag": false,
     "pr_count": 0,
     "total_photo_count": 0,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 51.0
   },
   {
     "resource_state": 2,
@@ -1519,7 +3480,8 @@
     "from_accepted_tag": false,
     "pr_count": 0,
     "total_photo_count": 1,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 51.0
   },
   {
     "resource_state": 2,
@@ -1578,7 +3540,8 @@
     "from_accepted_tag": false,
     "pr_count": 0,
     "total_photo_count": 2,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 117.0
   },
   {
     "resource_state": 2,
@@ -1643,7 +3606,8 @@
     "from_accepted_tag": false,
     "pr_count": 0,
     "total_photo_count": 1,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 18.0
   },
   {
     "resource_state": 2,
@@ -1702,7 +3666,8 @@
     "from_accepted_tag": false,
     "pr_count": 0,
     "total_photo_count": 0,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 4.0
   },
   {
     "resource_state": 2,
@@ -1768,7 +3733,8 @@
     "from_accepted_tag": false,
     "pr_count": 0,
     "total_photo_count": 0,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 3.0
   },
   {
     "resource_state": 2,
@@ -1828,7 +3794,8 @@
     "from_accepted_tag": false,
     "pr_count": 0,
     "total_photo_count": 0,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 3.0
   },
   {
     "resource_state": 2,
@@ -1888,7 +3855,8 @@
     "from_accepted_tag": false,
     "pr_count": 0,
     "total_photo_count": 0,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 8.0
   },
   {
     "resource_state": 2,
@@ -1949,7 +3917,8 @@
     "from_accepted_tag": false,
     "pr_count": 0,
     "total_photo_count": 0,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 32.0
   },
   {
     "resource_state": 2,
@@ -2010,7 +3979,8 @@
     "from_accepted_tag": false,
     "pr_count": 0,
     "total_photo_count": 0,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 16.0
   },
   {
     "resource_state": 2,
@@ -2071,7 +4041,8 @@
     "from_accepted_tag": false,
     "pr_count": 0,
     "total_photo_count": 0,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 17.0
   },
   {
     "resource_state": 2,
@@ -2137,7 +4108,8 @@
     "from_accepted_tag": false,
     "pr_count": 0,
     "total_photo_count": 0,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 77.0
   },
   {
     "resource_state": 2,
@@ -2203,7 +4175,8 @@
     "from_accepted_tag": false,
     "pr_count": 0,
     "total_photo_count": 2,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 39.0
   },
   {
     "resource_state": 2,
@@ -2264,7 +4237,8 @@
     "from_accepted_tag": false,
     "pr_count": 0,
     "total_photo_count": 0,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 47.0
   },
   {
     "resource_state": 2,
@@ -2329,7 +4303,8 @@
     "from_accepted_tag": false,
     "pr_count": 1,
     "total_photo_count": 0,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 8.0
   },
   {
     "resource_state": 2,
@@ -2394,7 +4369,8 @@
     "from_accepted_tag": false,
     "pr_count": 1,
     "total_photo_count": 0,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 3.0
   },
   {
     "resource_state": 2,
@@ -2459,7 +4435,8 @@
     "from_accepted_tag": false,
     "pr_count": 0,
     "total_photo_count": 0,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 15.0
   },
   {
     "resource_state": 2,
@@ -2524,7 +4501,8 @@
     "from_accepted_tag": false,
     "pr_count": 1,
     "total_photo_count": 0,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 15.0
   },
   {
     "resource_state": 2,
@@ -2589,7 +4567,8 @@
     "from_accepted_tag": false,
     "pr_count": 0,
     "total_photo_count": 1,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 16.0
   },
   {
     "resource_state": 2,
@@ -2654,7 +4633,8 @@
     "from_accepted_tag": false,
     "pr_count": 1,
     "total_photo_count": 1,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 21.0
   },
   {
     "resource_state": 2,
@@ -2721,7 +4701,8 @@
     "from_accepted_tag": false,
     "pr_count": 0,
     "total_photo_count": 0,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 12.0
   },
   {
     "resource_state": 2,
@@ -2782,7 +4763,8 @@
     "from_accepted_tag": false,
     "pr_count": 0,
     "total_photo_count": 0,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 23.0
   },
   {
     "resource_state": 2,
@@ -2847,7 +4829,8 @@
     "from_accepted_tag": false,
     "pr_count": 0,
     "total_photo_count": 2,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 185.0
   },
   {
     "resource_state": 2,
@@ -2908,7 +4891,8 @@
     "from_accepted_tag": false,
     "pr_count": 0,
     "total_photo_count": 0,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 9.0
   },
   {
     "resource_state": 2,
@@ -2974,7 +4958,8 @@
     "from_accepted_tag": false,
     "pr_count": 0,
     "total_photo_count": 1,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 26.0
   },
   {
     "resource_state": 2,
@@ -3040,7 +5025,8 @@
     "from_accepted_tag": false,
     "pr_count": 0,
     "total_photo_count": 0,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 43.0
   },
   {
     "resource_state": 2,
@@ -3101,7 +5087,8 @@
     "from_accepted_tag": false,
     "pr_count": 0,
     "total_photo_count": 0,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 74.0
   },
   {
     "resource_state": 2,
@@ -3168,7 +5155,8 @@
     "from_accepted_tag": false,
     "pr_count": 0,
     "total_photo_count": 3,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 171.0
   },
   {
     "resource_state": 2,
@@ -3234,7 +5222,8 @@
     "from_accepted_tag": false,
     "pr_count": 1,
     "total_photo_count": 2,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 80.0
   },
   {
     "resource_state": 2,
@@ -3295,7 +5284,8 @@
     "from_accepted_tag": false,
     "pr_count": 0,
     "total_photo_count": 0,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 21.0
   },
   {
     "resource_state": 2,
@@ -3356,7 +5346,8 @@
     "from_accepted_tag": false,
     "pr_count": 0,
     "total_photo_count": 0,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 7.0
   },
   {
     "resource_state": 2,
@@ -3417,7 +5408,8 @@
     "from_accepted_tag": false,
     "pr_count": 0,
     "total_photo_count": 0,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 38.0
   },
   {
     "resource_state": 2,
@@ -3478,7 +5470,8 @@
     "from_accepted_tag": false,
     "pr_count": 0,
     "total_photo_count": 0,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 38.0
   },
   {
     "resource_state": 2,
@@ -3539,7 +5532,8 @@
     "from_accepted_tag": false,
     "pr_count": 0,
     "total_photo_count": 0,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 12.0
   },
   {
     "resource_state": 2,
@@ -3600,7 +5594,8 @@
     "from_accepted_tag": false,
     "pr_count": 0,
     "total_photo_count": 0,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 28.0
   },
   {
     "resource_state": 2,
@@ -3666,7 +5661,8 @@
     "from_accepted_tag": false,
     "pr_count": 2,
     "total_photo_count": 0,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 30.0
   },
   {
     "resource_state": 2,
@@ -3732,7 +5728,8 @@
     "from_accepted_tag": false,
     "pr_count": 0,
     "total_photo_count": 2,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 43.0
   },
   {
     "resource_state": 2,
@@ -3798,7 +5795,8 @@
     "from_accepted_tag": false,
     "pr_count": 1,
     "total_photo_count": 0,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 78.0
   },
   {
     "resource_state": 2,
@@ -3864,7 +5862,8 @@
     "from_accepted_tag": false,
     "pr_count": 1,
     "total_photo_count": 0,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 185.0
   },
   {
     "resource_state": 2,
@@ -3930,7 +5929,8 @@
     "from_accepted_tag": false,
     "pr_count": 2,
     "total_photo_count": 0,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 119.0
   },
   {
     "resource_state": 2,
@@ -3996,7 +5996,8 @@
     "from_accepted_tag": false,
     "pr_count": 16,
     "total_photo_count": 1,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 232.0
   },
   {
     "resource_state": 2,
@@ -4057,7 +6058,8 @@
     "from_accepted_tag": false,
     "pr_count": 0,
     "total_photo_count": 0,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 5.0
   },
   {
     "resource_state": 2,
@@ -4123,7 +6125,8 @@
     "from_accepted_tag": false,
     "pr_count": 2,
     "total_photo_count": 1,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 151.0
   },
   {
     "resource_state": 2,
@@ -4189,7 +6192,8 @@
     "from_accepted_tag": false,
     "pr_count": 0,
     "total_photo_count": 0,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 16.0
   },
   {
     "resource_state": 2,
@@ -4255,7 +6259,8 @@
     "from_accepted_tag": false,
     "pr_count": 4,
     "total_photo_count": 2,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 378.0
   },
   {
     "resource_state": 2,
@@ -4321,7 +6326,8 @@
     "from_accepted_tag": false,
     "pr_count": 0,
     "total_photo_count": 1,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 113.0
   },
   {
     "resource_state": 2,
@@ -4387,7 +6393,8 @@
     "from_accepted_tag": false,
     "pr_count": 0,
     "total_photo_count": 0,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 99.0
   },
   {
     "resource_state": 2,
@@ -4447,7 +6454,8 @@
     "from_accepted_tag": false,
     "pr_count": 0,
     "total_photo_count": 0,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 24.0
   },
   {
     "resource_state": 2,
@@ -4513,7 +6521,8 @@
     "from_accepted_tag": false,
     "pr_count": 0,
     "total_photo_count": 1,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 29.0
   },
   {
     "resource_state": 2,
@@ -4757,7 +6766,8 @@
     "from_accepted_tag": false,
     "pr_count": 0,
     "total_photo_count": 1,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 73.0
   },
   {
     "resource_state": 2,
@@ -4823,7 +6833,8 @@
     "from_accepted_tag": false,
     "pr_count": 3,
     "total_photo_count": 1,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 160.0
   },
   {
     "resource_state": 2,
@@ -4883,7 +6894,8 @@
     "from_accepted_tag": false,
     "pr_count": 0,
     "total_photo_count": 0,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 37.0
   },
   {
     "resource_state": 2,
@@ -4949,7 +6961,8 @@
     "from_accepted_tag": false,
     "pr_count": 3,
     "total_photo_count": 0,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 205.0
   },
   {
     "resource_state": 2,
@@ -5009,7 +7022,8 @@
     "from_accepted_tag": false,
     "pr_count": 0,
     "total_photo_count": 0,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 6.0
   },
   {
     "resource_state": 2,
@@ -5075,7 +7089,8 @@
     "from_accepted_tag": false,
     "pr_count": 0,
     "total_photo_count": 1,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 60.0
   },
   {
     "resource_state": 2,
@@ -5141,7 +7156,8 @@
     "from_accepted_tag": false,
     "pr_count": 0,
     "total_photo_count": 6,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 148.0
   },
   {
     "resource_state": 2,
@@ -5259,7 +7275,8 @@
     "from_accepted_tag": false,
     "pr_count": 4,
     "total_photo_count": 3,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 45.0
   },
   {
     "resource_state": 2,
@@ -5325,7 +7342,8 @@
     "from_accepted_tag": false,
     "pr_count": 6,
     "total_photo_count": 6,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 136.0
   },
   {
     "resource_state": 2,
@@ -5391,7 +7409,8 @@
     "from_accepted_tag": false,
     "pr_count": 3,
     "total_photo_count": 2,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 47.0
   },
   {
     "resource_state": 2,
@@ -5457,7 +7476,8 @@
     "from_accepted_tag": false,
     "pr_count": 1,
     "total_photo_count": 6,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 262.0
   },
   {
     "resource_state": 2,
@@ -5523,7 +7543,8 @@
     "from_accepted_tag": false,
     "pr_count": 4,
     "total_photo_count": 1,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 72.0
   },
   {
     "resource_state": 2,
@@ -5588,7 +7609,8 @@
     "from_accepted_tag": false,
     "pr_count": 0,
     "total_photo_count": 5,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 41.0
   },
   {
     "resource_state": 2,
@@ -5613,7 +7635,7 @@
     "location_city": null,
     "location_state": null,
     "location_country": null,
-    "achievement_count": 45,
+    "achievement_count": 46,
     "kudos_count": 6,
     "comment_count": 0,
     "athlete_count": 2,
@@ -5651,9 +7673,10 @@
     "upload_id_str": "16667498309",
     "external_id": "activity_20195425267.tcx",
     "from_accepted_tag": false,
-    "pr_count": 18,
+    "pr_count": 19,
     "total_photo_count": 3,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 266.0
   },
   {
     "resource_state": 2,
@@ -5718,7 +7741,8 @@
     "from_accepted_tag": false,
     "pr_count": 10,
     "total_photo_count": 4,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 107.0
   },
   {
     "resource_state": 2,
@@ -5743,7 +7767,7 @@
     "location_city": null,
     "location_state": null,
     "location_country": null,
-    "achievement_count": 8,
+    "achievement_count": 9,
     "kudos_count": 6,
     "comment_count": 0,
     "athlete_count": 2,
@@ -5783,7 +7807,8 @@
     "from_accepted_tag": false,
     "pr_count": 1,
     "total_photo_count": 1,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 86.0
   },
   {
     "resource_state": 2,
@@ -5844,7 +7869,8 @@
     "from_accepted_tag": false,
     "pr_count": 0,
     "total_photo_count": 0,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 11.0
   },
   {
     "resource_state": 2,
@@ -5910,7 +7936,8 @@
     "from_accepted_tag": false,
     "pr_count": 0,
     "total_photo_count": 0,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 14.0
   },
   {
     "resource_state": 2,
@@ -5976,7 +8003,8 @@
     "from_accepted_tag": false,
     "pr_count": 14,
     "total_photo_count": 0,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 459.0
   },
   {
     "resource_state": 2,
@@ -6042,7 +8070,8 @@
     "from_accepted_tag": false,
     "pr_count": 5,
     "total_photo_count": 0,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 88.0
   },
   {
     "resource_state": 2,
@@ -6108,7 +8137,8 @@
     "from_accepted_tag": false,
     "pr_count": 1,
     "total_photo_count": 1,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 18.0
   },
   {
     "resource_state": 2,
@@ -6174,7 +8204,8 @@
     "from_accepted_tag": false,
     "pr_count": 0,
     "total_photo_count": 2,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 14.0
   },
   {
     "resource_state": 2,
@@ -6240,7 +8271,8 @@
     "from_accepted_tag": false,
     "pr_count": 4,
     "total_photo_count": 0,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 32.0
   },
   {
     "resource_state": 2,
@@ -6300,7 +8332,8 @@
     "from_accepted_tag": false,
     "pr_count": 0,
     "total_photo_count": 0,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 4.0
   },
   {
     "resource_state": 2,
@@ -6366,7 +8399,8 @@
     "from_accepted_tag": false,
     "pr_count": 3,
     "total_photo_count": 2,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 183.0
   },
   {
     "resource_state": 2,
@@ -6432,7 +8466,8 @@
     "from_accepted_tag": false,
     "pr_count": 0,
     "total_photo_count": 2,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 13.0
   },
   {
     "resource_state": 2,
@@ -6498,7 +8533,8 @@
     "from_accepted_tag": false,
     "pr_count": 0,
     "total_photo_count": 0,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 7.0
   },
   {
     "resource_state": 2,
@@ -6564,7 +8600,8 @@
     "from_accepted_tag": false,
     "pr_count": 0,
     "total_photo_count": 0,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 38.0
   },
   {
     "resource_state": 2,
@@ -6631,7 +8668,8 @@
     "from_accepted_tag": false,
     "pr_count": 0,
     "total_photo_count": 0,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 86.0
   },
   {
     "resource_state": 2,
@@ -6697,7 +8735,8 @@
     "from_accepted_tag": false,
     "pr_count": 0,
     "total_photo_count": 3,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 67.0
   },
   {
     "resource_state": 2,
@@ -6763,7 +8802,8 @@
     "from_accepted_tag": false,
     "pr_count": 4,
     "total_photo_count": 3,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 437.0
   },
   {
     "resource_state": 2,
@@ -6824,7 +8864,8 @@
     "from_accepted_tag": false,
     "pr_count": 0,
     "total_photo_count": 0,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 16.0
   },
   {
     "resource_state": 2,
@@ -6890,7 +8931,8 @@
     "from_accepted_tag": false,
     "pr_count": 1,
     "total_photo_count": 2,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 381.0
   },
   {
     "resource_state": 2,
@@ -6956,7 +8998,8 @@
     "from_accepted_tag": false,
     "pr_count": 0,
     "total_photo_count": 3,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 106.0
   },
   {
     "resource_state": 2,
@@ -7022,7 +9065,8 @@
     "from_accepted_tag": false,
     "pr_count": 9,
     "total_photo_count": 2,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 76.0
   },
   {
     "resource_state": 2,
@@ -7088,7 +9132,8 @@
     "from_accepted_tag": false,
     "pr_count": 10,
     "total_photo_count": 0,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 59.0
   },
   {
     "resource_state": 2,
@@ -7154,7 +9199,8 @@
     "from_accepted_tag": false,
     "pr_count": 15,
     "total_photo_count": 1,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 167.0
   },
   {
     "resource_state": 2,
@@ -7214,7 +9260,8 @@
     "from_accepted_tag": false,
     "pr_count": 0,
     "total_photo_count": 1,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 9.0
   },
   {
     "resource_state": 2,
@@ -7280,7 +9327,8 @@
     "from_accepted_tag": false,
     "pr_count": 1,
     "total_photo_count": 1,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 73.0
   },
   {
     "resource_state": 2,
@@ -7346,7 +9394,8 @@
     "from_accepted_tag": false,
     "pr_count": 0,
     "total_photo_count": 2,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 37.0
   },
   {
     "resource_state": 2,
@@ -7538,7 +9587,8 @@
     "from_accepted_tag": false,
     "pr_count": 21,
     "total_photo_count": 2,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 93.0
   },
   {
     "resource_state": 2,
@@ -7604,7 +9654,8 @@
     "from_accepted_tag": false,
     "pr_count": 0,
     "total_photo_count": 2,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 82.0
   },
   {
     "resource_state": 2,
@@ -7670,7 +9721,8 @@
     "from_accepted_tag": false,
     "pr_count": 0,
     "total_photo_count": 2,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 38.0
   },
   {
     "resource_state": 2,
@@ -7736,7 +9788,8 @@
     "from_accepted_tag": false,
     "pr_count": 2,
     "total_photo_count": 0,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 31.0
   },
   {
     "resource_state": 2,
@@ -7797,7 +9850,8 @@
     "from_accepted_tag": false,
     "pr_count": 0,
     "total_photo_count": 1,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 9.0
   },
   {
     "resource_state": 2,
@@ -7863,7 +9917,8 @@
     "from_accepted_tag": false,
     "pr_count": 0,
     "total_photo_count": 2,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 22.0
   },
   {
     "resource_state": 2,
@@ -7929,7 +9984,8 @@
     "from_accepted_tag": false,
     "pr_count": 8,
     "total_photo_count": 1,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 378.0
   },
   {
     "resource_state": 2,
@@ -8060,7 +10116,8 @@
     "from_accepted_tag": false,
     "pr_count": 1,
     "total_photo_count": 0,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 2.0
   },
   {
     "resource_state": 2,
@@ -8121,7 +10178,8 @@
     "from_accepted_tag": false,
     "pr_count": 0,
     "total_photo_count": 1,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 7.0
   },
   {
     "resource_state": 2,
@@ -8187,7 +10245,8 @@
     "from_accepted_tag": false,
     "pr_count": 0,
     "total_photo_count": 0,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 7.0
   },
   {
     "resource_state": 2,
@@ -8253,7 +10312,8 @@
     "from_accepted_tag": false,
     "pr_count": 5,
     "total_photo_count": 2,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 156.0
   },
   {
     "resource_state": 2,
@@ -8319,7 +10379,8 @@
     "from_accepted_tag": false,
     "pr_count": 4,
     "total_photo_count": 2,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 66.0
   },
   {
     "resource_state": 2,
@@ -8385,7 +10446,8 @@
     "from_accepted_tag": false,
     "pr_count": 8,
     "total_photo_count": 3,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 241.0
   },
   {
     "resource_state": 2,
@@ -8451,7 +10513,8 @@
     "from_accepted_tag": false,
     "pr_count": 1,
     "total_photo_count": 1,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 50.0
   },
   {
     "resource_state": 2,
@@ -8476,7 +10539,7 @@
     "location_city": null,
     "location_state": null,
     "location_country": null,
-    "achievement_count": 2,
+    "achievement_count": 3,
     "kudos_count": 2,
     "comment_count": 0,
     "athlete_count": 1,
@@ -8517,7 +10580,8 @@
     "from_accepted_tag": false,
     "pr_count": 0,
     "total_photo_count": 2,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 28.0
   },
   {
     "resource_state": 2,
@@ -8583,7 +10647,8 @@
     "from_accepted_tag": false,
     "pr_count": 1,
     "total_photo_count": 1,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 49.0
   },
   {
     "resource_state": 2,
@@ -8649,7 +10714,8 @@
     "from_accepted_tag": false,
     "pr_count": 4,
     "total_photo_count": 0,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 68.0
   },
   {
     "resource_state": 2,
@@ -8715,7 +10781,8 @@
     "from_accepted_tag": false,
     "pr_count": 4,
     "total_photo_count": 0,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 134.0
   },
   {
     "resource_state": 2,
@@ -8740,7 +10807,7 @@
     "location_city": null,
     "location_state": null,
     "location_country": null,
-    "achievement_count": 14,
+    "achievement_count": 15,
     "kudos_count": 4,
     "comment_count": 1,
     "athlete_count": 3,
@@ -8779,9 +10846,10 @@
     "upload_id_str": "15528367655",
     "external_id": "garmin_ping_440950013787",
     "from_accepted_tag": false,
-    "pr_count": 7,
+    "pr_count": 8,
     "total_photo_count": 1,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 160.0
   },
   {
     "resource_state": 2,
@@ -8847,7 +10915,8 @@
     "from_accepted_tag": false,
     "pr_count": 0,
     "total_photo_count": 0,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 126.0
   },
   {
     "resource_state": 2,
@@ -8913,7 +10982,8 @@
     "from_accepted_tag": false,
     "pr_count": 0,
     "total_photo_count": 0,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 183.0
   },
   {
     "resource_state": 2,
@@ -8979,7 +11049,8 @@
     "from_accepted_tag": false,
     "pr_count": 0,
     "total_photo_count": 0,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 722.0
   },
   {
     "resource_state": 2,
@@ -9039,7 +11110,8 @@
     "from_accepted_tag": false,
     "pr_count": 0,
     "total_photo_count": 0,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 10.0
   },
   {
     "resource_state": 2,
@@ -9105,7 +11177,8 @@
     "from_accepted_tag": false,
     "pr_count": 17,
     "total_photo_count": 0,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 121.0
   },
   {
     "resource_state": 2,
@@ -9165,7 +11238,8 @@
     "from_accepted_tag": false,
     "pr_count": 0,
     "total_photo_count": 1,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 34.0
   },
   {
     "resource_state": 2,
@@ -9190,7 +11264,7 @@
     "location_city": null,
     "location_state": null,
     "location_country": null,
-    "achievement_count": 25,
+    "achievement_count": 26,
     "kudos_count": 4,
     "comment_count": 0,
     "athlete_count": 1,
@@ -9229,9 +11303,10 @@
     "upload_id_str": "15130324470",
     "external_id": "garmin_ping_429071955566",
     "from_accepted_tag": false,
-    "pr_count": 10,
+    "pr_count": 11,
     "total_photo_count": 2,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 127.0
   },
   {
     "resource_state": 2,
@@ -9297,7 +11372,8 @@
     "from_accepted_tag": false,
     "pr_count": 1,
     "total_photo_count": 2,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 54.0
   },
   {
     "resource_state": 2,
@@ -9357,7 +11433,8 @@
     "from_accepted_tag": false,
     "pr_count": 0,
     "total_photo_count": 0,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 10.0
   },
   {
     "resource_state": 2,
@@ -9418,7 +11495,8 @@
     "from_accepted_tag": false,
     "pr_count": 0,
     "total_photo_count": 0,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 24.0
   },
   {
     "resource_state": 2,
@@ -9484,7 +11562,8 @@
     "from_accepted_tag": false,
     "pr_count": 0,
     "total_photo_count": 0,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 22.0
   },
   {
     "resource_state": 2,
@@ -9549,7 +11628,8 @@
     "from_accepted_tag": false,
     "pr_count": 0,
     "total_photo_count": 0,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 19.0
   },
   {
     "resource_state": 2,
@@ -9614,7 +11694,8 @@
     "from_accepted_tag": false,
     "pr_count": 0,
     "total_photo_count": 0,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 29.0
   },
   {
     "resource_state": 2,
@@ -9679,7 +11760,8 @@
     "from_accepted_tag": false,
     "pr_count": 1,
     "total_photo_count": 0,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 18.0
   },
   {
     "resource_state": 2,
@@ -9744,7 +11826,8 @@
     "from_accepted_tag": false,
     "pr_count": 0,
     "total_photo_count": 0,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 21.0
   },
   {
     "resource_state": 2,
@@ -9810,7 +11893,8 @@
     "from_accepted_tag": false,
     "pr_count": 2,
     "total_photo_count": 0,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 110.0
   },
   {
     "resource_state": 2,
@@ -9875,7 +11959,8 @@
     "from_accepted_tag": false,
     "pr_count": 0,
     "total_photo_count": 2,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 83.0
   },
   {
     "resource_state": 2,
@@ -9941,7 +12026,8 @@
     "from_accepted_tag": false,
     "pr_count": 0,
     "total_photo_count": 1,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 26.0
   },
   {
     "resource_state": 2,
@@ -10007,7 +12093,8 @@
     "from_accepted_tag": false,
     "pr_count": 0,
     "total_photo_count": 2,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 23.0
   },
   {
     "resource_state": 2,
@@ -10072,7 +12159,8 @@
     "from_accepted_tag": false,
     "pr_count": 0,
     "total_photo_count": 1,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 105.0
   },
   {
     "resource_state": 2,
@@ -10137,7 +12225,8 @@
     "from_accepted_tag": false,
     "pr_count": 0,
     "total_photo_count": 1,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 93.0
   },
   {
     "resource_state": 2,
@@ -10202,7 +12291,8 @@
     "from_accepted_tag": false,
     "pr_count": 0,
     "total_photo_count": 0,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 92.0
   },
   {
     "resource_state": 2,
@@ -10267,7 +12357,8 @@
     "from_accepted_tag": false,
     "pr_count": 0,
     "total_photo_count": 1,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 81.0
   },
   {
     "resource_state": 2,
@@ -10332,7 +12423,8 @@
     "from_accepted_tag": false,
     "pr_count": 0,
     "total_photo_count": 2,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 9.0
   },
   {
     "resource_state": 2,
@@ -10397,7 +12489,8 @@
     "from_accepted_tag": false,
     "pr_count": 0,
     "total_photo_count": 0,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 25.0
   },
   {
     "resource_state": 2,
@@ -10462,7 +12555,8 @@
     "from_accepted_tag": false,
     "pr_count": 0,
     "total_photo_count": 1,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 18.0
   },
   {
     "resource_state": 2,
@@ -10528,7 +12622,8 @@
     "from_accepted_tag": false,
     "pr_count": 1,
     "total_photo_count": 3,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 36.0
   },
   {
     "resource_state": 2,
@@ -10594,7 +12689,8 @@
     "from_accepted_tag": false,
     "pr_count": 0,
     "total_photo_count": 0,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 31.0
   },
   {
     "resource_state": 2,
@@ -10655,7 +12751,8 @@
     "from_accepted_tag": false,
     "pr_count": 0,
     "total_photo_count": 0,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 15.0
   },
   {
     "resource_state": 2,
@@ -10715,7 +12812,8 @@
     "from_accepted_tag": false,
     "pr_count": 0,
     "total_photo_count": 0,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 41.0
   },
   {
     "resource_state": 2,
@@ -10775,7 +12873,8 @@
     "from_accepted_tag": false,
     "pr_count": 0,
     "total_photo_count": 0,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 22.0
   },
   {
     "resource_state": 2,
@@ -10835,7 +12934,8 @@
     "from_accepted_tag": false,
     "pr_count": 0,
     "total_photo_count": 0,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 60.0
   },
   {
     "resource_state": 2,
@@ -10901,7 +13001,8 @@
     "from_accepted_tag": false,
     "pr_count": 0,
     "total_photo_count": 3,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 22.0
   },
   {
     "resource_state": 2,
@@ -10967,7 +13068,8 @@
     "from_accepted_tag": false,
     "pr_count": 1,
     "total_photo_count": 4,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 157.0
   },
   {
     "resource_state": 2,
@@ -11033,7 +13135,8 @@
     "from_accepted_tag": false,
     "pr_count": 0,
     "total_photo_count": 3,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 10.0
   },
   {
     "resource_state": 2,
@@ -11099,7 +13202,8 @@
     "from_accepted_tag": false,
     "pr_count": 0,
     "total_photo_count": 3,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 119.0
   },
   {
     "resource_state": 2,
@@ -11165,7 +13269,8 @@
     "from_accepted_tag": false,
     "pr_count": 1,
     "total_photo_count": 2,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 134.0
   },
   {
     "resource_state": 2,
@@ -11231,7 +13336,8 @@
     "from_accepted_tag": false,
     "pr_count": 0,
     "total_photo_count": 1,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 25.0
   },
   {
     "resource_state": 2,
@@ -11297,7 +13403,8 @@
     "from_accepted_tag": false,
     "pr_count": 0,
     "total_photo_count": 1,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 133.0
   },
   {
     "resource_state": 2,
@@ -11357,7 +13464,8 @@
     "from_accepted_tag": false,
     "pr_count": 0,
     "total_photo_count": 0,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 3.0
   },
   {
     "resource_state": 2,
@@ -11423,7 +13531,8 @@
     "from_accepted_tag": false,
     "pr_count": 3,
     "total_photo_count": 0,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 115.0
   },
   {
     "resource_state": 2,
@@ -11489,7 +13598,8 @@
     "from_accepted_tag": false,
     "pr_count": 2,
     "total_photo_count": 1,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 129.0
   },
   {
     "resource_state": 2,
@@ -11549,7 +13659,8 @@
     "from_accepted_tag": false,
     "pr_count": 0,
     "total_photo_count": 1,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 68.0
   },
   {
     "resource_state": 2,
@@ -11609,7 +13720,8 @@
     "from_accepted_tag": false,
     "pr_count": 0,
     "total_photo_count": 0,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 15.0
   },
   {
     "resource_state": 2,
@@ -11669,7 +13781,8 @@
     "from_accepted_tag": false,
     "pr_count": 0,
     "total_photo_count": 0,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 41.0
   },
   {
     "resource_state": 2,
@@ -11734,7 +13847,8 @@
     "from_accepted_tag": false,
     "pr_count": 0,
     "total_photo_count": 1,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 38.0
   },
   {
     "resource_state": 2,
@@ -11793,7 +13907,8 @@
     "from_accepted_tag": false,
     "pr_count": 0,
     "total_photo_count": 0,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 83.0
   },
   {
     "resource_state": 2,
@@ -11859,7 +13974,8 @@
     "from_accepted_tag": false,
     "pr_count": 0,
     "total_photo_count": 1,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 18.0
   },
   {
     "resource_state": 2,
@@ -11926,7 +14042,8 @@
     "from_accepted_tag": false,
     "pr_count": 3,
     "total_photo_count": 1,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 242.0
   },
   {
     "resource_state": 2,
@@ -11991,7 +14108,8 @@
     "from_accepted_tag": false,
     "pr_count": 0,
     "total_photo_count": 1,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 58.0
   },
   {
     "resource_state": 2,
@@ -12050,7 +14168,8 @@
     "from_accepted_tag": false,
     "pr_count": 0,
     "total_photo_count": 1,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 45.0
   },
   {
     "resource_state": 2,
@@ -12116,7 +14235,8 @@
     "from_accepted_tag": false,
     "pr_count": 0,
     "total_photo_count": 1,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 100.0
   },
   {
     "resource_state": 2,
@@ -12181,7 +14301,8 @@
     "from_accepted_tag": false,
     "pr_count": 0,
     "total_photo_count": 0,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 35.0
   },
   {
     "resource_state": 2,
@@ -12240,7 +14361,8 @@
     "from_accepted_tag": false,
     "pr_count": 0,
     "total_photo_count": 0,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 101.0
   },
   {
     "resource_state": 2,
@@ -12299,7 +14421,8 @@
     "from_accepted_tag": false,
     "pr_count": 0,
     "total_photo_count": 1,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 54.0
   },
   {
     "resource_state": 2,
@@ -12366,7 +14489,8 @@
     "from_accepted_tag": false,
     "pr_count": 0,
     "total_photo_count": 1,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 44.0
   },
   {
     "resource_state": 2,
@@ -12425,7 +14549,8 @@
     "from_accepted_tag": false,
     "pr_count": 0,
     "total_photo_count": 0,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 121.0
   },
   {
     "resource_state": 2,
@@ -12553,7 +14678,8 @@
     "from_accepted_tag": false,
     "pr_count": 0,
     "total_photo_count": 2,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 111.0
   },
   {
     "resource_state": 2,
@@ -12613,7 +14739,8 @@
     "from_accepted_tag": false,
     "pr_count": 0,
     "total_photo_count": 0,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 9.0
   },
   {
     "resource_state": 2,
@@ -12679,7 +14806,8 @@
     "from_accepted_tag": false,
     "pr_count": 0,
     "total_photo_count": 0,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 18.0
   },
   {
     "resource_state": 2,
@@ -12745,7 +14873,8 @@
     "from_accepted_tag": false,
     "pr_count": 0,
     "total_photo_count": 1,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 19.0
   },
   {
     "resource_state": 2,
@@ -12810,7 +14939,8 @@
     "from_accepted_tag": false,
     "pr_count": 0,
     "total_photo_count": 1,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 86.0
   },
   {
     "resource_state": 2,
@@ -12870,7 +15000,8 @@
     "from_accepted_tag": false,
     "pr_count": 0,
     "total_photo_count": 0,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 7.0
   },
   {
     "resource_state": 2,
@@ -12930,7 +15061,8 @@
     "from_accepted_tag": false,
     "pr_count": 0,
     "total_photo_count": 0,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 26.0
   },
   {
     "resource_state": 2,
@@ -12996,7 +15128,8 @@
     "from_accepted_tag": false,
     "pr_count": 0,
     "total_photo_count": 0,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 169.0
   },
   {
     "resource_state": 2,
@@ -13062,7 +15195,8 @@
     "from_accepted_tag": false,
     "pr_count": 0,
     "total_photo_count": 3,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 107.0
   },
   {
     "resource_state": 2,
@@ -13128,7 +15262,8 @@
     "from_accepted_tag": false,
     "pr_count": 0,
     "total_photo_count": 0,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 73.0
   },
   {
     "resource_state": 2,
@@ -13194,7 +15329,8 @@
     "from_accepted_tag": false,
     "pr_count": 0,
     "total_photo_count": 0,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 50.0
   },
   {
     "resource_state": 2,
@@ -13260,7 +15396,8 @@
     "from_accepted_tag": false,
     "pr_count": 0,
     "total_photo_count": 2,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 171.0
   },
   {
     "resource_state": 2,
@@ -13326,7 +15463,8 @@
     "from_accepted_tag": false,
     "pr_count": 8,
     "total_photo_count": 0,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 90.0
   },
   {
     "resource_state": 2,
@@ -13392,7 +15530,8 @@
     "from_accepted_tag": false,
     "pr_count": 4,
     "total_photo_count": 0,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 27.0
   },
   {
     "resource_state": 2,
@@ -13458,7 +15597,8 @@
     "from_accepted_tag": false,
     "pr_count": 0,
     "total_photo_count": 0,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 37.0
   },
   {
     "resource_state": 2,
@@ -13524,7 +15664,8 @@
     "from_accepted_tag": false,
     "pr_count": 0,
     "total_photo_count": 2,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 26.0
   },
   {
     "resource_state": 2,
@@ -13590,7 +15731,8 @@
     "from_accepted_tag": false,
     "pr_count": 0,
     "total_photo_count": 1,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 69.0
   },
   {
     "resource_state": 2,
@@ -13656,7 +15798,8 @@
     "from_accepted_tag": false,
     "pr_count": 1,
     "total_photo_count": 0,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 80.0
   },
   {
     "resource_state": 2,
@@ -13723,7 +15866,8 @@
     "from_accepted_tag": false,
     "pr_count": 0,
     "total_photo_count": 1,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 61.0
   },
   {
     "resource_state": 2,
@@ -13789,7 +15933,8 @@
     "from_accepted_tag": false,
     "pr_count": 3,
     "total_photo_count": 0,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 279.0
   },
   {
     "resource_state": 2,
@@ -13855,7 +16000,8 @@
     "from_accepted_tag": false,
     "pr_count": 0,
     "total_photo_count": 0,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 612.0
   },
   {
     "resource_state": 2,
@@ -13921,7 +16067,8 @@
     "from_accepted_tag": false,
     "pr_count": 0,
     "total_photo_count": 0,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 339.0
   },
   {
     "resource_state": 2,
@@ -13987,7 +16134,8 @@
     "from_accepted_tag": false,
     "pr_count": 14,
     "total_photo_count": 0,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 126.0
   },
   {
     "resource_state": 2,
@@ -14053,7 +16201,8 @@
     "from_accepted_tag": false,
     "pr_count": 22,
     "total_photo_count": 0,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 154.0
   },
   {
     "resource_state": 2,
@@ -14183,7 +16332,8 @@
     "from_accepted_tag": false,
     "pr_count": 1,
     "total_photo_count": 0,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 271.0
   },
   {
     "resource_state": 2,
@@ -14241,7 +16391,8 @@
     "from_accepted_tag": false,
     "pr_count": 0,
     "total_photo_count": 0,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 4.0
   },
   {
     "resource_state": 2,
@@ -14307,7 +16458,8 @@
     "from_accepted_tag": false,
     "pr_count": 2,
     "total_photo_count": 0,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 50.0
   },
   {
     "resource_state": 2,
@@ -14373,7 +16525,8 @@
     "from_accepted_tag": false,
     "pr_count": 3,
     "total_photo_count": 0,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 148.0
   },
   {
     "resource_state": 2,
@@ -14439,7 +16592,8 @@
     "from_accepted_tag": false,
     "pr_count": 5,
     "total_photo_count": 0,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 94.0
   },
   {
     "resource_state": 2,
@@ -14505,7 +16659,8 @@
     "from_accepted_tag": false,
     "pr_count": 0,
     "total_photo_count": 0,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 189.0
   },
   {
     "resource_state": 2,
@@ -14571,7 +16726,8 @@
     "from_accepted_tag": false,
     "pr_count": 0,
     "total_photo_count": 0,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 9.0
   },
   {
     "resource_state": 2,
@@ -14659,7 +16815,7 @@
     "location_city": null,
     "location_state": null,
     "location_country": null,
-    "achievement_count": 5,
+    "achievement_count": 6,
     "kudos_count": 6,
     "comment_count": 0,
     "athlete_count": 1,
@@ -14698,9 +16854,10 @@
     "upload_id_str": "12504863334",
     "external_id": "garmin_ping_349891065833",
     "from_accepted_tag": false,
-    "pr_count": 3,
+    "pr_count": 4,
     "total_photo_count": 0,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 76.0
   },
   {
     "resource_state": 2,
@@ -14767,7 +16924,8 @@
     "from_accepted_tag": false,
     "pr_count": 0,
     "total_photo_count": 1,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 132.0
   },
   {
     "resource_state": 2,
@@ -14833,7 +16991,8 @@
     "from_accepted_tag": false,
     "pr_count": 0,
     "total_photo_count": 0,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 148.0
   },
   {
     "resource_state": 2,
@@ -14891,7 +17050,8 @@
     "from_accepted_tag": false,
     "pr_count": 0,
     "total_photo_count": 0,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 20.0
   },
   {
     "resource_state": 2,
@@ -14958,7 +17118,8 @@
     "from_accepted_tag": false,
     "pr_count": 1,
     "total_photo_count": 0,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 123.0
   },
   {
     "resource_state": 2,
@@ -15088,7 +17249,8 @@
     "from_accepted_tag": false,
     "pr_count": 0,
     "total_photo_count": 0,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 81.0
   },
   {
     "resource_state": 2,
@@ -15155,7 +17317,8 @@
     "from_accepted_tag": false,
     "pr_count": 2,
     "total_photo_count": 1,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 148.0
   },
   {
     "resource_state": 2,
@@ -15287,7 +17450,8 @@
     "from_accepted_tag": false,
     "pr_count": 0,
     "total_photo_count": 1,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 5.0
   },
   {
     "resource_state": 2,
@@ -15353,7 +17517,8 @@
     "from_accepted_tag": false,
     "pr_count": 2,
     "total_photo_count": 0,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 6.0
   },
   {
     "resource_state": 2,
@@ -15419,7 +17584,8 @@
     "from_accepted_tag": false,
     "pr_count": 0,
     "total_photo_count": 0,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 2.0
   },
   {
     "resource_state": 2,
@@ -15485,7 +17651,8 @@
     "from_accepted_tag": false,
     "pr_count": 1,
     "total_photo_count": 0,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 14.0
   },
   {
     "resource_state": 2,
@@ -15551,7 +17718,8 @@
     "from_accepted_tag": false,
     "pr_count": 2,
     "total_photo_count": 0,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 43.0
   },
   {
     "resource_state": 2,
@@ -15809,7 +17977,8 @@
     "from_accepted_tag": false,
     "pr_count": 3,
     "total_photo_count": 1,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 16.0
   },
   {
     "resource_state": 2,
@@ -15876,7 +18045,8 @@
     "from_accepted_tag": false,
     "pr_count": 0,
     "total_photo_count": 0,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 118.0
   },
   {
     "resource_state": 2,
@@ -15943,7 +18113,8 @@
     "from_accepted_tag": false,
     "pr_count": 3,
     "total_photo_count": 0,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 98.0
   },
   {
     "resource_state": 2,
@@ -15968,7 +18139,7 @@
     "location_city": null,
     "location_state": null,
     "location_country": null,
-    "achievement_count": 11,
+    "achievement_count": 12,
     "kudos_count": 7,
     "comment_count": 0,
     "athlete_count": 1,
@@ -16010,7 +18181,8 @@
     "from_accepted_tag": false,
     "pr_count": 3,
     "total_photo_count": 1,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 46.0
   },
   {
     "resource_state": 2,
@@ -16077,7 +18249,8 @@
     "from_accepted_tag": false,
     "pr_count": 0,
     "total_photo_count": 0,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 3.0
   },
   {
     "resource_state": 2,
@@ -16144,7 +18317,8 @@
     "from_accepted_tag": false,
     "pr_count": 0,
     "total_photo_count": 0,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 7.0
   },
   {
     "resource_state": 2,
@@ -16204,7 +18378,8 @@
     "from_accepted_tag": false,
     "pr_count": 0,
     "total_photo_count": 0,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 27.0
   },
   {
     "resource_state": 2,
@@ -16323,7 +18498,8 @@
     "from_accepted_tag": false,
     "pr_count": 2,
     "total_photo_count": 0,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 234.0
   },
   {
     "resource_state": 2,
@@ -16381,7 +18557,8 @@
     "from_accepted_tag": false,
     "pr_count": 0,
     "total_photo_count": 0,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 71.0
   },
   {
     "resource_state": 2,
@@ -16448,7 +18625,8 @@
     "from_accepted_tag": false,
     "pr_count": 2,
     "total_photo_count": 0,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 57.0
   },
   {
     "resource_state": 2,
@@ -16513,7 +18691,8 @@
     "from_accepted_tag": false,
     "pr_count": 1,
     "total_photo_count": 0,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 64.0
   },
   {
     "resource_state": 2,
@@ -16578,7 +18757,8 @@
     "from_accepted_tag": false,
     "pr_count": 17,
     "total_photo_count": 0,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 146.0
   },
   {
     "resource_state": 2,
@@ -16643,7 +18823,8 @@
     "from_accepted_tag": false,
     "pr_count": 2,
     "total_photo_count": 0,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 63.0
   },
   {
     "resource_state": 2,
@@ -16708,7 +18889,8 @@
     "from_accepted_tag": false,
     "pr_count": 1,
     "total_photo_count": 0,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 113.0
   },
   {
     "resource_state": 2,
@@ -16773,7 +18955,8 @@
     "from_accepted_tag": false,
     "pr_count": 0,
     "total_photo_count": 0,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 67.0
   },
   {
     "resource_state": 2,
@@ -16838,7 +19021,8 @@
     "from_accepted_tag": false,
     "pr_count": 3,
     "total_photo_count": 0,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 113.0
   },
   {
     "resource_state": 2,
@@ -16903,7 +19087,8 @@
     "from_accepted_tag": false,
     "pr_count": 0,
     "total_photo_count": 0,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 45.0
   },
   {
     "resource_state": 2,
@@ -16968,7 +19153,8 @@
     "from_accepted_tag": false,
     "pr_count": 11,
     "total_photo_count": 0,
-    "has_kudoed": false
+    "has_kudoed": false,
+    "suffer_score": 67.0
   },
   {
     "resource_state": 2,
