@@ -9,7 +9,7 @@ interface ChangeEntry {
 
 const ENTRIES: ChangeEntry[] = [
   {
-    date: "2026-07-03",
+    date: "2026-07-10",
     title: "MCP server: dotazy na data odkudkoli (Claude appka)",
     tag: "feature",
     items: [
