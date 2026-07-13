@@ -302,10 +302,12 @@ function loadFriendTokens() {
   try {
     if (fs.existsSync(FRIEND_TOKENS_FILE)) {
       const file = JSON.parse(fs.readFileSync(FRIEND_TOKENS_FILE, "utf-8"));
-      // Merge env-var athlete/client fields in case file predates them
+      // Merge env-var athlete/client fields in case file predates them.
+      // Fallback to Honza's app creds — Martin authorizes via Honza's app since his own
+      // app (231345) was deactivated by Strava's 2026 subscription requirement.
       if (process.env.FRIEND_ACCESS_TOKEN && !file.client_secret) {
-        file.client_id     = file.client_id     || process.env.FRIEND_CLIENT_ID     || "231345";
-        file.client_secret = file.client_secret || process.env.FRIEND_CLIENT_SECRET || "";
+        file.client_id     = file.client_id     || process.env.FRIEND_CLIENT_ID     || STRAVA_CLIENT_ID;
+        file.client_secret = file.client_secret || process.env.FRIEND_CLIENT_SECRET || STRAVA_CLIENT_SECRET;
         file.athlete = file.athlete || {
           id: 12184759,
           firstname: process.env.FRIEND_FIRSTNAME || "Martin",
@@ -322,8 +324,8 @@ function loadFriendTokens() {
       access_token:  process.env.FRIEND_ACCESS_TOKEN,
       refresh_token: process.env.FRIEND_REFRESH_TOKEN,
       expires_at:    parseInt(process.env.FRIEND_EXPIRES_AT || "0"),
-      client_id:     process.env.FRIEND_CLIENT_ID     || "231345",
-      client_secret: process.env.FRIEND_CLIENT_SECRET || "",
+      client_id:     process.env.FRIEND_CLIENT_ID     || STRAVA_CLIENT_ID,
+      client_secret: process.env.FRIEND_CLIENT_SECRET || STRAVA_CLIENT_SECRET,
       athlete: {
         id: 12184759,
         firstname: process.env.FRIEND_FIRSTNAME || "Martin",
@@ -340,8 +342,11 @@ function saveFriendTokens(tokens) {
   try { fs.writeFileSync(FRIEND_TOKENS_FILE, JSON.stringify(tokens, null, 2)); } catch(e) {
     console.warn("⚠ Nelze zapsat friend_tokens.json:", e.message);
   }
-  // Auto-update Render env vars so the rotated token survives the next deploy
+  // Auto-update Render env vars so the rotated token survives the next deploy.
+  // Access token included too — otherwise a redeploy within its validity window
+  // would pair a stale env access_token with a fresh expires_at and 401 for hours.
   persistRenderEnvVars({
+    FRIEND_ACCESS_TOKEN: tokens.access_token,
     FRIEND_REFRESH_TOKEN: tokens.refresh_token,
     FRIEND_EXPIRES_AT: String(tokens.expires_at),
   });
@@ -462,6 +467,12 @@ function refreshStravaToken(callback) {
         if (!process.env.STRAVA_REFRESH_TOKEN) {
           fs.writeFileSync(TOKENS_FILE, JSON.stringify(tokens, null, 2));
         }
+        // Same env var sync as friend tokens — survive redeploys without manual updates
+        persistRenderEnvVars({
+          STRAVA_ACCESS_TOKEN: tokens.access_token,
+          STRAVA_REFRESH_TOKEN: tokens.refresh_token,
+          STRAVA_EXPIRES_AT: String(tokens.expires_at),
+        });
         console.log("✓ Token refreshed");
 
         callback(null, tokens.access_token);
