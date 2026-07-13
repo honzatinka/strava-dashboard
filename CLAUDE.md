@@ -51,7 +51,7 @@ Před commitem: `cd dashboard && npm run build` (musí projít bez chyb).
 - Nikdy `--amend`, vždy nový commit.
 - Push na `main` triggeruje Render auto-deploy.
 - GitHub auth: PAT s 90denní expirací (vytvořen ~21. 4. 2026 → **expiruje ~20. 7. 2026**). Když push selže na auth, tohle je pravděpodobná příčina — Honza musí vygenerovat nový token.
-- **Před commitem visible změn vždy přidej záznam do Changelogu** (`src/pages/ChangelogPage.tsx`, ENTRIES pole). Tagy: `feature` / `design` / `fix`. Datum dnešní (`YYYY-MM-DD`).
+- **Před KAŽDÝM commitem přidej záznam do Changelogu** (`src/pages/ChangelogPage.tsx`, ENTRIES pole) — i pro backendové/infra změny, ne jen viditelné UI. Honza to výslovně chce. Tagy: `feature` / `design` / `fix`. Datum = den, kdy změna reálně vznikla (ověř `date`, u zpětných záznamů `git log`), pozor na typografické uvozovky uvnitř JS stringů.
 
 ### Lokální spuštění
 ```bash

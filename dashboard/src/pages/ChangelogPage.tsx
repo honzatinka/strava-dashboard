@@ -9,6 +9,17 @@ interface ChangeEntry {
 
 const ENTRIES: ChangeEntry[] = [
   {
+    date: "2026-07-10",
+    title: "Martinova data zpět — oprava napojení na Strava API",
+    tag: "fix",
+    items: [
+      "Strava od 30. 6. 2026 vyžaduje placené předplatné majitele API aplikace — Martinova apka byla deaktivována, proto zmizela jeho data",
+      "Martin nyní autorizuje přes Honzovu aplikaci (navýšena na 10 athletes) — nezávislé na Martinově předplatném",
+      "Callback doména nastavena na produkci — re-autorizace je jeden klik na /api/friend-authorize, bez ručního kopírování",
+      "Tokeny obou atletů se po každé rotaci automaticky zapisují do Render env vars (přes Render API) — přežijí každý deploy",
+    ],
+  },
+  {
     date: "2026-07-09",
     title: "MCP server: dotazy na data odkudkoli (Claude appka)",
     tag: "feature",
@@ -17,6 +28,15 @@ const ENTRIES: ChangeEntry[] = [
       "5 nástrojů: list_activities, get_stats, find_routes_near (hledání tras podle místa), get_bet_status, refresh_data",
       "Funguje z Claude mobilní appky i webu — otázky typu 'kolik mám letos km proti Martinovi' zodpoví odkudkoli",
       "Volitelné zabezpečení přes MCP_SECRET env var (?key= v URL)",
+    ],
+  },
+  {
+    date: "2026-07-02",
+    title: "Stránka /bet: loading stav a opravy tokenů",
+    tag: "fix",
+    items: [
+      "Grafy a srovnání na /bet se skrývaly, když se soupeřova data načítala pomalu — nyní se zobrazí „Načítám data soupeře…“ a stránka se doplní sama (retry až 2 minuty)",
+      "Opraveno ztrácení Strava tokenů po vymazání cache (/api/refresh-data) — refreshnuté tokeny se drží v paměti serveru",
     ],
   },
   {
