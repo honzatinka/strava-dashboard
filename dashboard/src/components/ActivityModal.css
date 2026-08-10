@@ -144,6 +144,94 @@
   border-color: rgba(255, 68, 0, 0.3);
 }
 
+/* ─── Route stamp ─── */
+.modal-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+}
+
+.modal-stamp-btn {
+  cursor: pointer;
+  font: inherit;
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+}
+
+.modal-stamp-btn.active {
+  color: var(--color-accent);
+  border-color: rgba(255, 68, 0, 0.3);
+}
+
+.modal-stamp-panel {
+  margin-top: 12px;
+  padding: 14px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-surface-alt);
+}
+
+.modal-stamp-hint {
+  margin: 0 0 12px;
+  font-family: var(--font-body);
+  font-size: var(--font-size-xs);
+  color: var(--color-text-secondary);
+}
+
+.modal-stamp-choices {
+  display: flex;
+  gap: 12px;
+}
+
+.modal-stamp-choice {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 12px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: border-color 0.15s, transform 0.15s;
+}
+
+.modal-stamp-choice:hover {
+  border-color: var(--color-accent);
+  transform: translateY(-2px);
+}
+
+.modal-stamp-choice--black { background: #EEEAE1; }
+.modal-stamp-choice--white { background: #26282C; }
+
+.modal-stamp-choice img,
+.modal-stamp-loading {
+  width: 100%;
+  max-width: 148px;
+  aspect-ratio: 1;
+  display: block;
+}
+
+.modal-stamp-loading {
+  border-radius: 50%;
+  background: rgba(128, 128, 128, 0.18);
+}
+
+.modal-stamp-label {
+  font-family: var(--font-body);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-medium);
+}
+
+.modal-stamp-choice--black .modal-stamp-label { color: #26282C; }
+.modal-stamp-choice--white .modal-stamp-label { color: #EEEAE1; }
+
+@media (max-width: 560px) {
+  .modal-stamp-choices { gap: 8px; }
+  .modal-stamp-choice { padding: 8px; }
+}
+
 /* ─── Photos strip ─── */
 .modal-photos-strip {
   display: flex;

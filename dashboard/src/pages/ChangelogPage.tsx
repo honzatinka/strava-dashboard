@@ -9,6 +9,18 @@ interface ChangeEntry {
 
 const ENTRIES: ChangeEntry[] = [
   {
+    date: "2026-08-10",
+    title: "Obrázek trasy — razítko ke stažení",
+    tag: "feature",
+    items: [
+      "V detailu aktivity přibylo vedle „Zobrazit na Stravě“ tlačítko „Obrázek trasy“ (jen u aktivit s GPS stopou)",
+      "Trasa se vykreslí jako otisk gumového razítka — sport po horním oblouku, vzdálenost a převýšení po spodním, uprostřed tvar trasy",
+      "Na výběr černá nebo bílá varianta s živým náhledem, klikem se stáhne PNG 1080 × 1080 s průhledným pozadím",
+      "Otisk je záměrně nedokonalý (nedotištěná barva, škrábance, mírné natočení) a je odvozený od ID aktivity, takže každá trasa má vlastní, ale stálý otisk",
+      "Vykresluje se celé v prohlížeči přes canvas — žádné volání na server",
+    ],
+  },
+  {
     date: "2026-07-10",
     title: "Martinova data zpět — oprava napojení na Strava API",
     tag: "fix",

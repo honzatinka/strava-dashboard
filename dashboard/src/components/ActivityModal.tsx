@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
-import { MapPin, Watch, X, ExternalLink } from "lucide-react";
+import { MapPin, Watch, X, ExternalLink, Stamp } from "lucide-react";
 import type { Activity } from "../types";
 import { COURT_SPORTS, resolveSportIcon } from "../types";
 import {
@@ -9,6 +9,8 @@ import {
   sportLabel, locationFromTimezone, decodePolyline,
 } from "../utils";
 import { getCityName } from "../utils/geocode";
+import { renderRouteStamp, downloadStamp } from "../utils/routeStamp";
+import type { StampInk } from "../utils/routeStamp";
 import "./ActivityModal.css";
 
 interface Props {
@@ -37,8 +39,41 @@ export function ActivityModal({ activity, onClose, isFriend = false }: Props) {
   const [photosLoading, setPhotosLoading] = useState(false);
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
   const [calories, setCalories] = useState<number | null>(null);
+  const [stampOpen, setStampOpen] = useState(false);
+  const [stampPreviews, setStampPreviews] = useState<Record<StampInk, string> | null>(null);
   const polyline = activity.map?.summary_polyline;
   const hasRoute = polyline && polyline.length > 0;
+
+  // Small previews so the ink colour can be judged before downloading the full-size PNG
+  useEffect(() => {
+    if (!stampOpen || !polyline || stampPreviews) return;
+    const opts = {
+      polyline,
+      sportType: sport,
+      distanceMeters: activity.distance,
+      elevationMeters: activity.total_elevation_gain || 0,
+      seed: Number(String(activity.id).slice(-6)) || 7,
+    };
+    setStampPreviews({
+      black: renderRouteStamp({ ...opts, ink: "black", size: 360 }).toDataURL("image/png"),
+      white: renderRouteStamp({ ...opts, ink: "white", size: 360 }).toDataURL("image/png"),
+    });
+  }, [stampOpen, polyline, stampPreviews, sport, activity.distance, activity.total_elevation_gain, activity.id]);
+
+  const saveStamp = (ink: StampInk) => {
+    if (!polyline) return;
+    const canvas = renderRouteStamp({
+      polyline,
+      sportType: sport,
+      distanceMeters: activity.distance,
+      elevationMeters: activity.total_elevation_gain || 0,
+      ink,
+      size: 1080,
+      seed: Number(String(activity.id).slice(-6)) || 7,
+    });
+    const slug = activity.name.replace(/[^\p{L}\p{N}]+/gu, "-").replace(/^-|-$/g, "").toLowerCase();
+    downloadStamp(canvas, `trasa-${slug || activity.id}-${ink}.png`);
+  };
 
   // Reverse-geocode to get actual city name
   useEffect(() => {
@@ -191,14 +226,47 @@ export function ActivityModal({ activity, onClose, isFriend = false }: Props) {
               </React.Fragment>
             ))}
           </div>
-          <a
-            className="modal-strava-link"
-            href={`https://www.strava.com/activities/${activity.id}`}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <ExternalLink size={13} strokeWidth={1.8} /> Zobrazit na Stravě
-          </a>
+          <div className="modal-actions">
+            <a
+              className="modal-strava-link"
+              href={`https://www.strava.com/activities/${activity.id}`}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <ExternalLink size={13} strokeWidth={1.8} /> Zobrazit na Stravě
+            </a>
+            {hasRoute && (
+              <button
+                type="button"
+                className={`modal-strava-link modal-stamp-btn${stampOpen ? " active" : ""}`}
+                onClick={() => setStampOpen((v) => !v)}
+              >
+                <Stamp size={13} strokeWidth={1.8} /> Obrázek trasy
+              </button>
+            )}
+          </div>
+
+          {stampOpen && hasRoute && (
+            <div className="modal-stamp-panel">
+              <p className="modal-stamp-hint">Vyber variantu — klikem stáhneš PNG (1080 × 1080, průhledné pozadí).</p>
+              <div className="modal-stamp-choices">
+                {(["black", "white"] as StampInk[]).map((ink) => (
+                  <button
+                    key={ink}
+                    type="button"
+                    className={`modal-stamp-choice modal-stamp-choice--${ink}`}
+                    onClick={() => saveStamp(ink)}
+                    title={ink === "black" ? "Černá varianta" : "Bílá varianta"}
+                  >
+                    {stampPreviews
+                      ? <img src={stampPreviews[ink]} alt={`Razítko ${ink}`} />
+                      : <span className="modal-stamp-loading" />}
+                    <span className="modal-stamp-label">{ink === "black" ? "Černá" : "Bílá"}</span>
+                  </button>
+                ))}
+              </div>
+            </div>
+          )}
         </div>
 
         {/* Photos thumbnails */}
