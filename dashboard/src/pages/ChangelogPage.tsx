@@ -9,6 +9,17 @@ interface ChangeEntry {
 
 const ENTRIES: ChangeEntry[] = [
   {
+    date: "2026-08-18",
+    title: "Jóga se pozná i z názvu aktivity",
+    tag: "fix",
+    items: [
+      "Když Strava hlásí obecný typ „Workout“, ale v názvu je jóga, zobrazí se ikona i barva jógy",
+      "Rozpozná „yoga“ i české tvary (jóga, jógu, jogy, jógou)",
+      "Běh zůstává během — „jog“ a „jogging“ se záměrně nechytají, stejně jako „gym“ dál znamená posilovnu",
+      "Stejné pravidlo teď platí pro ikonu i barvu, dřív bylo napsané dvakrát zvlášť",
+    ],
+  },
+  {
     date: "2026-08-10",
     title: "Obrázek trasy — razítko ke stažení",
     tag: "feature",

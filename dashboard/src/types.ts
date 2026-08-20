@@ -73,19 +73,30 @@ export const SPORT_ICONS: Record<string, ReturnType<typeof makeMIcon>> = {
 };
 
 /**
- * Resolve activity icon — checks activity name first for words starting with "gymna"
- * (gymnastika, gymnastics, gymnasta, gymnastka...), then falls back to sport_type.
+ * Name-based sport overrides. Strava sometimes reports a generic type (typically
+ * "Workout") for sessions whose real discipline is only stated in the title, so the
+ * name gets the first word.
  *
- * IMPORTANT: bare "gym" is treated as posilovna (gym/weight training) and is NOT matched,
- * so it keeps the default Workout/WeightTraining icon (fitness_center).
+ * IMPORTANT: bare "gym" means posilovna (weight training) and must NOT match — it keeps
+ * the fitness_center icon. Likewise "jog"/"jogging" is running, so the yoga pattern
+ * requires a vowel after "jog" (jóga, jógu, jogy…) and never matches jogging.
  */
+const NAME_IS_GYMNASTICS = /\bgymna\w*\b/;
+const NAME_IS_YOGA = /\b(yoga|j[oó]g[aáeéiíouy]\w*)\b/;
+
+/** Sport key implied by the activity name, or null when the name says nothing. */
+function sportFromName(activityName?: string): string | null {
+  if (!activityName) return null;
+  const lower = activityName.toLowerCase();
+  if (NAME_IS_GYMNASTICS.test(lower)) return "Gymnastics";
+  if (NAME_IS_YOGA.test(lower)) return "Yoga";
+  return null;
+}
+
+/** Resolve activity icon — the name wins over a generic sport_type, then fall back. */
 export function resolveSportIcon(sportType: string, activityName?: string) {
-  if (activityName) {
-    const lower = activityName.toLowerCase();
-    if (/\bgymna\w*\b/.test(lower)) {
-      return SPORT_ICONS.Gymnastics;
-    }
-  }
+  const byName = sportFromName(activityName);
+  if (byName) return SPORT_ICONS[byName];
   return SPORT_ICONS[sportType] || FALLBACK_SPORT_ICON;
 }
 
@@ -138,9 +149,8 @@ export const SPORT_COLORS: Record<string, string> = {
  * jinak fallback na sport_type.
  */
 export function resolveSportColor(sportType: string, activityName?: string): string {
-  if (activityName && /\bgymna\w*\b/.test(activityName.toLowerCase())) {
-    return SPORT_COLORS.Gymnastics;
-  }
+  const byName = sportFromName(activityName);
+  if (byName) return SPORT_COLORS[byName];
   return SPORT_COLORS[sportType] || "#D4CFC9";
 }
 
