@@ -1322,6 +1322,24 @@ const server = http.createServer((req, res) => {
     return;
   }
 
+  // ─── Keep-alive / liveness: GET /api/health
+  // Deliberately does no Strava work — it exists so an external cron can keep the
+  // Render free-tier instance from spinning down (a cold start makes the MCP
+  // handshake time out). Hitting /api/refresh-data on a schedule instead would
+  // burn through Strava's rate limit.
+  if (req.method === "GET" && parsedUrl.pathname === "/api/health") {
+    const age = (t) => (t ? Math.round((Date.now() - t) / 1000) : null);
+    res.writeHead(200, { "Content-Type": "application/json", "Cache-Control": "no-store" });
+    res.end(JSON.stringify({
+      ok: true,
+      uptime_s: Math.round(process.uptime()),
+      activities: cachedActivities ? cachedActivities.length : 0,
+      friend_activities: cachedFriendActivities ? cachedFriendActivities.length : 0,
+      data_age_s: { honza: age(cachedActivitiesAt), martin: age(cachedFriendActivitiesAt) },
+    }));
+    return;
+  }
+
   // ─── Refresh data cache: GET /api/refresh-data
   if (req.method === "GET" && parsedUrl.pathname === "/api/refresh-data") {
     cachedMyStats          = null;

@@ -10,6 +10,16 @@ interface ChangeEntry {
 const ENTRIES: ChangeEntry[] = [
   {
     date: "2026-08-18",
+    title: "Endpoint /api/health pro udržení serveru vzhůru",
+    tag: "fix",
+    items: [
+      "Render free tier uspí službu po 15 minutách nečinnosti a studený start pak shodí MCP konektor",
+      "Nový lehký endpoint /api/health jen odpoví, nic netahá ze Stravy — je určený pro pravidelný ping zvenčí",
+      "Vrací i stáří dat a počet aktivit v cache, hodí se na rychlou diagnostiku",
+    ],
+  },
+  {
+    date: "2026-08-18",
     title: "Jóga se pozná i z názvu aktivity",
     tag: "fix",
     items: [
