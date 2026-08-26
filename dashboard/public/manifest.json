@@ -1,0 +1,23 @@
+{
+  "name": "Strava Dashboard",
+  "short_name": "Strava Dash",
+  "description": "Osobní přehled Strava aktivit, statistik a Velké sázky.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#F6F5F2",
+  "theme_color": "#FF4400",
+  "icons": [
+    {
+      "src": "/android-icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/android-icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

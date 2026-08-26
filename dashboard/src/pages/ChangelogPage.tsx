@@ -10,6 +10,16 @@ interface ChangeEntry {
 const ENTRIES: ChangeEntry[] = [
   {
     date: "2026-08-26",
+    title: "Appku jde přidat na plochu (PWA manifest)",
+    tag: "feature",
+    items: [
+      "Přidán web manifest — „Přidat na plochu“ na Androidu teď vytvoří skutečnou appku (fullscreen, bez adresního řádku, vlastní ikona), ne jen záložku",
+      "Nové ikony 192×192 a 512×512 s rezervou pro kruhové/čtvercové maskování launcherů (maskable icon)",
+      "Barva rámečku appky (theme-color) sladěná s accent barvou #FF4400",
+    ],
+  },
+  {
+    date: "2026-08-26",
     title: "Nová ikona appky",
     tag: "design",
     items: [
