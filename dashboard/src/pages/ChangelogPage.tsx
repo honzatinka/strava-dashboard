@@ -10,6 +10,15 @@ interface ChangeEntry {
 const ENTRIES: ChangeEntry[] = [
   {
     date: "2026-08-26",
+    title: "Nová ikona appky",
+    tag: "design",
+    items: [
+      "Favicon a apple-touch-icon nahrazeny čistým motivem tří rostoucích sloupců (dashboard/statistiky)",
+      "Stejná paleta jako dosud — oranžová #FF4400, tmavá linka #21211F",
+    ],
+  },
+  {
+    date: "2026-08-26",
     title: "MCP: oprava chyby přihlašování konektoru",
     tag: "fix",
     items: [
