@@ -9,12 +9,23 @@ interface ChangeEntry {
 
 const ENTRIES: ChangeEntry[] = [
   {
+    date: "2026-08-25",
+    title: "MCP: kalorie automaticky + detail aktivity",
+    tag: "fix",
+    items: [
+      "Kalorie se teď vrací samy u běžných dotazů (do 15 aktivit) — dřív se musely vyžádat příznakem, což appka skoro nikdy neudělala, takže se nezobrazovaly",
+      "Nový nástroj get_activity_detail — detail jedné aktivity: kalorie, průměrný a maximální tep, rychlost, rozsah nadmořské výšky, vybavení, teplota a popis",
+      "Bez zadání ID vrátí rovnou poslední aktivitu",
+      "Stažené detaily se drží v paměti, opakovaný dotaz už Stravu nezatěžuje",
+    ],
+  },
+  {
     date: "2026-08-22",
     title: "MCP: kalorie u aktivit",
     tag: "feature",
     items: [
       "Nástroj list_activities umí vrátit i kalorie — stačí se v Claude appce zeptat na spálené kalorie",
-      "Strava je v seznamu aktivit neposílá, musí se dotáhnout z detailu každé aktivity, proto je to volitelné a jen pro prvních 15 záznamů",
+      "Strava je v seznamu aktivit neposílá, musí se dotáhnout z detailu každé aktivity",
       "Jednou stažené kalorie se drží v paměti, takže opakovaný dotaz už Stravu nezatěžuje",
     ],
   },

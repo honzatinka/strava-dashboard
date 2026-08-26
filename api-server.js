@@ -597,11 +597,11 @@ function mcpGetAthleteActs(athlete, cb) {
 // Strava's activity *list* omits calories — only the per-activity detail carries them.
 // Fetching detail for every activity would blow the rate limit (100 req / 15 min), so it
 // is opt-in, capped per call, and memoised for the process lifetime.
-const caloriesCache = new Map(); // activityId -> calories | null
+const detailCache = new Map(); // activityId -> full Strava detail object
 const MCP_CALORIE_MAX = 15;
 
-function fetchCalories(athlete, id, cb) {
-  if (caloriesCache.has(id)) { cb(caloriesCache.get(id)); return; }
+function fetchActivityDetail(athlete, id, cb) {
+  if (detailCache.has(id)) { cb(detailCache.get(id)); return; }
   const refresh = athlete === "martin" ? refreshFriendToken : refreshStravaToken;
   refresh((err, token) => {
     if (err) { cb(null); return; }
@@ -612,15 +612,18 @@ function fetchCalories(athlete, id, cb) {
       let d = "";
       sr.on("data", c => d += c);
       sr.on("end", () => {
-        let cal = null;
-        try {
-          const j = JSON.parse(d);
-          cal = typeof j.calories === "number" ? Math.round(j.calories) : null;
-        } catch (e) {}
-        caloriesCache.set(id, cal);
-        cb(cal);
+        let j = null;
+        try { j = JSON.parse(d); } catch (e) {}
+        if (j && j.id) detailCache.set(id, j);
+        cb(j && j.id ? j : null);
       });
     }).on("error", () => cb(null)).end();
+  });
+}
+
+function fetchCalories(athlete, id, cb) {
+  fetchActivityDetail(athlete, id, (j) => {
+    cb(j && typeof j.calories === "number" ? Math.round(j.calories) : null);
   });
 }
 
@@ -652,8 +655,20 @@ const MCP_TOOLS = [
         limit: { type: "number", description: "Max results, default 10, max 50" },
         include_calories: {
           type: "boolean",
-          description: "Fetch calories for each returned activity. Costs one extra Strava call per activity, so only the first 15 rows are enriched — keep limit small when using this.",
+          description: "Calories are included automatically for up to 15 rows. Set false to skip the extra Strava lookups, or true to force them.",
         },
+      },
+      required: ["athlete"],
+    },
+  },
+  {
+    name: "get_activity_detail",
+    description: "Full detail of one activity: calories, average/max heart rate, speed, elevation range, gear, temperature and description. Use for questions about a single workout. Pass the activity id from list_activities, or omit it to get the most recent activity.",
+    inputSchema: {
+      type: "object",
+      properties: {
+        athlete: { type: "string", enum: ["honza", "martin"], description: "Whose activity" },
+        activity_id: { type: "number", description: "Strava activity id. Omit for the newest activity." },
       },
       required: ["athlete"],
     },
@@ -717,7 +732,13 @@ function mcpToolCall(name, args, done) {
         .sort((a, b) => (b.start_date_local || "").localeCompare(a.start_date_local || ""))
         .slice(0, limit);
       const rows = list.map(mcpActivityRow);
-      if (!args.include_calories) {
+      // Calories are ON by default for small result sets. They used to be opt-in, but the
+      // caller almost never passed the flag, so in practice they never appeared. Large
+      // result sets still skip them — one Strava detail call per row adds up fast.
+      const wantCalories = args.include_calories === false
+        ? false
+        : (args.include_calories === true || rows.length <= MCP_CALORIE_MAX);
+      if (!wantCalories) {
         reply({ athlete, count: rows.length, activities: rows });
         return;
       }
@@ -729,6 +750,54 @@ function mcpToolCall(name, args, done) {
           ...(rows.length > MCP_CALORIE_MAX
             ? { note: `Kalorie doplněny jen u prvních ${MCP_CALORIE_MAX} aktivit (limit Stravy).` }
             : {}),
+        });
+      });
+    });
+    return;
+  }
+
+  if (name === "get_activity_detail") {
+    const athlete = args.athlete === "martin" ? "martin" : "honza";
+    mcpGetAthleteActs(athlete, (acts) => {
+      if (!acts || !acts.length) { noData(athlete); return; }
+      let id = args.activity_id;
+      if (!id) {
+        const newest = [...acts].sort(
+          (a, b) => (b.start_date_local || "").localeCompare(a.start_date_local || ""),
+        )[0];
+        id = newest && newest.id;
+      }
+      if (!id) { noData(athlete); return; }
+
+      fetchActivityDetail(athlete, id, (j) => {
+        if (!j) {
+          reply({ error: `Detail aktivity ${id} se nepodařilo načíst.` });
+          return;
+        }
+        const round1 = (v) => (typeof v === "number" ? Math.round(v * 10) / 10 : null);
+        reply({
+          athlete,
+          id: j.id,
+          date: j.start_date_local,
+          name: j.name,
+          sport: j.sport_type || j.type,
+          km: round1((j.distance || 0) / 1000),
+          moving_time_min: Math.round((j.moving_time || 0) / 60),
+          elapsed_time_min: Math.round((j.elapsed_time || 0) / 60),
+          elevation_m: Math.round(j.total_elevation_gain || 0),
+          elevation_range_m: (typeof j.elev_low === "number" && typeof j.elev_high === "number")
+            ? [Math.round(j.elev_low), Math.round(j.elev_high)] : null,
+          calories: typeof j.calories === "number" ? Math.round(j.calories) : null,
+          avg_hr: round1(j.average_heartrate),
+          max_hr: round1(j.max_heartrate),
+          avg_speed_kmh: round1((j.average_speed || 0) * 3.6),
+          max_speed_kmh: round1((j.max_speed || 0) * 3.6),
+          avg_temp_c: typeof j.average_temp === "number" ? j.average_temp : null,
+          gear: (j.gear && j.gear.name) || null,
+          device: j.device_name || null,
+          trainer: j.trainer === true,
+          description: j.description || null,
+          strava_url: `https://www.strava.com/activities/${j.id}`,
         });
       });
     });
