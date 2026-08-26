@@ -10,6 +10,16 @@ interface ChangeEntry {
 const ENTRIES: ChangeEntry[] = [
   {
     date: "2026-08-26",
+    title: "Oprava: kombinovaná ikona v manifestu",
+    tag: "fix",
+    items: [
+      "Manifest kombinoval purpose \"any maskable\" v jedné ikoně — Chrome to nedoporučuje, může to oříznout ikonu na splash screenu",
+      "Rozděleno na samostatné ikony pro any (normální vzhled) a maskable (s rezervou pro maskování)",
+      "Chrome navíc rozhoduje o nabídnutí instalace podle vlastní historie návštěv dané stránky — po pár dalších otevřeních by se možnost v menu měla objevit sama",
+    ],
+  },
+  {
+    date: "2026-08-26",
     title: "Oprava: „Přidat na plochu“ se na Androidu vůbec nenabízela",
     tag: "fix",
     items: [
