@@ -10,6 +10,15 @@ interface ChangeEntry {
 const ENTRIES: ChangeEntry[] = [
   {
     date: "2026-08-26",
+    title: "Oprava: „Přidat na plochu“ se na Androidu vůbec nenabízela",
+    tag: "fix",
+    items: [
+      "Manifest sám nestačil — Chrome na Androidu vyžaduje ještě zaregistrovaný service worker, jinak možnost instalace v menu vůbec nenabídne",
+      "Přidán minimální service worker (bez offline cache, jen splňuje podmínku instalovatelnosti)",
+    ],
+  },
+  {
+    date: "2026-08-26",
     title: "Appku jde přidat na plochu (PWA manifest)",
     tag: "feature",
     items: [
