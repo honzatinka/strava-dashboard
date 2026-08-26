@@ -593,10 +593,56 @@ function mcpGetAthleteActs(athlete, cb) {
   }
 }
 
+// ─── Calories
+// Strava's activity *list* omits calories — only the per-activity detail carries them.
+// Fetching detail for every activity would blow the rate limit (100 req / 15 min), so it
+// is opt-in, capped per call, and memoised for the process lifetime.
+const caloriesCache = new Map(); // activityId -> calories | null
+const MCP_CALORIE_MAX = 15;
+
+function fetchCalories(athlete, id, cb) {
+  if (caloriesCache.has(id)) { cb(caloriesCache.get(id)); return; }
+  const refresh = athlete === "martin" ? refreshFriendToken : refreshStravaToken;
+  refresh((err, token) => {
+    if (err) { cb(null); return; }
+    https.request({
+      hostname: "www.strava.com", path: `/api/v3/activities/${id}`,
+      method: "GET", headers: { Authorization: `Bearer ${token}` },
+    }, (sr) => {
+      let d = "";
+      sr.on("data", c => d += c);
+      sr.on("end", () => {
+        let cal = null;
+        try {
+          const j = JSON.parse(d);
+          cal = typeof j.calories === "number" ? Math.round(j.calories) : null;
+        } catch (e) {}
+        caloriesCache.set(id, cal);
+        cb(cal);
+      });
+    }).on("error", () => cb(null)).end();
+  });
+}
+
+/** Attach calories to rows in place, sequentially so Strava isn't hammered. */
+function attachCalories(athlete, rows, ids, done) {
+  const n = Math.min(rows.length, MCP_CALORIE_MAX);
+  let i = 0;
+  const next = () => {
+    if (i >= n) { done(); return; }
+    const idx = i++;
+    fetchCalories(athlete, ids[idx], (cal) => {
+      if (cal !== null) rows[idx].calories = cal;
+      next();
+    });
+  };
+  next();
+}
+
 const MCP_TOOLS = [
   {
     name: "list_activities",
-    description: "List recent Strava activities for Honza or Martin, newest first. Optionally filter by sport (Ride includes GravelRide/MountainBikeRide/VirtualRide; EBikeRide is separate) and year. Returns date, name, sport, km, time, elevation and Strava URL.",
+    description: "List recent Strava activities for Honza or Martin, newest first. Optionally filter by sport (Ride includes GravelRide/MountainBikeRide/VirtualRide; EBikeRide is separate) and year. Returns date, name, sport, km, time, elevation and Strava URL. Set include_calories=true when the user asks about calories or energy burned.",
     inputSchema: {
       type: "object",
       properties: {
@@ -604,6 +650,10 @@ const MCP_TOOLS = [
         sport: { type: "string", description: "Optional sport filter, e.g. Ride, Run, Swim, Hike, EBikeRide, WeightTraining" },
         year: { type: "number", description: "Optional year filter, e.g. 2026" },
         limit: { type: "number", description: "Max results, default 10, max 50" },
+        include_calories: {
+          type: "boolean",
+          description: "Fetch calories for each returned activity. Costs one extra Strava call per activity, so only the first 15 rows are enriched — keep limit small when using this.",
+        },
       },
       required: ["athlete"],
     },
@@ -666,7 +716,21 @@ function mcpToolCall(name, args, done) {
       list = [...list]
         .sort((a, b) => (b.start_date_local || "").localeCompare(a.start_date_local || ""))
         .slice(0, limit);
-      reply({ athlete, count: list.length, activities: list.map(mcpActivityRow) });
+      const rows = list.map(mcpActivityRow);
+      if (!args.include_calories) {
+        reply({ athlete, count: rows.length, activities: rows });
+        return;
+      }
+      attachCalories(athlete, rows, list.map(a => a.id), () => {
+        reply({
+          athlete,
+          count: rows.length,
+          activities: rows,
+          ...(rows.length > MCP_CALORIE_MAX
+            ? { note: `Kalorie doplněny jen u prvních ${MCP_CALORIE_MAX} aktivit (limit Stravy).` }
+            : {}),
+        });
+      });
     });
     return;
   }

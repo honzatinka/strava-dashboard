@@ -9,6 +9,16 @@ interface ChangeEntry {
 
 const ENTRIES: ChangeEntry[] = [
   {
+    date: "2026-08-22",
+    title: "MCP: kalorie u aktivit",
+    tag: "feature",
+    items: [
+      "Nástroj list_activities umí vrátit i kalorie — stačí se v Claude appce zeptat na spálené kalorie",
+      "Strava je v seznamu aktivit neposílá, musí se dotáhnout z detailu každé aktivity, proto je to volitelné a jen pro prvních 15 záznamů",
+      "Jednou stažené kalorie se drží v paměti, takže opakovaný dotaz už Stravu nezatěžuje",
+    ],
+  },
+  {
     date: "2026-08-18",
     title: "Endpoint /api/health pro udržení serveru vzhůru",
     tag: "fix",
