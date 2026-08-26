@@ -9,6 +9,16 @@ interface ChangeEntry {
 
 const ENTRIES: ChangeEntry[] = [
   {
+    date: "2026-08-26",
+    title: "MCP: oprava chyby přihlašování konektoru",
+    tag: "fix",
+    items: [
+      "Claude appka hlásila „Couldn't register with sign-in service“ při přidávání/obnově konektoru",
+      "Server na OAuth discovery cesty (/.well-known/oauth-…, /register) odpovídal 200 s HTML místo 404 — appka si to vykládala jako nabídku OAuth přihlášení a pokoušela se zaregistrovat, což selhalo",
+      "Teď tyto cesty vrací čisté 404, takže appka ví, že server žádné OAuth nevyžaduje",
+    ],
+  },
+  {
     date: "2026-08-25",
     title: "MCP: kalorie automaticky + detail aktivity",
     tag: "fix",

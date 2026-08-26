@@ -1003,6 +1003,18 @@ const server = http.createServer((req, res) => {
 
   const parsedUrl = url.parse(req.url, true);
 
+  // ─── OAuth discovery probes (claude.ai custom connectors always try these before
+  // falling back to no-auth). The SPA static fallback below answers ANY unknown path
+  // with 200 + index.html, which makes claude.ai think an OAuth server might be there
+  // and attempt Dynamic Client Registration against it — that registration then has
+  // nothing real to talk to and fails with "Couldn't register with sign-in service".
+  // A clean 404 here tells the client plainly: no OAuth, use the connector unauthenticated.
+  if (/^\/(\.well-known\/oauth-|register$|\.well-known\/openid-)/.test(parsedUrl.pathname)) {
+    res.writeHead(404, { "Content-Type": "application/json" });
+    res.end(JSON.stringify({ error: "No OAuth on this server" }));
+    return;
+  }
+
   // ─── MCP endpoint (claude.ai custom connector): POST /mcp
   if (parsedUrl.pathname === "/mcp") {
     if (process.env.MCP_SECRET && parsedUrl.query.key !== process.env.MCP_SECRET) {
