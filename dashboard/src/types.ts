@@ -70,6 +70,7 @@ export const SPORT_ICONS: Record<string, ReturnType<typeof makeMIcon>> = {
   Yoga:             makeMIcon("self_improvement"),
   RockClimbing:     makeMIcon("landscape"),
   Gymnastics:       makeMIcon("sports_gymnastics"),
+  Volleyball:       makeMIcon("sports_volleyball"),
 };
 
 /**
@@ -83,6 +84,7 @@ export const SPORT_ICONS: Record<string, ReturnType<typeof makeMIcon>> = {
  */
 const NAME_IS_GYMNASTICS = /\bgymna\w*\b/;
 const NAME_IS_YOGA = /\b(yoga|j[oó]g[aáeéiíouy]\w*)\b/;
+const NAME_IS_VOLLEYBALL = /\b(volleyball|volejbal\w*)\b/;
 
 /** Sport key implied by the activity name, or null when the name says nothing. */
 function sportFromName(activityName?: string): string | null {
@@ -90,6 +92,7 @@ function sportFromName(activityName?: string): string | null {
   const lower = activityName.toLowerCase();
   if (NAME_IS_GYMNASTICS.test(lower)) return "Gymnastics";
   if (NAME_IS_YOGA.test(lower)) return "Yoga";
+  if (NAME_IS_VOLLEYBALL.test(lower)) return "Volleyball";
   return null;
 }
 
@@ -141,6 +144,8 @@ export const SPORT_COLORS: Record<string, string> = {
   Yoga: "#F5C2E0",
   // Gymnastika — teal (odlišný od posilovny i jogy)
   Gymnastics: "#7DD9C7",
+  // Volejbal — žlutá (odlišná od raketových sportů i posilovny)
+  Volleyball: "#F5D96B",
 };
 
 /**
@@ -157,5 +162,5 @@ export function resolveSportColor(sportType: string, activityName?: string): str
 /** Sports where GPS distance / pace doesn't make sense (court, gym, indoor) */
 export const COURT_SPORTS = new Set([
   "Padel", "Tennis", "Squash", "TableTennis", "Badminton",
-  "Yoga", "WeightTraining", "Workout", "Crossfit", "RockClimbing",
+  "Yoga", "WeightTraining", "Workout", "Crossfit", "RockClimbing", "Volleyball",
 ]);

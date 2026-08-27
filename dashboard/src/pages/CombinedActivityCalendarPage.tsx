@@ -3,7 +3,7 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 import type { Activity } from "../types";
 import { SPORT_COLORS, COURT_SPORTS, resolveSportIcon, resolveSportColor } from "../types";
 import {
-  groupByDate, formatDistance, czechMonth, formatPace,
+  groupByDate, formatDistance, czechMonth, formatPace, activityDurationSecs,
 } from "../utils";
 import { TheBigBetCompact } from "../components/TheBigBetCompact";
 import "./CombinedActivityCalendarPage.css";
@@ -69,7 +69,7 @@ function ActivityRow({
       <div className="act-row-stats">
         <div className="act-row-stat">
           <span className="act-row-stat-label">Time</span>
-          <span className="act-row-stat-value act-row-stat-value--accent">{shortDur(activity.moving_time)}</span>
+          <span className="act-row-stat-value act-row-stat-value--accent">{shortDur(activityDurationSecs(activity))}</span>
         </div>
         {activity.average_heartrate && (
           <div className="act-row-stat">
@@ -136,7 +136,7 @@ export function CombinedActivityCalendarPage({
   const monthActs = activities.filter((a) =>
     a.start_date_local.startsWith(`${year}-${String(month+1).padStart(2,"0")}`)
   );
-  const monthTotalSecs = monthActs.reduce((s, a) => s + a.moving_time, 0);
+  const monthTotalSecs = monthActs.reduce((s, a) => s + activityDurationSecs(a), 0);
   const monthHH = Math.floor(monthTotalSecs / 3600);
   const monthMM = String(Math.floor((monthTotalSecs % 3600) / 60)).padStart(2, "0");
   const monthDist = monthActs.reduce((s, a) => s + a.distance, 0);
@@ -147,7 +147,7 @@ export function CombinedActivityCalendarPage({
   const prevMonthActs = activities.filter((a) =>
     a.start_date_local.startsWith(`${prevY}-${String(prevM).padStart(2,"0")}`)
   );
-  const prevSecs = prevMonthActs.reduce((s, a) => s + a.moving_time, 0);
+  const prevSecs = prevMonthActs.reduce((s, a) => s + activityDurationSecs(a), 0);
   const prevDist = prevMonthActs.reduce((s, a) => s + a.distance, 0);
   const deltaCount = monthActs.length - prevMonthActs.length;
   const deltaSecs  = monthTotalSecs - prevSecs;
@@ -250,7 +250,7 @@ export function CombinedActivityCalendarPage({
                           >
                             <Ic size={11} color={darken(c, 0.45)} />
                             <span className="cp-cell-act-dur" style={{ color: darken(c, 0.45) }}>
-                              {shortDur(a.moving_time)}
+                              {shortDur(activityDurationSecs(a))}
                             </span>
                           </div>
                         );

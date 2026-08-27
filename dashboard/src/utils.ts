@@ -1,5 +1,5 @@
 import type { Activity } from "./types";
-import { normalizeDisplaySport } from "./types";
+import { normalizeDisplaySport, COURT_SPORTS } from "./types";
 
 export function formatDistance(meters: number): string {
   if (meters < 1000) return `${Math.round(meters)} m`;
@@ -21,6 +21,20 @@ export function formatDistanceKm(meters: number): string {
     return `${Math.round(km).toLocaleString("cs-CZ").replace(/\s/g, " ")} km`;
   }
   return `${km.toFixed(1)} km`;
+}
+
+/**
+ * Duration to actually display for an activity's "time" stat.
+ *
+ * Strava's moving_time comes from GPS/accelerometer motion detection, which is
+ * meaningless for COURT_SPORTS (volleyball, weight training, yoga…) — a volleyball
+ * game is mostly standing between plays, so moving_time is naturally far below the
+ * real session length, not just when a watch loses tracking mid-session. elapsed_time
+ * is what actually happened on the court/mat, so it's the honest number to show.
+ */
+export function activityDurationSecs(activity: Activity): number {
+  const sport = activity.sport_type || activity.type;
+  return COURT_SPORTS.has(sport) ? activity.elapsed_time : activity.moving_time;
 }
 
 export function formatDuration(seconds: number): string {

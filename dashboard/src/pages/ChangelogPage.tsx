@@ -9,6 +9,16 @@ interface ChangeEntry {
 
 const ENTRIES: ChangeEntry[] = [
   {
+    date: "2026-08-27",
+    title: "Volejbal: ikona a čas v kalendáři",
+    tag: "fix",
+    items: [
+      "Volejbal měl ikonu posilovny (Strava mu přiděluje obecný typ „Workout“) — teď se pozná podle názvu aktivity a dostane vlastní ikonu i žlutou barvu",
+      "Kalendář u sportů bez plynulého pohybu (volejbal, posilovna, jóga, lezení…) zobrazuje celkový čas (elapsed_time), ne pohybový (moving_time) — u volejbalu je totiž hodně stání mezi výměnami, takže pohybový čas přirozeně silně podhodnocuje skutečnou délku",
+      "Detail aktivity zůstává beze změny, tam se ukazují oba časy zvlášť",
+    ],
+  },
+  {
     date: "2026-08-26",
     title: "Oprava: kombinovaná ikona v manifestu",
     tag: "fix",
