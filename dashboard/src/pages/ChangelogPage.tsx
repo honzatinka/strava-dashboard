@@ -13,7 +13,7 @@ const ENTRIES: ChangeEntry[] = [
     title: "Volejbal: ikona a čas v kalendáři",
     tag: "fix",
     items: [
-      "Volejbal měl ikonu posilovny (Strava mu přiděluje obecný typ „Workout“) — teď se pozná podle názvu aktivity a dostane vlastní ikonu i žlutou barvu",
+      "Volejbal měl ikonu posilovny (Strava mu přiděluje obecný typ „Workout“) — teď se pozná podle názvu aktivity a dostane vlastní ikonu a limetkovou barvu jako ostatní raketové sporty",
       "Kalendář u sportů bez plynulého pohybu (volejbal, posilovna, jóga, lezení…) zobrazuje celkový čas (elapsed_time), ne pohybový (moving_time) — u volejbalu je totiž hodně stání mezi výměnami, takže pohybový čas přirozeně silně podhodnocuje skutečnou délku",
       "Detail aktivity zůstává beze změny, tam se ukazují oba časy zvlášť",
     ],

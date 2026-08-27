@@ -139,13 +139,11 @@ export const SPORT_COLORS: Record<string, string> = {
   // Gym / síla — tmavě fialová
   Workout: "#9B8FD4", WeightTraining: "#9B8FD4",
   // Raketové sporty — limetková
-  Tennis: "#C5E880", Padel: "#C5E880",
+  Tennis: "#C5E880", Padel: "#C5E880", Volleyball: "#C5E880",
   // Ostatní
   Yoga: "#F5C2E0",
   // Gymnastika — teal (odlišný od posilovny i jogy)
   Gymnastics: "#7DD9C7",
-  // Volejbal — žlutá (odlišná od raketových sportů i posilovny)
-  Volleyball: "#F5D96B",
 };
 
 /**
