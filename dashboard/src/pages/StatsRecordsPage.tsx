@@ -1,6 +1,6 @@
 import { useState, useMemo, useEffect } from "react";
 import {
-  BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, LabelList,
+  BarChart, ComposedChart, Bar, Line, XAxis, YAxis, Tooltip, ResponsiveContainer, LabelList,
 } from "recharts";
 import { Ruler, Timer, Mountain, MapPin } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
@@ -8,7 +8,7 @@ import type { Activity } from "../types";
 import { resolveSportIcon } from "../types";
 import { YearOverYearChart } from "../components/YearOverYearChart";
 import {
-  formatDistance, formatDuration, formatFullDate,
+  formatDistance, formatDuration, formatFullDate, activityDurationSecs,
   groupBySport, sportLabel, locationFromTimezone,
 } from "../utils";
 import { getCityName } from "../utils/geocode";
@@ -40,6 +40,42 @@ function findRecord(
   const best = filtered.reduce((best, a) => selector(a) > selector(best) ? a : best);
   if (selector(best) <= 0) return null;
   return { label, icon, activity: best, value: formatter(selector(best)) };
+}
+
+function formatHours(hours: number): string {
+  const h = Math.floor(hours);
+  const m = Math.round((hours - h) * 60);
+  if (h <= 0) return `${m} min`;
+  return m > 0 ? `${h}h ${m}m` : `${h}h`;
+}
+
+interface VolumeTooltipPayload { name: string; km: number; hours: number }
+
+/** Custom tooltip — Recharts' built-in formatter always inserts a ": " separator
+ *  even with an empty name, which is what we're avoiding by rendering the rows
+ *  ourselves. Also lets a single hover show both km and time together. */
+function VolumeTooltip({
+  active, payload, label,
+}: {
+  active?: boolean;
+  payload?: Array<{ payload: VolumeTooltipPayload }>;
+  label?: string;
+}) {
+  if (!active || !payload?.length) return null;
+  const d = payload[0].payload;
+  const monthLabel = CZECH_MONTHS_FULL[parseInt(String(label), 10) - 1] || label;
+  return (
+    <div
+      style={{
+        background: "#FFFFFF", border: "1px solid rgba(33,33,31,0.08)", borderRadius: 8,
+        color: "#21211F", fontFamily: "inherit", padding: "8px 12px",
+      }}
+    >
+      <div style={{ fontWeight: 600, marginBottom: 4, fontSize: 13 }}>{monthLabel}</div>
+      <div style={{ color: "var(--color-accent)", fontSize: 12 }}>{d.km.toLocaleString("cs-CZ")} km</div>
+      <div style={{ color: "#6B8FC7", fontSize: 12 }}>{formatHours(d.hours)}</div>
+    </div>
+  );
 }
 
 function RecordCard({ rec, onSelect }: { rec: ActivityRecord; onSelect: (a: Activity) => void }) {
@@ -89,15 +125,17 @@ export function StatsRecordsPage({
     const filtered = selectedYear
       ? activities.filter((a) => a.start_date_local.startsWith(selectedYear))
       : activities;
-    const months: Record<string, number> = {};
-    for (let m = 1; m <= 12; m++) months[String(m)] = 0;
+    const months: Record<string, { km: number; hours: number }> = {};
+    for (let m = 1; m <= 12; m++) months[String(m)] = { km: 0, hours: 0 };
     for (const a of filtered) {
       const m = String(parseInt(a.start_date_local.slice(5, 7)));
-      months[m] = (months[m] || 0) + 1;
+      months[m].km += (a.distance || 0) / 1000;
+      months[m].hours += activityDurationSecs(a) / 3600;
     }
-    return Object.entries(months).map(([m, count]) => ({
+    return Object.entries(months).map(([m, { km, hours }]) => ({
       name: m, // numeric month label per request
-      count,
+      km: Math.round(km * 10) / 10,
+      hours: Math.round(hours * 10) / 10,
     }));
   }, [activities, selectedYear]);
 
@@ -155,8 +193,16 @@ export function StatsRecordsPage({
               ))}
             </div>
           </div>
+          <div className="sr-volume-legend">
+            <span className="sr-volume-legend-item">
+              <span className="sr-volume-legend-swatch sr-volume-legend-swatch--km" /> km
+            </span>
+            <span className="sr-volume-legend-item">
+              <span className="sr-volume-legend-swatch sr-volume-legend-swatch--time" /> čas
+            </span>
+          </div>
           <ResponsiveContainer width="100%" height={220}>
-            <BarChart data={monthlyData}>
+            <ComposedChart data={monthlyData} margin={{ top: 8, right: 8, left: 0, bottom: 0 }}>
               <XAxis
                 dataKey="name"
                 tick={{ fontSize: 11, fill: "rgba(33,33,31,0.4)" }}
@@ -164,20 +210,34 @@ export function StatsRecordsPage({
                 tickLine={false}
               />
               <YAxis
+                yAxisId="km"
                 tick={{ fontSize: 11, fill: "rgba(33,33,31,0.4)" }}
                 axisLine={false}
                 tickLine={false}
+                width={36}
               />
-              <Tooltip
-                cursor={false}
-                labelFormatter={(label) => CZECH_MONTHS_FULL[parseInt(String(label)) - 1] || String(label)}
-                formatter={(value) => [`${value} aktivit`, ""] as [string, string]}
-                contentStyle={{ background: "#FFFFFF", border: "1px solid rgba(33,33,31,0.08)", borderRadius: 8, color: "#21211F", fontFamily: "inherit", padding: "8px 12px" }}
-                labelStyle={{ fontWeight: 600, marginBottom: 2 }}
-                itemStyle={{ color: "var(--color-accent)" }}
+              <YAxis
+                yAxisId="hours"
+                orientation="right"
+                tick={{ fontSize: 11, fill: "rgba(33,33,31,0.4)" }}
+                axisLine={false}
+                tickLine={false}
+                width={32}
+                tickFormatter={(v) => `${v}h`}
               />
-              <Bar dataKey="count" fill="var(--color-accent)" radius={[6, 6, 0, 0]} />
-            </BarChart>
+              <Tooltip cursor={false} content={<VolumeTooltip />} />
+              <Bar yAxisId="km" dataKey="km" fill="var(--color-accent)" radius={[6, 6, 0, 0]} isAnimationActive={false} />
+              <Line
+                yAxisId="hours"
+                type="monotone"
+                dataKey="hours"
+                stroke="#6B8FC7"
+                strokeWidth={2.5}
+                dot={{ r: 3, fill: "#6B8FC7" }}
+                activeDot={{ r: 5 }}
+                isAnimationActive={false}
+              />
+            </ComposedChart>
           </ResponsiveContainer>
         </div>
 

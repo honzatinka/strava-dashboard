@@ -234,3 +234,34 @@
   .sr-title { font-size: var(--font-size-2xl); }
   .sr-record-value { font-size: 22px; }
 }
+
+/* ─── Měsíční objem: km/čas legend ─── */
+.sr-volume-legend {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 8px;
+}
+
+.sr-volume-legend-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-body);
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+}
+
+.sr-volume-legend-swatch {
+  width: 10px;
+  height: 10px;
+  border-radius: 3px;
+  display: inline-block;
+}
+
+.sr-volume-legend-swatch--km {
+  background: var(--color-accent);
+}
+
+.sr-volume-legend-swatch--time {
+  background: #6B8FC7;
+}

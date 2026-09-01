@@ -10,6 +10,16 @@ interface ChangeEntry {
 const ENTRIES: ChangeEntry[] = [
   {
     date: "2026-08-27",
+    title: "Měsíční objem: přidán čas, opravený tooltip",
+    tag: "feature",
+    items: [
+      "Graf Měsíční objem ve Statistikách teď kromě sloupců s km ukazuje i modrou linku s časem",
+      "Po najetí na graf se zobrazí obě hodnoty najednou, bez zbytečné dvojtečky a mezery před číslem",
+      "Čas počítá stejně jako kalendář — u sportů bez plynulého pohybu (volejbal, posilovna, jóga…) bere celkový čas, ne pohybový",
+    ],
+  },
+  {
+    date: "2026-08-27",
     title: "Volejbal: ikona a čas v kalendáři",
     tag: "fix",
     items: [
