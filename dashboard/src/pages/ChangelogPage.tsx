@@ -9,7 +9,7 @@ interface ChangeEntry {
 
 const ENTRIES: ChangeEntry[] = [
   {
-    date: "2026-08-27",
+    date: "2026-09-01",
     title: "Měsíční objem: přidán čas, opravený tooltip",
     tag: "feature",
     items: [
