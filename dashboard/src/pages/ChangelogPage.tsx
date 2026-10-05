@@ -9,6 +9,15 @@ interface ChangeEntry {
 
 const ENTRIES: ChangeEntry[] = [
   {
+    date: "2026-10-05",
+    title: "Mapy: nový podkladový styl místo Carto",
+    tag: "fix",
+    items: [
+      "Podkladové mapy (detail aktivity i Heatmapa) přes Carto začaly přes celou plochu ukazovat nápis „API KEY REQUIRED“ — přešli jsme na světle šedou mapu od Esri, která klíč nevyžaduje a vypadá téměř stejně",
+      "Mapa se při maximálním přiblížení jen zvětší, nemá už detailnější dlaždice než úroveň 16",
+    ],
+  },
+  {
     date: "2026-09-01",
     title: "Měsíční objem: přidán čas, opravený tooltip",
     tag: "feature",

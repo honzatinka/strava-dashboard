@@ -40,12 +40,15 @@ export function HeatmapaPage({ activities }: { activities: Activity[] }) {
     }).setView([49.8, 15.5], 7);
 
     // Light desaturated basemap to make the orange routes pop
-    L.tileLayer("https://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}{r}.png", {
+    L.tileLayer("https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}", {
       maxZoom: 19,
+      maxNativeZoom: 16,
+      attribution: "Tiles © Esri",
     }).addTo(map);
     // Place labels on top so they appear above traces
-    L.tileLayer("https://{s}.basemaps.cartocdn.com/light_only_labels/{z}/{x}/{y}{r}.png", {
+    L.tileLayer("https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Reference/MapServer/tile/{z}/{y}/{x}", {
       maxZoom: 19,
+      maxNativeZoom: 16,
       pane: "shadowPane",
     }).addTo(map);
 
