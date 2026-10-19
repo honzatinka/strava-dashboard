@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
-import { MapPin, Watch, X, ExternalLink, Stamp } from "lucide-react";
+import { MapPin, Watch, X, ExternalLink, Mountain } from "lucide-react";
 import type { Activity } from "../types";
 import { COURT_SPORTS, resolveSportIcon } from "../types";
 import {
@@ -9,9 +9,7 @@ import {
   sportLabel, locationFromTimezone, decodePolyline,
 } from "../utils";
 import { getCityName } from "../utils/geocode";
-import { renderRouteStamp, downloadStamp } from "../utils/routeStamp";
-import type { StampInk } from "../utils/routeStamp";
-import { renderRouteProfile, ensureProfileFont } from "../utils/routeProfile";
+import { renderRouteProfile, ensureProfileFont, downloadPng } from "../utils/routeProfile";
 import type { ProfileData, ProfileInk } from "../utils/routeProfile";
 import "./ActivityModal.css";
 
@@ -41,56 +39,47 @@ export function ActivityModal({ activity, onClose, isFriend = false }: Props) {
   const [photosLoading, setPhotosLoading] = useState(false);
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
   const [calories, setCalories] = useState<number | null>(null);
-  const [stampOpen, setStampOpen] = useState(false);
-  const [stampPreviews, setStampPreviews] = useState<Record<StampInk, string> | null>(null);
+  const [exportOpen, setExportOpen] = useState(false);
   const [profile, setProfile] = useState<ProfileData | "missing" | null>(null);
   const [profilePreviews, setProfilePreviews] = useState<Record<ProfileInk, string> | null>(null);
   const polyline = activity.map?.summary_polyline;
   const hasRoute = polyline && polyline.length > 0;
 
-  // Small previews so the ink colour can be judged before downloading the full-size PNG
-  useEffect(() => {
-    if (!stampOpen || !polyline || stampPreviews) return;
-    const opts = {
-      polyline,
-      sportType: sport,
-      distanceMeters: activity.distance,
-      elevationMeters: activity.total_elevation_gain || 0,
-      seed: Number(String(activity.id).slice(-6)) || 7,
-    };
-    setStampPreviews({
-      black: renderRouteStamp({ ...opts, ink: "black", size: 360 }).toDataURL("image/png"),
-      white: renderRouteStamp({ ...opts, ink: "white", size: 360 }).toDataURL("image/png"),
-    });
-  }, [stampOpen, polyline, stampPreviews, sport, activity.distance, activity.total_elevation_gain, activity.id]);
-
   // Elevation profile needs Strava streams, so it is fetched only once the panel opens
   useEffect(() => {
-    if (!stampOpen || profile) return;
+    if (!exportOpen || profile) return;
     let cancelled = false;
     const athleteParam = isFriend ? "&athlete=martin" : "";
     fetch(`/api/activity-profile?id=${activity.id}${athleteParam}`)
       .then((r) => (r.ok ? r.json() : null))
-      .then(async (data: ProfileData | null) => {
+      .then((data: ProfileData | null) => {
         if (cancelled) return;
-        if (!data || !data.altitude?.length) { setProfile("missing"); return; }
-        await ensureProfileFont();
-        if (cancelled) return;
-        const opts = {
-          profile: data,
-          distanceMeters: activity.distance,
-          elevationMeters: activity.total_elevation_gain || 0,
-          width: 360,
-        };
-        setProfile(data);
-        setProfilePreviews({
-          black: renderRouteProfile({ ...opts, ink: "black" }).toDataURL("image/png"),
-          white: renderRouteProfile({ ...opts, ink: "white" }).toDataURL("image/png"),
-        });
+        setProfile(data && data.altitude?.length ? data : "missing");
       })
       .catch(() => { if (!cancelled) setProfile("missing"); });
     return () => { cancelled = true; };
-  }, [stampOpen, profile, isFriend, activity.id, activity.distance, activity.total_elevation_gain]);
+  }, [exportOpen, profile, isFriend, activity.id]);
+
+  // Re-rendered when calories arrive, since the activity detail may load after the profile
+  useEffect(() => {
+    if (!profile || profile === "missing") return;
+    let cancelled = false;
+    ensureProfileFont().then(() => {
+      if (cancelled) return;
+      const opts = {
+        profile,
+        distanceMeters: activity.distance,
+        elevationMeters: activity.total_elevation_gain || 0,
+        calories,
+        width: 360,
+      };
+      setProfilePreviews({
+        black: renderRouteProfile({ ...opts, ink: "black" }).toDataURL("image/png"),
+        white: renderRouteProfile({ ...opts, ink: "white" }).toDataURL("image/png"),
+      });
+    });
+    return () => { cancelled = true; };
+  }, [profile, calories, activity.distance, activity.total_elevation_gain]);
 
   const fileSlug = () =>
     activity.name.replace(/[^\p{L}\p{N}]+/gu, "-").replace(/^-|-$/g, "").toLowerCase() || String(activity.id);
@@ -101,24 +90,11 @@ export function ActivityModal({ activity, onClose, isFriend = false }: Props) {
       profile,
       distanceMeters: activity.distance,
       elevationMeters: activity.total_elevation_gain || 0,
+      calories,
       ink,
       width: 1080,
     });
-    downloadStamp(canvas, `profil-${fileSlug()}-${ink}.png`);
-  };
-
-  const saveStamp = (ink: StampInk) => {
-    if (!polyline) return;
-    const canvas = renderRouteStamp({
-      polyline,
-      sportType: sport,
-      distanceMeters: activity.distance,
-      elevationMeters: activity.total_elevation_gain || 0,
-      ink,
-      size: 1080,
-      seed: Number(String(activity.id).slice(-6)) || 7,
-    });
-    downloadStamp(canvas, `trasa-${fileSlug()}-${ink}.png`);
+    downloadPng(canvas, `profil-${fileSlug()}-${ink}.png`);
   };
 
   // Reverse-geocode to get actual city name
@@ -287,35 +263,17 @@ export function ActivityModal({ activity, onClose, isFriend = false }: Props) {
             {hasRoute && (
               <button
                 type="button"
-                className={`modal-strava-link modal-stamp-btn${stampOpen ? " active" : ""}`}
-                onClick={() => setStampOpen((v) => !v)}
+                className={`modal-strava-link modal-stamp-btn${exportOpen ? " active" : ""}`}
+                onClick={() => setExportOpen((v) => !v)}
               >
-                <Stamp size={13} strokeWidth={1.8} /> Obrázek trasy
+                <Mountain size={13} strokeWidth={1.8} /> Obrázek trasy
               </button>
             )}
           </div>
 
-          {stampOpen && hasRoute && (
+          {exportOpen && hasRoute && (
             <div className="modal-stamp-panel">
-              <p className="modal-stamp-hint">Klikem na variantu stáhneš PNG s průhledným pozadím.</p>
-              <p className="modal-stamp-group">Razítko · 1080 × 1080</p>
-              <div className="modal-stamp-choices">
-                {(["black", "white"] as StampInk[]).map((ink) => (
-                  <button
-                    key={ink}
-                    type="button"
-                    className={`modal-stamp-choice modal-stamp-choice--${ink}`}
-                    onClick={() => saveStamp(ink)}
-                    title={ink === "black" ? "Černá varianta" : "Bílá varianta"}
-                  >
-                    {stampPreviews
-                      ? <img src={stampPreviews[ink]} alt={`Razítko ${ink}`} />
-                      : <span className="modal-stamp-loading" />}
-                    <span className="modal-stamp-label">{ink === "black" ? "Černá" : "Bílá"}</span>
-                  </button>
-                ))}
-              </div>
-              <p className="modal-stamp-group">Výškový profil · 1080 × 720</p>
+              <p className="modal-stamp-hint">Klikem na variantu stáhneš PNG 1080 × 720 s průhledným pozadím.</p>
               {profile === "missing" ? (
                 <p className="modal-stamp-hint">Tahle aktivita nemá ve Stravě data o nadmořské výšce.</p>
               ) : (

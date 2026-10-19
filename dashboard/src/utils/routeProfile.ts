@@ -15,6 +15,8 @@ export interface ProfileOptions {
   profile: ProfileData;
   distanceMeters: number;
   elevationMeters: number;
+  /** Shown as a third stat when Strava reports it. */
+  calories?: number | null;
   ink: ProfileInk;
   width?: number;
 }
@@ -77,15 +79,16 @@ export function renderRouteProfile(opts: ProfileOptions): HTMLCanvasElement {
     ["DISTANCE", fmtKm(opts.distanceMeters)],
     ["ELEVATION", fmtElev(opts.elevationMeters)],
   ];
+  if (opts.calories) stats.push(["CALORIES", `${Math.round(opts.calories)} KCAL`]);
 
-  // Largest value size at which both stat columns fit side by side
+  // Largest value size at which all stat columns fit side by side
   let valueSize = 112 * u;
   const widths = () => {
     ctx.font = `${VALUE_WEIGHT} ${valueSize}px "${FONT}", system-ui, sans-serif`;
     return stats.map(([, v]) => ctx.measureText(v).width + valueSize * VALUE_STROKE);
   };
   let ws = widths();
-  while (ws[0] + ws[1] + gap > W - 2 * padX && valueSize > 40 * u) {
+  while (ws.reduce((a, b) => a + b, 0) + gap * (ws.length - 1) > W - 2 * padX && valueSize > 40 * u) {
     valueSize -= 2 * u;
     ws = widths();
   }
@@ -145,4 +148,18 @@ export function renderRouteProfile(opts: ProfileOptions): HTMLCanvasElement {
   ctx.stroke();
 
   return canvas;
+}
+
+export function downloadPng(canvas: HTMLCanvasElement, filename: string) {
+  canvas.toBlob((blob) => {
+    if (!blob) return;
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    URL.revokeObjectURL(url);
+  }, "image/png");
 }
