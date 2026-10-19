@@ -20,6 +20,10 @@ export interface ProfileOptions {
 }
 
 const INK: Record<ProfileInk, string> = { black: "#181614", white: "#FCFAF6" };
+const INK_RGB: Record<ProfileInk, string> = { black: "24, 22, 20", white: "252, 250, 246" };
+const VALUE_WEIGHT = 900;
+/** Outline around the values as a fraction of font size — faux-bold past the font's heaviest weight; more closes the counters in 5/9. */
+const VALUE_STROKE = 0.04;
 const FONT = "Unbounded";
 const ASPECT = 2 / 3;
 
@@ -27,7 +31,7 @@ const ASPECT = 2 / 3;
 export async function ensureProfileFont(): Promise<void> {
   try {
     await Promise.all([
-      document.fonts.load(`800 100px "${FONT}"`),
+      document.fonts.load(`${VALUE_WEIGHT} 100px "${FONT}"`),
       document.fonts.load(`700 40px "${FONT}"`),
     ]);
   } catch {
@@ -36,7 +40,7 @@ export async function ensureProfileFont(): Promise<void> {
 }
 
 function fmtKm(m: number): string {
-  return `${(m / 1000).toFixed(2).replace(".", ",")} KM`;
+  return `${(m / 1000).toFixed(2)} KM`;
 }
 
 function fmtElev(m: number): string {
@@ -77,8 +81,8 @@ export function renderRouteProfile(opts: ProfileOptions): HTMLCanvasElement {
   // Largest value size at which both stat columns fit side by side
   let valueSize = 112 * u;
   const widths = () => {
-    ctx.font = `800 ${valueSize}px "${FONT}", system-ui, sans-serif`;
-    return stats.map(([, v]) => ctx.measureText(v).width);
+    ctx.font = `${VALUE_WEIGHT} ${valueSize}px "${FONT}", system-ui, sans-serif`;
+    return stats.map(([, v]) => ctx.measureText(v).width + valueSize * VALUE_STROKE);
   };
   let ws = widths();
   while (ws[0] + ws[1] + gap > W - 2 * padX && valueSize > 40 * u) {
@@ -93,8 +97,11 @@ export function renderRouteProfile(opts: ProfileOptions): HTMLCanvasElement {
   stats.forEach(([label, value], i) => {
     ctx.font = `700 ${labelSize}px "${FONT}", system-ui, sans-serif`;
     ctx.fillText(label, x, labelY);
-    ctx.font = `800 ${valueSize}px "${FONT}", system-ui, sans-serif`;
+    ctx.font = `${VALUE_WEIGHT} ${valueSize}px "${FONT}", system-ui, sans-serif`;
     ctx.fillText(value, x, valueY);
+    ctx.lineWidth = valueSize * VALUE_STROKE;
+    ctx.lineJoin = "round";
+    ctx.strokeText(value, x, valueY);
     x += ws[i] + gap;
   });
 
@@ -104,19 +111,37 @@ export function renderRouteProfile(opts: ProfileOptions): HTMLCanvasElement {
   const dMin = distance[0], dMax = distance[distance.length - 1] || 1;
   const aMin = Math.min(...alt), aMax = Math.max(...alt);
   const top = valueY + 70 * u;
-  const bottom = H - 60 * u;
+  const bottom = H - 130 * u;
   const left = padX, right = W - padX;
   const aRange = aMax - aMin || 1;
+
+  const line = alt.map((a, i): [number, number] => [
+    left + ((distance[i] - dMin) / (dMax - dMin || 1)) * (right - left),
+    bottom - ((a - aMin) / aRange) * (bottom - top),
+  ]);
+  const trace = () => line.forEach(([px, py], i) => (i === 0 ? ctx.moveTo(px, py) : ctx.lineTo(px, py)));
+
+  // Soft veil hugging the underside of the line: a short vertical gradient per pixel
+  // column, starting at the line, so the glow follows the curve instead of filling to the floor
+  const veil = 120 * u;
+  let seg = 0;
+  for (let px = Math.ceil(left); px <= Math.floor(right); px++) {
+    while (seg < line.length - 2 && line[seg + 1][0] < px) seg++;
+    const [x0, y0] = line[seg], [x1, y1] = line[seg + 1];
+    const y = y0 + ((px - x0) / (x1 - x0 || 1)) * (y1 - y0);
+    const g = ctx.createLinearGradient(0, y, 0, y + veil);
+    g.addColorStop(0, `rgba(${INK_RGB[opts.ink]}, 0.24)`);
+    g.addColorStop(0.45, `rgba(${INK_RGB[opts.ink]}, 0.08)`);
+    g.addColorStop(1, `rgba(${INK_RGB[opts.ink]}, 0)`);
+    ctx.fillStyle = g;
+    ctx.fillRect(px, y, 1, veil);
+  }
 
   ctx.lineWidth = 5 * u;
   ctx.lineJoin = "round";
   ctx.lineCap = "round";
   ctx.beginPath();
-  alt.forEach((a, i) => {
-    const px = left + ((distance[i] - dMin) / (dMax - dMin || 1)) * (right - left);
-    const py = bottom - ((a - aMin) / aRange) * (bottom - top);
-    if (i === 0) ctx.moveTo(px, py); else ctx.lineTo(px, py);
-  });
+  trace();
   ctx.stroke();
 
   return canvas;

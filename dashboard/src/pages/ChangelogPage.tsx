@@ -15,6 +15,7 @@ const ENTRIES: ChangeEntry[] = [
     items: [
       "V detailu aktivity pod tlačítkem Obrázek trasy přibyla vedle razítka druhá varianta: vzdálenost a převýšení velkým širokým písmem nad tenkou čárou výškového profilu",
       "Stáhne se jako PNG 1080 × 720 s průhledným pozadím, v černé nebo bílé — určené k položení přes fotku v Instagram story",
+      "Vzhled doladěný: desetinná tečka místo čárky (75.95 KM), čísla v nejtučnější váze písma a navíc obtažená, pod čarou profilu jemný závoj, který kopíruje křivku a dolů mizí do průhledna",
       "Výšková data se stahují ze Stravy až při otevření panelu a server si je pamatuje, aby se nevyčerpal limit API; aktivity bez výškových dat (např. indoor) variantu nenabídnou",
     ],
   },
