@@ -600,6 +600,9 @@ function mcpGetAthleteActs(athlete, cb) {
 const detailCache = new Map(); // activityId -> full Strava detail object
 const MCP_CALORIE_MAX = 15;
 
+const profileCache = new Map(); // "athlete:activityId" -> { distance, altitude }
+const PROFILE_POINTS = 300;
+
 function fetchActivityDetail(athlete, id, cb) {
   if (detailCache.has(id)) { cb(detailCache.get(id)); return; }
   const refresh = athlete === "martin" ? refreshFriendToken : refreshStravaToken;
@@ -1430,6 +1433,52 @@ const server = http.createServer((req, res) => {
   }
 
   // ─── Activity detail: GET /api/activity-detail?id=XXX → full activity (incl. calories)
+  // ─── Elevation profile: GET /api/activity-profile?id=…[&athlete=martin]
+  // → { distance: [m…], altitude: [m…] }, downsampled for the profile export image.
+  if (req.method === "GET" && parsedUrl.pathname === "/api/activity-profile") {
+    const id = parsedUrl.query.id;
+    const athlete = parsedUrl.query.athlete === "martin" ? "martin" : "honza";
+    if (!id) { res.writeHead(400); res.end(JSON.stringify({ error: "Missing id" })); return; }
+    const cacheKey = `${athlete}:${id}`;
+    const send = (code, body) => {
+      res.writeHead(code, { "Content-Type": "application/json" });
+      res.end(JSON.stringify(body));
+    };
+    if (profileCache.has(cacheKey)) { send(200, profileCache.get(cacheKey)); return; }
+    const refresh = athlete === "martin" ? refreshFriendToken : refreshStravaToken;
+    refresh((err, token) => {
+      if (err) { send(401, { error: "not_authorized" }); return; }
+      https.request({
+        hostname: "www.strava.com",
+        path: `/api/v3/activities/${encodeURIComponent(id)}/streams?keys=altitude,distance&key_by_type=true`,
+        method: "GET", headers: { Authorization: `Bearer ${token}` },
+      }, (sr) => {
+        let d = ""; sr.on("data", c => d += c);
+        sr.on("end", () => {
+          let j = null;
+          try { j = JSON.parse(d); } catch (e) {}
+          const alt = j && j.altitude && j.altitude.data;
+          const dist = j && j.distance && j.distance.data;
+          if (!Array.isArray(alt) || !Array.isArray(dist) || alt.length < 2 || alt.length !== dist.length) {
+            send(404, { error: "no_altitude" });
+            return;
+          }
+          const n = Math.min(PROFILE_POINTS, alt.length);
+          const distance = [], altitude = [];
+          for (let i = 0; i < n; i++) {
+            const k = Math.round(i * (alt.length - 1) / (n - 1));
+            distance.push(Math.round(dist[k]));
+            altitude.push(Math.round(alt[k] * 10) / 10);
+          }
+          const body = { distance, altitude };
+          profileCache.set(cacheKey, body);
+          send(200, body);
+        });
+      }).on("error", e => send(500, { error: e.message })).end();
+    });
+    return;
+  }
+
   if (req.method === "GET" && parsedUrl.pathname === "/api/activity-detail") {
     const id = parsedUrl.query.id;
     if (!id) { res.writeHead(400); res.end(JSON.stringify({ error: "Missing id" })); return; }

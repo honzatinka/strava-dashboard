@@ -218,6 +218,28 @@
   background: rgba(128, 128, 128, 0.18);
 }
 
+.modal-stamp-choice--profile img,
+.modal-stamp-choice--profile .modal-stamp-loading {
+  max-width: 222px;
+  aspect-ratio: 3 / 2;
+}
+
+.modal-stamp-choice--profile .modal-stamp-loading { border-radius: var(--radius-sm); }
+
+.modal-stamp-choice:disabled { cursor: progress; transform: none; }
+
+.modal-stamp-group {
+  margin: 4px 0 8px;
+  font-family: var(--font-body);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+}
+
+.modal-stamp-choices + .modal-stamp-group { margin-top: 16px; }
+
 .modal-stamp-label {
   font-family: var(--font-body);
   font-size: var(--font-size-xs);
