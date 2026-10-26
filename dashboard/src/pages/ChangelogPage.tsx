@@ -9,6 +9,16 @@ interface ChangeEntry {
 
 const ENTRIES: ChangeEntry[] = [
   {
+    date: "2026-10-26",
+    title: "Meziroční srovnání přes celou šířku a s časem",
+    tag: "design",
+    items: [
+      "Box Meziroční srovnání ve Statistikách je teď pod oběma sloupci a roztažený přes celou šířku stránky, takže je graf čitelnější",
+      "Každá ze tří dlaždic (letos k dnešku, loni ke stejnému datu, loni celý rok) ukazuje pod kilometry i celkový čas aktivit daného sportu",
+      "Čas se počítá stejně jako jinde v appce — u sportů bez plynulého pohybu celkový, jinak pohybový",
+    ],
+  },
+  {
     date: "2026-10-19",
     title: "Export výškového profilu trasy",
     tag: "feature",

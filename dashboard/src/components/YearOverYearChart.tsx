@@ -174,8 +174,8 @@ export function YearOverYearChart({ activities }: { activities: Activity[] }) {
             tick={{ fontSize: 11, fill: "rgba(33,33,31,0.5)" }}
             axisLine={false}
             tickLine={false}
-            width={48}
-            tickFormatter={(v) => `${v} km`}
+            width={64}
+            tickFormatter={(v) => `${v.toLocaleString("cs-CZ")} km`}
           />
           <Line
             type="monotone"
