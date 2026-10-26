@@ -10,6 +10,17 @@ interface ChangeEntry {
 const ENTRIES: ChangeEntry[] = [
   {
     date: "2026-10-26",
+    title: "Statistiky: nové rozložení, chip Čas, měsíce přes všechny roky",
+    tag: "design",
+    items: [
+      "Meziroční srovnání je úplně nahoře na 3/4 šířky, vedle něj ve zbylé čtvrtině Rekordy",
+      "V meziročním srovnání přibyl vedle Kolo / Běh / Plavání chip Čas — součet času všech aktivit letos vs. loni",
+      "Měsíční objem je pod tím přes celou šířku, ještě před Rozložením sportů a Aktivitou podle dne",
+      "Měsíční objem ve volbě Vše ukazuje každý měsíc za všechny roky na jedné časové ose (dřív sčítal stejné měsíce různých let dohromady); po najetí ukáže měsíc i rok",
+    ],
+  },
+  {
+    date: "2026-10-26",
     title: "Meziroční srovnání přes celou šířku a s časem",
     tag: "design",
     items: [

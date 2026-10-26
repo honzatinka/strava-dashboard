@@ -1,8 +1,3 @@
-/* Spans both columns of the Statistics/Records grid */
-.yoy-card {
-  grid-column: 1 / -1;
-}
-
 .yoy-stats {
   display: grid;
   grid-template-columns: repeat(3, 1fr);

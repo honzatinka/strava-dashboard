@@ -20,15 +20,20 @@ const REF_DAYS: [number, number][] = (() => {
   return days;
 })();
 
+/** "Time" is not a sport: it sums the duration of every activity, whatever the sport. */
+const TIME = "Time";
+
 const SPORTS: { key: string; label: string }[] = [
   { key: "Ride", label: "Kolo" },
   { key: "Run", label: "Běh" },
   { key: "Swim", label: "Plavání" },
+  { key: TIME, label: "Čas" },
 ];
 
 function countsFor(a: Activity, year: number, sportKey: string): boolean {
   const d = a.start_date_local;
   if (!d || !d.startsWith(String(year))) return false;
+  if (sportKey === TIME) return true;
   if (normalizeDisplaySport(a.sport_type || a.type || "") !== sportKey) return false;
   // Same exclusion rule as Big Bet: trainer rides don't count, pool swims/treadmill runs do.
   return !(sportKey === "Ride" && a.trainer === true);
@@ -48,7 +53,7 @@ function totalSecs(activities: Activity[], year: number, sportKey: string, toTod
   return secs;
 }
 
-function cumulativeKmSeries(activities: Activity[], year: number, sportKey: string): (number | null)[] {
+function cumulativeSeries(activities: Activity[], year: number, sportKey: string): (number | null)[] {
   const bySum: Record<string, number> = {};
   for (const a of activities) {
     if (!countsFor(a, year, sportKey)) continue;
@@ -56,7 +61,8 @@ function cumulativeKmSeries(activities: Activity[], year: number, sportKey: stri
     const m = parseInt(d.slice(5, 7), 10);
     const day = parseInt(d.slice(8, 10), 10);
     const key = `${m}-${day}`;
-    bySum[key] = (bySum[key] || 0) + (a.distance || 0);
+    const amount = sportKey === TIME ? activityDurationSecs(a) / 3600 : (a.distance || 0) / 1000;
+    bySum[key] = (bySum[key] || 0) + amount;
   }
 
   const now = new Date();
@@ -70,7 +76,7 @@ function cumulativeKmSeries(activities: Activity[], year: number, sportKey: stri
     }
     if (pastToday) { out.push(null); continue; }
     cum += bySum[`${m}-${day}`] || 0;
-    out.push(Math.round(cum / 100) / 10);
+    out.push(Math.round(cum * 10) / 10);
   }
   return out;
 }
@@ -94,8 +100,8 @@ export function YearOverYearChart({ activities }: { activities: Activity[] }) {
   const lastYear = thisYear - 1;
 
   const { chartData, curr, prevFull, prevToDate, time } = useMemo(() => {
-    const currSeries = cumulativeKmSeries(activities, thisYear, sport);
-    const prevSeries = cumulativeKmSeries(activities, lastYear, sport);
+    const currSeries = cumulativeSeries(activities, thisYear, sport);
+    const prevSeries = cumulativeSeries(activities, lastYear, sport);
     const data = REF_DAYS.map(([m, day], i) => ({
       label: `${day}.${m}.`,
       curr: currSeries[i],
@@ -118,10 +124,12 @@ export function YearOverYearChart({ activities }: { activities: Activity[] }) {
     };
   }, [activities, sport, thisYear, lastYear]);
 
-  const fmt = (v: number) => `${v.toLocaleString("cs-CZ")} km`;
+  const isTime = sport === TIME;
+  const unit = isTime ? "h" : "km";
+  const fmt = (v: number) => (isTime ? formatDuration(v * 3600) : `${v.toLocaleString("cs-CZ")} km`);
 
   return (
-    <div className="sr-card yoy-card">
+    <div className="sr-card">
       <div className="sr-card-header">
         <h3 className="sr-card-title">Meziroční srovnání</h3>
         <div className="sr-year-tabs">
@@ -141,17 +149,17 @@ export function YearOverYearChart({ activities }: { activities: Activity[] }) {
         <div className="yoy-stat">
           <span className="yoy-stat-label">{thisYear} (k dnešku)</span>
           <span className="yoy-stat-value yoy-stat-value--accent">{fmt(curr)}</span>
-          <span className="yoy-stat-time">{formatDuration(time.curr)}</span>
+          {!isTime && <span className="yoy-stat-time">{formatDuration(time.curr)}</span>}
         </div>
         <div className="yoy-stat">
           <span className="yoy-stat-label">{lastYear} (stejné datum)</span>
           <span className="yoy-stat-value">{fmt(prevToDate)}</span>
-          <span className="yoy-stat-time">{formatDuration(time.prevToDate)}</span>
+          {!isTime && <span className="yoy-stat-time">{formatDuration(time.prevToDate)}</span>}
         </div>
         <div className="yoy-stat">
           <span className="yoy-stat-label">{lastYear} celý rok</span>
           <span className="yoy-stat-value">{fmt(prevFull)}</span>
-          <span className="yoy-stat-time">{formatDuration(time.prevFull)}</span>
+          {!isTime && <span className="yoy-stat-time">{formatDuration(time.prevFull)}</span>}
         </div>
       </div>
 
@@ -174,8 +182,8 @@ export function YearOverYearChart({ activities }: { activities: Activity[] }) {
             tick={{ fontSize: 11, fill: "rgba(33,33,31,0.5)" }}
             axisLine={false}
             tickLine={false}
-            width={64}
-            tickFormatter={(v) => `${v.toLocaleString("cs-CZ")} km`}
+            width={76}
+            tickFormatter={(v) => `${v.toLocaleString("cs-CZ")} ${unit}`}
           />
           <Line
             type="monotone"

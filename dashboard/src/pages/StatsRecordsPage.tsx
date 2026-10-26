@@ -63,7 +63,10 @@ function VolumeTooltip({
 }) {
   if (!active || !payload?.length) return null;
   const d = payload[0].payload;
-  const monthLabel = CZECH_MONTHS_FULL[parseInt(String(label), 10) - 1] || label;
+  const raw = String(label);
+  const monthLabel = raw.includes("-")
+    ? `${CZECH_MONTHS_FULL[parseInt(raw.slice(5, 7), 10) - 1]} ${raw.slice(0, 4)}`
+    : CZECH_MONTHS_FULL[parseInt(raw, 10) - 1] || raw;
   return (
     <div
       style={{
@@ -121,19 +124,29 @@ export function StatsRecordsPage({
     return Array.from(set).sort();
   }, [activities]);
 
+  // One year → its 12 months ("1".."12"); "Vše" → every month on a timeline ("2024-03")
   const monthlyData = useMemo(() => {
-    const filtered = selectedYear
-      ? activities.filter((a) => a.start_date_local.startsWith(selectedYear))
-      : activities;
     const months: Record<string, { km: number; hours: number }> = {};
-    for (let m = 1; m <= 12; m++) months[String(m)] = { km: 0, hours: 0 };
-    for (const a of filtered) {
-      const m = String(parseInt(a.start_date_local.slice(5, 7)));
-      months[m].km += (a.distance || 0) / 1000;
-      months[m].hours += activityDurationSecs(a) / 3600;
+    if (selectedYear) {
+      for (let m = 1; m <= 12; m++) months[String(m)] = { km: 0, hours: 0 };
+    } else if (activities.length) {
+      const first = activities.reduce((min, a) => (a.start_date_local < min ? a.start_date_local : min), activities[0].start_date_local);
+      const now = new Date();
+      let y = parseInt(first.slice(0, 4), 10), m = parseInt(first.slice(5, 7), 10);
+      while (y < now.getFullYear() || (y === now.getFullYear() && m <= now.getMonth() + 1)) {
+        months[`${y}-${String(m).padStart(2, "0")}`] = { km: 0, hours: 0 };
+        if (++m > 12) { m = 1; y++; }
+      }
+    }
+    for (const a of activities) {
+      if (selectedYear && !a.start_date_local.startsWith(selectedYear)) continue;
+      const key = selectedYear ? String(parseInt(a.start_date_local.slice(5, 7), 10)) : a.start_date_local.slice(0, 7);
+      if (!months[key]) continue;
+      months[key].km += (a.distance || 0) / 1000;
+      months[key].hours += activityDurationSecs(a) / 3600;
     }
     return Object.entries(months).map(([m, { km, hours }]) => ({
-      name: m, // numeric month label per request
+      name: m,
       km: Math.round(km * 10) / 10,
       hours: Math.round(hours * 10) / 10,
     }));
@@ -174,10 +187,25 @@ export function StatsRecordsPage({
 
   return (
     <div className="sr-layout">
-      {/* LEFT — Statistics */}
+      {/* TOP LEFT (3/4) — Statistics headline: year over year */}
       <section className="sr-section">
         <h2 className="sr-title">Statistiky</h2>
+        <YearOverYearChart activities={activities} />
+      </section>
 
+      {/* RIGHT — Records */}
+      <section className="sr-section">
+        <h2 className="sr-title">Rekordy</h2>
+
+        <div className="sr-records-grid">
+          {records.map((rec) => (
+            <RecordCard key={rec.label} rec={rec} onSelect={onSelect} />
+          ))}
+        </div>
+      </section>
+
+      {/* FULL WIDTH — monthly volume, then sport/day breakdown */}
+      <section className="sr-section sr-section--wide">
         {/* Měsíční objem */}
         <div className="sr-card">
           <div className="sr-card-header">
@@ -201,13 +229,15 @@ export function StatsRecordsPage({
               <span className="sr-volume-legend-swatch sr-volume-legend-swatch--time" /> čas
             </span>
           </div>
-          <ResponsiveContainer width="100%" height={220}>
+          <ResponsiveContainer width="100%" height={260}>
             <ComposedChart data={monthlyData} margin={{ top: 8, right: 8, left: 0, bottom: 0 }}>
               <XAxis
                 dataKey="name"
                 tick={{ fontSize: 11, fill: "rgba(33,33,31,0.4)" }}
                 axisLine={{ stroke: "rgba(33,33,31,0.08)" }}
                 tickLine={false}
+                interval={selectedYear ? "preserveEnd" : 0}
+                tickFormatter={(v: string) => (selectedYear ? v : v.endsWith("-01") ? v.slice(0, 4) : "")}
               />
               <YAxis
                 yAxisId="km"
@@ -233,7 +263,7 @@ export function StatsRecordsPage({
                 dataKey="hours"
                 stroke="#6B8FC7"
                 strokeWidth={2.5}
-                dot={{ r: 3, fill: "#6B8FC7" }}
+                dot={selectedYear ? { r: 3, fill: "#6B8FC7" } : false}
                 activeDot={{ r: 5 }}
                 isAnimationActive={false}
               />
@@ -303,20 +333,6 @@ export function StatsRecordsPage({
           </div>
         </div>
       </section>
-
-      {/* RIGHT — Records */}
-      <section className="sr-section">
-        <h2 className="sr-title">Rekordy</h2>
-
-        <div className="sr-records-grid">
-          {records.map((rec) => (
-            <RecordCard key={rec.label} rec={rec} onSelect={onSelect} />
-          ))}
-        </div>
-      </section>
-
-      {/* Meziroční srovnání — letošní rok (k dnešku) vs. loňský (celý rok), přes celou šířku */}
-      <YearOverYearChart activities={activities} />
     </div>
   );
 }
