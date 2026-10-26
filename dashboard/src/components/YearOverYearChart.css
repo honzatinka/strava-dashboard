@@ -1,3 +1,8 @@
+/* Spans both columns of the Statistics/Records grid */
+.yoy-card {
+  grid-column: 1 / -1;
+}
+
 .yoy-stats {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -27,6 +32,14 @@
   font-weight: var(--font-weight-bold);
   color: var(--color-text-primary);
   letter-spacing: -0.3px;
+}
+
+.yoy-stat-time {
+  font-family: var(--font-body);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-secondary);
+  font-variant-numeric: tabular-nums;
 }
 
 .yoy-stat-value--accent {

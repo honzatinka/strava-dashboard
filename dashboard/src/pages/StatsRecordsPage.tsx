@@ -241,9 +241,6 @@ export function StatsRecordsPage({
           </ResponsiveContainer>
         </div>
 
-        {/* Meziroční srovnání — letošní rok (k dnešku) vs. loňský (celý rok) */}
-        <YearOverYearChart activities={activities} />
-
         <div className="sr-charts-pair">
           {/* Rozložení sportů — top 10 by default, toggle for the rest */}
           <div className="sr-card sr-chart-half">
@@ -317,6 +314,9 @@ export function StatsRecordsPage({
           ))}
         </div>
       </section>
+
+      {/* Meziroční srovnání — letošní rok (k dnešku) vs. loňský (celý rok), přes celou šířku */}
+      <YearOverYearChart activities={activities} />
     </div>
   );
 }
